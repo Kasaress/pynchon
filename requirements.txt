@@ -1,0 +1,14 @@
+Django==2.2.19
+flake8==5.0.4
+importlib-metadata==4.2.0
+mccabe==0.7.0
+mypy==0.971
+mypy-extensions==0.4.3
+pycodestyle==2.9.1
+pyflakes==2.5.0
+pytz==2022.2.1
+sqlparse==0.4.2
+tomli==2.0.1
+typed-ast==1.5.4
+typing_extensions==4.3.0
+zipp==3.8.1
