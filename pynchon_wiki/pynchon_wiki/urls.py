@@ -6,3 +6,5 @@ urlpatterns = [
     path('', include('wiki.urls')),
     path('admin/', admin.site.urls),
 ]
+
+ 

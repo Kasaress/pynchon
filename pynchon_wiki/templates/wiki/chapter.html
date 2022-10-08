@@ -4,7 +4,13 @@
     <div class="container">
         <h1>Глава номер {{chapter}}</h1>
         <h2>Текст, который можно прочитать ДО главы</h2>
-        <h3>А тут поехали комментарии к страницам</h3>
+        <p>пару абзацев текста про главу</p>
+        <hr>
+        {% for comment in comments %}
+          {% include 'includes/comment.html' %}
+          <hr>
+            
+        {% endfor %}
 
     </div>  
 {% endblock %}
