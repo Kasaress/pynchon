@@ -25,8 +25,10 @@ def rainbow(request):
 def rainbow_chapter(request, chapter_number):
     template = 'wiki/chapter.html'
     chapter = get_object_or_404(Chapter, number=chapter_number)
+    book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
         'chapter': chapter,
-        'comments': chapter.comments.all()
+        'comments': chapter.comments.all(),
+        'chapters': Chapter.objects.filter(book=book).all()
     }
     return render(request, template, context)

@@ -1,8 +1,9 @@
 
-{% load thumbnail %}
-<article>
-        <p><i>Номер страницы в издании 2012 года: <b>{{ comment.page_number_by_2012 }}</b>/ Номер страницы в издании 2021 года: <b>{{ comment.page_number_by_2021 }}</b></i></p>
-        {% comment %} <p>Номер по порядку: {{ comment.order_number }}</p>         {% endcomment %}
+<article id='{{comment.order_number}}'>
+        <p><i>
+            Стр.{{ comment.page_number_by_2012 }}/
+            Стр.{{ comment.page_number_by_2021 }}</i>
+        </p>
     <p>
         <b>{{ comment.origin_text|linebreaks }}</b>
     </p>

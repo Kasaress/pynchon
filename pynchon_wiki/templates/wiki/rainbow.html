@@ -2,7 +2,7 @@
 {% block title %}Раздел про книгу {{book.name}} {% endblock %}
 {% block content %}
     <div class="container">
-        <h1>Тут будет статья Андрея без спойлеров</h1>
+        
         <h2>Список глав радуги</h2>
         {% for chapter in chapters %}
           <p><a href="{% url 'wiki:chapter' chapter.number %}">Комментарии к главе {{chapter}}</a> </p>

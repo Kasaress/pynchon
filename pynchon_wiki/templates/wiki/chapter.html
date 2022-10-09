@@ -2,15 +2,27 @@
 {% block title %}Страница главы номер {{chapter}} {% endblock %}
 {% block content %}
     <div class="container">
-        <h1>Глава номер {{chapter}}</h1>
-        <h2>Текст, который можно прочитать ДО главы</h2>
-        <p>пару абзацев текста про главу</p>
+        <h1>Примечания к главе {{chapter}}</h1>
+        <p>Комментарии 
+        {% for comment in comments %}
+        {% comment %} <a href="{% url 'wiki:chapter' chapter.number%}">№{{comment.order_number}}_стр.{{comment.page_number_by_2012}}</a> {% endcomment %}
+        <a href="#{{comment.order_number}}">{{comment.order_number}}</a>        
+        {% endfor %} </p>
+        <p><a href='#summary'>Краткое содержание главы</a></p>
+        <p><a href='#interpretation'>Интерпретация главы</a></p>   
         <hr>
         {% for comment in comments %}
           {% include 'includes/comment.html' %}
           <hr>
-            
         {% endfor %}
-
+        <h2 id='summary'>Краткое содержание главы {{chapter}}</h2>
+        <p>{{ chapter.summary |linebreaks }}</p>
+        <hr>
+        <h2 id='interpretation'>Интерпретация главы {{chapter}}</h2>
+        <p>{{ chapter.interpretation |linebreaks }}</p>
+        <hr>
+        {% for chapter in chapters %}
+          <a href="{% url 'wiki:chapter' chapter.number %}">Глава {{chapter}}</a>
+        {% endfor %}
     </div>  
 {% endblock %}

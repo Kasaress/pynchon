@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.safestring import mark_safe
-from sorl.thumbnail import ImageField, get_thumbnail
 
 User = get_user_model()
 
@@ -30,7 +29,8 @@ class Chapter(models.Model):
         blank=True,
         null=True
     )
-
+    summary = models.TextField(verbose_name='Краткое содержание главы', blank=True, null=True)
+    interpretation = models.TextField(verbose_name='Интерпретация', blank=True, null=True)
     class Meta:
         verbose_name_plural = 'Главы'
         verbose_name = 'Глава'
@@ -91,3 +91,6 @@ class Comment(models.Model):
             return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
         else:
             return 'нет картинки'
+        
+    def __str__(self) -> str:
+        return str(self.origin_text)
