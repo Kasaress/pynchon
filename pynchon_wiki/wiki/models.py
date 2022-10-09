@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.forms import IntegerField
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 
@@ -27,14 +28,39 @@ class Chapter(models.Model):
         blank=True,
         null=True
     )
+    description = models.TextField(
+        verbose_name='Описание главы',
+        blank=True,
+        null=True
+    )
+    book_part = models.CharField(max_length=5, blank=True,
+        null=True,)
     summary = models.TextField(verbose_name='Краткое содержание главы', blank=True, null=True)
     interpretation = models.TextField(verbose_name='Интерпретация', blank=True, null=True)
+    image = models.ImageField(
+        blank=True,
+        null=True,
+        verbose_name='Картинка',
+        #upload_to='comments/'
+    )
+    links = models.URLField(blank=True,
+        null=True,
+        max_length = 500,
+        verbose_name='Ссылки к главе'
+    )
     class Meta:
         verbose_name_plural = 'Главы'
         verbose_name = 'Глава'
         
     def __str__(self) -> str:
         return str(self.number)
+    
+    @property
+    def get_image(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
+        else:
+            return 'нет картинки'
 
 class Comment(models.Model):
     origin_text = models.CharField(
@@ -42,7 +68,12 @@ class Comment(models.Model):
         verbose_name='Оригинальный текст книги'
     )
     comment_text = models.TextField(
-        verbose_name='Текст комментария'
+        verbose_name='Текст примечания'
+    )
+    links = models.URLField(blank=True,
+        null=True,
+        max_length = 500,
+        verbose_name='Ссылки к примечанию'
     )
     image = models.ImageField(
         blank=True,

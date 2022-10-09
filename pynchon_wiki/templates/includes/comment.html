@@ -15,4 +15,9 @@
         {{ comment.get_image }}
         {% endif %}
     </p>
+    <p>
+        {% if comment.links %}
+        Ссылка, упомянутая в примечании: <a href="{{comment.links}}">{{ comment.links }}</a>
+        {% endif %}
+    </p>
 </article>

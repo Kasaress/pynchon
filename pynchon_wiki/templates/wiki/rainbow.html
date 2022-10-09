@@ -2,12 +2,27 @@
 {% block title %}Раздел про книгу {{book.name}} {% endblock %}
 {% block content %}
     <div class="container">
-        
-        <h2>Список глав радуги</h2>
+        <h2>Раздел 1: для чего читать радугу</h2>
+        <a href="">Ссылка на статью Андрея</a>
+        <h2>Разделы 2 и 3: примечания и комментария к каждой главе</h2>
         {% for chapter in chapters %}
-          <p><a href="{% url 'wiki:chapter' chapter.number %}">Комментарии к главе {{chapter}}</a> </p>
+        <p>Глава {{chapter}} {{chapter.description}}
+        <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Примечания</a> 
+        <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Комментарии</a>
+            {% comment %} {% if chapter.image %}
+            {{ chapter.get_image }}
+            {% endif %} {% endcomment %}
+        </p>
         {% endfor %}
-        <h3>Тут будут ссылки на таблицы и спойлерные статьи</h3>
-
+        <h2>Раздел 4: спойлерные статьи с объяснениями</h2>
+        <p><a href="">статья 1</a></p>
+        <p><a href="">статья 2</a></p>
+        <h2>Раздел 5: персонажи - таблица и схема</h2>
+        <p><a href="">таблица персонажей</a></p>
+        <p><a href="">схема связей персонажей</a></p>
+        <h2>Раздел 6: хронология романа</h2>
+        <p><a href="">наверное, тут тоже что-то будет</a></p>
+        <h2>Раздел 7: объяснение всего вообще</h2>
+        <p><a href="">вроде статья Стаса</a></p>
     </div>  
 {% endblock %}
