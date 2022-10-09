@@ -1,23 +1,21 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 
 User = get_user_model()
-
 
 class Book(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(
         verbose_name='Описание книги'
     )
-    
     class Meta:
         verbose_name_plural = 'Книги'
         verbose_name = 'Книга'
 
     def __str__(self) -> str:
         return str(self.name)
-
 
 class Chapter(models.Model):
     number = models.CharField(max_length=5)
@@ -86,11 +84,16 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
         verbose_name = 'Комментарий'
 
+    @property
     def get_image(self):
         if self.image:
             return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
         else:
             return 'нет картинки'
         
+    @property
+    def short_text(self):
+        return truncatechars(self.comment_text, 100)
+     
     def __str__(self) -> str:
         return str(self.origin_text)

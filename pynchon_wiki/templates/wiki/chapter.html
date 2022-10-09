@@ -16,10 +16,10 @@
           <hr>
         {% endfor %}
         <h2 id='summary'>Краткое содержание главы {{chapter}}</h2>
-        <p>{{ chapter.summary |linebreaks }}</p>
+        <p>{{ chapter.summary|safe }}</p>
         <hr>
         <h2 id='interpretation'>Интерпретация главы {{chapter}}</h2>
-        <p>{{ chapter.interpretation |linebreaks }}</p>
+        <p>{{ chapter.interpretation|safe }}</p>
         <hr>
         {% for chapter in chapters %}
           <a href="{% url 'wiki:chapter' chapter.number %}">Глава {{chapter}}</a>

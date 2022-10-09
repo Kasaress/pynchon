@@ -9,5 +9,17 @@
                  alt="">
             Пинчон</a>
     </a>
+    {% with request.resolver_match.view_name as view_name %}
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link {% if view_name  == 'wiki:rainbow' %}active{% endif %}"
+               href="{% url 'wiki:rainbow' %}">Вики по радуге тяготения</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if view_name  == 'wiki:about' %}active{% endif %}"
+               href="{% url 'wiki:about' %}">О проекте</a>
+        </li>
+    </ul>
+    {% endwith %}
 </div>
 </nav>

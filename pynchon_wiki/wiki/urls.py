@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('rainbow/', views.rainbow, name='rainbow'),
     path('rainbow/<chapter_number>/', views.rainbow_chapter, name='chapter'),
+    path('about/', views.about, name='about'),
 ]
 
 if settings.DEBUG:

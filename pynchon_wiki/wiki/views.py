@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 
 from .models import Book, Chapter, Comment
 
@@ -9,6 +8,10 @@ def index(request):
     template = 'wiki/index.html'
     return render(request, template)
 
+# О проекте
+def about(request):
+    template = 'wiki/about.html'
+    return render(request, template)
 
 # Страница книги радуга тяготения
 def rainbow(request):
