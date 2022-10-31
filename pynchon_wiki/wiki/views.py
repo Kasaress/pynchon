@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Book, Chapter, Comment
+from .models import Book, Chapter, Comment, TableChronology
 
 
 # Главная страница
@@ -50,3 +50,9 @@ def rainbow_comments(request, chapter_number):
     return render(request, template, context)
 
 
+def double_katie(request):
+    return render(request, 'wiki/double_katie.html')
+
+
+def chronology(request):
+    return render(request, 'wiki/chronology.html', context = {'rows': TableChronology.objects.all()})

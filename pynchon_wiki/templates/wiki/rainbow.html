@@ -1,28 +1,45 @@
 {% extends 'base.html' %}
-{% block title %}Раздел про книгу {{book.name}} {% endblock %}
+{% block title %} {{book.name}} {% endblock %}
 {% block content %}
     <div class="container">
+        <h1>Радуга тяготения</h1>
+        <hr>
         <h2>Раздел 1: для чего читать радугу</h2>
         <a href="">Ссылка на статью Андрея</a>
-        <h2>Разделы 2 и 3: примечания и комментария к каждой главе</h2>
+        <hr>
+        <h2 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h2>
         {% for chapter in chapters %}
-        <p>Глава {{chapter}} {{chapter.description}}
-        <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Примечания</a> 
-        <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Комментарии</a>
+        <p>
+        <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{chapter}} {{chapter.description}}</a> 
             {% comment %} {% if chapter.image %}
             {{ chapter.get_image }}
             {% endif %} {% endcomment %}
         </p>
         {% endfor %}
-        <h2>Раздел 4: спойлерные статьи с объяснениями</h2>
-        <p><a href="">статья 1</a></p>
+        <hr>
+        <h2 id='rainbow_part3'>Раздел 3: комментарии к каждой главе</h2>
+        {% for chapter in chapters %}
+        <p>
+        <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}} {{chapter.description}}</a>
+            {% comment %} {% if chapter.image %}
+            {{ chapter.get_image }}
+            {% endif %} {% endcomment %}
+        </p>
+        {% endfor %}
+        <hr>
+        <h2 id='rainbow_part4'>Раздел 4: спойлерные статьи с объяснениями</h2>
+        <p><a href="{% url 'wiki:double_katie' %} ">Двойничество Катье</a></p>
         <p><a href="">статья 2</a></p>
+        <hr>
         <h2>Раздел 5: персонажи - таблица и схема</h2>
         <p><a href="">таблица персонажей</a></p>
         <p><a href="">схема связей персонажей</a></p>
-        <h2>Раздел 6: хронология романа</h2>
-        <p><a href="">наверное, тут тоже что-то будет</a></p>
+        <hr>
+        <h2 id='rainbow_part6'>Раздел 6: хронология романа</h2>
+        <p><a href="{% url 'wiki:chronology' %}">Описание подхода и таблица с годами</a></p>
+        <hr>
         <h2>Раздел 7: объяснение всего вообще</h2>
         <p><a href="">вроде статья Стаса</a></p>
+        <hr>
     </div>  
 {% endblock %}

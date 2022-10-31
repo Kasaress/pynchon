@@ -128,3 +128,16 @@ class Comment(models.Model):
      
     def __str__(self) -> str:
         return str(self.origin_text)
+    
+    
+class TableChronology(models.Model):
+    date = models.CharField(max_length=100, verbose_name='Дата')
+    description = models.TextField(
+        verbose_name='Событие'
+    )
+    order_number = models.CharField(max_length=3)
+    
+    class Meta:
+        verbose_name_plural = 'Строки таблицы хронологии'
+        verbose_name = 'Строка таблицы хронологии'
+        ordering = ['order_number']

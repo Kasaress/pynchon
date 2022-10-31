@@ -2,6 +2,7 @@
 {% block title %}Комментарии к главе {{chapter}} {% endblock %}
 {% block content %}
     <div class="container">
+      <a href="{% url 'wiki:rainbow'%}#rainbow_part3">&#8592; Вернуться к списку глав</a>
       <hr>
       {% for chapter in chapters %}
         <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}}</a>

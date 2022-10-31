@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Book, Chapter, Comment
+from .models import Book, Chapter, Comment, TableChronology
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -34,6 +34,12 @@ class CommentAdmin(admin.ModelAdmin):
     readonly_fields = ['preview']
 
      
+class TableChronologyAdmin(admin.ModelAdmin):
+    list_display = ('date', 'description', 'order_number') 
+    search_fields = ('date', 'description', 'order_number')      
+     
+     
 admin.site.register(Book, BookAdmin)
 admin.site.register(Chapter, ChapterAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(TableChronology, TableChronologyAdmin)
