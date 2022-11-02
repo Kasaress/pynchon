@@ -28,13 +28,15 @@ class Command(BaseCommand):
         base = self.BASES[args[0].lower()]
         with open(args[1], 'r', encoding="utf-8") as csvfile:
             try:
-                reader = csv.DictReader(csvfile)
+                # reader = csv.DictReader(csvfile, delimiter=";")
+                reader = csv.reader(csvfile, delimiter=";")
             except Exception as e:
                 sys.exit(f'CSV-file read exception {e}')
             writed_rows = 0
             for row in reader:
                 try:
-                    base.objects.create(**row)
+                    print(row)
+                    base(*row).save()
                 except Exception as e:
                     print(f'Exception {e}')
                 else:

@@ -131,13 +131,16 @@ class Comment(models.Model):
     
     
 class TableChronology(models.Model):
-    date = models.CharField(max_length=100, verbose_name='Дата')
+    date = models.CharField(max_length=100, verbose_name='Дата', blank=True, null=True)
     description = models.TextField(
-        verbose_name='Событие'
+        verbose_name='Событие', blank=True, null=True
     )
-    order_number = models.CharField(max_length=3)
+    order_number = models.CharField(max_length=10)
     
     class Meta:
         verbose_name_plural = 'Строки таблицы хронологии'
         verbose_name = 'Строка таблицы хронологии'
         ordering = ['order_number']
+        
+        
+new_row = TableChronology('qqq', 'aaa', 'a')
