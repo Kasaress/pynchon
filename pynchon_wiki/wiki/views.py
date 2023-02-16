@@ -1,19 +1,22 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.contrib.auth.decorators import login_required
 from .models import Book, Chapter, Comment, TableChronology
 
 
 # Главная страница
+@login_required
 def index(request):
     template = 'wiki/index.html'
     return render(request, template)
 
 # О проекте
+@login_required
 def about(request):
     template = 'wiki/about.html'
     return render(request, template)
 
 # Страница книги радуга тяготения
+@login_required
 def rainbow(request):
     template = 'wiki/rainbow.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
@@ -55,4 +58,8 @@ def double_katie(request):
 
 
 def chronology(request):
-    return render(request, 'wiki/chronology.html', context = {'rows': TableChronology.objects.all()})
+    return render(
+        request,
+        'wiki/chronology.html',
+        context = {'rows': TableChronology.objects.all()}
+    )

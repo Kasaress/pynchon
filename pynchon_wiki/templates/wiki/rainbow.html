@@ -17,7 +17,7 @@
         </p>
         {% endfor %}
         <hr>
-        <h2 id='rainbow_part3'>Раздел 3: комментарии к каждой главе</h2>
+        <h2 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h2>
         {% for chapter in chapters %}
         <p>
         <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}} {{chapter.description}}</a>

@@ -9,6 +9,9 @@
       {% endfor %}
       <hr>
         <h1>Комментарии к главе {{chapter}}</h1>
+        {% if chapter.image %}
+            {{ chapter.get_image }}
+        {% endif %}
         <p><a href='#summary'>Краткое содержание главы</a></p>
         <p><a href='#interpretation'>Комментарии</a></p>   
         
