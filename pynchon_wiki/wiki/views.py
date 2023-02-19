@@ -27,8 +27,63 @@ def rainbow(request):
     return render(request, template, context)
 
 
-def rainbow2(request):
-    template = 'wiki/rainbow2.html'
+def rainbow_part1(request):
+    template = 'wiki/rainbow_part1.html'
+    return render(request, template)
+
+
+def rainbow_part2(request):
+    template = 'wiki/rainbow_part2.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
+
+def rainbow_part3(request):
+    template = 'wiki/rainbow_part3.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
+
+def rainbow_part4(request):
+    template = 'wiki/rainbow_part4.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
+
+def rainbow_part5(request):
+    template = 'wiki/rainbow_part5.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
+
+def rainbow_part6(request):
+    template = 'wiki/rainbow_part6.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
+
+def rainbow_part7(request):
+    template = 'wiki/rainbow_part7.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
         'book': book,

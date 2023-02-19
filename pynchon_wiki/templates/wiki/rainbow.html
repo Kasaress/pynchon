@@ -4,36 +4,18 @@
     <div class="container">
         <h1>Радуга тяготения</h1>
         <hr>
-        <h2>Раздел 1: для чего читать радугу</h2>
-        <a href="">Ссылка на статью Андрея</a>
+        <a href="{% url 'wiki:rainbow_part1'%}">Раздел 1: для чего читать радугу</a> 
         <hr>
-        <a href="{% url 'wiki:rainbow2'%}">Раздел 2: примечания к каждой главе</a> 
-        <h2 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h2>
-      
+        <a href="{% url 'wiki:rainbow_part2'%}">Раздел 2: примечания к каждой главе</a> 
         <hr>
-        <h2 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h2>
-        {% for chapter in chapters %}
-        <p>
-        <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}} {{chapter.description}}</a>
-            {% comment %} {% if chapter.image %}
-            {{ chapter.get_image }}
-            {% endif %} {% endcomment %}
-        </p>
-        {% endfor %}
+        <a href="{% url 'wiki:rainbow_part3'%}">Раздел 3: краткое содержание и комментарии по главам</a>
         <hr>
-        <h2 id='rainbow_part4'>Раздел 4: спойлерные статьи с объяснениями</h2>
-        <p><a href="{% url 'wiki:double_katie' %} ">Двойничество Катье</a></p>
-        <p><a href="">статья 2</a></p>
+        <a href="{% url 'wiki:rainbow_part4'%}">Раздел 4: спойлерные статьи с объяснениями</a>
         <hr>
-        <h2>Раздел 5: персонажи - таблица и схема</h2>
-        <p><a href="">таблица персонажей</a></p>
-        <p><a href="">схема связей персонажей</a></p>
+        <a href="{% url 'wiki:rainbow_part5'%}">Раздел 5: персонажи - таблица и схема</a>
         <hr>
-        <h2 id='rainbow_part6'>Раздел 6: хронология романа</h2>
-        <p><a href="{% url 'wiki:chronology' %}">Описание подхода и таблица с годами</a></p>
+        <a href="{% url 'wiki:rainbow_part6'%}">Раздел 6: хронология романа</a>
         <hr>
-        <h2>Раздел 7: объяснение всего вообще</h2>
-        <p><a href="">вроде статья Стаса</a></p>
-        <hr>
+        <a href="{% url 'wiki:rainbow_part7'%}">Раздел 7: объяснение всего вообще</a>
     </div>  
 {% endblock %}
