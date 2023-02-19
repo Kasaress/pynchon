@@ -7,19 +7,22 @@
     <p>
         <b>{{ comment.origin_text|linebreaks }}</b>
     </p>
-    <p>
+    <div class="d-flex">
+    <div style="padding-right:15px">
         {{ comment.comment_text|linebreaks }}
-    </p>
-    <p>
+    </div>
         {% if comment.image %}
         {% thumbnail comment.image "1200" crop="center" as im %}
-                    <img class="card-img my-2" src="{{ im.url }}">
+        <div>
+            <img class="card-img" src="{{ im.url }}">
+        </div>
         {% endthumbnail %}
         {% endif %}
-    </p>
-    <p>
+</div>
         {% if comment.links %}
+        <p>
         Ссылка, упомянутая в примечании: <a href="{{comment.links}}">{{ comment.links }}</a>
-        {% endif %}
     </p>
+        {% endif %}
+    
 </article>
