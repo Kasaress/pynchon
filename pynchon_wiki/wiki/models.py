@@ -111,7 +111,7 @@ class Comment(models.Model):
         verbose_name='Автор')
 
     class Meta:
-        ordering = ('order_number',)
+        ordering = ('page_number_by_2012', 'order_number')
         verbose_name_plural = 'Комментарии'
         verbose_name = 'Комментарий'
 

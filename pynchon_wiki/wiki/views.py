@@ -26,6 +26,16 @@ def rainbow(request):
     }
     return render(request, template, context)
 
+
+def rainbow2(request):
+    template = 'wiki/rainbow2.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context)
+
 # Страница главы, на которой видно все примечания к главе
 def rainbow_notes(request, chapter_number):
     template = 'wiki/rainbow_notes.html'

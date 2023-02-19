@@ -1,5 +1,6 @@
+asgiref==3.6.0
 da-vinci==0.3.0
-Django==2.2.19
+Django==3.2.16
 flake8==5.0.4
 importlib-metadata==4.2.0
 load-dotenv==0.1.0
@@ -7,6 +8,7 @@ mccabe==0.7.0
 mypy==0.971
 mypy-extensions==0.4.3
 Pillow==9.2.0
+psycopg2-binary==2.9.5
 pycodestyle==2.9.1
 pyflakes==2.5.0
 python-dotenv==0.21.0
