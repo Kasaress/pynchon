@@ -3,6 +3,7 @@ from django.db import models
 from django.forms import IntegerField
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
+# from sorl.thumbnail import ImageField
 
 User = get_user_model()
 
@@ -41,7 +42,7 @@ class Chapter(models.Model):
         blank=True,
         null=True,
         verbose_name='Картинка',
-        #upload_to='comments/'
+        # upload_to='comments/'
     )
     links = models.URLField(blank=True,
         null=True,
@@ -55,12 +56,12 @@ class Chapter(models.Model):
     def __str__(self) -> str:
         return str(self.number)
     
-    @property
-    def get_image(self):
-        if self.image:
-            return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
-        else:
-            return 'нет картинки'
+    # @property
+    # def get_image(self):
+    #     if self.image:
+    #         return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
+    #     else:
+    #         return 'нет картинки'
 
 class Comment(models.Model):
     origin_text = models.CharField(
@@ -79,7 +80,7 @@ class Comment(models.Model):
         blank=True,
         null=True,
         verbose_name='Картинка',
-        #upload_to='comments/'
+        # upload_to='comments/'
     )
     book = models.ForeignKey(
         Book,
@@ -115,12 +116,12 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
         verbose_name = 'Комментарий'
 
-    @property
-    def get_image(self):
-        if self.image:
-            return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
-        else:
-            return 'нет картинки'
+    # @property
+    # def get_image(self):
+    #     if self.image:
+    #         return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
+    #     else:
+    #         return 'нет картинки'
         
     @property
     def short_text(self):

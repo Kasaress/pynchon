@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block title %}Примечания к главе {{chapter}} {% endblock %}
 {% block content %}
     <div class="container">
@@ -14,7 +15,9 @@
         <a href="#{{comment.order_number}}">□{{comment.origin_text}}□</a>   
         {% endfor %} </p>
         {% if chapter.image %}
-            {{ chapter.get_image }}
+        {% thumbnail chapter.image "960x339" crop="center" upscale=True as im %}
+                    <img class="card-img my-2" src="{{ im.url }}">
+            {% endthumbnail %}
         {% endif %}
         <hr>
         {% for comment in comments %}

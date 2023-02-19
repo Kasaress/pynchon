@@ -1,4 +1,4 @@
-
+{% load thumbnail %}
 <article id='{{comment.order_number}}'>
     <p><i>
         Стр.{{ comment.page_number_by_2012 }}/
@@ -12,7 +12,9 @@
     </p>
     <p>
         {% if comment.image %}
-        {{ comment.get_image }}
+        {% thumbnail comment.image "1200" crop="center" as im %}
+                    <img class="card-img my-2" src="{{ im.url }}">
+        {% endthumbnail %}
         {% endif %}
     </p>
     <p>

@@ -14,9 +14,11 @@ pyflakes==2.5.0
 python-dotenv==0.21.0
 pytz==2022.2.1
 shortuuid==1.0.9
-sorl-thumbnail==12.3
+sorl-thumbnail==12.7.0
 sqlparse==0.4.2
 tomli==2.0.1
 typed-ast==1.5.4
 typing_extensions==4.3.0
 zipp==3.8.1
+gunicorn==20.0.4
+six==1.16.0
