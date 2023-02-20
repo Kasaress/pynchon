@@ -3,7 +3,6 @@ from django.db import models
 from django.forms import IntegerField
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
-# from sorl.thumbnail import ImageField
 
 User = get_user_model()
 

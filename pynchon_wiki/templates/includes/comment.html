@@ -9,7 +9,7 @@
     </p>
     <div class="d-flex">
     <div style="padding-right:15px">
-        {{ comment.comment_text|linebreaks }}
+        {{ comment.comment_text|safe|linebreaks }}
     </div>
         {% if comment.image %}
         {% thumbnail comment.image "1200" crop="center" as im %}
