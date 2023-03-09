@@ -3,21 +3,26 @@ from django.contrib.auth.decorators import login_required
 from .models import Book, Chapter, Comment, TableChronology
 
 
-# Главная страница
 @login_required
 def index(request):
+    """ Главная страница. """
+
     template = 'wiki/index.html'
     return render(request, template)
 
-# О проекте
+
 @login_required
 def about(request):
+    """ Страница описания. """
+
     template = 'wiki/about.html'
     return render(request, template)
 
-# Страница книги радуга тяготения
+
 @login_required
 def rainbow(request):
+    """ Страница книги радуга тяготения. """
+
     template = 'wiki/rainbow.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
@@ -91,8 +96,10 @@ def rainbow_part7(request):
     }
     return render(request, template, context)
 
-# Страница главы, на которой видно все примечания к главе
+
 def rainbow_notes(request, chapter_number):
+    """ Страница главы, на которой видно все примечания к главе. """
+
     template = 'wiki/rainbow_notes.html'
     chapter = get_object_or_404(Chapter, number=chapter_number)
     book = get_object_or_404(Book, name='Радуга тяготения')
@@ -104,8 +111,9 @@ def rainbow_notes(request, chapter_number):
     return render(request, template, context)
 
 
-# Страница главы, на которой видно все комментарии к главе
 def rainbow_comments(request, chapter_number):
+    """ Страница главы, на которой видно все комментарии к главе. """
+
     template = 'wiki/rainbow_comments.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     chapter = get_object_or_404(Chapter, number=chapter_number)
@@ -114,7 +122,7 @@ def rainbow_comments(request, chapter_number):
         'comments': chapter.comments.all(),
         'chapter': chapter,
         'chapters': Chapter.objects.filter(book=book).all()
-        }
+    }
     return render(request, template, context)
 
 
@@ -126,5 +134,5 @@ def chronology(request):
     return render(
         request,
         'wiki/chronology.html',
-        context = {'rows': TableChronology.objects.all()}
+        context={'rows': TableChronology.objects.all()}
     )
