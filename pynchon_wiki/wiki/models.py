@@ -1,29 +1,40 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator
 from django.db import models
-from django.forms import IntegerField
 from django.template.defaultfilters import truncatechars
-from django.utils.safestring import mark_safe
+
+from core.models import BaseModel, BaseNameModel
 
 User = get_user_model()
 
-class Book(models.Model):
-    name = models.CharField(max_length=50)
+
+class Book(BaseNameModel):
+    """ Модель книг. """
+
     description = models.TextField(
         verbose_name='Описание книги'
     )
+
     class Meta:
-        verbose_name_plural = 'Книги'
         verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
+        db_table = 'books'
 
     def __str__(self) -> str:
-        return str(self.name)
+        return self.name
 
-class Chapter(models.Model):
-    number = models.CharField(max_length=5)
+
+class Chapter(BaseModel):
+    """ Модель глав у книг. """
+
+    number = models.PositiveIntegerField(
+        verbose_name='Номер главы',
+        validators=[MaxValueValidator(10000)]
+    )
     book = models.ForeignKey(
         Book,
-        related_name='chapters',
         verbose_name='Книга',
+        related_name='chapters',
         on_delete=models.SET_NULL,
         blank=True,
         null=True
@@ -33,114 +44,168 @@ class Chapter(models.Model):
         blank=True,
         null=True
     )
-    book_part = models.CharField(max_length=5, blank=True,
-        null=True,)
-    summary = models.TextField(verbose_name='Краткое содержание главы', blank=True, null=True)
-    interpretation = models.TextField(verbose_name='Интерпретация', blank=True, null=True)
+    book_part = models.PositiveIntegerField(
+        verbose_name='Часть книги',
+        blank=True, null=True,
+        validators=[
+            MaxValueValidator(10000)
+        ],
+    )
+    summary = models.TextField(
+        verbose_name='Краткое содержание главы',
+        blank=True,
+        null=True
+    )
+    interpretation = models.TextField(
+        verbose_name='Интерпретация',
+        blank=True,
+        null=True
+    )
     image = models.ImageField(
+        verbose_name='Картинка',
         blank=True,
         null=True,
-        verbose_name='Картинка',
-        # upload_to='comments/'
+        upload_to='chapters/'
     )
-    links = models.URLField(blank=True,
-        null=True,
-        max_length = 500,
-        verbose_name='Ссылки к главе'
-    )
+
     class Meta:
-        verbose_name_plural = 'Главы'
         verbose_name = 'Глава'
-        
+        verbose_name_plural = 'Главы'
+        db_table = 'chapters'
+
     def __str__(self) -> str:
         return str(self.number)
-    
-    # @property
-    # def get_image(self):
-    #     if self.image:
-    #         return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
-    #     else:
-    #         return 'нет картинки'
 
-class Comment(models.Model):
-    origin_text = models.CharField(
-        max_length=200,
-        verbose_name='Оригинальный текст книги'
+
+class ChapterLink(BaseModel):
+    """ Модель ссылок для глав книг. """
+
+    link = models.URLField(
+        verbose_name='Ссылка к главе',
+        blank=True,
+        null=True,
     )
+    chapter = models.ForeignKey(
+        Chapter,
+        verbose_name='Глава',
+        related_name='chapters',
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name = 'Ссылка к главе'
+        verbose_name_plural = 'Ссылки к главе'
+        db_table = 'chapter_links'
+
+    def __str__(self):
+        return self.link
+
+
+class Comment(BaseNameModel):
+    """ Модель комментариев. """
+
     comment_text = models.TextField(
         verbose_name='Текст примечания'
     )
-    links = models.URLField(blank=True,
-        null=True,
-        max_length = 500,
-        verbose_name='Ссылки к примечанию'
-    )
     image = models.ImageField(
+        verbose_name='Картинка',
         blank=True,
         null=True,
-        verbose_name='Картинка',
-        # upload_to='comments/'
+        upload_to='comments/'
     )
     book = models.ForeignKey(
-        Book,
+        Book, verbose_name='Книга',
         related_name='comments',
-        verbose_name='Книга',
         on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
     chapter = models.ForeignKey(
         Chapter,
-        related_name='comments',
         verbose_name='Номер главы',
+        related_name='comments',
         on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
-    page_number_by_2012 = models.IntegerField()
-    page_number_by_2021 = models.IntegerField()
-    order_number = models.IntegerField()
-    pub_date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Опубликовано'
+    page_number_by_2012 = models.PositiveIntegerField(
+        verbose_name='Нумерация глав в старом издании'
+    )
+    page_number_by_2021 = models.PositiveIntegerField(
+        verbose_name='Нумерация глав в новом издании'
+    )
+    sort = models.PositiveBigIntegerField(
+        verbose_name='Сортировка',
+        null=True,
+        blank=True
     )
     author = models.ForeignKey(
         User,
+        verbose_name='Автор',
         on_delete=models.CASCADE,
-        related_name='comments',
-        verbose_name='Автор')
+        related_name='comments'
+    )
 
     class Meta:
-        ordering = ('page_number_by_2012', 'order_number')
-        verbose_name_plural = 'Комментарии'
+        ordering = ('page_number_by_2012', 'sort')
         verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        db_table = 'comments'
 
-    # @property
-    # def get_image(self):
-    #     if self.image:
-    #         return mark_safe(f'<img src="{self.image.url}" style="max-height: 500px;">')
-    #     else:
-    #         return 'нет картинки'
-        
     @property
     def short_text(self):
         return truncatechars(self.comment_text, 100)
-     
+
     def __str__(self) -> str:
-        return str(self.origin_text)
-    
-    
-class TableChronology(models.Model):
-    date = models.CharField(max_length=100, verbose_name='Дата', blank=True, null=True)
-    description = models.TextField(
-        verbose_name='Событие', blank=True, null=True
+        return self.name
+
+
+class CommentLink(BaseModel):
+    """ Модель ссылок для комментариев. """
+
+    link = models.URLField(
+        verbose_name='Ссылка к комментарию',
+        blank=True,
+        null=True,
     )
-    order_number = models.CharField(max_length=10)
-    
+    comment = models.ForeignKey(
+        Comment,
+        verbose_name='Комментарий',
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
+
     class Meta:
-        verbose_name_plural = 'Строки таблицы хронологии'
+        verbose_name = 'Ссылка к примечанию'
+        verbose_name_plural = 'Ссылки к примечанию'
+        db_table = 'comment_links'
+
+    def __str__(self) -> str:
+        return self.link
+
+
+class TableChronology(BaseModel):
+    """ Модель таблицы для определения хронологии. """
+
+    date = models.DateField(
+        verbose_name='Дата',
+        blank=True,
+        null=True
+    )
+    description = models.TextField(
+        verbose_name='Событие',
+        blank=True,
+        null=True
+    )
+    sort = models.PositiveBigIntegerField(
+        verbose_name='Сортировка'
+    )
+
+    class Meta:
         verbose_name = 'Строка таблицы хронологии'
-        ordering = ['order_number']
-        
-        
-new_row = TableChronology('qqq', 'aaa', 'a')
+        verbose_name_plural = 'Строки таблицы хронологии'
+        db_table = 'chronologies'
+        ordering = ('sort',)
+
+    def __str__(self) -> str:
+        return self.description
