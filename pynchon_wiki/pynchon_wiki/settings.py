@@ -1,23 +1,22 @@
-
 import os
+from datetime import datetime
+from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '../infra/.env'))
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-DEBUG = True
-
-TEMPLATE_DEBUG=True
-
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.getenv('SECRET_KEY', 'test-key')
+DEBUG = bool(os.getenv('DEBUG', False))
+TEMPLATE_DEBUG = bool(os.getenv('TEMPLATE_DEBUG', False))
+ALLOWED_HOSTS = str(os.getenv('ALLOWED_HOSTS', '*')).split()
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'wiki.apps.WikiConfig',
     'users.apps.UsersConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,24 +58,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pynchon_wiki.wsgi.application'
 
-
 DATABASES = {
-    'default': {
+    'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'production': {
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT')
+    },
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('DB_ENGINE'),
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('POSTGRES_USER'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-#         'HOST': os.getenv('DB_HOST'),
-#         'PORT': os.getenv('DB_PORT')
-#     }
-# }
 
+DB_LOCAL = bool(os.getenv('DB_LOCAL', False))
+DATABASES['default'] = DATABASES['dev' if DB_LOCAL else 'production']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -93,8 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -104,8 +101,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'users.User'
+
+DEFAULT_NAME_LENGTH = 255
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'wiki/static')
+if DEBUG:
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'wiki/static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -122,3 +127,52 @@ CACHES = {
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'wiki:index'
 LOGOUT_REDIRECT_URL = 'wiki:index'
+
+LOG_FILE_NAME = os.path.join(BASE_DIR,
+                             f'logs/log-{datetime.today().strftime("%Y-%m-%d")}.log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filters': ['require_debug_false'],
+            'filename': LOG_FILE_NAME,
+            'formatter': 'verbose'
+        },
+        'console': {
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'propagate': False,
+        },
+    }
+}
