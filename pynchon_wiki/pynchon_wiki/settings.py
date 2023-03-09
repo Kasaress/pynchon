@@ -2,21 +2,19 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '../../infra/.env'))
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-DEBUG = True
-
-TEMPLATE_DEBUG=True
-
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.getenv('SECRET_KEY', 'test-key')
+DEBUG = bool(os.getenv('DEBUG', False))
+TEMPLATE_DEBUG = bool(os.getenv('TEMPLATE_DEBUG', False))
+ALLOWED_HOSTS = str(os.getenv('ALLOWED_HOSTS', '*')).split()
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'wiki.apps.WikiConfig',
     'users.apps.UsersConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +56,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pynchon_wiki.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -92,8 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
