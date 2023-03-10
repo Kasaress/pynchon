@@ -3,6 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
+from factory import Faker
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '../infra/.env'))
@@ -176,3 +177,5 @@ LOGGING = {
         },
     }
 }
+
+Faker._DEFAULT_LOCALE = 'ru_RU'

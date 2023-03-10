@@ -4,6 +4,16 @@ from factory import Faker, django
 from users.models import User
 
 
+class AuthorFactory(django.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    first_name = Faker('first_name')
+    last_name = Faker('last_name')
+    username = Faker('user_name')
+    email = Faker('free_email')
+
+
 class UserAdminFactory(django.DjangoModelFactory):
     class Meta:
         model = User
