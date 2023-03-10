@@ -1,8 +1,9 @@
 {% load thumbnail %}
 <article id='{{ comment.order_number }}'>
-    <p><i>
-        Стр.{{ comment.page_number_by_2012 }}/
-        Стр.{{ comment.page_number_by_2021 }}</i>
+    <p>
+        <i>
+            Стр.{{ comment.page_number_by_2012 }}/ Стр.{{ comment.page_number_by_2021 }}
+        </i>
     </p>
     <p>
         <b>{{ comment.name|linebreaks }}</b>
