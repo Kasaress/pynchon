@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    container_name: pynchon-db
+    networks:
+      - default
+
+  backend:
+    build:
+      context: pynchon_wiki/
+      dockerfile: Dockerfile
+    volumes:
+      - ./media/:/app/media/
+      - ./logs:/app/logs
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    restart: always
+    container_name: pynchon-backend
+    networks:
+      - default
+
+  nginx:
+    image: nginx:1.19.3
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./pynchon_wiki/static/:/var/html/static/
+      - ./media/:/var/html/media/
+    depends_on:
+      - backend
+    container_name: pynchon-nginx
+    networks:
+      - default
+networks:
+  default:
+    external: true
+    name: pynchon-network
