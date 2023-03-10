@@ -20,7 +20,7 @@ class Command(BaseCommand):
     def _get_or_create_object(self, model, data):
         if model == Comment:
             return model.objects.get_or_create(
-                origin_text=data['origin_text'],
+                name=data['origin_text'],
                 comment_text=data['comment_text'],
                 links=data['links'],
                 image=data['image'],
