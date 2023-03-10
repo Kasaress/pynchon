@@ -1,5 +1,5 @@
 {% load thumbnail %}
-<article id='{{comment.order_number}}'>
+<article id='{{ comment.order_number }}'>
     <p><i>
         Стр.{{ comment.page_number_by_2012 }}/
         Стр.{{ comment.page_number_by_2021 }}</i>
@@ -8,21 +8,20 @@
         <b>{{ comment.origin_text|linebreaks }}</b>
     </p>
     <div class="d-flex">
-    <div style="padding-right:15px">
-        {{ comment.comment_text|safe|linebreaks }}
-    </div>
-        {% if comment.image %}
-        {% thumbnail comment.image "1200" crop="center" as im %}
-        <div>
-            <img class="card-img" src="{{ im.url }}">
+        <div style="padding-right:15px">
+            {{ comment.comment_text|safe|linebreaks }}
         </div>
-        {% endthumbnail %}
+        {% if comment.image %}
+            {% thumbnail comment.image "1200" crop="center" as im %}
+                <div>
+                    <img class="card-img" src="{{ im.url }}">
+                </div>
+            {% endthumbnail %}
         {% endif %}
-</div>
-        {% if comment.links %}
+    </div>
+    {% if comment.links %}
         <p>
-        Ссылка, упомянутая в примечании: <a href="{{comment.links}}">{{ comment.links }}</a>
-    </p>
-        {% endif %}
-    
+            Ссылка, упомянутая в примечании: <a href="{{ comment.links }}">{{ comment.links }}</a>
+        </p>
+    {% endif %}
 </article>
