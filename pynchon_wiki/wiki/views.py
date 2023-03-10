@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from .models import Book, Chapter, Comment, TableChronology
+from django.shortcuts import get_object_or_404, render
+
+from .models import Book, Chapter, TableChronology
 
 
 @login_required

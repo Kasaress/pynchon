@@ -1,10 +1,10 @@
 import csv
-import os.path
 import sys
-from django.conf import settings
+
 from django.core.management.base import BaseCommand
 
-from wiki.models import TableChronology, Comment
+from wiki.models import Comment
+
 
 class Command(BaseCommand):
     help = ('Import CSV-files. Use command: python3 manage.py importcsv')
@@ -20,17 +20,17 @@ class Command(BaseCommand):
     def _get_or_create_object(self, model, data):
         if model == Comment:
             return model.objects.get_or_create(
-                                origin_text=data['origin_text'],
-                                comment_text=data['comment_text'],
-                                links=data['links'],
-                                image=data['image'],
-                                book_id=1,
-                                chapter_id=data['chapter'],
-                                page_number_by_2012=data['page_number_by_2012'],
-                                page_number_by_2021=data['page_number_by_2021'],
-                                order_number=data['order_number'],
-                                author_id=1,
-                            )
+                origin_text=data['origin_text'],
+                comment_text=data['comment_text'],
+                links=data['links'],
+                image=data['image'],
+                book_id=1,
+                chapter_id=data['chapter'],
+                page_number_by_2012=data['page_number_by_2012'],
+                page_number_by_2021=data['page_number_by_2021'],
+                order_number=data['order_number'],
+                author_id=1,
+            )
         # return model.objects.get_or_create(
         #                     name=data['name'].lower(),
         #                     measurement_unit=data['measurement_unit']
