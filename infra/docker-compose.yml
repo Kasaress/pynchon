@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - ./data/postgres:/var/lib/postgresql/data/
     env_file:
       - ./.env
     container_name: pynchon-db
@@ -33,6 +33,3 @@ services:
     depends_on:
       - backend
     container_name: pynchon-nginx
-
-volumes:
-  postgres_data:

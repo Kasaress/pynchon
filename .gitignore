@@ -172,3 +172,4 @@ GitHub.sublime-settings
 .idea/
 logs/
 *.dwg
+infra/data
