@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %} {{book.name}} {% endblock %}
+{% block title %} {{ book.name }} {% endblock %}
 {% block content %}
     <div class="container">
         <h1 id='rainbow_part6'>Раздел 6: хронология романа</h1>
         <p><a href="{% url 'wiki:chronology' %}">Описание подхода и таблица с годами</a></p>
         <hr>
-    </div>  
+    </div>
 {% endblock %}

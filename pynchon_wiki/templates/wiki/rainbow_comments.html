@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% block title %}Комментарии к главе {{chapter}} {% endblock %}
+{% block title %}Комментарии к главе {{ chapter }} {% endblock %}
 {% block content %}
     <div class="container">
-      <a href="{% url 'wiki:rainbow_part3'%}">&#8592; Вернуться к списку глав</a>
-      <hr>
-      {% for chapter in chapters %}
-        <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}}</a>
-      {% endfor %}
-      <hr>
-        <h1>Комментарии к главе {{chapter}}</h1>
+        <a href="{% url 'wiki:rainbow_part3' %}">&#8592; Вернуться к списку глав</a>
+        <hr>
+        {% for chapter in chapters %}
+            <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>
+        {% endfor %}
+        <hr>
+        <h1>Комментарии к главе {{ chapter }}</h1>
         {% if chapter.image %}
             {% thumbnail chapter.image "960x339" crop="center" upscale=True as im %}
-                    <img class="card-img my-2" src="{{ im.url }}">
+                <img class="card-img my-2" src="{{ im.url }}">
             {% endthumbnail %}
 
         {% endif %}
         <p><a href='#summary'>Краткое содержание главы</a></p>
-        <p><a href='#interpretation'>Комментарии</a></p>   
-        
-        <h2 id='summary'>Краткое содержание главы {{chapter}}</h2>
+        <p><a href='#interpretation'>Комментарии</a></p>
+
+        <h2 id='summary'>Краткое содержание главы {{ chapter }}</h2>
         <p>{{ chapter.summary|safe }}</p>
         <hr>
-        <h2 id='interpretation'> Комментарии к главе {{chapter}}</h2>
+        <h2 id='interpretation'> Комментарии к главе {{ chapter }}</h2>
         <p>{{ chapter.interpretation|safe }}</p>
         <hr>
         <p>
-          {% if chapter.links %}
-          <h2> Полезные ссылки к главе {{chapter}}</h2>  
-          <a href="{{chapter.links}}">{{ chapter.links }}</a>
-          {% endif %}
-      </p>
+            {% if chapter.links %}
+                <h2> Полезные ссылки к главе {{ chapter }}</h2>
+                <a href="{{ chapter.links }}">{{ chapter.links }}</a>
+            {% endif %}
+        </p>
         {% for chapter in chapters %}
-          <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{chapter}}</a>
+            <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>
         {% endfor %}
         <hr>
-    </div>  
+    </div>
 {% endblock %}
