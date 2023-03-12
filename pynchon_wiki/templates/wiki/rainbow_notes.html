@@ -2,7 +2,9 @@
 {% load thumbnail %}
 {% block title %}Примечания к главе {{ chapter }} {% endblock %}
 {% block content %}
-    <div class="container">
+<article style="position: relative; height: auto; margin-bottom: 10px;">
+   <div style="display: flex;">
+      <div style="flex: 1; margin-right: 70px;">
         <a href="{% url 'wiki:rainbow_part2' %}">&#8592; Вернуться к списку глав</a>
         <hr>
         {% for chapter in chapters %}
@@ -14,11 +16,6 @@
             {% for comment in comments %}
                 <a href="#{{ comment.order_number }}">□{{ comment.name }}□</a>
             {% endfor %} </p>
-        {% if chapter.image %}
-            {% thumbnail chapter.image "960x339" crop="center" upscale=True as im %}
-                <img class="card-img my-2" src="{{ im.url }}">
-            {% endthumbnail %}
-        {% endif %}
         <hr>
         {% for comment in comments %}
             {% include 'includes/comment.html' %}
@@ -27,5 +24,16 @@
         {% for chapter in chapters %}
             <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
         {% endfor %}
-    </div>
+      </div>
+       {% if chapter.image %}
+        {% thumbnail chapter.image "1600x900" background="#fff" as thumbnail %}
+            <div style="flex: 0 0 20%; margin-right: -20px; height: 300px; width: 600px; background-color: {{ request.session.theme.background_color }};">
+            <img style="height: 100%; max-width: 100%; object-fit: cover; cursor: pointer;" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}" onclick="showPopup('{{ chapter.image.url }}')">
+            </div>
+        {% endthumbnail %}
+        {% else %}
+        <div class="empty-image" style="background-color: {{ request.session.theme.background_color }}; flex: 0 0 20%; margin-right: -20px; height: 300px; width: 600px;"></div>
+        {% endif %}
+   </div>
+</article>
 {% endblock %}
