@@ -4,10 +4,8 @@
 <article style="position: relative; height: auto; margin-bottom: 10px;">
   <div style="display: flex;">
     <div style="flex: 1; margin-right: 70px;">
-        <a href="{% url 'wiki:rainbow_part3' %}">&#8592; Вернуться к списку глав</a>
-        <hr>
         {% for chapter in chapters %}
-            <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>
+            <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>,
         {% endfor %}
         <hr>
         <h1>Комментарии к главе {{ chapter }}</h1>
