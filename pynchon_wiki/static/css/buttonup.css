@@ -16,8 +16,3 @@
 .back-to-top:hover {
     background-image: url("../../static/img/buttonup.png");
 }
-
-
-.hidden {
-  display: none;
-}

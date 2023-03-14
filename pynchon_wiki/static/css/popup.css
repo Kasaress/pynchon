@@ -1,0 +1,33 @@
+#popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+#popup img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+#popup-close {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      color: #fff;
+      cursor: pointer;
+    }

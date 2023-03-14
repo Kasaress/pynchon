@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block title %}Примечания к главе {{ chapter }} {% endblock %}
 {% block content %}
 <article style="position: relative; height: auto; margin-bottom: 10px;">
-  <div style="display: flex;">
-    <div style="flex: 1; margin-right: 70px;">
-        <a href="{% url 'wiki:rainbow_part2' %}">&#8592; Список глав</a>
+   <div style="display: flex;">
+      <div style="flex: 1; margin-right: 70px;">
+        <a href="{% url 'wiki:rainbow_part2' %}">&#8592; Вернуться к списку глав</a>
         <hr>
         {% for chapter in chapters %}
             <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
@@ -20,8 +21,19 @@
             {% include 'includes/comment.html' %}
             <hr>
         {% endfor %}
-    </div>
-    {% include 'includes/image.html' %}
-  </div>
+        {% for chapter in chapters %}
+            <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
+        {% endfor %}
+      </div>
+       {% if chapter.image %}
+        {% thumbnail chapter.image "1600x900" background="#fff" as thumbnail %}
+            <div style="flex: 0 0 20%; margin-right: -20px; height: 300px; width: 600px; background-color: {{ request.session.theme.background_color }};">
+            <img style="height: 100%; max-width: 100%; object-fit: cover; cursor: pointer;" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}" onclick="showPopup('{{ chapter.image.url }}')">
+            </div>
+        {% endthumbnail %}
+        {% else %}
+        <div class="empty-image" style="background-color: {{ request.session.theme.background_color }}; flex: 0 0 20%; margin-right: -20px; height: 300px; width: 600px;"></div>
+        {% endif %}
+   </div>
 </article>
 {% endblock %}
