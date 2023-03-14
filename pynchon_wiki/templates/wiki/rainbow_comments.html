@@ -24,6 +24,9 @@
                 <a href="{{ chapter.links }}">{{ chapter.links }}</a>
             {% endif %}
         </p>
+        {% for chapter in chapters %}
+            <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>,
+        {% endfor %}
     </div>
     {% include 'includes/image.html' %}
    </div>
