@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
 {% block title %}Примечания к главе {{ chapter }} {% endblock %}
 {% block content %}
-    <div class="container">
+<article style="position: relative; height: auto; margin-bottom: 10px;">
+  <div style="display: flex;">
+    <div style="flex: 1; margin-right: 70px;">
         <a href="{% url 'wiki:rainbow_part2' %}">&#8592; Вернуться к списку глав</a>
         <hr>
         {% for chapter in chapters %}
@@ -14,18 +15,13 @@
             {% for comment in comments %}
                 <a href="#{{ comment.order_number }}">□{{ comment.name }}□</a>
             {% endfor %} </p>
-        {% if chapter.image %}
-            {% thumbnail chapter.image "960x339" crop="center" upscale=True as im %}
-                <img class="card-img my-2" src="{{ im.url }}">
-            {% endthumbnail %}
-        {% endif %}
         <hr>
         {% for comment in comments %}
             {% include 'includes/comment.html' %}
             <hr>
         {% endfor %}
-        {% for chapter in chapters %}
-            <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
-        {% endfor %}
     </div>
+    {% include 'includes/image.html' %}
+   </div>
+</article>
 {% endblock %}
