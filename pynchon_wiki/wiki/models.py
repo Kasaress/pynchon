@@ -72,6 +72,7 @@ class Chapter(BaseModel):
         verbose_name = 'Глава'
         verbose_name_plural = 'Главы'
         db_table = 'chapters'
+        ordering = ('number',)
 
     def __str__(self) -> str:
         return str(self.number)
