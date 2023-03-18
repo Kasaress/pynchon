@@ -19,7 +19,6 @@ class Command(BaseCommand):
     help = 'Генерация тестовых данных'
 
     factories_and_generation_amount = {
-        AuthorFactory: 10,
         UserAdminFactory: 1,
         BookFactory: 5,
         ChapterFactory: 10,

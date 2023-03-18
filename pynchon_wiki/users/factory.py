@@ -18,6 +18,7 @@ class UserAdminFactory(django.DjangoModelFactory):
     class Meta:
         model = User
 
+    id = 1
     first_name = Faker('first_name')
     last_name = Faker('last_name')
     username = 'admin'
