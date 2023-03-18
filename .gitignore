@@ -170,6 +170,6 @@ oscrypto-ca-bundle.crt
 bh_unicode_properties.cache
 GitHub.sublime-settings
 .idea/
-logs/
+*log
 *.dwg
-infra/data
+pynchon_wiki/media
