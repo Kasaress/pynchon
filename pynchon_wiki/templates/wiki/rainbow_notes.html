@@ -1,28 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Примечания к главе {{ chapter }} {% endblock %}
 {% block content %}
-<article style="position: relative; height: auto; margin-bottom: 10px;">
-  <div style="display: flex;">
-    <div style="flex: 1; margin-right: 70px;">
-        {% for chapter in chapters %}
-            <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
-        {% endfor %}
-        <hr>
-        <h1>Примечания к главе {{ chapter }}</h1>
-        <p>
-            {% for comment in comments %}
-                <a href="#{{ comment.order_number }}">□{{ comment.name }}□</a>
-            {% endfor %} </p>
-        <hr>
-        {% for comment in comments %}
-            {% include 'includes/comment.html' %}
-            <hr>
-        {% endfor %}
-        {% for chapter in chapters %}
-            <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
-        {% endfor %}
-    </div>
-    {% include 'includes/image.html' %}
-   </div>
-</article>
+    <article style="position: relative; height: auto; margin-bottom: 10px;">
+        <div style="display: flex;">
+            <div style="flex: 1; margin-right: 70px;">
+                <div class="small mt-2">
+                    {% for chapter in chapters %}
+                        <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
+                    {% endfor %}
+                </div>
+                <hr>
+                <h1>Примечания к главе {{ chapter }}</h1>
+                <ul>
+                    {% for comment in comments %}
+                        <li>
+                            <a href="#{{ comment.id }}">□{{ comment.name }}□</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                {% for comment in comments %}
+                    {% include 'includes/comment.html' %}
+                    <hr>
+                {% endfor %}
+                {% for chapter in chapters %}
+                    <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
+                {% endfor %}
+            </div>
+            {% include 'includes/image.html' %}
+        </div>
+    </article>
 {% endblock %}
