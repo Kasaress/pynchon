@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
 from django.db.models import Model
 
-from users.factory import AuthorFactory, UserAdminFactory
+from users.factory import UserAdminFactory
 from users.models import User
 from wiki.factory import (BookFactory, ChapterFactory, ChapterLinkFactory,
                           CommentFactory, CommentLinkFactory,
