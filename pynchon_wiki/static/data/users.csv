@@ -1,0 +1,2 @@
+id,first_name,last_name,username,is_staff,is_active,is_superuser
+1,Главный,Редактор,chief_editor,1,1,1

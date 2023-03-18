@@ -27,9 +27,9 @@ class Book(BaseNameModel):
 class Chapter(BaseModel):
     """ Модель глав у книг. """
 
-    number = models.PositiveIntegerField(
+    number = models.CharField(
         verbose_name='Номер главы',
-        validators=[MaxValueValidator(10000)]
+        max_length=8
     )
     book = models.ForeignKey(
         Book,
