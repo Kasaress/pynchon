@@ -17,14 +17,12 @@
                 </li>
                 {% if  user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link link-light {% if view_name  == 'users:password_reset' %}active{% endif %}"
-                           href="{% url 'users:password_reset' %}">Изменить пароль</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link link-light {% if view_name  == 'users:logout' %}active{% endif %}"
                            href="{% url 'users:logout' %}">Выйти</a>
                     </li>
-                    <li>Пользователь: {{ user.username }}</li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light disabled">Пользователь: {{ user.username }}</a>
+                    </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}"
