@@ -17,6 +17,7 @@ services:
     volumes:
       - ./media/:/app/media/
       - ./logs:/app/logs
+      - static:/app/static/
     depends_on:
       - db
     env_file:
@@ -30,7 +31,7 @@ services:
     image: nginx:1.19.3
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./pynchon_wiki/static/:/var/html/static/
+      - static:/var/html/static/
       - ./media/:/var/html/media/
     depends_on:
       - backend
@@ -41,3 +42,6 @@ networks:
   default:
     external: true
     name: pynchon-network
+
+volumes:
+  static:
