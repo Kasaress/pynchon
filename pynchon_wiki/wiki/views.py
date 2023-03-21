@@ -5,7 +5,6 @@ from django.urls import reverse
 from .models import Book, Chapter, TableChronology
 
 
-@login_required
 def index(request):
     """ Главная страница. """
     template = 'wiki/index.html'
@@ -13,14 +12,12 @@ def index(request):
     return render(request, template, context=context)
 
 
-@login_required
 def about(request):
     """ Страница описания. """
     template = 'wiki/about.html'
     return render(request, template)
 
 
-@login_required
 def rainbow(request):
     """ Страница книги радуга тяготения. """
 
