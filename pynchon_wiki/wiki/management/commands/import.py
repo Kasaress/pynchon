@@ -1,4 +1,3 @@
-import os.path
 from csv import DictReader
 
 from django.conf import settings
@@ -7,8 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import BaseCommand
 
 # Импорт моделей
-from wiki.models import (Book, Chapter, ChapterLink, Comment, CommentLink,
-                         TableChronology)
+from wiki.models import (Book, Chapter, Comment)
 
 User = get_user_model()
 

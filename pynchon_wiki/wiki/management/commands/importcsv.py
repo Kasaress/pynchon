@@ -1,6 +1,7 @@
 import csv
 import sys
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from wiki.models import Comment
@@ -12,8 +13,9 @@ class Command(BaseCommand):
         # 'ingredients': Ingredient,
         'Comment': Comment,
     }
+    BASE_DIR = settings.BASE_DIR
     FILES = {
-        'Comment': '/Users/yanabubnova/DEV/pynchon/pynchon_wiki/wiki/static/data/test_comments.csv',
+        'Comment': f'{BASE_DIR}/static/data/test_comments.csv',
         # 'tags': f'{settings.DATA_ROOT}/tags.csv',
     }
 
