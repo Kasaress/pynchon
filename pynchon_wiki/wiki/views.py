@@ -21,7 +21,7 @@ def rainbow(request):
     """ Страница книги радуга тяготения. """
 
     template = 'wiki/rainbow.html'
-    book = get_object_or_404(Book, name='спешить')
+    book = get_object_or_404(Book, name='Радуга тяготения')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -61,7 +61,7 @@ def rainbow_part1(request):
 
 def rainbow_part2(request):
     template = 'wiki/rainbow_part2.html'
-    book = get_object_or_404(Book, name='спешить')
+    book = get_object_or_404(Book, name='Радуга тяготения')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -85,7 +85,7 @@ def rainbow_part2(request):
 
 def rainbow_part3(request):
     template = 'wiki/rainbow_part3.html'
-    book = get_object_or_404(Book, name='спешить')
+    book = get_object_or_404(Book, name='Радуга тяготения')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -205,7 +205,7 @@ def rainbow_notes(request, chapter_number):
 
     template = 'wiki/rainbow_notes.html'
     chapter = get_object_or_404(Chapter, number=chapter_number)
-    book = get_object_or_404(Book, name='спешить')
+    book = get_object_or_404(Book, name='Радуга тяготения')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -236,7 +236,7 @@ def rainbow_comments(request, chapter_number):
     """ Страница главы, на которой видно все комментарии к главе. """
 
     template = 'wiki/rainbow_comments.html'
-    book = get_object_or_404(Book, name='спешить')
+    book = get_object_or_404(Book, name='Радуга тяготения')
     chapter = get_object_or_404(Chapter, number=chapter_number)
     breadcrumbs = [
         {
