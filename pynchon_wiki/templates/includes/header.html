@@ -1,18 +1,27 @@
 {% load static %}
 <nav class="navbar navbar-light" style="background-color: #414141">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'wiki:index' %}">
-            Пинчон
-        </a>
+        <a class="nav-link link-light
+            {% if view_name  == 'wiki:index' %}active text-bg-secondary{% else %}color-text-header{% endif %}"
+                      href="{% url 'wiki:index' %}">Пинчон</a>
         {% with request.resolver_match.view_name as view_name %}
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link {% if view_name  == 'wiki:rainbow' %}active{% endif %}"
-                       href="{% url 'wiki:rainbow' %}">Радуга тяготения</a>
+                    <a class="nav-link link-light nav-bg
+                        {% if view_name  == 'wiki:double_katie' %}active text-bg-secondary{% endif %}"
+                            href="{% url 'wiki:double_katie' %}">Томас Пинчон</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if view_name  == 'wiki:about' %}active{% endif %}"
-                       href="{% url 'wiki:about' %}">О проекте</a>
+                    <a class="nav-link link-light nav-bg
+                        {% if view_name  == 'wiki:about' %}active text-bg-secondary
+                        {% else %}text-beyge{% endif %}"
+                            href="{% url 'wiki:about' %}">О проекте</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light nav-bg
+                        {% if view_name  == 'wiki:rainbow_part7' %}active text-bg-secondary
+                        {% else %}text-beyge{% endif %}"
+                            href="{% url 'wiki:rainbow_part7' %}">Другие книги</a>
                 </li>
                 {% if  user.is_authenticated %}
                     <li class="nav-item">

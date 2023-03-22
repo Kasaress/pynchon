@@ -5,9 +5,14 @@ from .models import Book, Chapter, TableChronology
 
 
 def index(request):
-    """ Главная страница. """
+    """ Главная страница книги радуга тяготения. """
     template = 'wiki/index.html'
-    context = {'url_name': 'index'}
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+        'url_name': 'index',
+    }
     return render(request, template, context=context)
 
 
@@ -17,38 +22,11 @@ def about(request):
     return render(request, template)
 
 
-def rainbow(request):
-    """ Страница книги радуга тяготения. """
-
-    template = 'wiki/rainbow.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
-        }
-    ]
-    context = {
-        'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
-        'url_name': 'rainbow',
-        'breadcrumbs': breadcrumbs
-    }
-    return render(request, template, context=context)
-
-
 def rainbow_part1(request):
     template = 'wiki/rainbow_part1.html'
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
         },
         {
             'title': 'Раздел 1: для чего читать радугу',
@@ -65,10 +43,6 @@ def rainbow_part2(request):
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
         },
         {
             'title': 'Раздел 2: примечания к каждой главе',
@@ -91,9 +65,6 @@ def rainbow_part3(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')},
-        {
             'title': 'Раздел 3: краткое содержание и комментарии по главам',
             'url_name': reverse('wiki:rainbow_part1')
         }
@@ -114,9 +85,6 @@ def rainbow_part4(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')},
-        {
             'title': 'Раздел 4: статьи с объяснениями',
             'url_name': reverse('wiki:rainbow_part1')
         }
@@ -135,10 +103,6 @@ def rainbow_part5(request):
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
         },
         {
             'title': 'Раздел 5: персонажи - таблица и схема',
@@ -161,10 +125,6 @@ def rainbow_part6(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
-        },
-        {
             'title': 'Раздел 6: хронология романа',
             'url_name': reverse('wiki:rainbow_part1')
         }
@@ -184,9 +144,6 @@ def rainbow_part7(request):
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')},
         {
             'title': 'Раздел 7: объяснение',
             'url_name': reverse('wiki:rainbow_part1')
@@ -209,10 +166,6 @@ def rainbow_notes(request, chapter_number):
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
         },
         {
             'title': 'Раздел 2: примечания к каждой главе',
@@ -243,10 +196,6 @@ def rainbow_comments(request, chapter_number):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
-        },
-        {
             'title': 'Раздел 3: краткое содержание и комментарии по главам',
             'url_name': reverse('wiki:rainbow_part3')},
         {
@@ -270,12 +219,8 @@ def double_katie(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
-        },
-        {
             'title': 'Раздел 4',
-            'url_name': reverse('wiki:rainbow_part1')
+            'url_name': reverse('wiki:rainbow_part4')
         },
         {
             'title': 'Двойничество Катье',
@@ -292,12 +237,8 @@ def chronology(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Радуга: Разделы',
-            'url_name': reverse('wiki:rainbow')
-        },
-        {
-            'title': 'Раздел 6',
-            'url_name': reverse('wiki:rainbow_part1')
+            'title': 'Раздел 6: хронология романа',
+            'url_name': reverse('wiki:rainbow_part6')
         },
         {
             'title': 'Хронология',

@@ -3,9 +3,7 @@
 {% block content %}
 {% load user_filters %}
     <div class="container">
-        <h1>Радуга тяготения</h1>
-        <hr>
-        <h2 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h2>
+        <h1 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h1>
         {% for chapter in chapters|sort_chapters %}
             <p>
                 <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter.number }} {{ chapter.description }}</a>
