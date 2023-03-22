@@ -31,6 +31,16 @@ class Command(BaseCommand):
                 except ObjectDoesNotExist:
                     raise f'{model} не существует'
 
+    @staticmethod
+    def _insert_image(file, row):
+        """
+        Метод для импорта названия папки с картинками, если такие есть в CSV.
+        """
+        image = row.get('image')
+        if image:
+            row['image'] = f'{file}/{image}'
+        return row
+
     def import_data(self):
         """ Метод импортирует пользователей, книги и т.д. в БД. """
 
@@ -40,6 +50,7 @@ class Command(BaseCommand):
                           encoding='utf-8') as f:
                     print(f'Начался импорт данных {file}')
                     for row in DictReader(f):
+                        self._insert_image(file, row)
                         if not model.objects.filter(**row).exists():
                             model.objects.create(**row)
                 print(f'Импорт данных {file} завершен.')
