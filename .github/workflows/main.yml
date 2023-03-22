@@ -65,7 +65,7 @@ jobs:
           script: |
             cd ./projects/pynchon/
             sudo docker compose stop
-            sudo docker compose rm pynchon-backend
+            sudo docker compose rm backend
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/pynchon
             sudo docker compose up -d
             sudo docker compose start
