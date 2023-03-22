@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Раздел 3: краткое содержание и комментарии по главам {% endblock %}
 {% block content %}
+{% load user_filters %}
     <div class="container">
         <h1 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h1>
-        {% for chapter in chapters %}
+        {% for chapter in chapters|sort_chapters %}
             <p>
                 <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }} {{ chapter.description }}</a>
                 {% comment %} {% if chapter.image %}

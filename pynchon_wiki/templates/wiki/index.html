@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}Пинчон{% endblock %}
+{% block title %} {{ book.name }} {% endblock %}
 {% block content %}
     <div class="container">
-        <h1>Пинчона читать полезно и весело</h1>
-        <p>Пока мы сделали только один раздел, про радугу тяготения. Но скоро тут появится информация и о других книгах
-            Пинчона.</p>
-        <h3><a href="{% url 'wiki:rainbow' %}">Вики по Радуге Тяготения</a></h3>
+        <h1>Радуга тяготения</h1>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part1' %}">Раздел 1: для чего читать радугу</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part2' %}">Раздел 2: примечания к каждой главе</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part3' %}">Раздел 3: краткое содержание и комментарии по главам</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part4' %}">Раздел 4: спойлерные статьи с объяснениями</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part5' %}">Раздел 5: персонажи - таблица и схема</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part6' %}">Раздел 6: хронология романа</a>
+        <hr>
+        <a href="{% url 'wiki:rainbow_part7' %}">Раздел 7: объяснение всего вообще</a>
     </div>
 {% endblock %}

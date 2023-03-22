@@ -18,7 +18,6 @@ urlpatterns = [
     path('rainbow_part5', views.rainbow_part5, name='rainbow_part5'),
     path('rainbow_part6', views.rainbow_part6, name='rainbow_part6'),
     path('rainbow_part7', views.rainbow_part7, name='rainbow_part7'),
-    path('rainbow/', views.rainbow, name='rainbow'),
     path('about/', views.about, name='about'),
     path('', views.index, name='index'),
 ]

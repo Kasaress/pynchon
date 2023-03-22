@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}Примечания к главе {{ chapter }} {% endblock %}
 {% block content %}
+{% load user_filters %}
     <article style="position: relative; height: auto; margin-bottom: 10px;">
         <div style="display: flex;">
             <div style="flex: 1; margin-right: 70px;">
-                {% for chapter in chapters %}
-                    <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
+                {% for chapter in chapters|sort_chapters %}
+                    <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
+                    {% if not forloop.last %}
+                        ,
+                    {% endif %}
                 {% endfor %}
                 <hr>
                 <h1>Примечания к главе {{ chapter }}</h1>
                 <p>
                     {% for comment in comments %}
-                        <a href="#{{ comment.order_number }}">□{{ comment.name }}□</a>
+                        <a href="#{{ comment.order_number }}">{{ comment.name }}{% if not forloop.last %}□{% endif %}</a>
                     {% endfor %}
                 </p>
                 <hr>
@@ -19,8 +23,11 @@
                     {% include 'includes/comment.html' %}
                     <hr>
                 {% endfor %}
-                {% for chapter in chapters %}
-                    <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>,
+                {% for chapter in chapters|sort_chapters %}
+                    <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter }}</a>
+                    {% if not forloop.last %}
+                        ,
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
