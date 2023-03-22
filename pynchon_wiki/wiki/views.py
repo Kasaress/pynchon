@@ -21,7 +21,7 @@ def rainbow(request):
     """ Страница книги радуга тяготения. """
 
     template = 'wiki/rainbow.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    book = get_object_or_404(Book, name='спешить')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -61,7 +61,7 @@ def rainbow_part1(request):
 
 def rainbow_part2(request):
     template = 'wiki/rainbow_part2.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    book = get_object_or_404(Book, name='спешить')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -85,7 +85,7 @@ def rainbow_part2(request):
 
 def rainbow_part3(request):
     template = 'wiki/rainbow_part3.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    book = get_object_or_404(Book, name='спешить')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -205,7 +205,7 @@ def rainbow_notes(request, chapter_number):
 
     template = 'wiki/rainbow_notes.html'
     chapter = get_object_or_404(Chapter, number=chapter_number)
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    book = get_object_or_404(Book, name='спешить')
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -219,7 +219,8 @@ def rainbow_notes(request, chapter_number):
             'url_name': reverse('wiki:rainbow_part2')
         },
         {
-            'title': 'Примечание'
+            'title': f'Примечания к главе {chapter}',
+            'url_name': reverse('wiki:rainbow_notes', args={chapter})
         }
     ]
     context = {
@@ -235,7 +236,7 @@ def rainbow_comments(request, chapter_number):
     """ Страница главы, на которой видно все комментарии к главе. """
 
     template = 'wiki/rainbow_comments.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    book = get_object_or_404(Book, name='спешить')
     chapter = get_object_or_404(Chapter, number=chapter_number)
     breadcrumbs = [
         {
@@ -249,7 +250,8 @@ def rainbow_comments(request, chapter_number):
             'title': 'Раздел 3: краткое содержание и комментарии по главам',
             'url_name': reverse('wiki:rainbow_part3')},
         {
-            'title': 'Комментарий'
+            'title': f'Комментариии к главе {chapter}',
+            'url_name': reverse('wiki:rainbow_comments', args={chapter})
         }
     ]
     context = {
