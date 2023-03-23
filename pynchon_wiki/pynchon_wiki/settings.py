@@ -129,8 +129,12 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'wiki:index'
 LOGOUT_REDIRECT_URL = 'wiki:index'
 
-LOG_FILE_NAME = os.path.join(BASE_DIR,
-                             f'logs/log-{datetime.today().strftime("%Y-%m-%d")}.log')
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+LOG_FILE_NAME = f'{LOG_DIR}/log-{datetime.today().strftime("%Y-%m-%d")}.log'
 
 LOGGING = {
     'version': 1,
