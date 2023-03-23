@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .models import Book, Chapter, TableChronology
+from .decorators import page_in_development
 
 
 def index(request):
@@ -22,6 +23,7 @@ def about(request):
     return render(request, template)
 
 
+@page_in_development
 def rainbow_part1(request):
     template = 'wiki/rainbow_part1.html'
     breadcrumbs = [
@@ -97,6 +99,7 @@ def rainbow_part4(request):
     return render(request, template, context)
 
 
+@page_in_development
 def rainbow_part5(request):
     template = 'wiki/rainbow_part5.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
@@ -137,6 +140,7 @@ def rainbow_part6(request):
     return render(request, template, context)
 
 
+@page_in_development
 def rainbow_part7(request):
     template = 'wiki/rainbow_part7.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
@@ -219,7 +223,7 @@ def double_katie(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Раздел 4',
+            'title': 'Раздел 4: статьи с объяснениями',
             'url_name': reverse('wiki:rainbow_part4')
         },
         {
@@ -250,3 +254,9 @@ def chronology(request):
         'breadcrumbs': breadcrumbs
     }
     return render(request, 'wiki/chronology.html', context)
+
+
+def in_development(request):
+    """ Страница в разработке. """
+    template = 'wiki/in_development.html'
+    return render(request, template)

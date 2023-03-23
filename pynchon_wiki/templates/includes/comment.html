@@ -1,5 +1,5 @@
 {% load thumbnail %}
-<article id='{{ comment.id }}'>
+<article id='{{ comment.page_number_by_2012 }}_{{ comment.order_number }}'>
     <div class="mb-3">
         <small>Стр.{{ comment.page_number_by_2012 }}/ Стр.{{ comment.page_number_by_2021 }}</small>
     </div>
@@ -15,21 +15,22 @@
                 {% thumbnail comment.image "1600x900" as thumbnail %}
                 <div class="position-relative" style="height: 224px; width: 400px;">
                     <img class="w-100" src="{{ thumbnail.url }}" alt="{{ comment.image.alt }}" data-bs-toggle="modal"
-                         data-bs-target="#image-modal-{{ comment.pk }}" style="object-fit: contain; max-height: 100%; max-width: 100%;">
+                         data-bs-target="#image-modal-{{ comment.pk }}"
+                         style="object-fit: contain; max-height: 100%; max-width: 100%;">
                 </div>
                 {% endthumbnail %}
                 <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 70%; height: 70%; max-width: none;">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
-                            <div class="modal-body text-center">
-                                <img src="{{ comment.image.url }}" style="max-width: 100%; max-height: 90vh; object-fit: contain;"
-                                     alt="{{ comment.image.alt }}">
+                            <div class="modal-body text-center p-0">
+                                <img src="{{ comment.image.url }}" style="width: 90%; height: 90%; object-fit: cover;
+                                 margin-top: 10px; margin-bottom: 10px;" alt="{{ comment.image.alt }}">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endif %}
+        {% endif %}
     </div>
     {% if comment.links %}
         <div class="mb-3">

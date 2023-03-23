@@ -6,11 +6,11 @@
         {% block title %}{% endblock %}
     </title>
 </head>
-<body style="background-color: #F3F0EA">
+<body class="d-flex flex-column min-vh-100" style="background-color: #F3F0EA">
 <header>
     {% include 'includes/header.html' %}
 </header>
-<main>
+<main class="flex-shrink-0">
     <div class="container py-5">
     {% include 'includes/bread_crumbs.html' %}
         {% block content %}{% endblock %}

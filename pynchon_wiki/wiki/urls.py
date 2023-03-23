@@ -5,6 +5,7 @@ from . import views
 app_name = 'wiki'
 
 urlpatterns = [
+    path('in_development', views.in_development, name='in_development'),
     path('rainbow/chronology/', views.chronology, name='chronology'),
     path('rainbow/double_katie/', views.double_katie, name='double_katie'),
     path('rainbow/notes/<chapter_number>/', views.rainbow_notes,
