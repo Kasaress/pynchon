@@ -15,7 +15,7 @@
                 <h1>Примечания к главе {{ chapter }}</h1>
                 <p>
                     {% for comment in comments %}
-                        <a href="#{{ comment.page_number_by_2012 }}_{{ comment.order_number }}">□ {{ comment.name }} □</a>
+                        <a href="#{{ comment.page_number_by_2012 }}_{{ comment.id }}">□ {{ comment.name }} □</a>
                     {% endfor %}
                 </p>
                 <hr>
