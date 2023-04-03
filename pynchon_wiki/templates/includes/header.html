@@ -1,48 +1,32 @@
 {% load static %}
+{% load user_filters %}
+{% show_top_menu as top_menu %}
 <nav class="navbar navbar-light" style="background-color: #414141">
     <div class="container">
-        <a class="nav-link link-light
-            {% if view_name  == 'wiki:index' %}active text-bg-secondary{% else %}color-text-header{% endif %}"
-                      href="{% url 'wiki:index' %}">Радуга тяготения</a>
         {% with request.resolver_match.view_name as view_name %}
+            {% if view_name == 'wiki:index' %}
+                <div class="nav-link link-light disabled user-select-none">Радуга тяготения</div>
+            {% else %}
+                <a class="nav-link link-light" href="{% url 'wiki:index' %}">Радуга тяготения</a>
+            {% endif %}
             <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link link-light nav-bg
-                        {% if view_name  == '#' %}active text-bg-secondary{% else %}text-beyge{% endif %}"
-                            href="{% url 'wiki:in_development' %}">Томас Пинчон</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-light nav-bg
-                        {% if view_name  == 'wiki:about' %}active text-bg-secondary
-                        {% else %}text-beyge{% endif %}"
-                            href="{% url 'wiki:about' %}">О проекте</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-light nav-bg
-                        {% if view_name  == '#' %}active text-bg-secondary
-                        {% else %}text-beyge{% endif %}"
-                            href="{% url 'wiki:in_development' %}">Другие книги</a>
-                </li>
+                {% for menu in top_menu %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light nav-bg
+                        {% if request.path == menu.url %} active text-bg-secondary{% else %}text-beyge{% endif %}" href="{{ menu.url }}">{{ menu.name }}</a>
+                    </li>
+                {% endfor %}
                 {% if  user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link link-light nav-bg {% if view_name  == 'users:logout' %}
-                            active text-bg-secondary{% else %}text-beyge{% endif %}"
-                           href="{% url 'users:logout' %}">Выйти</a>
+                        <a class="nav-link link-light nav-bg " href="{% url 'users:logout' %}">Выйти</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-light disabled">Пользователь: {{ user.username }}</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link link-light nav-bg  {% if view_name  == 'users:login' %}
-                            active text-bg-secondary{% else %}text-beyge{% endif %}"
-                           href="{% url 'users:login' %}">Войти</a>
+                        <a class="nav-link link-light nav-bg  {% if view_name  == 'users:login' %} active text-bg-secondary{% else %}text-beyge{% endif %}" href="{% url 'users:login' %}">Войти</a>
                     </li>
-                    {% comment %}
-                        <li class="nav-item">
-                            <a class="nav-link link-light {% if view_name  == 'users:signup' %}active{% endif %}"
-                               href="{% url 'users:signup' %}">Регистрация</a>
-                        </li> {% endcomment %}
                 {% endif %}
             </ul>
         {% endwith %}
