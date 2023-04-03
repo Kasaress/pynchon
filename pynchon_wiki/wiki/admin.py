@@ -71,7 +71,9 @@ class ChapterAdmin(admin.ModelAdmin):
     def preview(self, obj):
         if obj.image:
             return mark_safe(
-                f'<img src="{obj.image.url}" style="max-height: 200px;">')
+                f'<img src="{obj.image.url}"'
+                f'style="max-height: 200px; max-width: 200px;">'
+            )
         else:
             return 'Нет картинки'
 
@@ -127,7 +129,9 @@ class CommentAdmin(admin.ModelAdmin):
     def preview(self, obj):
         if obj.image:
             return mark_safe(
-                f'<img src="{obj.image.url}" style="max-height: 200px;">')
+                f'<img src="{obj.image.url}"'
+                f'style="max-height: 200px; max-width: 200px;">'
+            )
         else:
             return 'Нет картинки'
 
