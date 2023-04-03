@@ -11,9 +11,7 @@ services:
       - default
 
   backend:
-    build:
-      context: pynchon_wiki/
-      dockerfile: Dockerfile
+    image: bujhvh/pynchon_wiki
     volumes:
       - ./media/:/app/media/
       - ./logs:/app/logs
