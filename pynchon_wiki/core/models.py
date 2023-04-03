@@ -26,3 +26,18 @@ class BaseNameModel(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class TopMenu(BaseNameModel):
+    """ Модель верхнеуровневого меню. """
+
+    url = models.CharField('Ссылка на страницу',
+                           max_length=settings.DEFAULT_NAME_LENGTH, blank=True,
+                           null=True)
+    auth_only = models.BooleanField('Только для авторизованных', default=False)
+    sort = models.PositiveSmallIntegerField('Сортировка', default=100)
+
+    class Meta:
+        verbose_name = 'Меню'
+        verbose_name_plural = 'Меню'
+        db_table = 'menus'

@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
 from django.db.models import Model
 
+from core.factory import TopMenuFactory
+from core.models import TopMenu
 from users.factory import UserAdminFactory
 from users.models import User
 from wiki.factory import (BookFactory, ChapterFactory, ChapterLinkFactory,
@@ -26,11 +28,12 @@ class Command(BaseCommand):
         CommentFactory: 10,
         CommentLinkFactory: 20,
         TableChronologyFactory: 20,
+        TopMenuFactory: 3,
     }
 
     models = (
         User, Book, Chapter, ChapterLink, Comment, CommentLink,
-        TableChronology)
+        TableChronology, TopMenu)
 
     def clean_db(self, models: [Model]):
         for model in models:
