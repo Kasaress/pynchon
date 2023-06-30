@@ -11,11 +11,17 @@ def addclass(field, css):
 
 
 @register.filter
-def sort_chapters(chapters):
-    def chapter_key(chapter):
-        return tuple(int(part) for part in chapter.number.split('.'))
+def sort_queryset(queryset, sort_obj):
+    def sort_obj_key(obj):
+        try:
+            parts = getattr(obj, sort_obj).split('.')
+            if len(parts) != 2:
+                return (0, 0)
+            return tuple(map(int, parts))
+        except (AttributeError, ValueError):
+            return (0, 0)
 
-    return sorted(chapters, key=chapter_key)
+    return sorted(queryset, key=sort_obj_key)
 
 
 @register.simple_tag

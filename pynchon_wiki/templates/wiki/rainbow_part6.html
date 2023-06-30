@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
-{% block title %} {{ book.name }} {% endblock %}
+{% block title %}Хронология радуги тяготения{% endblock %}
 {% block content %}
+{% load user_filters %}
     <div class="container">
-        <h1 id='rainbow_part6'>Раздел 6: хронология романа</h1>
-        <p><a href="{% url 'wiki:chronology' %}">Описание подхода и таблица с годами</a></p>
-        <hr>
+        {% for article in articles %}
+            <h1>{{ article.name }}</h1>
+            <p>{{ article|safe }}
+            {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
     </div>
+    <hr/>
+    <h2>Хронологическая таблица</h2>
+    <table class="table">
+        <tr class="table__row">
+            <tr class="table__row">
+                <td class="table__cell">
+                    <p class="table__text"> Дата </p>
+                </td>
+                <td class="table__cell">
+                    <p class="table__text"> Событие </p>
+                </td>
+            </tr> 
+            {% for row in rows|sort_queryset:'sort' %}
+                <td class="table__cell">
+                    <p class="table__text"> {{ row.date }} </p>
+                </td>
+                <td class="table__cell">
+                    <p class="table__text"> {{ row.description }} </p>
+                </td>
+                </tr>
+            {% endfor %}
+    </table>
+
 {% endblock %}

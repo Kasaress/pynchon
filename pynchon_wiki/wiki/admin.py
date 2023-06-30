@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from import_export.admin import ImportExportModelAdmin
+from import_export import resources
 
 from .models import (Book, Chapter, Comment, TableChronology, ChapterLink,
-                     CommentLink)
+                     CommentLink, Article)
 
 
 @admin.register(Book)
@@ -136,8 +138,17 @@ class CommentAdmin(admin.ModelAdmin):
             return 'Нет картинки'
 
 
+class TableChronologyResource(resources.ModelResource):
+
+    class Meta:
+        model = TableChronology
+        exclude = ('id', 'created_at', 'is_active', 'deleted_at')
+        import_id_fields = ('sort', 'date', 'description')
+
+
 @admin.register(TableChronology)
-class TableChronologyAdmin(admin.ModelAdmin):
+class TableChronologyAdmin(ImportExportModelAdmin):
+    resource_classes = [TableChronologyResource]
     list_display = ('created_at', 'description', 'sort')
     search_fields = ('created_at', 'description', 'sort')
     readonly_fields = ('created_at',)
@@ -152,3 +163,8 @@ class TableChronologyAdmin(admin.ModelAdmin):
             'fields': ('date', 'sort', 'description',)
         }),
     )
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'text', 'author', 'image')

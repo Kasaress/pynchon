@@ -17,7 +17,6 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'wiki.apps.WikiConfig',
     'users.apps.UsersConfig',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -25,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'ckeditor',
+    'import_export'
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import truncatechars
+from ckeditor.fields import RichTextField
 
 from core.models import BaseModel, BaseNameModel
 
@@ -187,7 +188,8 @@ class CommentLink(BaseModel):
 class TableChronology(BaseModel):
     """ Модель таблицы для определения хронологии. """
 
-    date = models.DateField(
+    date = models.CharField(
+        max_length=50,
         verbose_name='Дата',
         blank=True,
         null=True
@@ -197,7 +199,8 @@ class TableChronology(BaseModel):
         blank=True,
         null=True
     )
-    sort = models.PositiveBigIntegerField(
+    sort = models.CharField(
+        max_length=10,
         verbose_name='Сортировка'
     )
 
@@ -209,3 +212,37 @@ class TableChronology(BaseModel):
 
     def __str__(self) -> str:
         return self.description
+
+
+class Article(BaseNameModel):
+    """ Модель статей. """
+    text = RichTextField(
+        'Текст статьи'
+    )
+    author = models.ForeignKey(
+        User,
+        verbose_name='Автор статьи',
+        related_name='articles',
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(
+        'Картинка',
+        blank=True,
+        null=True,
+        upload_to='articles/'
+    )
+    chapter = models.IntegerField(
+        'Номер раздела'
+    )
+    create_at = models.DateTimeField(
+        'Дата создания',
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+        db_table = 'articles'
+
+    def __str__(self):
+        return self.text

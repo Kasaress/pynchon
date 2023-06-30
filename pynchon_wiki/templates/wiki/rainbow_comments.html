@@ -6,7 +6,7 @@
     <article style="position: relative; height: auto; margin-bottom: 10px;">
         <div style="display: flex;">
             <div style="flex: 1; margin-right: 70px;">
-                {% for chapter in chapters|sort_chapters %}
+                {% for chapter in chapters|sort_queryset:'number' %}
                     <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>
                     {% if not forloop.last %}
                         ,
@@ -36,7 +36,7 @@
                         <a href="{{ chapter.links }}">{{ chapter.links }}</a>
                     {% endif %}
                 </p>
-                {% for chapter in chapters|sort_chapters %}
+                {% for chapter in chapters|sort_queryset:'number' %}
                     <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }}</a>
                     {% if not forloop.last %}
                         ,
