@@ -1,6 +1,8 @@
 asgiref==3.6.0
 da-vinci==0.3.0
 Django==3.2.16
+django-ckeditor==6.3.2
+django-import-export==3.2.0
 factory-boy==3.2.1
 Faker==17.6.0
 flake8==5.0.4
