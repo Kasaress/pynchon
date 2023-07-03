@@ -88,8 +88,26 @@ class InlineCommentLink(admin.TabularInline):
     verbose_name_plural = 'Ссылки'
 
 
+class CommentResource(resources.ModelResource):
+    class Meta:
+        model = Comment
+        exclude = ('id', 'created_at', 'is_active', 'deleted_at')
+        import_id_fields = (
+            'page_number_by_2012',
+            'page_number_by_2021',
+            'name',
+            'comment_text',
+            'image',
+            'book_id',
+            'chapter_id',
+            'sort',
+            'author_id'
+        )
+
+
 @admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
+class CommentAdmin(ImportExportModelAdmin):
+    resource_classes = [CommentResource]
     list_display = (
         'name', 'short_text', 'page_number_by_2012', 'sort', 'preview',
         'get_links')
