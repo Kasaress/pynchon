@@ -7,7 +7,7 @@
         {% for chapter in chapters|sort_queryset:'number' %}
             <p>
                 <a href="{% url 'wiki:rainbow_notes' chapter.number %}">
-                    Глава {{ chapter.number }} {{ chapter.description|striptags }}
+                    Глава {{ chapter.pages }} {{ chapter.number }} {{ chapter.description|striptags }}
                 </a>
                 {% if chapter.image %}
                     {{ chapter.get_image }}
