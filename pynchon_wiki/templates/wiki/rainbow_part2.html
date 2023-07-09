@@ -6,7 +6,7 @@
         <h1 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h1>
         {% for chapter in chapters|sort_queryset:'number' %}
             <p>
-                <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter.number }} {{ chapter.description }}</a>
+                <a href="{% url 'wiki:rainbow_notes' chapter.number %}">Глава {{ chapter.number }} {{ chapter.description|safe }}</a>
                 {% if chapter.image %}
                     {{ chapter.get_image }}
                 {% endif %}
