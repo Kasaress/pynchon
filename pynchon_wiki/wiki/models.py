@@ -105,8 +105,8 @@ class ChapterLink(BaseModel):
 class Comment(BaseNameModel):
     """ Модель комментариев. """
 
-    comment_text = models.TextField(
-        verbose_name='Текст примечания'
+    comment_text = RichTextField(
+        'Текст примечания'
     )
     image = models.ImageField(
         verbose_name='Картинка',

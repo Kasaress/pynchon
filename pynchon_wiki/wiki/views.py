@@ -242,27 +242,6 @@ def double_katie(request):
                   context={'breadcrumbs': breadcrumbs})
 
 
-def chronology(request):
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 6: хронология романа',
-            'url_name': reverse('wiki:rainbow_part6')
-        },
-        {
-            'title': 'Хронология',
-            'url_name': reverse('wiki:chronology')
-        }
-    ]
-    context = {
-        'rows': TableChronology.objects.all(),
-        'breadcrumbs': breadcrumbs
-    }
-    return render(request, 'wiki/chronology.html', context)
-
-
 def in_development(request):
     """ Страница в разработке. """
     template = 'wiki/in_development.html'

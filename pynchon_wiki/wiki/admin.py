@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from import_export.admin import ImportExportModelAdmin
-from import_export import resources
+from import_export import resources, fields, widgets
 
 from .models import (Book, Chapter, Comment, TableChronology, ChapterLink,
-                     CommentLink, Article)
+                     CommentLink, Article, User)
 
 
 @admin.register(Book)
@@ -33,9 +33,37 @@ class InlineChapterLink(admin.TabularInline):
     verbose_name_plural = 'Ссылки'
 
 
+class ChapterResource(resources.ModelResource):
+    book_id = fields.Field(
+        column_name='book_id',
+        attribute='book',
+        widget=widgets.ForeignKeyWidget(Book, 'id')
+    )
+
+    class Meta:
+        model = Chapter
+        exclude = ('image')
+        fields = (
+            'id',
+            'number',
+            'description',
+            'book_part',
+            'summary',
+            'interpretation'
+        )
+
+
 @admin.register(Chapter)
-class ChapterAdmin(admin.ModelAdmin):
-    list_display = ('number', 'book', 'book_part', 'preview', 'get_links')
+class ChapterAdmin(ImportExportModelAdmin):
+    resource_classes = [ChapterResource]
+    list_display = (
+        'id',
+        'number',
+        'book',
+        'book_part',
+        'preview',
+        'get_links'
+    )
     search_fields = ('number',)
     list_filter = ('number', 'book')
     inlines = (InlineChapterLink,)
@@ -89,19 +117,33 @@ class InlineCommentLink(admin.TabularInline):
 
 
 class CommentResource(resources.ModelResource):
+    book_id = fields.Field(
+        column_name='book_id',
+        attribute='book',
+        widget=widgets.ForeignKeyWidget(Book, 'id')
+    )
+    chapter_id = fields.Field(
+        column_name='chapter_id',
+        attribute='chapter',
+        widget=widgets.ForeignKeyWidget(Chapter, 'id')
+    )
+    author_id = fields.Field(
+        column_name='author_id',
+        attribute='author',
+        widget=widgets.ForeignKeyWidget(User, 'id')
+    )
+
     class Meta:
         model = Comment
-        exclude = ('id', 'created_at', 'is_active', 'deleted_at')
-        import_id_fields = (
+        exclude = ('created_at', 'is_active', 'deleted_at')
+        fields = (
+            'id',
             'page_number_by_2012',
             'page_number_by_2021',
             'name',
             'comment_text',
             'image',
-            'book_id',
-            'chapter_id',
             'sort',
-            'author_id'
         )
 
 
@@ -109,10 +151,10 @@ class CommentResource(resources.ModelResource):
 class CommentAdmin(ImportExportModelAdmin):
     resource_classes = [CommentResource]
     list_display = (
-        'name', 'short_text', 'page_number_by_2012', 'sort', 'preview',
+        'name', 'comment_text', 'page_number_by_2012', 'sort', 'preview',
         'get_links')
     inlines = (InlineCommentLink,)
-    search_fields = ('number',)
+    search_fields = ('comment_text',)
     list_filter = ('book', 'chapter', 'page_number_by_2012', 'sort')
     readonly_fields = ('preview', 'created_at',)
 
@@ -186,3 +228,4 @@ class TableChronologyAdmin(ImportExportModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'text', 'author', 'image')
+    search_fields = ('text',)
