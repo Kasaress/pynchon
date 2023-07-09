@@ -5,12 +5,14 @@
     <div class="container">
         <h1 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h1>
         {% for chapter in chapters|sort_queryset:'number' %}
-            <p>
-                <a href="{% url 'wiki:rainbow_comments' chapter.number %}">Глава {{ chapter }} {{ chapter.description|safe }}</a>
+            <br>
+                <a href="{% url 'wiki:rainbow_comments' chapter.number %}">
+                    Глава {{ chapter.number }} {{ chapter.description|striptags }}
+                </a>
                 {% comment %} {% if chapter.image %}
                     {{ chapter.get_image }}
                 {% endif %} {% endcomment %}
-            </p>
+            <br>
         {% endfor %}
         <hr>
     </div>

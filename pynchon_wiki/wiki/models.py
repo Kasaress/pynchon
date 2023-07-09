@@ -68,6 +68,12 @@ class Chapter(BaseModel):
         null=True,
         upload_to='chapters/'
     )
+    pages = models.CharField(
+        'Номер страниц',
+        max_length=50,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'Глава'
