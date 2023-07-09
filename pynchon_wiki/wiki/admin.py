@@ -74,7 +74,7 @@ class ChapterAdmin(ImportExportModelAdmin):
         }),
         ('Данные', {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('number', 'book', 'book_part',)
+            'fields': ('number', 'book', 'book_part', 'pages')
         }),
         ('Описание', {
             'classes': ('wide', 'extrapretty'),
