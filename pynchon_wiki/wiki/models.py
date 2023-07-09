@@ -40,7 +40,7 @@ class Chapter(BaseModel):
         blank=True,
         null=True
     )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name='Описание главы',
         blank=True,
         null=True
@@ -52,12 +52,12 @@ class Chapter(BaseModel):
             MaxValueValidator(10000)
         ],
     )
-    summary = models.TextField(
+    summary = RichTextField(
         verbose_name='Краткое содержание главы',
         blank=True,
         null=True
     )
-    interpretation = models.TextField(
+    interpretation = RichTextField(
         verbose_name='Интерпретация',
         blank=True,
         null=True
