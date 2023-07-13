@@ -3,8 +3,11 @@ from django.utils.safestring import mark_safe
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources, fields, widgets
 
-from .models import (Book, Chapter, Comment, TableChronology, ChapterLink,
-                     CommentLink, Article, User)
+from .models import (
+    Article, Book, Chapter, Comment,
+    TableChronology, ChapterLink, CommentLink, User, TableСharacters,
+    CircleTableCharacters
+)
 
 
 @admin.register(Book)
@@ -227,3 +230,46 @@ class TableChronologyAdmin(ImportExportModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'text', 'author', 'image')
     search_fields = ('text',)
+
+
+class TableCharacterResource(resources.ModelResource):
+    circle_id = fields.Field(
+        column_name='circle_id',
+        attribute='circle',
+        widget=widgets.ForeignKeyWidget(
+            CircleTableCharacters, 'id'
+        )
+    )
+
+    class Meta:
+        model = TableСharacters
+        exclude = ('created_at', 'is_active', 'deleted_at')
+        filds = (
+            'name',
+            'value_name',
+            'characteristics',
+            'portrait',
+            'groups',
+            'mentions'
+        )
+
+
+@admin.register(TableСharacters)
+class TableCharacterAdmin(ImportExportModelAdmin):
+    resource_classes = [TableCharacterResource]
+    list_display = ('id', 'name', 'value_name', 'characteristics',
+                    'portrait', 'groups', 'mentions', 'circle')
+    search_fields = ('name',)
+
+
+class CircleTableCharactersResource(resources.ModelResource):
+    class Meta:
+        model = CircleTableCharacters
+        filds = ('id', 'name')
+
+
+@admin.register(CircleTableCharacters)
+class CircleTableCharactersAdmin(ImportExportModelAdmin):
+    resource_classes = [CircleTableCharactersResource]
+    list_display = ('id', 'name')
+    search_fields = ('name',)

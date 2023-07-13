@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import Article, Book, Chapter, TableChronology
+from .models import (
+    Article, Book, Chapter, TableChronology, CircleTableCharacters
+)
 from .decorators import page_in_development
 
 
@@ -103,10 +105,9 @@ def rainbow_part4(request):
     return render(request, template, context)
 
 
-@page_in_development
 def rainbow_part5(request):
     template = 'wiki/rainbow_part5.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
+    circles = CircleTableCharacters.objects.all()
     breadcrumbs = [
         {
             'title': 'Главная', 'url_name': reverse('wiki:index')
@@ -117,8 +118,7 @@ def rainbow_part5(request):
         }
     ]
     context = {
-        'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
+        'circles': circles,
         'breadcrumbs': breadcrumbs,
     }
     return render(request, template, context)

@@ -16,7 +16,7 @@
                         {% if request.path == menu.url %} active text-bg-secondary{% else %}text-beyge{% endif %}" href="{{ menu.url }}">{{ menu.name }}</a>
                     </li>
                 {% endfor %}
-                {% if  user.is_authenticated %}
+                {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link link-light nav-bg " href="{% url 'users:logout' %}">Выйти</a>
                     </li>

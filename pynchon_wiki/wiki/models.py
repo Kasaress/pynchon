@@ -252,3 +252,53 @@ class Article(BaseNameModel):
 
     def __str__(self):
         return self.text
+
+
+class CircleTableCharacters(BaseNameModel):
+    """ Модель круга в таблице персонажей."""
+    class Meta:
+        verbose_name = 'Круг в таблице персонажей'
+        verbose_name_plural = 'Круги в таблице персонажей'
+        db_table = 'circles'
+
+
+class TableСharacters(BaseNameModel):
+    """ Модель таблицы персонажей."""
+    value_name = models.CharField(
+        'Имя в оригинале и значение',
+        max_length=100,
+        null=True,
+        blank=True
+    )
+    characteristics = models.TextField(
+        'Характеристика',
+        null=True,
+        blank=True
+    )
+    portrait = models.TextField(
+        'Портрет',
+        null=True,
+        blank=True
+    )
+    groups = models.TextField(
+        'Группы',
+        null=True,
+        blank=True
+    )
+    mentions = models.TextField(
+        'Упоминания'
+    )
+    circle = models.ForeignKey(
+        CircleTableCharacters,
+        on_delete=models.CASCADE,
+        verbose_name='Круг персонажа',
+        related_name='characters'
+    )
+
+    class Meta:
+        verbose_name = 'Запись в таблице персонажей'
+        verbose_name_plural = 'Записи в таблице персонажей'
+        db_table = 'characters'
+
+    def __str__(self):
+        return self.name
