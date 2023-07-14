@@ -32,3 +32,13 @@ a:hover {
 .nav-bg:hover {
   background-color: #C3C3C3;
 }
+
+#image-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+#image {
+  width: 100%;
+  height: auto;
+}

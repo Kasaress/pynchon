@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 {% block title %} {{ book.name }} {% endblock %}
 {% block content %}
+{% load static %}
     <div class="container">
         <h1>Раздел 5: персонажи - таблица и схема</h1>
+        <div id="image-container">
+            <img id="image" src="{% static 'img/Схема персонажей РТ в линиях_page-0001.jpg' %}">
+        </div>
+        <a href="{% static 'img/Схема персонажей РТ в линиях_page-0001.jpg' %}" download>Скачать схему</a>
+        <br>
+        <br>
         <table class="table">
             <tr class="table__row">
                 <td class="table__cell">
