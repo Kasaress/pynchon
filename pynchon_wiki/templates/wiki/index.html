@@ -1,21 +1,175 @@
-{% extends 'base.html' %}
-{% block title %} {{ book.name }} {% endblock %}
-{% block content %}
-    <div class="container">
-        <h1>Радуга тяготения</h1>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part1' %}">Раздел 1: для чего читать радугу</a>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part2' %}">Раздел 2: примечания к каждой главе</a>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part3' %}">Раздел 3: краткое содержание и комментарии по главам</a>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part4' %}">Раздел 4: спойлерные статьи с объяснениями</a>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part5' %}">Раздел 5: персонажи - таблица и схема</a>
-        <hr>
-        <a href="{% url 'wiki:rainbow_part6' %}">Раздел 6: хронология романа</a>
-        <!--<hr>
-        <a href="{% url 'wiki:rainbow_part7' %}">Раздел 7: объяснение всего вообще</a>-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Проект Пинчон вики">
+  <meta name="keywords" content="html, css, javascript">
+  <meta name="author" content="Ирина Матэуш">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+  <title>Пинчонвики</title>
+</head>
+
+<body class="page">
+  <header class="header">
+    <ul class="header__links">
+      <li class="header__item"><a class="header__link link" href="#" target="_blank">Томас Пинчон</a></li>
+      <li class="header__item"><a class="header__link link" href="#" target="_blank">О Проекте</a></li>
+      <li class="header__item"><a class="header__link link" href="#" target="_blank">Другие Книги</a></li>
+    </ul>
+    <div class="header__title">
+      <h1 class="title">Радуга тяготения</h1>
+      <img class="title__image" src="{% static '/img/Name.png' %}" alt="радуга тяготения">
     </div>
-{% endblock %}
+    <p class="header__subtitle">ВВодный Текст-инструкция по пользованию сайтом и статьями. Текст-инструкция по
+      пользованию сайтом и статьями.</p>
+  </header>
+
+  <main class="content">
+    <section class="black">
+      <div class="chapter">
+        <div class="left-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title">Раздел 1</h2>
+            <p class="chapter__name">Как перестать беспокоиться и начать читать роман</p>
+          </div>
+          <p class="chapter__text">Статья доброго духа-андроида Андрея Н.И. Петрова о преимуществах «Радуги тяготения»
+            над
+            всеми другими известными вам
+            книгами. Из нее вы узнаете, из чего состоит радуга (а чего в ней нет) и зачем тратить на нее несколько
+            месяцев
+            жизни.
+            Рекомендуется к прочтению в любой момент. Если после этой статьи вы немедленно не взяли в руки роман, скорее
+            всего, этот
+            сайт не для вас.</p>
+          <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part1' %}">Читать</a>
+        </div>
+      </div>
+      <div class="countdown left-part">
+      </div>
+
+      <div class="chapter">
+        <div class="left-part">
+          <span class="chapter__counter">00000</span>
+        </div>
+        <div class="right-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title">Раздел 2</h2>
+            <p class="chapter__name">Примечания</p>
+          </div>
+          <p class="chapter__text">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и
+            выражений, содержащие справки
+            об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п.
+            Рекомендуется
+            к
+            прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше
+            блуждали по
+            просторам интернета в поисках нужной информации.</p>
+          <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part2' %}">Читать</a>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="left-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title">Раздел 3</h2>
+            <p class="chapter__name">Комментарии</p>
+          </div>
+          <p class="chapter__text">Первая часть комментария состоит из краткого содержания главы романа — для тех, кто
+            хочет упорядочить свой нарратив.
+            Вторая часть — из потока сознания тайного литературоведа Михаила Монастырева (которого подчас поправляют его
+            внимательные коллеги) о том, что происходит в главе и как это связано со всем предыдущим. Рекомендуется к
+            прочтению
+            после каждой главы, дабы сопоставить свои соображения о книге с нашими. Не удивляйтесь, если никакого
+            совпадения не
+            случится.</p>
+          <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part3' %}">Читать</a>
+        </div>
+      </div>
+    </section>
+    <section class="white">
+      <div class="chapter">
+        <div class="right-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title chapter__title_white">Раздел 4</h2>
+            <p class="chapter__name chapter__name_white">Комментарии</p>
+          </div>
+          <p class="chapter__text chapter__text_white">Само название говорит о том, что этот раздел для тех, кто уже
+            прочитал роман. Здесь собраны статьи, соображения,
+            мыслеобразы и некоторые справочные материалы о ключевых и поначалу вроде бы неочевидных темах романа — о
+            странных
+            ученых, изобретших странные вещества и странные материалы; о корпорациях; о кинофильмах; о таро и о многом
+            другом.
+            Больше спойлеров хороших и разных.</p>
+          <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part4' %}">Читать</a>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="left-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title chapter__title_white">Раздел 5</h2>
+            <p class="chapter__name chapter__name_white">Хронология</p>
+          </div>
+          <p class="chapter__text chapter__text_white">Все события романа представлены в табличной форме и строгой
+            линейной хронологической последовательности. Надеемся, что
+            мы ничего не забыли. Рекомендуется к прочтению только после окончания чтения книги, ибо тут сосредоточение
+            всех мыслимых
+            и немыслимых спойлеров.</p>
+          <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part5' %}">Читать</a>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="left-part">
+          <img src="{% static '/img/ledy.png' %}" alt="девушка с сигаретой" class="chapter__image">
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="right-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title chapter__title_white">Раздел 6</h2>
+            <p class="chapter__name chapter__name_white">Персонажи</p>
+          </div>
+          <p class="chapter__text chapter__text_white">Все персонажи романа представлены в схематичной и табличной
+            форме,
+            с их оригинальными английскими именами, краткими
+            характеристиками, портретами, связями и постраничными упоминаниями (с соблюдением требований
+            законодательства
+            о
+            персональных данных). Если вы не хотите заранее знать, кто чей брат (сестра) или кто с кем сольется-таки в
+            экстазе,
+            лучше сюда не заходить. Мы вас предупредили.</p>
+          <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part6' %}">Читать</a>
+        </div>
+      </div>
+      <div class="chapter">
+        <div class="left-part">
+          <div class="chapter__border">
+            <h2 class="chapter__title chapter__title_white">Раздел 7</h2>
+            <p class="chapter__name chapter__name_white">Как перестать беспокоиться-2 и начать перечитывать</p>
+          </div>
+          <p class="chapter__text chapter__text_white">Статья ведущего пинчоноведа и телеграфиста «Радуги спойлерения»
+            Станислава Распеченко о том, что все это значило и как
+            теперь с этим жить дальше. Рекомендуется к прочтению после того, как вы дойдете до слов «Теперь все вместе…»
+            и
+            вам
+            захочется незамедлительно вернуться к первой странице.</p>
+          <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part7' %}">Читать</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">&copy;&nbsp;2023</p>
+    <nav class="footer__links">
+      <a href="https://yandex.ru/maps" class="footer__link link" target="_blank">Телеграм канал</a>
+      <a href="{% url 'wiki:index' %}" class="footer__link link" target="_blank">В начало</a>
+    </nav>
+
+  </footer>
+</body>
+
+</html>
