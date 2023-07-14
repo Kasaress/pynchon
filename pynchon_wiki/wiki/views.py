@@ -107,25 +107,6 @@ def rainbow_part4(request):
 
 def rainbow_part5(request):
     template = 'wiki/rainbow_part5.html'
-    circles = CircleTableCharacters.objects.all()
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 5: персонажи - таблица и схема',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
-    context = {
-        'circles': circles,
-        'breadcrumbs': breadcrumbs,
-    }
-    return render(request, template, context)
-
-
-def rainbow_part6(request):
-    template = 'wiki/rainbow_part6.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     articles = Article.objects.filter(chapter=6)
     breadcrumbs = [
@@ -142,6 +123,25 @@ def rainbow_part6(request):
         'chapters': Chapter.objects.filter(book=book).all(),
         'rows': TableChronology.objects.all(),
         'articles': articles,
+        'breadcrumbs': breadcrumbs,
+    }
+    return render(request, template, context)
+
+
+def rainbow_part6(request):
+    template = 'wiki/rainbow_part6.html'
+    circles = CircleTableCharacters.objects.all()
+    breadcrumbs = [
+        {
+            'title': 'Главная', 'url_name': reverse('wiki:index')
+        },
+        {
+            'title': 'Раздел 6: персонажи - таблица и схема',
+            'url_name': reverse('wiki:rainbow_part1')
+        }
+    ]
+    context = {
+        'circles': circles,
         'breadcrumbs': breadcrumbs,
     }
     return render(request, template, context)
