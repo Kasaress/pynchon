@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     container.addEventListener('wheel', function(event) {
-        var newScale = scale - event.deltaY * 0.01; // Инвертированное значение event.deltaY
+        var newScale = scale - event.deltaY * 0.01;
 
         if (newScale > 1.0) {
             isZoomed = true;
