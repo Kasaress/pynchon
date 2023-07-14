@@ -1,71 +1,35 @@
 {% extends 'base.html' %}
-{% block title %} {{ book.name }} {% endblock %}
+{% block title %}Хронология радуги тяготения{% endblock %}
 {% block content %}
-{% load static %}
+{% load user_filters %}
     <div class="container">
-        <h1>Раздел 5: персонажи - таблица и схема</h1>
-        <div id="image-container">
-            <img id="image" src="{% static 'img/scheme.jpg' %}" width="100%">
-        </div>
-        <a href="{% static 'img/scheme.jpg' %}" download>Скачать схему</a>
-        <br>
-        <br>
-        <table class="table">
+        {% for article in articles %}
+            <h1>{{ article.name }}</h1>
+            <p>{{ article|safe }}
+            {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
+    </div>
+    <hr/>
+    <h2>Хронологическая таблица</h2>
+    <table class="table">
+        <tr class="table__row">
             <tr class="table__row">
                 <td class="table__cell">
-                    <p class="table__text"> Имя </p>
+                    <p class="table__text"> Дата </p>
                 </td>
                 <td class="table__cell">
-                    <p class="table__text"> Имя в оригинале и значение имени </p>
-                </td>
-                <td class="table__cell">
-                    <p class="table__text"> Характеристика </p>
-                </td>
-                <td class="table__cell">
-                    <p class="table__text"> Портрет </p>
-                </td>
-                <td class="table__cell">
-                    <p class="table__text"> Группы </p>
-                </td>
-                <td class="table__cell">
-                    <p class="table__text"> Упоминания </p>
+                    <p class="table__text"> Событие </p>
                 </td>
             </tr> 
-            {% with previous_group=None %}
-                {% for circle in circles %}
-                    <tr class="table__row">
-                        <td class="table__cell" colspan="6">
-                            <h4 class="table__text circle-name text-center">Круг {{ circle.name }}</h4>
-                        </td>
-                    </tr>
-                    {% with characters=circle.characters.all %}
-                        {% with group_size=characters|length %}
-                            {% for character in characters %}
-                                <tr class="table__row">
-                                    <td class="table__cell">
-                                        <h6 class="table__text"> {{ character.name }} </h6>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ character.value_name }} </p>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ character.characteristics }} </p>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ character.portrait }} </p>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ character.groups }} </p>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ character.mentions }} </p>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endwith %}
-                    {% endwith %}
-                {% endfor %}
-            {% endwith %}
-        </table>
-    </div>
+            {% for row in rows|sort_queryset:'sort' %}
+                <td class="table__cell">
+                    <p class="table__text"> {{ row.date }} </p>
+                </td>
+                <td class="table__cell">
+                    <p class="table__text"> {{ row.description }} </p>
+                </td>
+                </tr>
+            {% endfor %}
+    </table>
+
 {% endblock %}
