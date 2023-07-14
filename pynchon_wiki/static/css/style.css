@@ -34,11 +34,12 @@ a:hover {
 }
 
 #image-container {
-  width: 100%;
-  overflow: hidden;
+  max-width: 100%;
+  height: auto;
 }
 
 #image {
-  width: 100%;
+  display: block;
+  max-width: 100%;
   height: auto;
 }
