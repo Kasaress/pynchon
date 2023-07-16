@@ -260,23 +260,78 @@
   margin: 0;
 }
 
-.black__tentacle1 {
+.link_top {
+  position: relative;
+}
+
+.link_top::after {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  right: -70px;
+  top: -14px;
+}
+
+.link-text {
+  margin-right: 10px;
+  line-height: 1; 
+}
+
+.link-icon {
+  vertical-align: middle;
+}
+
+.tentacle1 {
   position: absolute;
   top: 88px;
   right: 187px;
-  width: 400px;
-  height: 770px;
+  width: 520px;
+  height: 809px;
+}
+
+.tentacle2 {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+  width: 645px;
+  height: 730px;
+}
+
+.tentacle3 {
+  position: absolute;
+  width: 600px;
+  height: 1000px;
+  bottom: -50px;
+  left: 630px;
+}
+
+.tentacle4 {
+  position: absolute;
+  width: 642px;
+  height: 884px;
+  top: 0px;
+  left: 147px;
+}
+
+.tentacle5 {
+  position: absolute;
+  width: 480px;
+  height: 750px;
+  bottom: -70px;
+  left: 50%;
+}
+
+.tentacle6 {
+  position: absolute;
+  width: 330px;
+  height: 670px;
+  bottom: 0px;
+  left: 649px;
 }
 
 .title__image {
   margin: 108px 0 0 85px;
   z-index: 2;
-}
-
-.white__tentacle4 {
-  position: absolute;
-  top: 88px;
-  left: 147px;
-  width: 500px;
-  height: 1000px;
 }

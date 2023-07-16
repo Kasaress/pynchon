@@ -1,4 +1,6 @@
 {% load static %}
+{% load user_filters %}
+{% show_top_menu as top_menu%}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -16,9 +18,12 @@
 <body class="page">
   <header class="header">
     <ul class="header__links">
-      <li class="header__item"><a class="header__link link" href="#" target="_blank">Томас Пинчон</a></li>
-      <li class="header__item"><a class="header__link link" href="#" target="_blank">О Проекте</a></li>
-      <li class="header__item"><a class="header__link link" href="#" target="_blank">Другие Книги</a></li>
+      {% comment %} {% for menu in top_menu %}
+        <li class="header__item"><a class="header__link link" href="{{ menu.url }}" target="self">{{ menu.name }}</a></li>
+      {% endfor %} {% endcomment %}
+      <li class="header__item"><a class="header__link link" href="{% url 'wiki:in_development' %}" target="self">Томас Пинчон</a></li>
+      <li class="header__item"><a class="header__link link" href="/about" target="self">О Проекте</a></li>
+      <li class="header__item"><a class="header__link link" href="{% url 'wiki:in_development' %}" target="self">Другие Книги</a></li>
     </ul>
     <div class="header__title">
       <h1 class="title">Радуга тяготения</h1>
@@ -26,6 +31,7 @@
     </div>
     <p class="header__subtitle">ВВодный Текст-инструкция по пользованию сайтом и статьями. Текст-инструкция по
       пользованию сайтом и статьями.</p>
+    <img class="header__rocket" src="{% static '/img/Rocket.png' %}" alt="ракета">
   </header>
 
   <main class="content">
@@ -47,13 +53,14 @@
             сайт не для вас.</p>
           <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part1' %}">Читать</a>
         </div>
+        <img class="tentacle1" src="{% static '/img/tentacle1.png' %}">
       </div>
       <div class="countdown left-part">
       </div>
 
       <div class="chapter">
         <div class="left-part">
-          <span class="chapter__counter">00000</span>
+          <span id="value" class="chapter__counter">00000</span>
         </div>
         <div class="right-part">
           <div class="chapter__border">
@@ -70,6 +77,7 @@
             просторам интернета в поисках нужной информации.</p>
           <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part2' %}">Читать</a>
         </div>
+        <img class="tentacle2" src="{% static '/img/tentacle2.png' %}">
       </div>
       <div class="chapter">
         <div class="left-part">
@@ -87,6 +95,7 @@
             случится.</p>
           <a class="chapter__link link link_white" href="{% url 'wiki:rainbow_part3' %}">Читать</a>
         </div>
+        <img class="tentacle3" src="{% static '/img/tentacle3.png' %}">
       </div>
     </section>
     <section class="white">
@@ -105,6 +114,7 @@
             Больше спойлеров хороших и разных.</p>
           <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part4' %}">Читать</a>
         </div>
+        <img class="tentacle4" src="{% static '/img/tentacle4.png' %}">
       </div>
       <div class="chapter">
         <div class="left-part">
@@ -119,6 +129,7 @@
             и немыслимых спойлеров.</p>
           <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part5' %}">Читать</a>
         </div>
+        <img class="tentacle5" src="{% static '/img/tentacle5.png' %}">
       </div>
       <div class="chapter">
         <div class="left-part">
@@ -157,6 +168,7 @@
             захочется незамедлительно вернуться к первой странице.</p>
           <a class="chapter__link link chapter__link_white" href="{% url 'wiki:rainbow_part7' %}">Читать</a>
         </div>
+        <img class="tentacle6" src="{% static '/img/tentacle6.png' %}">
       </div>
     </section>
 
@@ -165,11 +177,45 @@
   <footer class="footer">
     <p class="footer__copyright">&copy;&nbsp;2023</p>
     <nav class="footer__links">
-      <a href="https://yandex.ru/maps" class="footer__link link" target="_blank">Телеграм канал</a>
-      <a href="{% url 'wiki:index' %}" class="footer__link link" target="_blank">В начало</a>
+      <a href="#" class="footer__link link" target="_self">Телеграм канал</a>
+      <a href="#" class="footer__link link" id="scrollToTopLink" target="_self">
+        <span class="link-text">В начало</span>
+        <img src="{% static 'img/btn.png' %}" alt="Иконка" class="link-icon">
+      </a>
     </nav>
 
   </footer>
+  <script type="text/javascript">
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    const obj = document.getElementById('value');
+
+    animateValue(obj, 99999, 00000, 50000000);
+
+    document.getElementById("scrollToTopLink").addEventListener("click", function(event) {
+      event.preventDefault();
+      scrollToTop();
+    });
+    
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+  </script>
 </body>
 
 </html>

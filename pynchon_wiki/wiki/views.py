@@ -114,7 +114,7 @@ def rainbow_part5(request):
             'title': 'Главная', 'url_name': reverse('wiki:index')
         },
         {
-            'title': 'Раздел 6: хронология романа',
+            'title': 'Раздел 5: хронология романа',
             'url_name': reverse('wiki:rainbow_part1')
         }
     ]
