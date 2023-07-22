@@ -2,7 +2,9 @@
 {% block title %} {{ book.name }} {% endblock %}
 {% block content %}
     <div class="container">
+		<br>
         <h1>Томас Пинчон</h1>
+		<br>
 		{% for article in articles %}
 			<h1>{{ article.name }}</h1>
 			<p>{{ article|safe }}

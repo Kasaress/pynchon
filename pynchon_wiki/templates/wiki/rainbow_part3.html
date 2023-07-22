@@ -5,8 +5,8 @@
     <div class="container">
         <br>
         <h1 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h1>
+        <br>
         {% for chapter in chapters|sort_queryset:'number' %}
-            <br>
             <p>
                 <a href="{% url 'wiki:rainbow_comments' chapter.number %}">
                     Глава {{ chapter.pages }} {{ chapter.number }} {{ chapter.description|striptags|safe }} ...
