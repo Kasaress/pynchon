@@ -21,8 +21,8 @@
       {% comment %} {% for menu in top_menu %}
         <li class="header__item"><a class="header__link link" href="{{ menu.url }}" target="self">{{ menu.name }}</a></li>
       {% endfor %} {% endcomment %}
-      <li class="header__item"><a class="header__link link" href="{% url 'wiki:in_development' %}" target="_self">Томас Пинчон</a></li>
-      <li class="header__item"><a class="header__link link" href="/about" target="_self">О Проекте</a></li>
+      <li class="header__item"><a class="header__link link" href="{% url 'wiki:author' %}" target="_self">Томас Пинчон</a></li>
+      <li class="header__item"><a class="header__link link" href="{% url 'wiki:about' %}" target="_self">О Проекте</a></li>
       <li class="header__item"><a class="header__link link" href="{% url 'wiki:in_development' %}" target="_self">Другие Книги</a></li>
     </ul>
     <div class="header__title">

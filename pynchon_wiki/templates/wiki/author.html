@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} {{ book.name }} {% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Томас Пинчон</h1>
+		{% for article in articles %}
+			<h1>{{ article.name }}</h1>
+			<p>{{ article|safe }}
+		{% if not forloop.last %}<hr>{% endif %}
+	{% endfor %}
+    </div>
+{% endblock %}

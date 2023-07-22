@@ -25,6 +25,16 @@ def about(request):
     return render(request, template)
 
 
+def author(request):
+    """ Страница об авторе. """
+    template = 'wiki/author.html'
+    articles = Article.objects.filter(chapter=777)
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
 def rainbow_part1(request):
     template = 'wiki/rainbow_part1.html'
     articles = Article.objects.filter(chapter=1)
