@@ -3,16 +3,18 @@
 {% block content %}
 {% load user_filters %}
     <div class="container">
+        <br>
         <h1 id='rainbow_part3'>Раздел 3: краткое содержание и комментарии по главам</h1>
         {% for chapter in chapters|sort_queryset:'number' %}
             <br>
+            <p>
                 <a href="{% url 'wiki:rainbow_comments' chapter.number %}">
                     Глава {{ chapter.pages }} {{ chapter.number }} {{ chapter.description|striptags|safe }} ...
                 </a>
                 {% comment %} {% if chapter.image %}
                     {{ chapter.get_image }}
                 {% endif %} {% endcomment %}
-            <br>
+            </p>
         {% endfor %}
         <hr>
     </div>

@@ -3,7 +3,10 @@
 {% block content %}
 {% load user_filters %}
     <div class="container">
+        <br>
+        <h1>Раздел 5: хронология</h1>
         {% for article in articles %}
+            <br>
             <h1>{{ article.name }}</h1>
             <p>{{ article|safe }}
             {% if not forloop.last %}<hr>{% endif %}
@@ -11,6 +14,7 @@
     </div>
     <hr/>
     <h2>Хронологическая таблица</h2>
+    <br>
     <table class="table">
         <tr class="table__row">
             <tr class="table__row">
