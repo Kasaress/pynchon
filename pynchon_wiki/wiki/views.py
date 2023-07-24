@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .models import (
-    Article, Book, Chapter, TableChronology, CircleTableCharacters
+    Article, Book, Comment, CircleTableCharacters, Chapter, TableChronology
 )
 from .decorators import page_in_development
 
@@ -178,6 +178,15 @@ def rainbow_part7(request):
     return render(request, template, context)
 
 
+def search(request):
+    """ Результаты поиска. """
+    query = request.GET.get('q', '')
+    results = Comment.objects.filter(comment_text__icontains=query)
+    return render(
+        request, 'wiki/search.html', {'results': results, 'query': query}
+    )
+
+
 def rainbow_notes(request, chapter_number):
     """ Страница главы, на которой видно все примечания к главе. """
 
@@ -202,6 +211,7 @@ def rainbow_notes(request, chapter_number):
         'comments': chapter.comments.all(),
         'chapters': Chapter.objects.filter(book=book).all(),
         'breadcrumbs': breadcrumbs,
+        'search': search
     }
     return render(request, template, context)
 

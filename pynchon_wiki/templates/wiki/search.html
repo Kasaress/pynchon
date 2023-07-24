@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Примечания к главе {{ chapter }} {% endblock %}
+{% block content %}
+	<h2>Результаты поиска для "{{ query }}"</h2>
+	<br>
+		<ul>
+			{% for comment in results %}
+				{% include 'includes/comment.html' %}
+			{% empty %}
+				По вашему запросу ничего не найдено =(
+			{% endfor %}
+		</ul>
+{% endblock %}
