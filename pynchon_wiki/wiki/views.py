@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
@@ -182,6 +183,8 @@ def search(request):
     """ Результаты поиска. """
     query = request.GET.get('q', '')
     results = Comment.objects.filter(comment_text__icontains=query)
+    for result in results:
+        result.comment_text = re.sub(r'(%s)' % re.escape(query), r'<span class="highlighted">\1</span>', result.comment_text, flags=re.IGNORECASE)
     return render(
         request, 'wiki/search.html', {'results': results, 'query': query}
     )
