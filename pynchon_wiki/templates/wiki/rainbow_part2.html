@@ -6,12 +6,7 @@
         <br>
         <h1 id='rainbow_part2'>Раздел 2: примечания к каждой главе</h1>
         <br>
-        <div class="d-flex">
-            <form class="d-flex" action="{% url 'wiki:search' %}" method="GET">
-                <input class="form-control me-2" type="text" name="q" placeholder="Поиск" aria-label="Поиск" value="{{ query }}">
-                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
-            </form>
-        </div>
+        {% include 'includes/form_search.html' %}
         <br>
         {% for chapter in chapters|sort_queryset:'number' %}
             <p>

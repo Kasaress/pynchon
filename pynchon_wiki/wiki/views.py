@@ -1,9 +1,11 @@
 import re
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.db.models import Q
 
 from .models import (
-    Article, Book, Comment, CircleTableCharacters, Chapter, TableChronology
+    Article, Book, Comment, CircleTableCharacters,
+    Chapter, TableChronology, TableСharacters
 )
 from .decorators import page_in_development
 
@@ -72,6 +74,7 @@ def rainbow_part2(request):
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
         'breadcrumbs': breadcrumbs,
+        'search_model': 'comments'
     }
     return render(request, template, context)
 
@@ -135,6 +138,7 @@ def rainbow_part5(request):
         'rows': TableChronology.objects.all(),
         'articles': articles,
         'breadcrumbs': breadcrumbs,
+        'search_model': 'chronology'
     }
     return render(request, template, context)
 
@@ -154,6 +158,7 @@ def rainbow_part6(request):
     context = {
         'circles': circles,
         'breadcrumbs': breadcrumbs,
+        'search_model': 'characters'
     }
     return render(request, template, context)
 
@@ -179,20 +184,6 @@ def rainbow_part7(request):
     return render(request, template, context)
 
 
-def search(request):
-    """ Результаты поиска. """
-    query = request.GET.get('q', '')
-    results = Comment.objects.filter(comment_text__icontains=query)
-    for result in results:
-        result.comment_text = re.sub(r'(%s)' % re.escape(query),
-                                     r'<span class="highlighted">\1</span>',
-                                     result.comment_text, flags=re.IGNORECASE
-                                     )
-    return render(
-        request, 'wiki/search.html', {'results': results, 'query': query}
-    )
-
-
 def rainbow_notes(request, chapter_number):
     """ Страница главы, на которой видно все примечания к главе. """
 
@@ -216,8 +207,7 @@ def rainbow_notes(request, chapter_number):
         'chapter': chapter,
         'comments': chapter.comments.all(),
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
-        'search': search
+        'breadcrumbs': breadcrumbs
     }
     return render(request, template, context)
 
@@ -272,3 +262,43 @@ def in_development(request):
     """ Страница в разработке. """
     template = 'wiki/in_development.html'
     return render(request, template)
+
+
+def search(request):
+    """ Результаты поиска. """
+    query = request.GET.get('q', '')
+    search_model = request.GET.get('chapter')
+    results = []
+    if search_model == 'comments':
+        results = Comment.objects.filter(comment_text__icontains=query)
+        for result in results:
+            result.comment_text = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.comment_text, flags=re.IGNORECASE
+            )
+    elif search_model == 'chronology':
+        results = TableChronology.objects.filter(
+            Q(description__icontains=query) | Q(date__icontains=query)
+        )
+        for result in results:
+            result.description = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.description, flags=re.IGNORECASE
+            )
+            result.date = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.date, flags=re.IGNORECASE
+            )
+    elif search_model == 'characters':
+        results = TableСharacters.objects.filter(name__icontains=query)
+        for result in results:
+            result.name = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.name, flags=re.IGNORECASE
+            )
+    return render(request, 'wiki/search.html', {
+        'results': results, 'query': query, 'search_model': search_model})
