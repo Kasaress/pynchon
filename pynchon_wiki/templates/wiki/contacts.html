@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+  Контакты
+{% endblock %}
+{% block content %}
+  <section class="about-nav">
+    <ul class="about-nav__links">
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:about-project' %}">Описание</a>
+      </li>
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:creators' %}">Авторы</a>
+      </li>
+      <li class="about-nav__link-item about-nav__link-item_active">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:contacts' %}">Контакты</a>
+      </li>
+    </ul>
+    <h1 class="about-nav__title chapter-title">Как с нами связаться</h1>
+  </section>
+  <section class="contact">
+    <p class="contact__text body-text">Если вы хотите сообщить нам об ошибке или неточности в тексте, пожалуйста, пишите нам об этом</p>
+    <form class="contact__form">
+      <input class="contact__input body-text" type="text" name="username" placeholder="Имя">
+      <input class="contact__input body-text" type="email" name="email" placeholder="Адрес электронной почты">
+      <textarea class="contact__input contact__input_textarea body-text" name="message" placeholder="Комментарий"></textarea>
+      <div class="contact__actions">
+        <button class="contact__file-btn" type="button"></button>
+        <button class="contact__submit" type="button">Отправить</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

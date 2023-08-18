@@ -1,14 +1,109 @@
 {% extends 'base.html' %}
-{% block title %} {{ book.name }} {% endblock %}
+{% load static %}
+{% block title %}
+  Томас Пинчон
+{% endblock %}
 {% block content %}
-    <div class="container">
-		<br>
-        <h1>Томас Пинчон</h1>
-		<br>
-		{% for article in articles %}
-			<h1>{{ article.name }}</h1>
-			<p>{{ article|safe }}
-		{% if not forloop.last %}<hr>{% endif %}
-	{% endfor %}
+  <section class="pynchon-promo">
+    <div class="pynchon-promo__content">
+      <div class="pynchon-promo__title-box">Томас Пинчон</div>
+      <p class="pynchon-promo__text title">Ведущий представитель постмодернистской литературы второй половины XX века. Обладатель Фолкнеровской премии за лучший дебют, лауреат Национальной книжной премии</p>
     </div>
+    <img class="pynchon-promo__img" src="{% static 'img/pynchon-art.png' %}" alt="Томас Пинчон">
+  </section>
+  <section class="bio bio_type_childhood">
+    <p class="bio__date body-text"><span class="bio__date-span">Родился</span><br>8 мая 1937 года</p>
+    <article class="bio__article">
+      <h1 class="bio__title title-bold">Детство</h1>
+      <p class="bio__text body-text">Томас Рагглз Пинчон-младший (Thomas Ruggles Pynchon Jr.) родился 8 мая 1937 года в небольшом городе Глен-Ков на северном побережье Лонг-Айленда, штат Нью-Йорк (Glen Cove, Long Island, New York). Отец Томас Рагглз Пинчон-старший (Thomas Ruggles Pynchon Sr.) (1907–1995) инженер и политик. Мать Кэтрин Фрэнсис Беннетт (Katherine Frances Bennett) (1909–1996) работала медсестрой. В детстве посещал службу в Епископальной церкви с отцом и Католическую службу с матерью.</p>
+    </article>
+  </section>
+  <section class="bio bio_type_youth">
+    <article class="bio__article">
+      <h1 class="bio__title title-bold">Юность</h1>
+      <div class="bio__text-columns">
+        <p class="bio__text bio__text_column body-text">По окончании школы в 1953 году Пинчон поступил в Корнеллский университет (Cornell University), где изучал прикладную физику (engineering physics).<br>
+          В 1955 году он покинул университет и отправился служить в военно-морской флот США (U.S. Navy). На военной базе в Норфолк, Вирджиния (Norfolk, Virginia) Пинчон получил квалификацию электрика.<br>
+          В 1956 году он находился на борту эсминца USS Hank в Средиземном море во время Суэцкого Кризиса.<br>
+          Вернувшись в Корнелл в 1957 году, Пинчон сменил свою специализацию на английскую литературу. </p>
+        <p class="bio__text bio__text_column body-text">Не исключено, что он посещал лекции Владимира Набокова, преподававшего там в это время.<br>
+          Свой первый рассказ «Мелкий дождь» Пинчон опубликовал в местном издании Cornell Writer в мае 1959 года.<br>
+          В июне того же года он получил степень бакалавра с особым отличием как член Общества Phi Beta Kappa.<br>
+          В университете Томаса Пинчона подружился с Ричардом Фаринья (1937 – 1968) (Richard Fariña), Киркпатриком Сейлом (1937 г.) (Kirkpatrick Sale) и Дэвидом Шетцлайном (David Shetzline) (1934 г. )</p>
+      </div>
+    </article>
+  </section>
+  <section class="bio bio_type_photos">
+    <p class="bio__fact body-text"><span class="bio__fact-span">Том Пинчон</span><br>Известны лишь его фото, сделанные в юности (1950-е годы), и не существует ни одного официального и достоверного фото более позднего времени</p>
+    <ul class="bio__gallery">
+      <li class="bio__gallery-column">
+        <img class="bio__photo" src="{% static 'img/tom-photo-1.jpeg' %}" alt="Фотография из ежегодника">
+        <p class="bio__description">Фотография из ежегодника 1953 года</p>
+      </li>
+      <li class="bio__gallery-column">
+        <img class="bio__photo" src="{% static 'img/tom-photo-2.jpeg' %}" alt="Пинчон в старшей школе">
+        <p class="bio__description">Пинчон, 16 лет, в&nbsp;старшей&nbsp;школе в 1953 году</p>
+      </li>
+      <li class="bio__gallery-column">
+        <img class="bio__photo" src="{% static 'img/tom-photo-3.jpeg' %}" alt="Пинчон">
+      </li>
+    </ul>
+  </section>
+  <section class="bio bio_type_boeing">
+    <div class="bio__article bio__article_type_boeing">
+      <div class="bio__article-content">
+        <h1 class="bio__title title-bold">Боинг</h1>
+        <p class="bio__text body-text">С февраля 1960 года по сентябрь 1962 года Пинчон работал техническим писателем в компании Боинг (Boeing) в Сиэтле (Seattle). Он писал статьи по безопасности для Bomarc Service News. В них речь шла о ракете Боинг CIM-10 Бомарк (Boeing CIM-10 BOMARC) - «ракета-перехватчик подземного базирования № 10», принятая на вооружение в 1959 году и использовавшаяся во время холодной войны для воздушной обороны США.<br>
+        В 1968 году Пинчон был среди 447 подписавших протест против налога на войну в New York Post.</p>
+      </div>
+      <img class="bio__boeing-img" src="{% static 'img/bio-boeing.png' %}" alt="Статья">
+    </div>
+  </section>
+  <section class="bio bio_type_debut">
+    <p class="bio__date body-text"><span class="bio__date-span">V.</span><br>1963 год</p>
+    <article class="bio__article">
+      <h1 class="bio__title title-bold">Дебютный роман Томаса Пинчона</h1>
+      <p class="bio__text body-text">На русском языке есть три варианта перевода от издательств «Симпозиум» (Г. Григорьев и А. Ханин), «Амфора» (Н. Махлаюк, С. Слободянюк и А. Захаревич) и «Эксмо» (М. Немцов)<br>
+        Фолкнеровская премия за лучший дебют / William Faulkner Foundation Award for the best first novel of the year.<br>
+        Финалист конкурса the National Book Award.</p>
+    </article>
+  </section>
+  <section class="bio bio_type_slider">
+    <ul class="bio__slider-list">
+      <li class="bio__slider-item">
+        <img class="bio__slider-photo" src="{% static 'img/cover-v.jpg' %}" alt="обложка">
+      </li>
+      <li class="bio__slider-item">
+        <img class="bio__slider-photo" src="{% static 'img/cover-v-2.jpg' %}" alt="обложка">
+      </li>
+      <li class="bio__slider-item">
+        <img class="bio__slider-photo" src="{% static 'img/cover-v-3.jpg' %}" alt="обложка">
+      </li>
+    </ul>
+  </section>
+  <section class="bio bio_type_california">
+    <article class="bio__article">
+      <h1 class="bio__title title-bold">Калифорния</h1>
+      <p class="bio__text body-text">С осени 1962 Пинчон жил некоторое время в Нью-Йорке и Мексике, а затем обосновался по адресу 217 33rd St Manhattan Beach, California.<br>
+        В апреле 1964 года он написал своему литературному агенту: «I have four novels in progress…If they come out on paper anything like they are inside my head then it will be the literary event of the millennium».<br>
+        В декабре 1965 года он отказался от предложения преподавать литературу в Bennington College.</p>
+    </article>
+  </section>
+  <section class="bio bio_type_family">
+    <p class="bio__fact body-text"><span class="bio__fact-span">Мелани Джексон</span><br>Жена</p>
+    <article class="bio__article">
+      <h1 class="bio__title title-bold">Семья</h1>
+      <div class="bio__text-columns">
+        <p class="bio__text bio__text_column body-text">В 1990 году Пинчон женился на Мелани Джексон (Melanie Jackson), правнучка Теодора Рузвельта и внучка Роберта Х. Джексона, судьи Верховного суда США и прокурора Нюрнбергского процесса.<br>
+          Мелани Джексон является владелицей литературного агентства Melanie Jackson Agency, которое находится в Нью-Йорке на 72 улице в здании, которое называется Hermitage, и является литературным агентом Томаса Пинчона.</p>
+        <p class="bio__text bio__text_column body-text">Семейная пара живёт на Манхеттене в районе Upper West Side рядом с Центральным Парком.<br>
+          В 1991 году у них родился сын Джексон. Он учился в Collegiate School - частная школа для мальчиков. В 2013 году закончил Колумбийский Университет.<br>
+          6 ноября 2018 года Пинчона сфотографировали вместе с сыном возле его дома, когда писатель шёл голосовать. Фото и статья были опубликованы в таблоиде the National Enquirer.</p>
+      </div>
+      <div class="bio__family-gallery">
+        <img class="bio__family-img" src="{% static 'img/bio-family-photo-1.png' %}" alt="Фото">
+        <img class="bio__family-img" src="{% static 'img/bio-family-photo-2.png' %}" alt="Фото">
+      </div>
+    </article>
+  </section>
 {% endblock %}

@@ -1,7 +1,5 @@
-<div class="d-flex">
-	<form class="d-flex" action="{% url 'wiki:search' %}" method="GET">
-		<input type="hidden" name="chapter" value="{{ search_model }}">
-		<input class="form-control me-2" type="text" name="q" placeholder="Поиск" value="{{ query }}">
-		<button class="btn btn-outline-secondary" type="submit">Поиск</button>
-	</form>
-</div>
+<form class="search" action="{% url 'wiki:search' %}" method="GET">
+	<input type="hidden" name="chapter" value="{{ search_model }}">
+	<input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ query }}">
+	<button class="search__button" type="button"></button>
+</form>

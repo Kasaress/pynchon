@@ -1,0 +1,150 @@
+.chapter-2-3-notes {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px 119px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.chapter-2-3-notes__description {
+  max-width: 631px;
+  padding: 0;
+  margin: 0 0 100px;
+}
+
+.chapter-2-3-notes__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  width: 100%;
+  max-width: 540px;
+  height: min-content;
+  background-color: #151515;
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sidebar .accordion-item {
+  background-color: #151515;
+  color: #C3C3C3;
+  border: 0;
+}
+
+.sidebar .accordion-button {
+  background-color: #151515;
+  color: #C3C3C3;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar .accordion-button::after {
+  display: none;
+}
+
+.sidebar .accordion-header {
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar__icon {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  content: "";
+  background-image: url(../../img/sidebar-arrow.svg);
+  background-size: contain;
+}
+
+.accordion-button:not(.collapsed) .sidebar__icon {
+  background-image: url(../../img/sidebar-arrow.svg);
+  transform: rotate(90deg);
+}
+
+.sidebar__title {
+  text-align: left;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.sidebar__subtitle {
+  max-width: 308px;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .accordion-body {
+  list-style: none;
+  margin: 0;
+  padding: 32px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar__link {
+  text-decoration: none;
+  color: #C3C3C3;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.sidebar__link_active {
+  color: #151515;
+  background-color: #F3F0EA;
+  font-weight: 700;
+}
+
+.chapter-2-3-notes__list {
+  max-width: 49%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.chapter-2-3-notes__item {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.chapter-2-3-notes__title {
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-2-3-notes__pages {
+  color: #842234;
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-2-3-notes__text {
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-2-3-notes__text-content ul {
+  list-style-type: disc;
+}
+
+.chapter-2-3-notes__img {
+  display: block;
+  height: 260px;
+  object-fit: contain;
+  object-position: 0;
+}

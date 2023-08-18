@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Авторы
+{% endblock %}
+{% block content %}
+  <section class="about-nav">
+    <ul class="about-nav__links">
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:about-project' %}">Описание</a>
+      </li>
+      <li class="about-nav__link-item about-nav__link-item_active">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:creators' %}">Авторы</a>
+      </li>
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:contacts' %}">Контакты</a>
+      </li>
+    </ul>
+    <h1 class="about-nav__title chapter-title">Кто делает проект</h1>
+  </section>
+  <section class="about-creators">
+    <ul class="about-creators__list">
+      <li class="about-creators__creator">
+        <img class="about-creators__photo" src="{% static 'img/creator.jpeg' %}" alt="команда">
+        <h2 class="about-creators__name body-text-l">Имя Фамилия</h2>
+        <p class="about-creators__role body-text-bold">Роль в проекте</p>
+      </li>
+      <li class="about-creators__creator">
+        <img class="about-creators__photo" src="{% static 'img/creator.jpeg' %}" alt="команда">
+        <h2 class="about-creators__name body-text-l">Имя Фамилия</h2>
+        <p class="about-creators__role body-text-bold">Роль в проекте</p>
+      </li>
+      <li class="about-creators__creator">
+        <img class="about-creators__photo" src="{% static 'img/creator.jpeg' %}" alt="команда">
+        <h2 class="about-creators__name body-text-l">Имя Фамилия</h2>
+        <p class="about-creators__role body-text-bold">Роль в проекте</p>
+      </li>
+      <li class="about-creators__creator">
+        <img class="about-creators__photo" src="{% static 'img/creator.jpeg' %}" alt="команда">
+        <h2 class="about-creators__name body-text-l">Имя Фамилия</h2>
+        <p class="about-creators__role body-text-bold">Роль в проекте</p>
+      </li>
+    </ul>
+  </section>
+{% endblock %}

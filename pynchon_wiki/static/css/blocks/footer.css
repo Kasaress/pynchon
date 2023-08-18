@@ -1,0 +1,29 @@
+.footer {
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.footer__container {
+  display: flex;
+  align-items: center;
+  padding: 52px 0;
+  box-sizing: border-box;
+  border-top: 1px solid #414141;
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 0;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: #1B1B1B;
+  margin: 0 auto;
+  padding: 0;
+  transition: border 100ms ease;
+}
+
+.footer__link:hover {
+  border-bottom: 1px solid #1B1B1B;
+}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}
+  КАК ПЕРЕСТАТЬ БЕСПОКОИТЬСЯ И НАЧАТЬ ЧИТАТЬ РОМАН - 2
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Как&nbsp;перестать беспокоиться и&nbsp;начать&nbsp;читать роман - 2</h1>
+  </section>
+  <section class="chapter chapter-4-kezvh">
+    <div class="chapter-4-kezvh__article">
+      {% for article in articles %}
+        <div class="chapter-4-kezvh__text-content">
+          <h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2>
+          <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p>
+          {% if article.image %}
+            <div class="col-md-4 mb-5">
+              {% thumbnail article.image "1600x900" as thumbnail %}
+              <div class="position-relative">
+                <img class="w-100 modal-toggle" src="{{ thumbnail.url }}" alt="{{ article.image.alt }}" data-bs-toggle="modal"
+                    data-bs-target="#image-modal-{{ article.pk }}"
+                    style="object-fit: contain; max-height: 224px; max-width: 400px;">
+              </div>
+              {% endthumbnail %}
+              <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-body text-center p-0">
+                      <img src="{{ article.image.url }}" style="width: 100%; height: auto; object-fit: contain;
+                          margin-top: 10px; margin-bottom: 10px;" alt="{{ article.image.alt }}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

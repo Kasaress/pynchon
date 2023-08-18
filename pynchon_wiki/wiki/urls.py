@@ -5,9 +5,10 @@ from . import views
 app_name = 'wiki'
 
 urlpatterns = [
+    path('download_chronology/', views.download_chronology,
+         name='download_chronology'),
     path('search/', views.search, name='search'),
     path('in_development', views.in_development, name='in_development'),
-    path('rainbow/double_katie/', views.double_katie, name='double_katie'),
     path('rainbow/notes/<chapter_number>/', views.rainbow_notes,
          name='rainbow_notes'),
     path('rainbow/comments/<chapter_number>/', views.rainbow_comments,
@@ -20,6 +21,9 @@ urlpatterns = [
     path('rainbow_part6', views.rainbow_part6, name='rainbow_part6'),
     path('rainbow_part7', views.rainbow_part7, name='rainbow_part7'),
     path('author/', views.author, name='author'),
-    path('about/', views.about, name='about'),
+    path('about-project/', views.about_project, name='about-project'),
+    path("other-books/", views.other_books, name="other-books"),
+    path('contacts/', views.contacts, name='contacts'),
+    path('creators/', views.creators, name='creators'),
     path('', views.index, name='index'),
 ]

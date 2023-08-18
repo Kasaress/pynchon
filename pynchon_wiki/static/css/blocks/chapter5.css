@@ -1,0 +1,96 @@
+.chronology-description {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px 100px;
+  box-sizing: border-box;
+}
+
+.chronology-description__subtitle {
+  max-width: 528px;
+  color: #414141;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.chronology-description__facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.chronology-description__fact {
+  width: 416px;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chronology-description__fact-header {
+  min-height: 78px;
+  display: flex;
+}
+
+.chronology-description__fact-title {
+  max-width: calc(100% - 50px - 16px);
+  color: #414141;
+  margin: 0;
+  padding: 0;
+}
+
+.chronology-description__fact-number {
+  display: block;
+  color: #fff;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 0 16px 0 0;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-radius: 50%;
+  background-color: #842234;
+}
+
+.chronology-description__fact-text {
+  color: #414141;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical; */
+}
+
+.chronology-description__fact-text_short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.chronology-description__fact-btn {
+  width: max-content;
+  align-self: flex-end;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+  color: #c3c3c3;
+  margin: 0;
+  padding: 0;
+  /* display: none; */
+}
+
+.chronology-description__fact-btn_visible {
+  display: block;
+}
+
+
+

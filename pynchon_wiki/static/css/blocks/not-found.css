@@ -1,0 +1,93 @@
+.not-found {
+  width: 100%;
+  max-width: 1440px;
+  padding: 80px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  height: 100vh;
+  background-image: url(../../img/octopus.jpeg);
+  background-repeat: no-repeat;
+  background-size: 632px;
+  background-position: right 80px center;
+  mix-blend-mode: darken;
+  display: flex;
+  align-items: center;
+}
+
+.not-found__column {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 85px;
+  box-sizing: border-box;
+}
+
+.not-found__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 632px;
+}
+
+.not-found__number {
+  color: #C3C3C3;
+  text-align: center;
+  font-size: 18.75rem;
+  font-weight: 900;
+  line-height: 120%;
+  letter-spacing: -18px;
+  margin: 0;
+  padding: 0;
+}
+
+.not-found__title {
+  color: #151515;
+  text-align: center;
+  font-size: 3rem;
+  font-size: 48px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 203px;
+}
+
+.not-found__text {
+  margin: 0 0 40px;
+  padding: 0;
+}
+
+.not-found__link {
+  width: max-content;
+  text-decoration: none;
+  color: #151515;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+  display: inline-block;
+  padding: 10px 30px 10px 10px;
+  margin: 0;
+  border-radius: 40px;
+  border: 1px solid #151515;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.not-found__link::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 20px;
+  background-color: #842234;
+}
+
+.not-found__link:hover {
+  background-color: #842234;
+  color: #F3F0EA;
+  border-color: #842234;
+}

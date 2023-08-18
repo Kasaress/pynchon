@@ -1,0 +1,99 @@
+.contact {
+  max-width: 632px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+.contact__text {
+  color: #151515;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.contact__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.contact__input {
+  outline: 0;
+  border: 1px solid #414141;
+  background-color: transparent;
+  margin: 0 0 32px;
+  padding: 8px;
+  box-sizing: border-box;
+  color: #151515;
+}
+
+.contact__input::placeholder {
+  color: #C3C3C3;
+}
+
+.contact__input_textarea {
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 66px;
+}
+
+.contact__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact__file-btn {
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background-image: url(../../img/file-btn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.contact__submit {
+  height: max-content;
+  background-color: transparent;
+  color: #151515;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+  padding: 10px 30px 10px 10px;
+  margin: 0;
+  border-radius: 40px;
+  border: 1px solid #151515;
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.contact__submit::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 20px;
+  background-color: #842234;
+}
+
+.contact__submit:hover {
+  background-color: #842234;
+  color: #F3F0EA;
+  border-color: #842234;
+}
+
+.contact__submit:disabled, .contact__submit:disabled::before {
+  background-color: #D9909D;
+  color: #F3F0EA;
+  border-color: #D9909D;
+}

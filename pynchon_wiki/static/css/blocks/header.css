@@ -1,0 +1,32 @@
+.header {
+  min-height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px 0 65px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.header__logo {
+  width: 128px;
+}
+
+.header__links {
+  list-style: none;
+  display: flex;
+  gap: 55px;
+  margin: 0;
+  padding: 0;
+}
+
+.header__link {
+  color: #151515;
+  font-style: italic;
+  text-transform: uppercase;
+  transition: border 100ms ease;
+}
+
+.header__link:hover {
+  border-bottom: 1px solid #151515;
+}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load user_filters %}
+{% block title %}
+  Хронология
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Хронология</h1>
+    <a class="chapters-nav__title-link body-text" href="{% url 'wiki:download_chronology' %}">Скачать хронологию полностью</a>
+    <div class="container">
+      <table class="table">
+        <tr class="table__row">
+            <td class="table__cell">
+                <p class="table__text"> Дата </p>
+            </td>
+            <td class="table__cell">
+                <p class="table__text"> Событие </p>
+            </td>
+        </tr> 
+        {% for row in rows|sort_queryset:'sort' %}
+            <td class="table__cell">
+                <p class="table__text"> {{ row.date }} </p>
+            </td>
+            <td class="table__cell">
+                <p class="table__text"> {{ row.description }} </p>
+            </td>
+            </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </section>
+  <section class="chronology">
+    <!-- здесь будет слайдер с датами и фактами -->
+  </section>
+  <section class="chronology-description">
+    <h2 class="chronology-description__subtitle title">В хронологической таблице единым списком указаны три типа дат:</h2>
+    <ul class="chronology-description__facts">
+      <li class="chronology-description__fact">
+        <div class="chronology-description__fact-header">
+          <span class="chronology-description__fact-number title">1</span>
+          <h3 class="chronology-description__fact-title body-text-bold">Реальные исторические события</h3>
+        </div>
+        <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Реальные исторические
+          события, которые либо упомянуты в романе, либо, хотя и не упомянуты, но имеют существенное значение для
+          сюжета (например, день назначения А. Гитлера рейхсканцлером)</p>
+        <button class="chronology-description__fact-btn body-text" type="button"></button>
+      </li>
+      <li class="chronology-description__fact">
+        <div class="chronology-description__fact-header">
+          <span class="chronology-description__fact-number title">2</span>
+          <h3 class="chronology-description__fact-title body-text-bold">Романные события</h3>
+        </div>
+        <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Они указаны либо точной
+          датой (промежутком времени), когда текст романа позволяет ее (его) однозначно определить (например, события
+          последней главы 1 части происходят в День подарков, то есть 26 декабря 1944 года), либо приблизительным
+          промежутком времени. В последнем случае такая дата выделена курсивом, и ее погрешность составляет несколько
+          дней или недель, в зависимости от контекста. Например, Катье появилась у Бликеро осенью, в солнечный день;
+          это не могло быть ранее 8 сентября 1944 года (день первого пуска ФАУ-2 по Лондону) и позднее конца октября
+          1944 года, когда случилась упомянутое в I-14 падение ракеты на пусковую установку. Соответственно, это
+          событие отнесено на конец сентября – начало октября 1944 года</p>
+        <button class="chronology-description__fact-btn body-text" type="button">читать дальше</button>
+      </li>
+      <li class="chronology-description__fact">
+        <div class="chronology-description__fact-header">
+          <span class="chronology-description__fact-number title">3</span>
+          <h3 class="chronology-description__fact-title body-text-bold">Христианские торжества и праздники в литургические годы 1944
+            и 1945</h3>
+        </div>
+        <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Так как их частое
+          упоминание в тексте и соотносимость романных событий с литургическим календарем не кажется случайным.<br>Для
+          создания единой картины данные типы дат в таблице специально не выделяются</p>
+        <button class="chronology-description__fact-btn body-text" type="button">читать дальше</button>
+      </li>
+    </ul>
+  </section>
+{% endblock %}

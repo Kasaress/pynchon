@@ -1,0 +1,171 @@
+html {
+  font-size: 16px;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #F3F0EA;
+  color: #151515;
+  margin: 0 auto;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.chapter-title {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+.title-bold {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+.body-text-l {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.body-text-bold {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.body-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.to-top__button {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url('../../img/to-top-btn.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  right: 80px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: background-image 200ms ease;
+}
+
+.to-top:hover .to-top__button {
+  background-image: url(../../img/to-top-btn-hover.svg);
+}
+
+.to-top__text {
+  mix-blend-mode: difference;
+  color: #F3F0EA;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  right: 140px;
+  bottom: 52px;
+  z-index: 100;
+}
+
+.tentacle {
+  z-index: 1;
+}
+
+.tentacle1 {
+  position: absolute;
+  top: 88px;
+  right: 187px;
+  width: 869.7px;
+  mix-blend-mode: multiply;
+}
+
+.tentacle2 {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+  width: 835.13px;
+  mix-blend-mode: multiply;
+}
+
+.tentacle3 {
+  position: absolute;
+  width: 957.71px;
+  bottom: -50px;
+  left: 630px;
+  mix-blend-mode: multiply;
+}
+
+.tentacle4 {
+  position: absolute;
+  width: 748.66px;
+  top: 0px;
+  left: 147px;
+  opacity: 0.4;
+  mix-blend-mode: color-burn;
+}
+
+.tentacle5 {
+  position: absolute;
+  width: 719.42px;
+  bottom: -70px;
+  left: 50%;
+  opacity: 0.4;
+  mix-blend-mode: color-burn;
+}
+
+.tentacle6 {
+  position: absolute;
+  width: 437.2px;
+  bottom: 0px;
+  left: 649px;
+  opacity: 0.5;
+  mix-blend-mode: color-burn;
+}
+
+.tentacle_type_chapter {
+  left: 568px;
+  top: -475px;
+  z-index: -1;
+}
+
+.tentacle_type_about {
+  left: 662px;
+  top: -339px;
+  z-index: -1;
+}

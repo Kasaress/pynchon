@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  О проекте
+{% endblock %}
+{% block content %}
+  <section class="about-nav">
+    <ul class="about-nav__links">
+      <li class="about-nav__link-item about-nav__link-item_active">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:about-project' %}">Описание</a>
+      </li>
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:creators' %}">Авторы</a>
+      </li>
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:contacts' %}">Контакты</a>
+      </li>
+    </ul>
+    <h1 class="about-nav__title chapter-title">Зачем мы все это делаем</h1>
+  </section>
+  <section class="about-project">
+    <img class="tentacle tentacle5 tentacle_type_about" src="{% static 'img/tentacle5.png' %}" alt="фон">
+    <p class="about-project__description body-text-bold">В США работал над программой баллистических ракет средней дальности (то есть от 3000 до 5500 км), считается также отцом американской космической программы. Эпиграф взят из статьи фон Брауна «Why I Believe in Immortality», опубликованной в книге Уильяма Николса «The Third Book of Words to Live By» (1962).</p>
+    <div class="about-project__content">
+      <div class="accordion accordion-flush sidebar" id="notesNav">
+        <div class="accordion-item">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#noteNav-1" aria-expanded="false" aria-controls="noteNav-1">
+            <div class="accordion-header">
+              <div class="sidebar__icon"></div>
+              <h2 class="sidebar__title title-bold">Запланированные мероприятия</h2>
+            </div>
+          </button>
+          <div id="noteNav-1" class="accordion-collapse collapse">
+            {% for article in articles %}
+            <ul class="accordion-body">
+              <li><a class="sidebar__link body-text comment-link" href="#{{ article.name }}">{{article.name}}</a></li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#noteNav-2" aria-expanded="false" aria-controls="noteNav-2">
+            <div class="accordion-header">
+              <div class="sidebar__icon"></div>
+              <h2 class="sidebar__title title-bold">Записи встреч</h2>
+            </div>
+          </button>
+          <div id="noteNav-2" class="accordion-collapse collapse">
+            {% for article in articles %}
+            <ul class="accordion-body">
+              <li><a class="sidebar__link body-text comment-link" href="#{{ article.name }}">{{article.name}}</a></li>
+            </ul>
+            {% endfor %}
+            {% comment %} <ul class="accordion-body">
+              <li><a class="sidebar__link body-text" href="#">Тема встречи / 21.04.2023</a></li>
+            </ul> {% endcomment %}
+          </div>
+        </div>
+      </div>
+
+      <div class="meeting">
+        {% for article in articles %}
+        <div id="{{ article.name }}" class="meeting__header">
+          <h2 class="meeting__topic title-bold">Тема встречи</h2>
+          <p class="meeting__date body-text">{{article.name}}</p>
+        </div>
+        <p class="meeting__text">{{article.text|safe}}</p>
+
+        <!-- если запланированное -->
+        <a class="meeting__link" href="#">Регистрация</a>
+
+        <!-- если прошедшее -->
+        <div class="meeting__record">
+          <!-- видео взяла с ютуба для примера, желательно сохранить css-класс фрейма -->
+          <iframe class="meeting__iframe" src="https://www.youtube.com/embed/2rnIaQlFs4c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

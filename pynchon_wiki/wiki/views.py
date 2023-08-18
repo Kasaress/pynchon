@@ -1,6 +1,6 @@
 import re
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
 from django.db.models import Q
 
 from .models import (
@@ -8,6 +8,19 @@ from .models import (
     Chapter, TableChronology, TableСharacters
 )
 from .decorators import page_in_development
+
+
+def download_chronology(request):
+    """ Загрузка списка хронологии. """
+    chronology = TableChronology.objects.all()
+    content = "Дата\tСобытие\n"
+    for event in chronology:
+        content += f"{event.date}\t{event.description}\n"
+
+    response = HttpResponse(content, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename="chronology.txt"'
+
+    return response
 
 
 def index(request):
@@ -22,9 +35,31 @@ def index(request):
     return render(request, template, context=context)
 
 
-def about(request):
-    """ Страница описания. """
-    template = 'wiki/about.html'
+def about_project(request):
+    """ Страница о проекте. """
+    template = 'wiki/about-project.html'
+    articles = Article.objects.filter(chapter=222)
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context)
+
+
+def contacts(request):
+    """ Страница с контактами. """
+    template = 'wiki/contacts.html'
+    return render(request, template)
+
+
+def creators(request):
+    """ Страница с авторами. """
+    template = 'wiki/creators.html'
+    return render(request, template)
+
+
+def other_books(request):
+    """ Страница с другими книгами. """
+    template = 'wiki/other-books.html'
     return render(request, template)
 
 
@@ -39,147 +74,78 @@ def author(request):
 
 
 def rainbow_part1(request):
-    template = 'wiki/rainbow_part1.html'
+    template = 'wiki/chapter1.html'
     articles = Article.objects.filter(chapter=1)
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 1: для чего читать радугу',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'url_name': 'rainbow_part1',
         'articles': articles,
-        'breadcrumbs': breadcrumbs
     }
     return render(request, template, context=context)
 
 
 def rainbow_part2(request):
-    template = 'wiki/rainbow_part2.html'
+    template = 'wiki/chapter2.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 2: примечания к каждой главе',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
         'search_model': 'comments'
     }
     return render(request, template, context)
 
 
 def rainbow_part3(request):
-    template = 'wiki/rainbow_part3.html'
+    template = 'wiki/chapter3.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 3: краткое содержание и комментарии по главам',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
     }
     return render(request, template, context)
 
 
 def rainbow_part4(request):
-    template = 'wiki/rainbow_part4.html'
+    template = 'wiki/chapter4.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 4: статьи с объяснениями',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
+    articles = Article.objects.filter(chapter=4)
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
+        'articles': articles
     }
     return render(request, template, context)
 
 
 def rainbow_part5(request):
-    template = 'wiki/rainbow_part5.html'
+    template = 'wiki/chapter5.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     articles = Article.objects.filter(chapter=6)
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 5: хронология романа',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
         'rows': TableChronology.objects.all(),
         'articles': articles,
-        'breadcrumbs': breadcrumbs,
         'search_model': 'chronology'
     }
     return render(request, template, context)
 
 
 def rainbow_part6(request):
-    template = 'wiki/rainbow_part6.html'
+    template = 'wiki/chapter6.html'
     circles = CircleTableCharacters.objects.all()
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 6: персонажи - таблица и схема',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'circles': circles,
-        'breadcrumbs': breadcrumbs,
         'search_model': 'characters'
     }
     return render(request, template, context)
 
 
-@page_in_development
 def rainbow_part7(request):
-    template = 'wiki/rainbow_part7.html'
+    template = 'wiki/chapter7.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 7: объяснение',
-            'url_name': reverse('wiki:rainbow_part1')
-        }
-    ]
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
     }
     return render(request, template, context)
 
@@ -190,24 +156,10 @@ def rainbow_notes(request, chapter_number):
     template = 'wiki/rainbow_notes.html'
     chapter = get_object_or_404(Chapter, number=chapter_number)
     book = get_object_or_404(Book, name='Радуга тяготения')
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 2: примечания к каждой главе',
-            'url_name': reverse('wiki:rainbow_part2')
-        },
-        {
-            'title': f'Примечания к главе {chapter}',
-            'url_name': reverse('wiki:rainbow_notes', args={chapter})
-        }
-    ]
     context = {
         'chapter': chapter,
         'comments': chapter.comments.all(),
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs
     }
     return render(request, template, context)
 
@@ -218,44 +170,13 @@ def rainbow_comments(request, chapter_number):
     template = 'wiki/rainbow_comments.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     chapter = get_object_or_404(Chapter, number=chapter_number)
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 3: краткое содержание и комментарии по главам',
-            'url_name': reverse('wiki:rainbow_part3')},
-        {
-            'title': f'Комментариии к главе {chapter}',
-            'url_name': reverse('wiki:rainbow_comments', args={chapter})
-        }
-    ]
     context = {
         'book': book,
         'comments': chapter.comments.all(),
         'chapter': chapter,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'breadcrumbs': breadcrumbs,
     }
     return render(request, template, context)
-
-
-def double_katie(request):
-    breadcrumbs = [
-        {
-            'title': 'Главная', 'url_name': reverse('wiki:index')
-        },
-        {
-            'title': 'Раздел 4: статьи с объяснениями',
-            'url_name': reverse('wiki:rainbow_part4')
-        },
-        {
-            'title': 'Двойничество Катье',
-            'url_name': reverse('wiki:double_katie')
-        }
-    ]
-    return render(request, 'wiki/double_katie.html',
-                  context={'breadcrumbs': breadcrumbs})
 
 
 def in_development(request):
@@ -300,5 +221,5 @@ def search(request):
                 r'<span class="highlighted">\1</span>',
                 result.name, flags=re.IGNORECASE
             )
-    return render(request, 'wiki/search.html', {
+    return render(request, 'wiki/search_results.html', {
         'results': results, 'query': query, 'search_model': search_model})

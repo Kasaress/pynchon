@@ -1,0 +1,44 @@
+.chapter-1-how {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.chapter-1-how__article {
+  padding: 40px 80px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chapter-1-how__subtitle {
+  width: 24%;
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-1-how__subtitle-span {
+  font-weight: 400;
+}
+
+.chapter-1-how__text {
+  width: 66.25%;
+  margin: 0;
+  padding: 0;
+  text-indent: 25%;
+}
+
+.chapter-1-how__sign {
+  padding: 0 80px 100px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chapter-1-how__sign .chapter-1-how__text {
+  text-indent: 0;
+}
+
+.chapter-1-how__sign-span {
+  color: #C3C3C3;
+}

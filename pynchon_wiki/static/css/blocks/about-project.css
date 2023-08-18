@@ -1,0 +1,117 @@
+.about-nav {
+  padding: 50px 0 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-nav__links {
+  width: max-content;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 165.5px;
+  border-bottom: 1px solid #C3C3C3;
+}
+
+.about-nav__link {
+  text-decoration: none;
+  color: #151515;
+  margin: 0;
+  padding: 0;
+}
+
+.about-nav__link-item_active {
+  border-bottom: 1px solid #151515;
+}
+
+.about-nav__title {
+  margin: 0;
+}
+
+.about-project {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.about-project__description {
+  max-width: 631px;
+  padding: 0;
+  margin: 0 0 90px;
+}
+
+.about-project__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meeting {
+  max-width: 49%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.meeting__topic {
+  color: #151515;
+  margin: 0;
+  padding: 0;
+}
+
+.meeting__date {
+  color: #C3C3C3;
+  margin: 0;
+  padding: 0;
+}
+
+.meeting__text {
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.meeting__link {
+  width: max-content;
+  text-decoration: none;
+  color: #151515;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+  display: inline-block;
+  padding: 10px 30px 10px 10px;
+  margin: 0;
+  border-radius: 40px;
+  border: 1px solid #151515;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.meeting__link::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 20px;
+  background-color: #842234;
+}
+
+.meeting__link:hover {
+  background-color: #842234;
+  color: #F3F0EA;
+  border-color: #842234;
+}
+
+.meeting__iframe {
+  width: 100%;
+  aspect-ratio: 632 / 379;
+  font-size: 0;
+}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}
+  Примечания
+{% endblock  %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Примечания</h1>
+  </section>
+  <section class="chapter chapter-2-3-notes">
+    <p class="chapter-2-3-notes__description body-text-bold">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и выражений, содержащие справки об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п.<br>
+    Рекомендуется к прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше блуждали по просторам интернета в поисках нужной информации.</p>
+    <div class="chapter-2-3-notes__content">
+      <div class="accordion accordion-flush sidebar" id="notesNav">
+        {% for chapter in chapters %}
+          <div class="accordion-item">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#noteNav-{{ chapter.number }}" aria-expanded="false"
+                aria-controls="noteNav-{{ chapter.number }}">
+                <div class="accordion-header">
+                    <div class="sidebar__icon"></div>
+                    <h2 class="sidebar__title title-bold">Глава {{ chapter.number }}</h2>
+                </div>
+                <p class="sidebar-subtitle body-text-bold">{{ chapter.description|striptags|safe }}</p>
+            </button>
+            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse">
+              <ul class="accordion-body">
+                {% for comment in chapter.comments.all %}
+                  <li><a class="sidebar__link body-text comment-link"
+                    href="#{{ comment.page_number_by_2012 }}_{{ comment.id }}">{{ comment.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="chapter-2-3-notes__list">
+        {% for chapter in chapters %}
+          <ul id="chapter-comments-{{ chapter.number }}" class="chapter-2-3-notes__item">
+            {% for comment in chapter.comments.all %}
+              <li id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                  <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}}/
+                      Стр.{{comment.page_number_by_2021}}</p><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+                </div>
+                {% if comment.image %}
+                  <div class="col-md-4 mb-5">
+                    {% thumbnail comment.image "1600x900" as thumbnail %}
+                    <div class="position-relative" style="height: 224px; width: 400px;">
+                      <img class="w-100" src="{{ thumbnail.url }}" alt="{{ comment.image.alt }}" data-bs-toggle="modal"
+                          data-bs-target="#image-modal-{{ comment.pk }}"
+                          style="object-fit: contain; max-height: 100%; max-width: 100%;">
+                    </div>
+                    {% endthumbnail %}
+                    <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-xl">
+                          <div class="modal-content">
+                              <div class="modal-body text-center p-0">
+                                  <img src="{{ comment.image.url }}" style="width: 100%; height: auto; object-fit: contain;
+                                      margin-top: 10px; margin-bottom: 10px;" alt="{{ comment.image.alt }}">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+  </div>
+    <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
+  </section>
+{% endblock %}

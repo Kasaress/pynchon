@@ -1,5 +1,14 @@
-<footer class="border-top text-center py-3 mt-auto sticky-footer">
-    <div class="container">
-        <p>© 2022 - {% now "Y" %} Радуга тяготения</p>
+<footer class="footer">
+    <div class="footer__container">
+      <p class="footer__copyright body-text">&copy;&nbsp;
+        <script>document.write(new Date().getFullYear())</script>
+      </p>
+      <a class="footer__link body-text" href="#">Телеграм канал</a>
     </div>
-</footer>
+  </footer>
+
+  <!-- компонент прокрутки страницы вверх -->
+  <div class="to-top">
+    <p class="to-top__text body-text">В начало</p>
+    <button class="to-top__button" type="button" id="scrollToTopLink"></button>
+  </div>

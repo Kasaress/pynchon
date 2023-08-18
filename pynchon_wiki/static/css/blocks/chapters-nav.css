@@ -1,0 +1,139 @@
+.chapters-nav {
+  padding: 24px 80px 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search {
+  align-self: flex-end;
+  margin: 0 0 100px;
+  padding: 0;
+  display: flex;
+  gap: 33px;
+  align-items: flex-end;
+}
+
+.search__input {
+  width: 548px;
+  border: 0;
+  border-bottom: 1px solid #000;
+  outline: 0;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 120%;
+  margin: 0;
+  padding: 0;
+}
+
+.search__input::placeholder {
+  color: #C3C3C3;
+}
+
+.search__button {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background-image: url(../../img/search-btn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.chapters-nav__list {
+  list-style: none;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto 60px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 176px);
+  grid-template-rows: 180px;
+  gap: 8px;
+  justify-content: center;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chapters-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.chapters-nav__item {
+  width: 100%;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  background-color: #F3F0EA;
+  border: 1px solid #151515;
+}
+
+.chapters-nav__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.chapters-nav__chapter {
+  color: #C3C3C3;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.chapters-nav__name {
+  color: #151515;
+  font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.chapters-nav__item_active {
+  background-color: #842234;
+  border: 0;
+}
+
+.chapters-nav__item_active .chapters-nav__chapter {
+  color: rgba(248, 246, 243, 0.30);
+}
+
+.chapters-nav__item_active .chapters-nav__name {
+  color: #F8F6F3;
+}
+
+.chapters-nav__title {
+  max-width: 1140px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.chapters-nav__title-link {
+  text-decoration: none;
+  color: #842234;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 1439px) {
+  .chapters-nav__list {
+    justify-content: start;
+  }
+}

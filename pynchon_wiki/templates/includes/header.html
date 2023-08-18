@@ -1,34 +1,15 @@
 {% load static %}
-{% load user_filters %}
-{% show_top_menu as top_menu %}
-<nav class="navbar navbar-light" style="background-color: #414141">
-    <div class="container">
+<header class="header">
+    <a class="header__logo-link" href="{% url 'wiki:index' %}" target="_self">
+        <img class="header__logo" src="{% static 'img/logo.png' %}" alt="лого">
+    </a>
+    <ul class="header__links"> 
         {% with request.resolver_match.view_name as view_name %}
-            {% if view_name == 'wiki:index' %}
-                <div class="navbar-brand text-white disabled user-select-none">Радуга тяготения</div>
-            {% else %}
-                <a class="navbar-brand text-white" href="{% url 'wiki:index' %}">Радуга тяготения</a>
-            {% endif %}
-            <ul class="nav nav-pills">
-                {% for menu in top_menu %}
-                    <li class="nav-item">
-                        <a class="nav-link link-light nav-bg
-                        {% if request.path == menu.url %} active text-bg-secondary{% else %}text-beyge{% endif %}" href="{{ menu.url }}">{{ menu.name }}</a>
-                    </li>
-                {% endfor %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link link-light nav-bg " href="{% url 'users:logout' %}">Выйти</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-light disabled">Пользователь: {{ user.username }}</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link link-light nav-bg  {% if view_name  == 'users:login' %} active text-bg-secondary{% else %}text-beyge{% endif %}" href="{% url 'users:login' %}">Войти</a>
-                    </li>
-                {% endif %}
-            </ul>
+        <li class="header__item"><a class="header__link link body-text-l" 
+            href="{% if view_name == 'wiki:index' %}{% url 'wiki:author' %}{% else %}{% url 'wiki:index' %}{% endif %}"
+            target="_self">{% if view_name == 'wiki:index' %}ТОМАС ПИНЧОН{% else %}РАДУГА ТЯГОТЕНИЯ{% endif %}</a></li>
+        <li class="header__item"><a class="header__link link body-text-l" href="{% url 'wiki:other-books' %}" target="_self">ДРУГИЕ КНИГИ</a></li>
+        <li class="header__item"><a class="header__link link body-text-l" href="{% url 'wiki:about-project' %}" target="_self">О ПРОЕКТЕ</a></li>
         {% endwith %}
-    </div>
-</nav>
+    </ul>
+</header>
