@@ -7,7 +7,6 @@ from .models import (
     Article, Book, Comment, CircleTableCharacters,
     Chapter, TableChronology, TableСharacters
 )
-from .decorators import page_in_development
 
 
 def download_chronology(request):
