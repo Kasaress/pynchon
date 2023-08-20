@@ -1,119 +1,149 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block title %}Поиск{% endblock %}
 {% block content %}
-<section class="chapters-nav">
-    <form class="search" action="{% url 'wiki:search' %}" method="GET">
-      <input type="hidden" name="chapter" value="{{ search_model }}">
-      <input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ query }}">
-      <button class="search__button" type="button"></button>
-    </form>
-    {% include 'includes/chapters.html' %}
-    <h1 class="chapters-nav__title chapter-title">Примечания</h1>
+  <section class="chapters-nav">
+      <form class="search" action="{% url 'wiki:search' %}" method="GET">
+          <input type="hidden" name="chapter" value="{{ search_model }}">
+          <input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ query }}">
+          <button class="search__button" type="button"></button>
+      </form>
+      {% include 'includes/chapters.html' %}
   </section>
-
-  <!-- секция раздела -->
   <section class="chapter chapter-2-3-notes">
-        <div>
-            <h3>Результаты поиска по запросу "{{ query }}"</h3> 
-            <a class="btn btn-outline-secondary"   href={% if search_model == 'comments' %}
-                                                            {% url 'wiki:rainbow_part2' %}	
-                                                        {% elif search_model == 'chronology' %}
-                                                            {% url 'wiki:rainbow_part5' %}
-                                                        {% elif search_model == 'characters' %}
-                                                            {% url 'wiki:rainbow_part6' %}
-                                                        {% endif %}>
-                Назад
-            </a>
-            <br>
-            <br>
-            {% if search_model == 'characters' %}
-                <table class="table">
-                    <tr class="table__row">
-                        <td class="table__cell">
-                            <p class="table__text">Имя</p>
-                        </td>
-                        <td class="table__cell">
-                            <p class="table__text">Имя в оригинале и значение имени</p>
-                        </td>
-                        <td class="table__cell">
-                            <p class="table__text">Характеристика</p>
-                        </td>
-                        <td class="table__cell">
-                            <p class="table__text">Портрет</p>
-                        </td>
-                        <td class="table__cell">
-                            <p class="table__text">Группы</p>
-                        </td>
-                        <td class="table__cell">
-                            <p class="table__text">Упоминания</p>
-                        </td>
-                    </tr>
-                    {% for result in results %}
-                        {% with result as character %}
-                            <tr class="table__row">
-                                <td class="table__cell">
-                                    <h6 class="table__text"> {{ character.name|safe }} </h6>
-                                </td>
-                                <td class="table__cell">
-                                    <p class="table__text"> {{ character.value_name }} </p>
-                                </td>
-                                <td class="table__cell">
-                                    <p class="table__text"> {{ character.characteristics }} </p>
-                                </td>
-                                <td class="table__cell">
-                                    <p class="table__text"> {{ character.portrait }} </p>
-                                </td>
-                                <td class="table__cell">
-                                    <p class="table__text"> {{ character.groups }} </p>
-                                </td>
-                                <td class="table__cell">
-                                    <p class="table__text"> {{ character.mentions }} </p>
-                                </td>
-                            </tr>
-                        {% endwith %}
-                    {% empty %}
-                        <tr>
-                            <td colspan="6"><h5>По вашему запросу ничего не найдено =(</h5></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% elif search_model == 'chronology' %}
-                <div class="container">
-                    <table class="table">
-                        <tr class="table__row">
-                            <td class="table__cell">
-                                <p class="table__text">Дата</p>
-                            </td>
-                            <td class="table__cell">
-                                <p class="table__text">Событие</p>
-                            </td>
-                        </tr>
-                        {% for result in results %}
-                            {% with result as row %}
-                                <tr class="table__row">
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ row.date|safe }} </p>
-                                    </td>
-                                    <td class="table__cell">
-                                        <p class="table__text"> {{ row.description|safe }} </p>
-                                    </td>
-                                </tr>
-                            {% endwith %}
-                        {% empty %}
-                            <tr>
-                                <td colspan="2"><h5>По вашему запросу ничего не найдено =(</h5></td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            {% elif search_model == 'comments' %}
-                {% for result in results %}
-                    {% with result as comment %}
-                        {% include 'includes/comment.html' %}
-                    {% endwith %}
-                {% empty %}
-                    <h5>По вашему запросу ничего не найдено =(</h5>
-                {% endfor %}
-            {% endif %}
+    <div>
+      <h3>Результаты поиска по запросу "{{ query }}"</h3> 
+      <a class="btn btn-outline-secondary"   href={% if search_model == 'comments' %}
+                                                      {% url 'wiki:rainbow_part2' %}	
+                                                  {% elif search_model == 'chronology' %}
+                                                      {% url 'wiki:rainbow_part5' %}
+                                                  {% elif search_model == 'characters' %}
+                                                      {% url 'wiki:rainbow_part6' %}
+                                                  {% endif %}>
+          Назад
+      </a>
+      <br>
+      <br>
+      {% if search_model == 'characters' %}
+        <table class="table">
+          <tr class="table__row">
+            <td class="table__cell">
+              <p class="table__text">Имя</p>
+            </td>
+            <td class="table__cell">
+              <p class="table__text">Имя в оригинале и значение имени</p>
+            </td>
+            <td class="table__cell">
+              <p class="table__text">Характеристика</p>
+            </td>
+            <td class="table__cell">
+              <p class="table__text">Портрет</p>
+            </td>
+            <td class="table__cell">
+              <p class="table__text">Группы</p>
+            </td>
+            <td class="table__cell">
+              <p class="table__text">Упоминания</p>
+            </td>
+          </tr>
+          {% for result in results %}
+            {% with result as character %}
+              <tr class="table__row">
+                <td class="table__cell">
+                  <h6 class="table__text"> {{ character.name|safe }} </h6>
+                </td>
+                <td class="table__cell">
+                  <p class="table__text"> {{ character.value_name }} </p>
+                </td>
+                <td class="table__cell">
+                  <p class="table__text"> {{ character.characteristics }} </p>
+                </td>
+                <td class="table__cell">
+                  <p class="table__text"> {{ character.portrait }} </p>
+                </td>
+                <td class="table__cell">
+                  <p class="table__text"> {{ character.groups }} </p>
+                </td>
+                <td class="table__cell">
+                  <p class="table__text"> {{ character.mentions }} </p>
+                </td>
+              </tr>
+            {% endwith %}
+          {% empty %}
+            <tr>
+              <td colspan="6"><h5>По вашему запросу ничего не найдено =(</h5></td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% elif search_model == 'chronology' %}
+        <div class="container">
+          <table class="table">
+            <tr class="table__row">
+              <td class="table__cell">
+                <p class="table__text">Дата</p>
+              </td>
+              <td class="table__cell">
+                <p class="table__text">Событие</p>
+              </td>
+            </tr>
+            {% for result in results %}
+              {% with result as row %}
+                <tr class="table__row">
+                  <td class="table__cell">
+                    <p class="table__text"> {{ row.date|safe }} </p>
+                  </td>
+                  <td class="table__cell">
+                    <p class="table__text"> {{ row.description|safe }} </p>
+                  </td>
+                </tr>
+              {% endwith %}
+            {% empty %}
+              <tr>
+                <td colspan="2"><h5>По вашему запросу ничего не найдено =(</h5></td>
+              </tr>
+            {% endfor %}
+          </table>
         </div>
+      {% elif search_model == 'comments' %}
+        {% for result in results %}
+          {% with result as comment %}
+            <div id="comments-container">
+              <div id="comments-content">
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                  <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+                      Стр.{{comment.page_number_by_2021}}</p><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+                </div>
+                {% if comment.image %}
+                  <div class="col-md-4 mb-5">
+                    {% thumbnail comment.image "1600x900" as thumbnail %}
+                    <div class="position-relative" style="height: 224px; width: 400px;">
+                      <img class="w-100" src="{{ thumbnail.url }}" alt="{{ comment.image.alt }}" data-bs-toggle="modal"
+                      data-bs-target="#image-modal-{{ comment.pk }}"
+                      style="object-fit: contain; max-height: 100%; max-width: 100%;">
+                    </div>
+                    {% endthumbnail %}
+                    <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-body text-center p-0">
+                            <img src="{{ comment.image.url }}" style="width: 100%; height: auto; object-fit: contain;
+                              margin-top: 10px; margin-bottom: 10px;" alt="{{ comment.image.alt }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}     
+              </div>
+            </div>
+          {% endwith %}
+        {% empty %}
+          <h5>По вашему запросу ничего не найдено =(</h5>
+        {% endfor %}
+      {% endif %}
+    </div>
 {% endblock %}

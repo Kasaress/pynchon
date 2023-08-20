@@ -149,31 +149,26 @@ def rainbow_part7(request):
     return render(request, template, context)
 
 
-def rainbow_notes(request, chapter_number):
-    """ Страница главы, на которой видно все примечания к главе. """
-
-    template = 'wiki/rainbow_notes.html'
-    chapter = get_object_or_404(Chapter, number=chapter_number)
-    book = get_object_or_404(Book, name='Радуга тяготения')
+def get_comments(request):
+    """ Динамический контент комментариев главы. """
+    template = 'wiki/comments.html'
+    selected_chapter_id = request.GET.get('chapter_id')
+    comments = Comment.objects.filter(chapter_id=selected_chapter_id)
     context = {
-        'chapter': chapter,
-        'comments': chapter.comments.all(),
-        'chapters': Chapter.objects.filter(book=book).all(),
+        'selected_chapter_id': selected_chapter_id,
+        'comments': comments,
     }
     return render(request, template, context)
 
 
-def rainbow_comments(request, chapter_number):
-    """ Страница главы, на которой видно все комментарии к главе. """
-
-    template = 'wiki/rainbow_comments.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
-    chapter = get_object_or_404(Chapter, number=chapter_number)
+def get_summary(request):
+    """ Динамический контент краткого содержания главы. """
+    template = 'wiki/summary.html'
+    selected_chapter_id = request.GET.get('chapter_id')
+    chapter = Chapter.objects.get(pk=selected_chapter_id)
     context = {
-        'book': book,
-        'comments': chapter.comments.all(),
+        'selected_chapter_id': selected_chapter_id,
         'chapter': chapter,
-        'chapters': Chapter.objects.filter(book=book).all(),
     }
     return render(request, template, context)
 
