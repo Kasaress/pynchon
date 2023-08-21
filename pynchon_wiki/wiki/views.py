@@ -87,7 +87,8 @@ def rainbow_part2(request):
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
         'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
+        'start_chapter': Chapter.objects.filter(book=book).get(number='1.1'),
+        'chapters': Chapter.objects.filter(book=book),
         'search_model': 'comments'
     }
     return render(request, template, context)
@@ -98,6 +99,7 @@ def rainbow_part3(request):
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
         'book': book,
+        'start_chapter': Chapter.objects.filter(book=book).get(number='1.1'),
         'chapters': Chapter.objects.filter(book=book).all(),
     }
     return render(request, template, context)

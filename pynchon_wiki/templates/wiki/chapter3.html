@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
   <section class="chapters-nav">
-    {% include 'includes/form_search.html' %}
+    <div class="search"></div><br><br>
     {% include 'includes/chapters.html' %}
     <h1 class="chapters-nav__title chapter-title">Комментарии</h1>
   </section>
@@ -40,7 +40,34 @@
       </div>
       <div class="chapter-2-3-notes__list">
         <div id="comments-container">
-          <div id="comments-content"></div>
+          <div id="comments-content">
+            {% if start_chapter.image %}
+              <div class="position-relative">
+                {% thumbnail start_chapter.image "1300x400" crop="center" as thumbnail %}
+                  <img class="img-fluid w-100" src="{{ thumbnail.url }}" alt="{{ start_chapter.image.alt }}" style="object-fit: contain;">
+                {% endthumbnail %}
+              </div>
+            {% endif %}
+            <br>
+            <div id="chapter-content-{{ start_chapter.number }}" class="chapter-2-3-notes__item">
+              <div id="summary-{{ start_chapter.number }}">
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ start_chapter.number }}</h2><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{ start_chapter.summary|safe }}</p>
+                </div>
+              </div>
+              <div id="interpretation-{{ start_chapter.number}}">
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ start_chapter.number }}</h2><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{ start_chapter.interpretation|safe }}</p>
+                </div>
+              </div>
+            </div>   
+          </div>
         </div>
       </div>
     </div>

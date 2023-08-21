@@ -3,11 +3,7 @@
 {% block title %}Поиск{% endblock %}
 {% block content %}
   <section class="chapters-nav">
-      <form class="search" action="{% url 'wiki:search' %}" method="GET">
-          <input type="hidden" name="chapter" value="{{ search_model }}">
-          <input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ query }}">
-          <button class="search__button" type="button"></button>
-      </form>
+      <div class="search"></div><br><br>
       {% include 'includes/chapters.html' %}
   </section>
   <section class="chapter chapter-2-3-notes">
@@ -115,7 +111,7 @@
                       Стр.{{comment.page_number_by_2021}}</p><br>
                 </div>
                 <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|striptags|safe}}</p>
                 </div>
                 {% if comment.image %}
                   <div class="col-md-4 mb-5">

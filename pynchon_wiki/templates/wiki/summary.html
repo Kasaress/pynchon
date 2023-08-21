@@ -1,28 +1,28 @@
 {% load thumbnail %}
 {% if chapter.image %}
-    <div class="position-relative">
-        {% thumbnail chapter.image "1300x400" crop="center" as thumbnail %}
-            <img class="img-fluid w-100" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}" style="object-fit: contain;">
-        {% endthumbnail %}
-    </div>
+  <div class="position-relative">
+    {% thumbnail chapter.image "1300x400" crop="center" as thumbnail %}
+      <img class="img-fluid w-100" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}" style="object-fit: contain;">
+    {% endthumbnail %}
+  </div>
 {% endif %}
 <br>
 <div id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
-    <div id="summary-{{ chapter.number }}">
-        <div class="chapter-2-3-notes__header">
-            <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
-        </div>
-        <div class="chapter-2-3-notes__text-content">
-            <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|safe }}</p>
-        </div>
+  <div id="summary-{{ chapter.number }}">
+    <div class="chapter-2-3-notes__header">
+      <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
     </div>
-    <div id="interpretation-{{ chapter.number}}">
-        <div class="chapter-2-3-notes__header">
-            <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
-        </div>
-        <div class="chapter-2-3-notes__text-content">
-            <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|safe }}</p>
-        </div>
+    <div class="chapter-2-3-notes__text-content">
+      <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|safe }}</p>
     </div>
+  </div>
+  <div id="interpretation-{{ chapter.number}}">
+    <div class="chapter-2-3-notes__header">
+      <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
+    </div>
+    <div class="chapter-2-3-notes__text-content">
+      <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|safe }}</p>
+    </div>
+  </div>
 </div>   
       
