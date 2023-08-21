@@ -20,7 +20,7 @@
       </a>
       <br>
       <br>
-      {% if search_model == 'characters' %}
+      {% if search_model == 'characters' and query != '' %}
         <table class="table">
           <tr class="table__row">
             <td class="table__cell">
@@ -71,7 +71,7 @@
             </tr>
           {% endfor %}
         </table>
-      {% elif search_model == 'chronology' %}
+      {% elif search_model == 'chronology' and query != '' %}
         <div class="container">
           <table class="table">
             <tr class="table__row">
@@ -100,7 +100,7 @@
             {% endfor %}
           </table>
         </div>
-      {% elif search_model == 'comments' %}
+      {% elif search_model == 'comments' and query != '' %}
         {% for result in results %}
           {% with result as comment %}
             <div id="comments-container">
@@ -111,7 +111,7 @@
                       Стр.{{comment.page_number_by_2021}}</p><br>
                 </div>
                 <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|striptags|safe}}</p>
+                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
                 </div>
                 {% if comment.image %}
                   <div class="col-md-4 mb-5">

@@ -169,3 +169,7 @@ html {
   top: -339px;
   z-index: -1;
 }
+
+.highlighted {
+  background-color: yellow;
+}

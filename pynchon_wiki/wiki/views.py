@@ -188,6 +188,7 @@ def search(request):
     results = []
     if search_model == 'comments':
         results = Comment.objects.filter(comment_text__icontains=query)
+        print(results)
         for result in results:
             result.comment_text = re.sub(
                 r'(%s)' % re.escape(query),
