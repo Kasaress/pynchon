@@ -10,7 +10,7 @@ from .models import (
 
 
 def index(request):
-    """ Главная страница книги радуга тяготения. """
+    """ Главная страница книги 'Радуга тяготения'. """
     template = 'wiki/index.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
@@ -67,6 +67,7 @@ def author(request):
 
 
 def rainbow_part1(request):
+    """ Страница со статьей. """
     template = 'wiki/chapter1.html'
     articles = Article.objects.filter(attitude='Раздел 1')
     context = {
@@ -76,6 +77,7 @@ def rainbow_part1(request):
 
 
 def rainbow_part2(request):
+    """ Страница с примечаниями. """
     template = 'wiki/chapter2.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     chapters = Chapter.objects.filter(book=book)
@@ -89,6 +91,7 @@ def rainbow_part2(request):
 
 
 def rainbow_part3(request):
+    """ Страница с комментариями к главам. """
     template = 'wiki/chapter3.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
@@ -100,6 +103,7 @@ def rainbow_part3(request):
 
 
 def rainbow_part4(request):
+    """ Страница со статьями. """
     template = 'wiki/chapter4.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     articles = Article.objects.filter(attitude='Раздел 4')
@@ -111,6 +115,7 @@ def rainbow_part4(request):
 
 
 def rainbow_part5(request):
+    """ Страница с хронологией. """
     template = 'wiki/chapter5.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
@@ -123,6 +128,7 @@ def rainbow_part5(request):
 
 
 def rainbow_part6(request):
+    """ Страница с персонажами. """
     template = 'wiki/chapter6.html'
     circles = CircleTableCharacters.objects.all()
     context = {
@@ -133,6 +139,7 @@ def rainbow_part6(request):
 
 
 def rainbow_part7(request):
+    """ Страница со статьей. """
     template = 'wiki/chapter7.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     articles = Article.objects.filter(attitude='Раздел 7')
