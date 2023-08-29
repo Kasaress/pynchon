@@ -55,9 +55,12 @@
 
 .meeting {
   max-width: 49%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
 }
 
 .meeting__topic {
@@ -114,4 +117,12 @@
   width: 100%;
   aspect-ratio: 632 / 379;
   font-size: 0;
+}
+
+#plannedMeetingsContainer {
+  display: block;
+}
+
+#pastMeetingsContainer {
+  display: none;
 }

@@ -148,3 +148,37 @@
   object-fit: contain;
   object-position: 0;
 }
+
+.modal-image {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-body {
+  background-color: rgba(0, 0, 0, 0.9);
+  max-width: 100%;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+}
+
+.chapter-3-image {
+  position: relative;
+}
+
+.img-chapter {
+  width: 100%;
+}
+
+.img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 400px;
+}

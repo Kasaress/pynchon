@@ -1,5 +1,5 @@
 import re
-from django.http import HttpResponse
+import datetime as dt
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
 
@@ -7,19 +7,6 @@ from .models import (
     Article, Book, Comment, CircleTableCharacters,
     Chapter, TableChronology, TableСharacters
 )
-
-
-def download_chronology(request):
-    """ Загрузка списка хронологии. """
-    chronology = TableChronology.objects.all()
-    content = "Дата\tСобытие\n"
-    for event in chronology:
-        content += f"{event.date}\t{event.description}\n"
-
-    response = HttpResponse(content, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename="chronology.txt"'
-
-    return response
 
 
 def index(request):
@@ -37,10 +24,15 @@ def index(request):
 def about_project(request):
     """ Страница о проекте. """
     template = 'wiki/about-project.html'
-    articles = Article.objects.filter(chapter=222)
+    today = dt.date.today()
+    planned = Article.objects.filter(attitude='Запланированные мероприятия',
+                                     date__gte=today)
+    past = Article.objects.filter(attitude='Записи встреч')
     context = {
-        'articles': articles
+        'planned': planned,
+        'past': past,
     }
+    print(today)
     return render(request, template, context)
 
 
@@ -53,7 +45,11 @@ def contacts(request):
 def creators(request):
     """ Страница с авторами. """
     template = 'wiki/creators.html'
-    return render(request, template)
+    articles = Article.objects.filter(attitude='Авторы')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context)
 
 
 def other_books(request):
@@ -65,19 +61,16 @@ def other_books(request):
 def author(request):
     """ Страница об авторе. """
     template = 'wiki/author.html'
-    articles = Article.objects.filter(chapter=777)
     context = {
-        'articles': articles
     }
     return render(request, template, context=context)
 
 
 def rainbow_part1(request):
     template = 'wiki/chapter1.html'
-    articles = Article.objects.filter(chapter=1)
+    articles = Article.objects.filter(attitude='Раздел 1')
     context = {
-        'url_name': 'rainbow_part1',
-        'articles': articles,
+        'articles': articles
     }
     return render(request, template, context=context)
 
@@ -85,10 +78,11 @@ def rainbow_part1(request):
 def rainbow_part2(request):
     template = 'wiki/chapter2.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
+    chapters = Chapter.objects.filter(book=book)
     context = {
         'book': book,
         'start_chapter': Chapter.objects.filter(book=book).get(number='1.1'),
-        'chapters': Chapter.objects.filter(book=book),
+        'chapters': chapters,
         'search_model': 'comments'
     }
     return render(request, template, context)
@@ -108,10 +102,9 @@ def rainbow_part3(request):
 def rainbow_part4(request):
     template = 'wiki/chapter4.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    articles = Article.objects.filter(chapter=4)
+    articles = Article.objects.filter(attitude='Раздел 4')
     context = {
         'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
         'articles': articles
     }
     return render(request, template, context)
@@ -120,12 +113,10 @@ def rainbow_part4(request):
 def rainbow_part5(request):
     template = 'wiki/chapter5.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
-    articles = Article.objects.filter(chapter=6)
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
         'rows': TableChronology.objects.all(),
-        'articles': articles,
         'search_model': 'chronology'
     }
     return render(request, template, context)
@@ -144,9 +135,10 @@ def rainbow_part6(request):
 def rainbow_part7(request):
     template = 'wiki/chapter7.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
+    articles = Article.objects.filter(attitude='Раздел 7')
     context = {
         'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
+        'articles': articles
     }
     return render(request, template, context)
 
@@ -188,7 +180,6 @@ def search(request):
     results = []
     if search_model == 'comments':
         results = Comment.objects.filter(comment_text__icontains=query)
-        print(results)
         for result in results:
             result.comment_text = re.sub(
                 r'(%s)' % re.escape(query),

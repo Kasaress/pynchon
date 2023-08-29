@@ -7,95 +7,95 @@
       {% include 'includes/chapters.html' %}
   </section>
   <section class="chapter chapter-2-3-notes">
-    <div>
-      <h3>Результаты поиска по запросу "{{ query }}"</h3> 
-      <a class="btn btn-outline-secondary"   href={% if search_model == 'comments' %}
-                                                      {% url 'wiki:rainbow_part2' %}	
-                                                  {% elif search_model == 'chronology' %}
-                                                      {% url 'wiki:rainbow_part5' %}
-                                                  {% elif search_model == 'characters' %}
-                                                      {% url 'wiki:rainbow_part6' %}
-                                                  {% endif %}>
+    <div class="container">
+      <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ query }}"</h3><br>
+      <a class="btn custom-button" href={% if search_model == 'comments' %}
+                                            {% url 'wiki:rainbow_part2' %}	
+                                        {% elif search_model == 'chronology' %}
+                                            {% url 'wiki:rainbow_part5' %}
+                                        {% elif search_model == 'characters' %}
+                                            {% url 'wiki:rainbow_part6' %}
+                                        {% endif %}>
           Назад
       </a>
       <br>
       <br>
       {% if search_model == 'characters' and query != '' %}
-        <table class="table">
-          <tr class="table__row">
-            <td class="table__cell">
-              <p class="table__text">Имя</p>
+        <table class="table_characters_chronology">
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Имя</p>
             </td>
-            <td class="table__cell">
-              <p class="table__text">Имя в оригинале и значение имени</p>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Имя в оригинале и значение имени</p>
             </td>
-            <td class="table__cell">
-              <p class="table__text">Характеристика</p>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Характеристика</p>
             </td>
-            <td class="table__cell">
-              <p class="table__text">Портрет</p>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Портрет</p>
             </td>
-            <td class="table__cell">
-              <p class="table__text">Группы</p>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Группы</p>
             </td>
-            <td class="table__cell">
-              <p class="table__text">Упоминания</p>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Упоминания</p>
             </td>
           </tr>
           {% for result in results %}
             {% with result as character %}
-              <tr class="table__row">
-                <td class="table__cell">
-                  <h6 class="table__text"> {{ character.name|safe }} </h6>
+              <tr class="table_characters_chronology__row">
+                <td class="table_characters_chronology__cell">
+                  <h6 class="table_characters_chronology__text"> {{ character.name|safe }} </h6>
                 </td>
-                <td class="table__cell">
-                  <p class="table__text"> {{ character.value_name }} </p>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
                 </td>
-                <td class="table__cell">
-                  <p class="table__text"> {{ character.characteristics }} </p>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
                 </td>
-                <td class="table__cell">
-                  <p class="table__text"> {{ character.portrait }} </p>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
                 </td>
-                <td class="table__cell">
-                  <p class="table__text"> {{ character.groups }} </p>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.groups }} </p>
                 </td>
-                <td class="table__cell">
-                  <p class="table__text"> {{ character.mentions }} </p>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
                 </td>
               </tr>
             {% endwith %}
           {% empty %}
             <tr>
-              <td colspan="6"><h5>По вашему запросу ничего не найдено =(</h5></td>
+              <td colspan="6"><br><h5>По вашему запросу ничего не найдено =(</h5></td>
             </tr>
           {% endfor %}
         </table>
       {% elif search_model == 'chronology' and query != '' %}
         <div class="container">
-          <table class="table">
-            <tr class="table__row">
-              <td class="table__cell">
-                <p class="table__text">Дата</p>
+          <table class="table_characters_chronology">
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Дата</p>
               </td>
-              <td class="table__cell">
-                <p class="table__text">Событие</p>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Событие</p>
               </td>
             </tr>
             {% for result in results %}
               {% with result as row %}
-                <tr class="table__row">
-                  <td class="table__cell">
-                    <p class="table__text"> {{ row.date|safe }} </p>
+                <tr class="table_characters_chronology__row">
+                  <td class="table_characters_chronology__cell">
+                    <p class="table_characters_chronology__text"> {{ row.date|safe }} </p>
                   </td>
-                  <td class="table__cell">
-                    <p class="table__text"> {{ row.description|safe }} </p>
+                  <td class="table_characters_chronology__cell">
+                    <p class="table_characters_chronology__text"> {{ row.description|safe }} </p>
                   </td>
                 </tr>
               {% endwith %}
             {% empty %}
               <tr>
-                <td colspan="2"><h5>По вашему запросу ничего не найдено =(</h5></td>
+                <td colspan="2"><br><h5>По вашему запросу ничего не найдено =(</h5></td>
               </tr>
             {% endfor %}
           </table>

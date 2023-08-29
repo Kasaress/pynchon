@@ -5,8 +5,6 @@ from . import views
 app_name = 'wiki'
 
 urlpatterns = [
-    path('download_chronology/', views.download_chronology,
-         name='download_chronology'),
     path('search/', views.search, name='search'),
     path('in_development', views.in_development, name='in_development'),
     path('comments/', views.get_comments, name='get_comments'),

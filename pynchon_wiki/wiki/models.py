@@ -8,6 +8,16 @@ from core.models import BaseModel, BaseNameModel
 
 User = get_user_model()
 
+CHOICES_CHAPTER = [
+    ('Раздел 1', 'Раздел 1'), ('Раздел 2', 'Раздел 2'),
+    ('Раздел 3', 'Раздел 3'), ('Раздел 4', 'Раздел 4'),
+    ('Раздел 5', 'Раздел 5'), ('Раздел 6', 'Раздел 6'),
+    ('Раздел 7', 'Раздел 7'), ('Авторы', 'Авторы'),
+    ('Томас Пинчон', 'Томас Пинчон'), ('Другое', 'Другое'),
+    ('Запланированные мероприятия', 'Запланированные мероприятия'),
+    ('Записи встреч', 'Записи встреч'), ('Другие книги', 'Другие книги'),
+]
+
 
 class Book(BaseNameModel):
     """ Модель книг. """
@@ -237,12 +247,28 @@ class Article(BaseNameModel):
         null=True,
         upload_to='articles/'
     )
-    chapter = models.IntegerField(
-        'Номер раздела'
+    date = models.DateField(
+        'Дата',
+        blank=True,
+        null=True
+    )
+    sort = models.PositiveSmallIntegerField(
+        'Сортировка',
+        blank=True,
+        null=True
+    )
+    attitude = models.TextField(
+        'Отношение к разделу',
+        choices=CHOICES_CHAPTER
     )
     create_at = models.DateTimeField(
         'Дата создания',
         auto_now_add=True
+    )
+    link = models.URLField(
+        verbose_name='Ссылка к статье',
+        blank=True,
+        null=True
     )
 
     class Meta:

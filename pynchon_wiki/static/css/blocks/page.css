@@ -173,3 +173,103 @@ html {
 .highlighted {
   background-color: yellow;
 }
+
+.custom-button {
+  color: black; 
+  background-color: transparent;
+  border-color: #990033;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #990033;
+  color: white;
+}
+
+.prev-chapter {
+  margin-right: 10px;
+}
+
+.next-chapter {
+  margin-left: 10px;
+}
+
+.accordion-container {
+  max-height: 850px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.accordion-container::-webkit-scrollbar {
+  display: none;
+}
+
+.comments-container {
+  max-height: 1200px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+
+.comments-container::-webkit-scrollbar {
+  display: none; 
+}
+
+
+#zoom-in-button,
+#zoom-out-button {
+    background-color: #990033;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#zoom-in-button {
+    margin-left: -50px; 
+}
+
+#zoom-out-button {
+    margin-left: 10px; 
+}
+
+#zoom-in-button:hover,
+#zoom-out-button:hover {
+    background-color: #cc0044;
+}
+
+#zoom-in-button:active,
+#zoom-out-button:active {
+    transform: scale(0.95) translateX(-50%);
+}
+
+.table_characters_chronology {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #F3F0EA;
+}
+
+.table_characters_chronology__row {
+  border-bottom: 1px solid #c7c3c3;
+  border-top: 1px solid #c7c3c3;
+}
+
+.table_characters_chronology__cell {
+  border-right: 1px solid #c7c3c3;
+  border-left: 1px solid #c7c3c3;
+  border-bottom: 1px solid #c7c3c3;
+  padding: 8px;
+}
+
+.table_characters_chronology__text {
+  text-align: center;
+}

@@ -51,30 +51,44 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    container.addEventListener('wheel', function(event) {
-        var newScale = scale - event.deltaY * 0.01;
-
-        if (newScale > 1.0) {
+    var zoomInButton = document.getElementById('zoom-in-button');
+    zoomInButton.addEventListener('click', function(event) {
+        var newScale = scale + 0.7;
+        if (newScale <= 4.5) { 
+            scale = newScale;
             isZoomed = true;
-        } else {
-            isZoomed = false;
-            translateX = 0;
-            translateY = 0;
+            updateTransform();
         }
+    });
 
-        var containerWidth = container.offsetWidth;
-        var containerHeight = container.offsetHeight;
-        var imageWidth = image.offsetWidth;
-        var imageHeight = image.offsetHeight;
-
-        var minScale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
-        scale = Math.max(minScale, newScale);
-
-        updateTransform();
-        event.preventDefault();
+    var zoomOutButton = document.getElementById('zoom-out-button');
+    zoomOutButton.addEventListener('click', function(event) {
+        var newScale = scale - 0.7;
+        if (newScale >= 0.7) { 
+            scale = newScale;
+            if (scale === 1.0) {
+                isZoomed = false;
+                translateX = 0;
+                translateY = 0;
+            } else {
+                isZoomed = true;
+            }
+            updateTransform();
+        }
     });
 
     function updateTransform() {
+        var containerWidth = container.offsetWidth;
+        var containerHeight = container.offsetHeight;
+        var imageWidth = image.offsetWidth * scale;
+        var imageHeight = image.offsetHeight * scale;
+
+        var maxX = (imageWidth - containerWidth) / 2;
+        var maxY = (imageHeight - containerHeight) / 2;
+
+        translateX = Math.max(-maxX, Math.min(maxX, translateX));
+        translateY = Math.max(-maxY, Math.min(maxY, translateY));
+
         image.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
     }
 });

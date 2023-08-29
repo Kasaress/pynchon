@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
 {% block title %}
   KEZVH
 {% endblock %}
@@ -13,32 +12,24 @@
     <div class="chapter-4-kezvh__article">
       <div class="chapter-4-kezvh__left-column">
         <h3 class="chapter-4-kezvh__name body-text-bold">Катье Боргесиус</h2>
-          <a class="chapter-4-kezvh__link" href="#">Подробнее</a>
+        <a class="chapter-4-kezvh__link" href="#">Подробнее</a>
       </div>
       {% for article in articles %}
         <div class="chapter-4-kezvh__text-content">
           <h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2>
           <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p>
           {% if article.image %}
-              <div class="col-md-4 mb-5">
-                  {% thumbnail article.image "1600x900" as thumbnail %}
-                  <div class="position-relative">
-                      <img class="w-100 modal-toggle" src="{{ thumbnail.url }}" alt="{{ article.image.alt }}" data-bs-toggle="modal"
-                          data-bs-target="#image-modal-{{ article.pk }}"
-                          style="object-fit: contain; max-height: 224px; max-width: 400px;">
+            <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
+              data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+            <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-body text-center p-0">
+                    <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
                   </div>
-                  {% endthumbnail %}
-                  <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-body text-center p-0">
-                                <img src="{{ article.image.url }}" style="width: 100%; height: auto; object-fit: contain;
-                                    margin-top: 10px; margin-bottom: 10px;" alt="{{ article.image.alt }}">
-                            </div>
-                        </div>
-                    </div>
-                  </div>
+                </div>
               </div>
+            </div>
           {% endif %}
         </div>
       {% endfor %}

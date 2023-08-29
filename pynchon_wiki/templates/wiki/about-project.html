@@ -24,7 +24,7 @@
     <div class="about-project__content">
       <div class="accordion accordion-flush sidebar" id="notesNav">
         <div class="accordion-item">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          <button  id="plannedMeetingsButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#noteNav-1" aria-expanded="false" aria-controls="noteNav-1">
             <div class="accordion-header">
               <div class="sidebar__icon"></div>
@@ -32,15 +32,15 @@
             </div>
           </button>
           <div id="noteNav-1" class="accordion-collapse collapse">
-            {% for article in articles %}
+            {% for meeting in planned %}
             <ul class="accordion-body">
-              <li><a class="sidebar__link body-text comment-link" href="#{{ article.name }}">{{article.name}}</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}} / {{meeting.date}}</a></li>
             </ul>
             {% endfor %}
           </div>
         </div>
         <div class="accordion-item">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          <button id="pastMeetingsButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#noteNav-2" aria-expanded="false" aria-controls="noteNav-2">
             <div class="accordion-header">
               <div class="sidebar__icon"></div>
@@ -48,36 +48,40 @@
             </div>
           </button>
           <div id="noteNav-2" class="accordion-collapse collapse">
-            {% for article in articles %}
+            {% for meeting in past %}
             <ul class="accordion-body">
-              <li><a class="sidebar__link body-text comment-link" href="#{{ article.name }}">{{article.name}}</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}} / {{meeting.date}}</a></li>
             </ul>
             {% endfor %}
-            {% comment %} <ul class="accordion-body">
-              <li><a class="sidebar__link body-text" href="#">Тема встречи / 21.04.2023</a></li>
-            </ul> {% endcomment %}
           </div>
         </div>
       </div>
-
-      <div class="meeting">
-        {% for article in articles %}
-        <div id="{{ article.name }}" class="meeting__header">
-          <h2 class="meeting__topic title-bold">Тема встречи</h2>
-          <p class="meeting__date body-text">{{article.name}}</p>
-        </div>
-        <p class="meeting__text">{{article.text|safe}}</p>
-
-        <!-- если запланированное -->
-        <a class="meeting__link" href="#">Регистрация</a>
-
-        <!-- если прошедшее -->
-        <div class="meeting__record">
-          <!-- видео взяла с ютуба для примера, желательно сохранить css-класс фрейма -->
-          <iframe class="meeting__iframe" src="https://www.youtube.com/embed/2rnIaQlFs4c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+      <div id="plannedMeetingsContainer" class="meeting">
+        {% for meeting in planned %}
+          <div id="{{ meeting.name }}" class="meeting__header">
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
+            <p class="meeting__date body-text">{{meeting.date}}</p>
+          </div>
+          <p class="meeting__text">{{meeting.text|safe}}</p><br>
+          <a class="meeting__link" href="#">Регистрация</a> 
+          <br><br><br>
         {% endfor %}
       </div>
+      <div id="pastMeetingsContainer" class="meeting">
+        {% for meeting in past %}
+          <div id="{{ meeting.name }}" class="meeting__header">
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
+            <p class="meeting__date body-text">{{meeting.date}}</p>
+          </div>
+          <p class="meeting__text">{{meeting.text|safe}}</p>
+          {% if meeting.links %}
+            <div class="meeting__record">
+              <iframe class="meeting__iframe" src="{{meeting.links}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
     </div>
   </section>
 {% endblock %}

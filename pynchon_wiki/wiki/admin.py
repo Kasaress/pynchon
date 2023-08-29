@@ -228,9 +228,11 @@ class TableChronologyAdmin(ImportExportModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'truncated_text', 'author', 'image')
+    list_display = (
+        'id', 'name', 'truncated_text', 'image', 'attitude', 'date'
+    )
     search_fields = ('text',)
-    list_filter = ('name', 'author')
+    list_filter = ('name', 'author', 'attitude', 'date')
 
     def truncated_text(self, obj):
         return obj.text[:100] + '...' if len(obj.text) > 100 else obj.text

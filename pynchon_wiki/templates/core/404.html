@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Проект Пинчон вики">
-  <meta name="keywords" content="Пинчон, Томас Пинчон, Радуга тяготения">
-  <meta name="author" content="">
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  <title>Пинчонвики</title>
-</head>
-<body class="page">
-  <main class="content">
-    <section class="not-found">
-      <div class="not-found__column">
-        <div class="not-found__error">
-          <h1 class="not-found__number">404</h1>
-          <h2 class="not-found__title">Страница не найдена</h2>
-        </div>
-        <p class="not-found__text title">Иногда такое случается</p>
-        <a class="not-found__link" href="{% url 'wiki:index' %}">Вернуться на главную</a>
+{% extends 'base.html' %}
+{% block  %}
+  Страница не найдена
+{% endblock  %}
+{% block content %}
+  <section class="not-found">
+    <div class="not-found__column">
+      <div class="not-found__error">
+        <h1 class="not-found__number">404</h1>
+        <h2 class="not-found__title">Страница не найдена</h2>
       </div>
-    </section>
-  </main>
-</body>
-</html>
+      <p class="not-found__text title">Иногда такое случается</p>
+      <a class="not-found__link" href="{% url 'wiki:index' %}">Вернуться на главную</a>
+    </div>
+  </section>
+{% endblock  %}

@@ -1,15 +1,40 @@
 {% load static %}
 <header class="header">
-    <a class="header__logo-link" href="{% url 'wiki:index' %}" target="_self">
-        <img class="header__logo" src="{% static 'img/logo.png' %}" alt="лого">
-    </a>
-    <ul class="header__links"> 
-        {% with request.resolver_match.view_name as view_name %}
-        <li class="header__item"><a class="header__link link body-text-l" 
-            href="{% if view_name == 'wiki:index' %}{% url 'wiki:author' %}{% else %}{% url 'wiki:index' %}{% endif %}"
-            target="_self">{% if view_name == 'wiki:index' %}ТОМАС ПИНЧОН{% else %}РАДУГА ТЯГОТЕНИЯ{% endif %}</a></li>
-        <li class="header__item"><a class="header__link link body-text-l" href="{% url 'wiki:other-books' %}" target="_self">ДРУГИЕ КНИГИ</a></li>
-        <li class="header__item"><a class="header__link link body-text-l" href="{% url 'wiki:about-project' %}" target="_self">О ПРОЕКТЕ</a></li>
-        {% endwith %}
-    </ul>
+  <a class="header__logo-link" href="{% url 'wiki:index' %}" target="_self">
+    <img class="header__logo" src="{% static 'img/logo.png' %}" alt="лого">
+  </a>
+  <ul class="header__links"> 
+    {% with request.resolver_match.view_name as view_name %}
+      <li class="header__item">
+        <a class="header__link link body-text-l" 
+          href="{% if 'wiki:rainbow_part' in view_name %}
+                  {% url 'wiki:author' %}
+                {% elif 'wiki:index' in view_name%}
+                  {% url 'wiki:author' %}
+                {% else %}
+                  {% url 'wiki:index' %}
+                {% endif %}" target="_self">
+          {% if 'wiki:rainbow_part' in view_name %}
+            ТОМАС ПИНЧОН
+          {% elif 'wiki:index' in view_name%}
+            ТОМАС ПИНЧОН
+          {% else %}
+            РАДУГА ТЯГОТЕНИЯ
+          {% endif %}
+        </a>
+      </li>
+      <li class="header__item">
+        <a class="header__link link body-text-l" 
+          href="{% url 'wiki:other-books' %}" target="_self">
+          ДРУГИЕ КНИГИ
+        </a>
+      </li>
+      <li class="header__item">
+        <a class="header__link link body-text-l"
+          href="{% url 'wiki:about-project' %}" target="_self">
+          О ПРОЕКТЕ
+        </a>
+      </li>
+    {% endwith %}
+  </ul>
 </header>

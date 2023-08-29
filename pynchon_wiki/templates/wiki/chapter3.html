@@ -39,12 +39,12 @@
         {% endfor %}
       </div>
       <div class="chapter-2-3-notes__list">
-        <div id="comments-container">
-          <div id="comments-content">
+        <div id="comments-content">
+          <div class="comments-container">
             {% if start_chapter.image %}
-              <div class="position-relative">
-                {% thumbnail start_chapter.image "1300x400" crop="center" as thumbnail %}
-                  <img class="img-fluid w-100" src="{{ thumbnail.url }}" alt="{{ start_chapter.image.alt }}" style="object-fit: contain;">
+              <div class="chapter-3-image">
+                {% thumbnail start_chapter.image "1300x400" as thumbnail %}
+                  <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ start_chapter.image.alt }}">
                 {% endthumbnail %}
               </div>
             {% endif %}
@@ -66,8 +66,12 @@
                   <p class="chapter-2-3-notes__text body-text">{{ start_chapter.interpretation|safe }}</p>
                 </div>
               </div>
-            </div>   
+            </div>
           </div>
+        </div>
+        <div class="chapter-navigation">
+          <button id="prev-chapter" class="btn custom-button prev-chapter">Предыдущая глава</button>
+          <button id="next-chapter" class="btn custom-button prev-chapter">Следующая глава</button>
         </div>
       </div>
     </div>

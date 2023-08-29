@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load user_filters %}
-{% load thumbnail %}
 {% block title %}
   Примечания
 {% endblock  %}
@@ -15,7 +14,7 @@
     <p class="chapter-2-3-notes__description body-text-bold">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и выражений, содержащие справки об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п.<br>
     Рекомендуется к прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше блуждали по просторам интернета в поисках нужной информации.</p>
     <div class="chapter-2-3-notes__content">
-      <div class="accordion accordion-flush sidebar" id="notesNav">
+      <div class="accordion accordion-flush sidebar accordion-container" id="notesNav">
         {% for chapter in chapters|sort_queryset:'number' %}
           <div class="accordion-item">
             <button class="accordion-button collapsed chapter-button" type="button"
@@ -43,39 +42,39 @@
       <div class="chapter-2-3-notes__list">
         <div id="comments-container">
           <div id="comments-content">
-            {% for comment in start_chapter.comments.all %}
-              <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
-                <div class="chapter-2-3-notes__header">
-                  <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
-                  <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+            <div class="comments-container">
+              {% for comment in start_chapter.comments.all %}
+                <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                  <div class="chapter-2-3-notes__header">
+                    <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                    <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
                       Стр.{{comment.page_number_by_2021}}</p><br>
-                </div>
-                <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
-                </div>
-                {% if comment.image %}
-                  <div class="col-md-4 mb-5">
-                    {% thumbnail comment.image "1600x900" as thumbnail %}
-                    <div class="position-relative" style="height: 224px; width: 400px;">
-                      <img class="w-100" src="{{ thumbnail.url }}" alt="{{ comment.image.alt }}" data-bs-toggle="modal"
-                        data-bs-target="#image-modal-{{ comment.pk }}"
-                        style="object-fit: contain; max-height: 100%; max-width: 100%;">
-                    </div>
-                    {% endthumbnail %}
+                  </div>
+                  <div class="chapter-2-3-notes__text-content">
+                    <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+                  </div>
+                  {% if comment.image %}
+                    <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                      data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
                     <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content">
                           <div class="modal-body text-center p-0">
-                            <img src="{{ comment.image.url }}" style="width: 100%; height: auto; object-fit: contain;
-                                margin-top: 10px; margin-bottom: 10px;" alt="{{ comment.image.alt }}">
+                            <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
+                  {% endif %}
+                </div>
+                <br>
+              {% endfor %}
+            </div>
+          </div>
+          <br><br>
+          <div class="chapter-navigation">
+            <button id="prev-chapter" class="btn custom-button prev-chapter">Предыдущая глава</button>
+            <button id="next-chapter" class="btn custom-button next-chapter">Следующая глава</button>
           </div>
         </div>
       </div>
