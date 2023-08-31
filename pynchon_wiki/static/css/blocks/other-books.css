@@ -57,7 +57,6 @@
 }
 
 .other-books__text {
-  text-indent: 25%;
   margin: 0;
   padding: 0;
 }
@@ -74,6 +73,7 @@
   margin: 0;
   border-radius: 40px;
   border: 1px solid #151515;
+  outline: 0;
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease;
 }
@@ -93,4 +93,57 @@
   background-color: #842234;
   color: #F3F0EA;
   border-color: #842234;
+}
+
+.covers-popup {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .2s, opacity .4s ease;
+}
+
+.covers-popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.covers-popup__slider {
+  width: 80%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.covers-popup__wrapper {
+  gap: 0;
+}
+
+.covers-popup__slider-photo {
+  display: block;
+  width: 622px;
+  aspect-ratio: 426 / 622;
+  object-fit: contain;
+  object-position: center;
+}
+
+.covers-popup__pagination {
+  position: static;
+}
+
+.covers-popup__pagination .swiper-pagination-bullet {
+  background: #C3C3C3;
+  opacity: 1;
+}
+
+.covers-popup__pagination .swiper-pagination-bullet-active {
+  background: #842234;
 }

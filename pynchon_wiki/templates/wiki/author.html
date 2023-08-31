@@ -69,17 +69,17 @@
     </article>
   </section>
   <section class="bio bio_type_slider">
-    <ul class="bio__slider-list">
-      <li class="bio__slider-item">
-        <img class="bio__slider-photo" src="{% static 'img/cover-v.jpg' %}" alt="обложка">
-      </li>
-      <li class="bio__slider-item">
-        <img class="bio__slider-photo" src="{% static 'img/cover-v-2.jpg' %}" alt="обложка">
-      </li>
-      <li class="bio__slider-item">
-        <img class="bio__slider-photo" src="{% static 'img/cover-v-3.jpg' %}" alt="обложка">
-      </li>
-    </ul>
+    <div class="bio__slider-container">
+      <div class="swiper bio__slider-list">
+        <div class="swiper-wrapper">
+          <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v.jpg' %}" alt="обложка">
+          <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v-2.jpg' %}" alt="обложка">
+          <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v-3.jpg' %}" alt="обложка">
+        </div>
+      </div>
+      <div class="swiper-button-next bio__slider-next-btn"></div>
+      <div class="swiper-button-prev bio__slider-prev-btn"></div>
+    </div>
   </section>
   <section class="bio bio_type_california">
     <article class="bio__article">

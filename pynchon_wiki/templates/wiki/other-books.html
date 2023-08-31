@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
   Другие книги
 {% endblock %}
@@ -39,4 +40,12 @@
       </div>
     </div>
   </section>
+  <div class="covers-popup">
+    <div class="swiper covers-popup__slider">
+      <div class="swiper-wrapper covers-popup__wrapper">
+        <img class="swiper-slide covers-popup__slider-photo" src="{{}}" alt="обложка">
+      </div>
+      <div class="swiper-pagination covers-popup__pagination"></div>
+    </div>
+  </div>
 {% endblock %}

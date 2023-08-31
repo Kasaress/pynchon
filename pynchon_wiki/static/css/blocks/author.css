@@ -1,3 +1,5 @@
+/* обложка */
+
 .pynchon-promo {
   height: calc(100vh - 83px);
   padding: 0 80px 61px;
@@ -32,6 +34,8 @@
   height: 507px;
   margin-top: 72px;
 }
+
+/* биография - общее */
 
 .bio {
   width: 100%;
@@ -157,22 +161,18 @@
   height: 427px;
 }
 
+/* -------------слайдер---------------- */
+
+.bio__slider-container {
+  position: relative;
+}
+
 .bio__slider-list {
   width: 848px;
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  gap: 16px;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.bio__slider-list::-webkit-scrollbar {
-  display: none;
 }
 
 .bio__slider-photo {
@@ -180,6 +180,24 @@
   aspect-ratio: 308 / 450;
   object-fit: cover;
 }
+
+.bio__slider-next-btn, .bio__slider-prev-btn {
+  color: #1c1b1f;
+  width: 30px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.bio__slider-next-btn {
+  left: calc(100% + 16px);
+}
+
+.bio__slider-prev-btn {
+  left: calc(-16px - 30px);
+}
+
+/* ------------------------------------ */
 
 .bio__family-img {
   width: calc((100% - 16px) / 2);

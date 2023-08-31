@@ -121,7 +121,8 @@ def rainbow_part5(request):
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'rows': TableChronology.objects.all(),
+        'start_event': TableChronology.objects.get(id=1),
+        'events': TableChronology.objects.all(),
         'search_model': 'chronology'
     }
     return render(request, template, context)

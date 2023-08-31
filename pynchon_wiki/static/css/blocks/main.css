@@ -119,7 +119,6 @@
 }
 
 .chapter-preview__title {
-  text-decoration: none;
   color: #C3C3C3;
   margin: 0;
   padding: 0;
@@ -171,6 +170,7 @@
   vertical-align: middle;
   margin-right: 20px;
 }
+
 
 .chapters__dark .chapter-preview:nth-child(1) .chapter-preview__link::before {
   background-color: #842234;

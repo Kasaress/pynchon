@@ -74,9 +74,9 @@
             <p class="meeting__date body-text">{{meeting.date}}</p>
           </div>
           <p class="meeting__text">{{meeting.text|safe}}</p>
-          {% if meeting.links %}
+          {% if meeting.link %}
             <div class="meeting__record">
-              <iframe class="meeting__iframe" src="{{meeting.links}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe class="meeting__iframe" src="{{meeting.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           {% endif %}
         {% endfor %}
