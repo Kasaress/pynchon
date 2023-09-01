@@ -103,39 +103,31 @@
       {% elif search_model == 'comments' and query != '' %}
         {% for result in results %}
           {% with result as comment %}
-            <div id="comments-container">
-              <div id="comments-content">
-                <div class="chapter-2-3-notes__header">
-                  <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
-                  <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
-                      Стр.{{comment.page_number_by_2021}}</p><br>
-                </div>
-                <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
-                </div>
-                {% if comment.image %}
-                  <div class="col-md-4 mb-5">
-                    {% thumbnail comment.image "1600x900" as thumbnail %}
-                    <div class="position-relative" style="height: 224px; width: 400px;">
-                      <img class="w-100" src="{{ thumbnail.url }}" alt="{{ comment.image.alt }}" data-bs-toggle="modal"
-                      data-bs-target="#image-modal-{{ comment.pk }}"
-                      style="object-fit: contain; max-height: 100%; max-width: 100%;">
-                    </div>
-                    {% endthumbnail %}
-                    <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered modal-xl">
-                        <div class="modal-content">
-                          <div class="modal-body text-center p-0">
-                            <img src="{{ comment.image.url }}" style="width: 100%; height: auto; object-fit: contain;
-                              margin-top: 10px; margin-bottom: 10px;" alt="{{ comment.image.alt }}">
-                          </div>
-                        </div>
+            <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+              <div class="chapter-2-3-notes__header">
+                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+                  Стр.{{comment.page_number_by_2021}}</p><br>
+              </div>
+              <div class="chapter-2-3-notes__text-content">
+                <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+              </div>
+              <br>
+              {% if comment.image %}
+                <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+                <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                      <div class="modal-body text-center p-0">
+                        <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
                       </div>
                     </div>
                   </div>
-                {% endif %}     
-              </div>
+                </div>
+              {% endif %}
             </div>
+            <br>
           {% endwith %}
         {% empty %}
           <h5>По вашему запросу ничего не найдено =(</h5>
