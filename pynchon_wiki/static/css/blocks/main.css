@@ -119,6 +119,7 @@
 }
 
 .chapter-preview__title {
+  text-decoration: none;
   color: #C3C3C3;
   margin: 0;
   padding: 0;

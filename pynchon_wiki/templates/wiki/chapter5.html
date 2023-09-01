@@ -9,13 +9,10 @@
     {% include 'includes/chapters.html' %}
     <h1 class="chapters-nav__title chapter-title">Хронология</h1>
     <br><br><br>
-    
     <section class="chronology">
-      <!-- Библиотечный слайдер -->
-      <!-- Активный в данный момент div "swiper-slide..." приобретает класс ".chronology__slide_active" -->
       <div class="chronology__slider-container">
         <div class="swiper-button-prev chronology__prev-btn"></div>
-          <div class="swiper chronology__slider">
+          <div class="swiper1 chronology__slider">
             <div class="swiper-wrapper chronology__wrapper">
               {% for event in events|sort_queryset:'sort' %} 
                 <div class="swiper-slide chronology__slide" data-id="{{ event.id }}">
@@ -30,7 +27,6 @@
         <p class="chronology__fact body-text-l" data-id="{{ event.id }}">{{ event.description }}</p>
       {% endfor %}
     </section>
-
     <section class="chronology-description">
       <h2 class="chronology-description__subtitle title">В хронологической таблице единым списком указаны три типа дат:</h2>
       <ul class="chronology-description__facts">

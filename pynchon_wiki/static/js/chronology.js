@@ -1,6 +1,6 @@
 // Настройка слайдера дат
 
-const slider = new Swiper('.swiper', {
+const slider = new Swiper('.swiper1', {
   slidesPerView: 3,
   spaceBetween: 18,
   centeredSlides: true,

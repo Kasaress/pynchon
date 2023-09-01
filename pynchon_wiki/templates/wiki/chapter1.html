@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
   Как перестать беспокоиться и начать читать роман
 {% endblock  %}
@@ -14,9 +15,34 @@
         <h2 class="chapter-1-how__subtitle body-text-bold">{{article.name}}</h2>
         <p class="chapter-1-how__text body-text">{{article.text|safe|striptags}}</p>
       </div>
+      <section class="bio bio_type_slider">
+        <div class="bio__slider-container">
+          <div class="swiper bio__slider-list">
+            <div class="swiper-wrapper">
+              <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v.jpg' %}" alt="обложка">
+              <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v-2.jpg' %}" alt="обложка">
+              <img class="swiper-slide bio__slider-photo" src="{% static 'img/cover-v-3.jpg' %}" alt="обложка">
+            </div>
+          </div>
+          <div class="swiper-button-next bio__slider-next-btn"></div>
+          <div class="swiper-button-prev bio__slider-prev-btn"></div>
+        </div>
+      </section>
     {% endfor %}
     <div class="chapter-1-how__sign">
       <p class="chapter-1-how__text body-text"><span class="chapter-1-how__sign-span">Автор статьи:</span><br>Андрей Н. И. Петров</p>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    // Настройки слайдера с обложками
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 16,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    })
+  </script>
 {% endblock %}
