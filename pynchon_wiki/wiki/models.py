@@ -55,6 +55,9 @@ class Chapter(BaseModel):
         blank=True,
         null=True
     )
+    pov = RichTextField(
+        verbose_name='POV',
+    )
     book_part = models.PositiveIntegerField(
         verbose_name='Часть книги',
         blank=True, null=True,
@@ -232,6 +235,12 @@ class TableChronology(BaseModel):
 
 class Article(BaseNameModel):
     """ Модель статей. """
+    name = models.CharField(
+        'Название',
+        max_length=255,
+        blank=True,
+        null=True
+    )
     text = RichTextField(
         'Текст статьи'
     )
@@ -272,6 +281,7 @@ class Article(BaseNameModel):
     )
 
     class Meta:
+        ordering = ('sort'),
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         db_table = 'articles'

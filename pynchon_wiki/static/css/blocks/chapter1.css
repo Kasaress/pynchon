@@ -17,6 +17,23 @@
   padding: 0;
 }
 
+.chapter-1-how__image-container {
+  text-align: right;
+  max-width: 100%;
+  overflow: hidden;
+  margin-right: 210px;
+}
+
+.chapter-1-how__image-container img {
+  width: auto;
+  height: 400px;
+}
+
+.modal-content_chapter1 img {
+  width: 100%; 
+  height: auto;
+}
+
 .chapter-1-how__subtitle-span {
   font-weight: 400;
 }

@@ -32,7 +32,6 @@ def about_project(request):
         'planned': planned,
         'past': past,
     }
-    print(today)
     return render(request, template, context)
 
 

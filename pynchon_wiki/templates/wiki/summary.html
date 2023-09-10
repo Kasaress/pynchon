@@ -10,6 +10,8 @@
   <br>
   <div id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
     <div id="summary-{{ chapter.number }}">
+      <p class="chapter-2-3-notes__text body-text">{{ chapter.pov|safe }}</p>
+      <br>
       <div class="chapter-2-3-notes__header">
         <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
       </div>
