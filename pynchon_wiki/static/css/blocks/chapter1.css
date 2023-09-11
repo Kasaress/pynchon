@@ -21,11 +21,11 @@
   text-align: right;
   max-width: 100%;
   overflow: hidden;
-  margin-right: 210px;
+  margin-right: 150px;
 }
 
 .chapter-1-how__image-container img {
-  width: auto;
+  width: 60%;
   height: 400px;
 }
 
