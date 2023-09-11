@@ -78,6 +78,22 @@ DATABASES = {
 DB_LOCAL = bool(os.getenv('DB_LOCAL', False))
 DATABASES['default'] = DATABASES['dev' if DB_LOCAL else 'production']
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+        'forcePasteAsPlainText': True,
+        'allowedContent': True,
+        'extraPlugins': 'autogrow',
+        'autoGrow_minHeight': 200,
+        'autoGrow_maxHeight': 600,
+        'autoGrow_bottomSpace': 50,
+        'enterMode': 2,
+        'shiftEnterMode': 1,
+    }
+}
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
