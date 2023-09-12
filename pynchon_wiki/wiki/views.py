@@ -60,7 +60,9 @@ def other_books(request):
 def author(request):
     """ Страница об авторе. """
     template = 'wiki/author.html'
+    articles = Article.objects.filter(attitude='Томас Пинчон')
     context = {
+        'articles': articles
     }
     return render(request, template, context=context)
 
