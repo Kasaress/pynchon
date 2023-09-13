@@ -11,30 +11,30 @@
     </div>
     <img class="pynchon-promo__img" src="{% static 'img/pynchon-art.png' %}" alt="Томас Пинчон">
   </section>
-  <section class="bio bio_type_childhood">
+  <section class="chapter chapter-1-how">
     {% for article in articles %}
-      <p class="bio__date-span">{% if article.name %}{{article.name}}{% endif %}</p>
-      <article class="bio__article">
-        <p class="bio__text body-text">{{article.text|striptags|safe|linebreaksbr}}</p><br>
-        {% if article.image %}
-          <div class="image-container">
-            <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
-              data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
-            <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                  <div class="modal-body text-center p-0">
-                    <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
-                  </div>
+      <div class="chapter-1-how__article">
+        <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{article.name}}{% endif %}</h2>
+        <p class="chapter-1-how__text body-text">{{article.text|striptags|safe|linebreaksbr}}</p>
+      </div>
+      {% if article.image %}
+        <div class="image-container">
+          <img class="author__img" src="{{article.image.url}}" alt="{{article.name}}"
+            data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+          <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+                <div class="modal-body text-center p-0">
+                  <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
                 </div>
               </div>
             </div>
           </div>
-        {% endif %}
-      </article>
+        </div>
+      {% endif %}
+      <br><br>
     {% endfor %}
   </section>
-  
   <section class="bio bio_type_slider">
     <div class="bio__slider-container">
       <div class="swiper bio__slider-list">

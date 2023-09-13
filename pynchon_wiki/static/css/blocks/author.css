@@ -218,3 +218,11 @@
     height: 35.208vw;
   }
 }
+
+.author__img {
+  display: block;
+  height: 260px;
+  object-fit: contain;
+  object-position: 0;
+  margin-left: 514px;
+}
