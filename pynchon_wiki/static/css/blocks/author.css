@@ -2,6 +2,7 @@
 
 .pynchon-promo {
   height: calc(100vh - 83px);
+  max-height: 60vw;
   padding: 0 80px 61px;
   box-sizing: border-box;
   display: flex;
@@ -44,122 +45,46 @@
   padding: 40px 80px;
   box-sizing: border-box;
   display: flex;
-}
-
-.bio_type_childhood, .bio_type_photos, .bio_type_debut, .bio_type_family {
-  justify-content: space-between;
-}
-
-.bio_type_youth, .bio_type_boeing, .bio_type_slider, .bio_type_california {
-  justify-content: flex-end;
-}
-
-.bio_type_photos {
-  padding-right: 0;
-}
-
-.bio__date {
-  margin: 0;
-  padding: 0;
-}
-
-.bio__date-span {
-  font-weight: 700;
-}
-
-.bio__fact {
-  max-width: 308px;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 160%;
-  margin: 0;
-  padding: 0;
-}
-
-.bio__fact-span {
-  font-weight: 700;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .bio__article {
-  width: 848px;
-}
-
-.bio__article_type_boeing {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
 }
 
-.bio__article-content {
-  max-width: 416px;
+.bio__article_4 {
+  justify-content: center;
 }
 
-.bio__text-columns {
+.bio__image-box {
   display: flex;
-  gap: 16px;
+  gap: 10px;
 }
 
-.bio__title {
-  margin: 0 0 40px;
-  padding: 0;
+.bio__image {
+  max-height: 260px;
+}
+
+.bio__column {
+  width: calc(50% - 15px);
 }
 
 .bio__text {
+  /* max-width: 848px; */
+  text-align: justify;
   margin: 0;
   padding: 0;
 }
 
-.bio__text_column {
-  width: calc((100% - 16px) / 2);
+.bio__text-link {
+  color: #1c1b1f;
+  text-decoration: underline;
 }
 
-.bio__gallery {
-  width: 928px;
-  list-style: none;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.bio__gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.bio__gallery-column {
-  width: 308px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 0 0 auto;
-}
-
-.bio__photo {
-  width: 100%;
-  aspect-ratio: 308 / 431;
-  object-fit: cover;
-}
-
-.bio__description {
-  color: #000;
-  text-align: center;
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 160%;
-  margin: 5px 0 0;
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-.bio__boeing-img {
-  width: 308px;
-  height: 427px;
-}
 
 /* -------------слайдер---------------- */
 
@@ -197,15 +122,6 @@
   left: calc(-16px - 30px);
 }
 
-/* ------------------------------------ */
-
-.bio__family-img {
-  width: calc((100% - 16px) / 2);
-  aspect-ratio: 416 / 450;
-  object-fit: cover;
-  margin-top: 48px;
-  flex: 0 0 auto;
-}
 
 @media screen and (min-width: 1441px) {
   .pynchon-promo__title-box {
@@ -217,12 +133,4 @@
     width: 28.889vw;
     height: 35.208vw;
   }
-}
-
-.author__img {
-  display: block;
-  height: 260px;
-  object-fit: contain;
-  object-position: 0;
-  margin-left: 514px;
 }
