@@ -56,8 +56,14 @@
   gap: 30px;
 }
 
-.bio__article_4 {
+.bio__article_center {
   justify-content: center;
+}
+
+.bio__article_column {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .bio__image-box {
@@ -67,6 +73,7 @@
 
 .bio__image {
   max-height: 260px;
+  object-fit: contain;
 }
 
 .bio__column {
@@ -78,6 +85,14 @@
   text-align: justify;
   margin: 0;
   padding: 0;
+  text-indent: 50px;
+}
+
+.bio__text li {
+  margin-left: 20px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  text-indent: 0;
 }
 
 .bio__text-link {
