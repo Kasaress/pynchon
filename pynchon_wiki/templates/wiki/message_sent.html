@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+  Письмо отправлено
+{% endblock %}
+{% block content %}
+  <section class="about-nav">
+    <ul class="about-nav__links">
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:about-project' %}">Описание</a>
+      </li>
+      <li class="about-nav__link-item">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:creators' %}">Авторы</a>
+      </li>
+      <li class="about-nav__link-item about-nav__link-item_active">
+        <a class="about-nav__link body-text-l" href="{% url 'wiki:contacts' %}">Контакты</a>
+      </li>
+    </ul>
+    <h1 class="about-nav__title chapter-title">Как с нами связаться</h1><br>
+    <h2 class="about-nav__title">Письмо отправлено. Спасибо, что написали нам, ответим в ближайшее время!</h2>
+  </section>
+{% endblock %}

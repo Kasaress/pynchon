@@ -1,8 +1,12 @@
 import re
 import datetime as dt
-from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
+from django.core.mail.message import EmailMessage
+from django.http import BadHeaderError, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
+from pynchon_wiki.settings import EMAIL_HOST_USER
+from .forms import ContactForm
 from .models import (
     Article, Book, Comment, CircleTableCharacters,
     Chapter, TableChronology, TableСharacters
@@ -36,9 +40,35 @@ def about_project(request):
 
 
 def contacts(request):
-    """ Страница с контактами. """
+    """ Страница для отправки контактной формы. """
     template = 'wiki/contacts.html'
-    return render(request, template)
+    if request.method == 'POST':
+        form = ContactForm(request.POST, request.FILES)
+        if form.is_valid():
+            subject = "pynchon.ru"
+            body = {
+                'username': form.cleaned_data['username'],
+                'email': form.cleaned_data['email'],
+                'message': form.cleaned_data['message'],
+                'file': form.cleaned_data['file']
+            }
+            msg = (f'Новое сообщение от пользователя: {body["username"]}\n'
+                   f'Email: {body["email"]}\n'
+                   f'Текст сообщения: {body["message"]}')
+            email = EmailMessage(
+                subject, msg, EMAIL_HOST_USER, [EMAIL_HOST_USER]
+            )
+            if body['file']:
+                attachment_file = body['file']
+                email.attach(attachment_file.name, attachment_file.read())
+            try:
+                email.send()
+            except BadHeaderError:
+                return HttpResponse('Найден неккоректный заголовок')
+            return render(request, template_name='wiki/message_sent.html')
+
+    form = ContactForm()
+    return render(request, template, {'form': form})
 
 
 def creators(request):
@@ -119,10 +149,12 @@ def rainbow_part5(request):
     """ Страница с хронологией. """
     template = 'wiki/chapter5.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
+    articles = Article.objects.filter(attitude='Раздел 5')
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
         'start_event': TableChronology.objects.get(id=172),
+        'articles': articles,
         'events': TableChronology.objects.all(),
         'search_model': 'chronology'
     }

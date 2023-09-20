@@ -19,13 +19,15 @@
   </section>
   <section class="contact">
     <p class="contact__text body-text">Если вы хотите сообщить нам об ошибке или неточности в тексте, пожалуйста, пишите нам об этом</p>
-    <form class="contact__form">
+    <form class="contact__form" method='POST' enctype="multipart/form-data">
+      {% csrf_token %}
       <input class="contact__input body-text" type="text" name="username" placeholder="Имя">
       <input class="contact__input body-text" type="email" name="email" placeholder="Адрес электронной почты">
       <textarea class="contact__input contact__input_textarea body-text" name="message" placeholder="Комментарий"></textarea>
       <div class="contact__actions">
-        <button class="contact__file-btn" type="button"></button>
-        <button class="contact__submit" type="button">Отправить</button>
+        <label for="file-load" class="custom-file-upload"></label>
+        <input id="file-load" class="contact__file-btn" type="file" name="file">
+        <button class="contact__submit" type="submit">Отправить</button>
       </div>
     </form>
   </section>
