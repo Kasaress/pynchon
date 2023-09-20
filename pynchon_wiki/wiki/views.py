@@ -3,7 +3,7 @@ import datetime as dt
 from django.db.models import Q
 from django.core.mail.message import EmailMessage
 from django.http import BadHeaderError, HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 
 from pynchon_wiki.settings import EMAIL_HOST_USER
 from .forms import ContactForm
