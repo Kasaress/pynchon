@@ -30,42 +30,16 @@
     <section class="chronology-description">
       <h2 class="chronology-description__subtitle title">В хронологической таблице единым списком указаны три типа дат:</h2>
       <ul class="chronology-description__facts">
-        <li class="chronology-description__fact">
-          <div class="chronology-description__fact-header">
-            <span class="chronology-description__fact-number title">1</span>
-            <h3 class="chronology-description__fact-title body-text-bold">Реальные исторические события</h3>
-          </div>
-          <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Реальные исторические
-            события, которые либо упомянуты в романе, либо, хотя и не упомянуты, но имеют существенное значение для
-            сюжета (например, день назначения А. Гитлера рейхсканцлером)</p>
-          <button class="chronology-description__fact-btn body-text" type="button"></button>
-        </li>
-        <li class="chronology-description__fact">
-          <div class="chronology-description__fact-header">
-            <span class="chronology-description__fact-number title">2</span>
-            <h3 class="chronology-description__fact-title body-text-bold">Романные события</h3>
-          </div>
-          <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Они указаны либо точной
-            датой (промежутком времени), когда текст романа позволяет ее (его) однозначно определить (например, события
-            последней главы 1 части происходят в День подарков, то есть 26 декабря 1944 года), либо приблизительным
-            промежутком времени. В последнем случае такая дата выделена курсивом, и ее погрешность составляет несколько
-            дней или недель, в зависимости от контекста. Например, Катье появилась у Бликеро осенью, в солнечный день;
-            это не могло быть ранее 8 сентября 1944 года (день первого пуска ФАУ-2 по Лондону) и позднее конца октября
-            1944 года, когда случилась упомянутое в I-14 падение ракеты на пусковую установку. Соответственно, это
-            событие отнесено на конец сентября – начало октября 1944 года</p>
-          <button class="chronology-description__fact-btn body-text" type="button">читать дальше</button>
-        </li>
-        <li class="chronology-description__fact">
-          <div class="chronology-description__fact-header">
-            <span class="chronology-description__fact-number title">3</span>
-            <h3 class="chronology-description__fact-title body-text-bold">Христианские торжества и праздники в литургические годы 1944
-              и 1945</h3>
-          </div>
-          <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">Так как их частое
-            упоминание в тексте и соотносимость романных событий с литургическим календарем не кажется случайным.<br>Для
-            создания единой картины данные типы дат в таблице специально не выделяются</p>
-          <button class="chronology-description__fact-btn body-text" type="button">читать дальше</button>
-        </li>
+        {% for article in articles %}
+          <li class="chronology-description__fact">
+            <div class="chronology-description__fact-header">
+              <span class="chronology-description__fact-number title">{{article.sort}}</span>
+              <h3 class="chronology-description__fact-title body-text-bold">{{article.name}}</h3>
+            </div>
+            <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">{{article.text|striptags|safe|linebreaksbr}}</p>
+            <button class="chronology-description__fact-btn body-text" type="button"></button>
+          </li>
+        {% endfor %}
       </ul>
     </section>
   </section>
