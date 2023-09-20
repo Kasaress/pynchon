@@ -169,6 +169,11 @@
   } */
 }
 
+.help_text {
+  margin-top: -25px;
+  margin-left: 10px;
+}
+
 .table_characters_chronology {
   border-collapse: collapse;
   width: 100%;
