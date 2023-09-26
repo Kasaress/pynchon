@@ -45,12 +45,15 @@ class ChapterResource(resources.ModelResource):
 
     class Meta:
         model = Chapter
-        exclude = ('image', 'summary', 'interpretation')
+        exclude = ('image',)
         fields = (
             'id',
             'number',
             'description',
-            'book_part'
+            'pov',
+            'book_part',
+            'summary',
+            'interpretation'
         )
 
 
