@@ -146,6 +146,7 @@ class CommentResource(resources.ModelResource):
             'page_number_by_2021',
             'name',
             'comment_text',
+            'links'
             'image',
             'sort',
         )
