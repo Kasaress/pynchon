@@ -153,7 +153,7 @@ def rainbow_part5(request):
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'start_event': TableChronology.objects.get(id=172),
+        'start_event': TableChronology.objects.get(id=521),
         'articles': articles,
         'events': TableChronology.objects.all(),
         'search_model': 'chronology'
