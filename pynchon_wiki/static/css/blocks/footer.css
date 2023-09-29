@@ -1,12 +1,12 @@
 .footer {
-  padding: 0 80px;
+  padding: 0 80px 40px;
   box-sizing: border-box;
 }
 
 .footer__container {
-  display: flex;
-  align-items: center;
-  padding: 52px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 40px 0 24px;
   box-sizing: border-box;
   border-top: 1px solid #414141;
 }
@@ -26,4 +26,12 @@
 
 .footer__link:hover {
   border-bottom: 1px solid #1B1B1B;
+}
+
+.footer__text {
+  max-width: 43%;
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  color: #C3C3C3;
 }

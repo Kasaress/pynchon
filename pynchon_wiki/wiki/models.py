@@ -222,6 +222,11 @@ class TableChronology(BaseModel):
         max_length=10,
         verbose_name='Сортировка'
     )
+    event_type = models.PositiveSmallIntegerField(
+        'Тип события',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         verbose_name = 'Строка таблицы хронологии'

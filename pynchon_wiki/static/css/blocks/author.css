@@ -1,4 +1,4 @@
-/* обложка */
+/* обложка */ 
 
 .pynchon-promo {
   height: calc(100vh - 83px);
@@ -34,6 +34,7 @@
   width: 416px;
   height: 507px;
   margin-top: 72px;
+  mix-blend-mode: darken;
 }
 
 /* биография - общее */
@@ -42,99 +43,116 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 80px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  align-items: center;
 }
 
 .bio__article {
   width: 100%;
   display: flex;
-  align-items: center;
-  gap: 30px;
+  padding: 40px 80px;
+  box-sizing: border-box;
+  gap: 16px;
+  align-items: stretch;
 }
 
-.bio__article_center {
-  justify-content: center;
-}
-
-.bio__article_column {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.bio__image-box {
+.bio__article_right {
   display: flex;
-  gap: 10px;
+  justify-content: flex-end;
 }
 
-.bio__image {
-  max-height: 260px;
-  object-fit: contain;
+.bio__gallery {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
 }
 
-.bio__column {
-  width: calc(50% - 15px);
+.bio__image_high {
+  width: calc((100% - 48px) / 4);
+  max-height: 450px;
+  object-fit: cover;
+}
+
+.bio__image_high-l {
+  max-height: none;
+}
+
+.bio__image_wide {
+  width: calc((100% - 16px) / 2);
+  height: min-content;
+}
+
+.bio__image_center {
+  align-self: center;
+}
+
+.bio__image_family {
+  width: calc((100% - 16px) / 2);
+  object-fit: cover;
 }
 
 .bio__text {
-  /* max-width: 848px; */
-  text-align: justify;
+  width: calc((100% - 16px) / 2);
   margin: 0;
   padding: 0;
-  text-indent: 50px;
 }
 
-.bio__text li {
-  margin-left: 20px;
-  padding-left: 10px;
-  box-sizing: border-box;
-  text-indent: 0;
+.bio__text_center {
+  text-align: center;
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
 }
 
-.bio__text-link {
+.bio__text_narrow {
+  width: calc((100% - 48px) / 4);
+}
+
+.bio__text p {
+  margin: 0 0 .5rem;
+  padding: 0;
+}
+
+.bio__text span {
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 120%;
+}
+
+.bio__text ul {
+  margin: 0 0 .5rem;
+  padding: 0 0 0 20px;
+}
+
+.bio__text a {
   color: #1c1b1f;
   text-decoration: underline;
 }
 
-
-/* -------------слайдер---------------- */
-
-.bio__slider-container {
-  position: relative;
+.bio__fact-grid {
+  /* width: calc((100% - 16px) / 2); */
+  width: 416px;
+  display: grid;
+  grid-template-rows: 210px 66px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
 }
 
-.bio__slider-list {
-  width: 848px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-.bio__slider-photo {
-  width: 308px;
-  aspect-ratio: 308 / 450;
+.bio__fact-item {
+  width: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
-.bio__slider-next-btn, .bio__slider-prev-btn {
-  color: #1c1b1f;
-  width: 30px;
-  height: 50px;
-  margin: 0;
-  padding: 0;
+.bio__fact-item_type_simpson-img {
+  height: 100%;
+  grid-column: 1/5;
 }
 
-.bio__slider-next-btn {
-  left: calc(100% + 16px);
-}
-
-.bio__slider-prev-btn {
-  left: calc(-16px - 30px);
+.bio__fact-item_type_simpson-video {
+  height: 100%;
 }
 
 

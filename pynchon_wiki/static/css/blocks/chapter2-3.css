@@ -182,3 +182,14 @@
   max-width: 100%;
   max-height: 400px;
 }
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  background-color: #F3F0EA;
+  color: #000;
+  font-size: 1.3rem;
+  opacity: 0.8;
+}

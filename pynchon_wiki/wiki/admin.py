@@ -206,15 +206,15 @@ class TableChronologyResource(resources.ModelResource):
 
     class Meta:
         model = TableChronology
-        exclude = ('id', 'created_at', 'is_active', 'deleted_at')
-        import_id_fields = ('sort', 'date', 'description')
+        exclude = ('created_at', 'is_active', 'deleted_at')
+        fields = ('id', 'sort', 'date', 'description', 'event_type')
 
 
 @admin.register(TableChronology)
 class TableChronologyAdmin(ImportExportModelAdmin):
     resource_classes = [TableChronologyResource]
-    list_display = ('pk', 'created_at', 'description', 'sort')
-    search_fields = ('created_at', 'description', 'sort')
+    list_display = ('pk', 'created_at', 'description', 'sort', 'event_type')
+    search_fields = ('created_at', 'description', 'sort', 'event_type')
     readonly_fields = ('created_at',)
 
     fieldsets = (
@@ -224,7 +224,7 @@ class TableChronologyAdmin(ImportExportModelAdmin):
         }),
         ('Описание', {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('date', 'sort', 'description',)
+            'fields': ('date', 'sort', 'description', 'event_type')
         }),
     )
 

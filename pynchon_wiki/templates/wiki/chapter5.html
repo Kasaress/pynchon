@@ -43,6 +43,34 @@
         {% endfor %}
       </ul>
     </section>
+      <div class="container">
+        <table class="table_characters_chronology">
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Дата </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Событие </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Тип </p>
+            </td>
+          </tr> 
+          {% for event in events %}
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <h6 class="table_characters_chronology__text"> {{ event.date }} </h6>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ event.description }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ event.event_type }} </p>
+              </td>
+            </tr>
+          {% endfor %} 
+        </table> 
+      </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
