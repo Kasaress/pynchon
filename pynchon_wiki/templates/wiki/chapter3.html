@@ -12,7 +12,7 @@
   </section>
   <section class="chapter chapter-2-3-notes">
     <div class="chapter-2-3-notes__content">
-      <div class="accordion accordion-flush sidebar" id="notesNav">
+      <div class="accordion accordion-flush sidebar accordion-container" id="notesNav">
         {% for chapter in chapters|sort_queryset:'number' %}
           <div class="accordion-item">
             <button class="accordion-button collapsed chapter-button" type="button"
