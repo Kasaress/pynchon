@@ -9,30 +9,84 @@
     {% include 'includes/chapters.html' %}
     <h1 class="chapters-nav__title chapter-title">Как перестать беспокоиться и начать читать роман</h1>
   </section>
-  <section class="chapter chapter-1-how">
-    {% for article in articles %}
-      <div class="chapter-1-how__article">
-        <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{article.name}}{% endif %}</h2>
-        <p class="chapter-1-how__text body-text">{{article.text|striptags|safe|linebreaksbr}}</p>
-      </div>
-      {% if article.image %}
-        <div class="chapter-1-how__image-container">
-          <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"
+  <section class="chapter chapter-4-kezvh">
+    <div class="chapter-4-kezvh__article">
+      <div class="chapter-4-kezvh__left-column"></div>
+      {% comment %} <div class="chapter-4-kezvh__text-content">
+        <h1 class="chapter-4-kezvh__title title-bold">Теперь все вместе: "По небу раскатился вой". Я расскажу, как перестать беспокоиться и начать читать "Радугу тяготения", зачем читателю 900 страниц хитроумных повествовательных техник, завернутых в слои отсылок к реалиям 40-х, и что делать, когда после прочтения роман оказался еще менее понятным, чем до. 
+          Если начинать с конца, то у вас читательского опыта такого не бывало раньше, даже если эту книгу есть с чем сравнить....</h1>
+        <a class='help_text' href="{% url "wiki:article1" %}">читать далее</a>
+        <h1 class="chapter-4-kezvh__title title-bold">Многие слышали про великого и ужасного Томаса Пинчона и его «Радугу Тяготения» - самый сложный роман всех времен и народов. На самом деле, книг с такой характеристикой можно сходу набрать около десятка, так что, это, скорее, литературная подгруппа, а не одно-единственное произведение....</h1>  
+        <a class='help_text' href="{% url "wiki:article2" %}">читать далее</a>
+        {% for article in articles %}
+          <h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2>
+          <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p>
+          {% if article.image %}
+            <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
               data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
-          <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-              <div class="modal-content_chapter1">
-                <div class="modal-body text-center p-0">
-                  <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+            <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-body text-center p-0">
+                    <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    <div class="chapter-1-how__sign">
-      <p class="chapter-1-how__text body-text"><span class="chapter-1-how__sign-span">Автор статьи:</span><br>Андрей Н. И. Петров</p>
+          {% endif %}
+        {% endfor %}  
+      </div> {% endcomment %}
+      <div class="chapter-4-kezvh__text-content">
+        <h1 class="chapter-4-kezvh__title title-bold">Теперь все вместе: "По небу раскатился вой". Я расскажу, как перестать беспокоиться и начать читать "Радугу тяготения", зачем читателю 900 страниц хитроумных повествовательных техник, завернутых в слои отсылок к реалиям 40-х, и что делать, когда после прочтения роман оказался еще менее понятным, чем до. 
+          Если начинать с конца, то у вас читательского опыта такого не бывало раньше, даже если эту книгу есть с чем сравнить....</h1>
+        <a class="chronology-description__fact-btn body-text" href="{% url "wiki:article1" %}">читать далее</a>
+        <h1 class="chapter-4-kezvh__title title-bold">Многие слышали про великого и ужасного Томаса Пинчона и его «Радугу Тяготения» - самый сложный роман всех времен и народов. На самом деле, книг с такой характеристикой можно сходу набрать около десятка, так что, это, скорее, литературная подгруппа, а не одно-единственное произведение....</h1>  
+        <a class="chronology-description__fact-btn body-text" href="{% url "wiki:article2" %}">читать далее</a>
+        {% for article in articles %}
+          <h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2>
+          <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">{{article.text|striptags|safe}}</p>
+          {% if article.image %}
+            <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
+              data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+            <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-body text-center p-0">
+                    <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          <button class="chronology-description__fact-btn body-text" type="button">читать далее</button>
+        {% endfor %}
+      </div>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+  // Управление разворачиванием и сворачиванием текста
+  const facts = document.querySelectorAll('.chapter-4-kezvh__text-content');
+
+  facts.forEach((fact) => {
+    const text = fact.querySelector('.chronology-description__fact-text');
+    const button = fact.querySelector('.chronology-description__fact-btn');
+    const moreText = 'читать дальше';
+    const collapseText = 'свернуть';
+
+    if (text.scrollHeight > 130) {
+      button.style.display = 'block';
+    }
+
+    button.addEventListener('click', () => {
+      if (button.textContent !== collapseText) {
+        text.style.height = 'auto';
+        button.textContent = collapseText;
+      } else if (button.textContent === collapseText) {
+        text.style.height = '130px';
+        button.textContent = moreText;
+      }
+    })
+  })
+</script>
 {% endblock %}
