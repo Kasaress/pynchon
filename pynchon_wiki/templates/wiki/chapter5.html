@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load user_filters %}
 {% block title %}
   Хронология
@@ -56,7 +57,7 @@
                 <p class="table_characters_chronology__text"> Тип </p>
             </td>
           </tr> 
-          {% for event in events %}
+          {% for event in events|sort_queryset:'sort' %}
             <tr class="table_characters_chronology__row">
               <td class="table_characters_chronology__cell">
                 <h6 class="table_characters_chronology__text"> {{ event.date }} </h6>

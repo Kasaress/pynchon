@@ -29,8 +29,10 @@ def about_project(request):
     """ Страница о проекте. """
     template = 'wiki/about-project.html'
     today = dt.date.today()
-    planned = Article.objects.filter(attitude='Запланированные мероприятия',
-                                     date__gte=today)
+    planned = Article.objects.filter(
+        attitude='Запланированные мероприятия',
+        date__gte=today
+    )
     past = Article.objects.filter(attitude='Записи встреч')
     context = {
         'planned': planned,
@@ -52,9 +54,11 @@ def contacts(request):
                 'message': form.cleaned_data['message'],
                 'file': form.cleaned_data['file']
             }
-            msg = (f'Новое сообщение от пользователя: {body["username"]}\n'
-                   f'Email: {body["email"]}\n'
-                   f'Текст сообщения: {body["message"]}')
+            msg = (
+                f'Новое сообщение от пользователя: {body["username"]}\n'
+                f'Email: {body["email"]}\n'
+                f'Текст сообщения: {body["message"]}'
+            )
             email = EmailMessage(
                 subject, msg, EMAIL_HOST_USER, [EMAIL_HOST_USER]
             )
@@ -107,6 +111,26 @@ def rainbow_part1(request):
     return render(request, template, context=context)
 
 
+def article1(request):
+    """ Страница со статьей. """
+    template = 'wiki/article1.html'
+    articles = Article.objects.filter(attitude='Другое')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
+def article2(request):
+    """ Страница со статьей. """
+    template = 'wiki/article2.html'
+    articles = Article.objects.filter(attitude='Раздел 2')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
 def rainbow_part2(request):
     """ Страница с примечаниями. """
     template = 'wiki/chapter2.html'
@@ -153,7 +177,7 @@ def rainbow_part5(request):
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
-        'start_event': TableChronology.objects.get(id=521),
+        'start_event': TableChronology.objects.get(id=877),
         'articles': articles,
         'events': TableChronology.objects.all(),
         'search_model': 'chronology'

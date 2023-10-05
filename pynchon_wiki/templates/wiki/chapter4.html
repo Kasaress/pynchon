@@ -14,8 +14,8 @@
         <h3 class="chapter-4-kezvh__name body-text-bold">Катье Боргесиус</h2>
         <a class="chapter-4-kezvh__link" href="#">Подробнее</a>
       </div>
-      {% for article in articles %}
-        <div class="chapter-4-kezvh__text-content">
+      <div class="chapter-4-kezvh__text-content">
+        {% for article in articles %}
           <h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2>
           <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p>
           {% if article.image %}
@@ -31,8 +31,8 @@
               </div>
             </div>
           {% endif %}
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </section>
 {% endblock %}
