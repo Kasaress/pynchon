@@ -265,3 +265,15 @@ html {
 #zoom-out-button:active {
     transform: scale(0.95) translateX(-50%);
 }
+
+.article_transform {
+  height: 130px;
+  overflow: hidden;
+}
+
+.help_text {
+  color: #c3c3c3;
+  text-decoration: none;
+  align-self: flex-end;
+}
+

@@ -1,4 +1,3 @@
-// Скролл вверх
 document.getElementById('scrollToTopLink').addEventListener('click', function(event) {
   event.preventDefault();
   scrollToTop();
@@ -10,7 +9,6 @@ function scrollToTop() {
   });
 }
 
-// Выделение активных ссылок в слайдере
 function setActiveLink(links, activeClass) {
   links.forEach(link => {
     link.addEventListener('click', event => {
@@ -26,7 +24,6 @@ setActiveLink(commentLinks, 'sidebar__link_active');
 const bookLinks = document.querySelectorAll('.book-link');
 setActiveLink(bookLinks, 'other-books__book-link_active');
 
-// Получение динамического контента для вывода комментариев и описания глав
 document.addEventListener("DOMContentLoaded", function () {
   var buttons = document.querySelectorAll('.chapter-button');
   var contentContainer = document.getElementById('comments-content');
@@ -36,15 +33,32 @@ document.addEventListener("DOMContentLoaded", function () {
   var currentChapterIndex = 0;
   var chapters = Array.from(buttons).map(button => button.dataset.chapterId);
 
+  loadChapter(chapters[0], buttons[0].getAttribute('data-view-page'));
+
   function loadChapter(chapterId, viewPage) {
-    fetch(`/${viewPage}?chapter_id=${chapterId}`)
-      .then(response => response.text())
-      .then(content => {
-        contentContainer.innerHTML = content;
-        currentChapterIndex = chapters.indexOf(chapterId);
+    return new Promise(function (resolve, reject) {
+      if (currentChapterIndex !== chapters.indexOf(chapterId)) {
+        fetch(`/${viewPage}?chapter_id=${chapterId}`)
+          .then(response => response.text())
+          .then(content => {
+            contentContainer.innerHTML = content;
+            buttons[currentChapterIndex].classList.remove('active');
+            buttons[chapters.indexOf(chapterId)].classList.add('active');
+            currentChapterIndex = chapters.indexOf(chapterId);
+            updateNavigationButtons();
+            var chapterButton = document.querySelector(`.chapter-button[data-chapter-id="${chapterId}"]`);
+            chapterButton.scrollIntoView({ behavior: "smooth", block: "start" });
+            resolve();
+          })
+          .catch(error => {
+            console.error("Ошибка при загрузке контента:", error);
+            reject(error);
+          });
+      } else {
         updateNavigationButtons();
-      })
-      .catch(error => console.error("Ошибка при загрузке контента:", error));
+        resolve();
+      }
+    });
   }
 
   function updateNavigationButtons() {
@@ -52,33 +66,55 @@ document.addEventListener("DOMContentLoaded", function () {
     nextButton.disabled = currentChapterIndex === chapters.length - 1;
   }
 
-  buttons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      var selectedChapterId = button.dataset.chapterId;
-      var selectedViewPage = button.getAttribute('data-view-page');
-      loadChapter(selectedChapterId, selectedViewPage);
+  function scrollToChapter(chapterId) {
+    return new Promise(function (resolve) {
+      var notesContent = document.querySelector('.chapter-2-3-notes__content');
+      var chapterButton = document.querySelector(`.chapter-button[data-chapter-id="${chapterId}"]`);
+  
+      var buttonOffsetTop = chapterButton.offsetTop;
+      var containerScrollTop = notesContent.scrollTop;
+      var targetScrollTop = buttonOffsetTop - containerScrollTop;
+  
+      requestAnimationFrame(function () {
+        notesContent.scrollTo({
+          top: targetScrollTop,
+          behavior: 'smooth'
+        });
+        resolve();
+      });
     });
-  });
+  }
 
-  prevButton.addEventListener('click', function () {
-    if (currentChapterIndex > 0) {
-      var prevChapterId = chapters[currentChapterIndex - 1];
-      var prevViewPage = buttons[currentChapterIndex - 1].getAttribute('data-view-page');
-      loadChapter(prevChapterId, prevViewPage);
-    }
-  });
+  buttons.forEach(function (button) {
+  button.addEventListener('click', function () {
+    var selectedChapterId = button.dataset.chapterId;
+    var selectedViewPage = button.getAttribute('data-view-page');
 
-  nextButton.addEventListener('click', function () {
-    if (currentChapterIndex < chapters.length - 1) {
-      var nextChapterId = chapters[currentChapterIndex + 1];
-      var nextViewPage = buttons[currentChapterIndex + 1].getAttribute('data-view-page');
-      loadChapter(nextChapterId, nextViewPage);
-    }
+    loadChapter(selectedChapterId, selectedViewPage)
+      .then(() => scrollToChapter(selectedChapterId));
   });
 });
 
+prevButton.addEventListener('click', function () {
+  if (currentChapterIndex > 0) {
+    var prevChapterId = chapters[currentChapterIndex - 1];
+    var prevViewPage = buttons[currentChapterIndex - 1].getAttribute('data-view-page');
 
-// Автоматическое закрытие вкладок с названием глав в аккордеоне, при нажатии на новую
+    loadChapter(prevChapterId, prevViewPage)
+      .then(() => scrollToChapter(prevChapterId));
+  }
+});
+
+nextButton.addEventListener('click', function () {
+  if (currentChapterIndex < chapters.length - 1) {
+    var nextChapterId = chapters[currentChapterIndex + 1];
+    var nextViewPage = buttons[currentChapterIndex + 1].getAttribute('data-view-page');
+
+    loadChapter(nextChapterId, nextViewPage)
+      .then(() => scrollToChapter(nextChapterId));
+  }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   const accordionButtons = document.querySelectorAll('.accordion-button');
   accordionButtons.forEach(button => {
@@ -90,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+});
+
+document.getElementById('scrollToTopLink').addEventListener('click', function(event) {
+  event.preventDefault();
+  scrollToTop();
 });
 
 // Обработчики клика по кнопкам "Мероприятий"
@@ -105,4 +146,5 @@ plannedMeetingsButton.addEventListener('click', function () {
 pastMeetingsButton.addEventListener('click', function () {
   plannedMeetingsContainer.style.display = 'none';
   pastMeetingsContainer.style.display = 'block';
+});
 });
