@@ -251,6 +251,12 @@ class Article(BaseNameModel):
     text = RichTextField(
         'Текст статьи'
     )
+    author_article = models.CharField(
+        'Автор статьи',
+        max_length=50,
+        blank=True,
+        null=True
+    )
     author = models.ForeignKey(
         User,
         verbose_name='Автор статьи',
