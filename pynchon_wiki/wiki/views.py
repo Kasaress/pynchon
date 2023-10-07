@@ -114,7 +114,7 @@ def rainbow_part1(request):
 def article1(request):
     """ Страница со статьей. """
     template = 'wiki/article1.html'
-    articles = Article.objects.filter(attitude='Другое')
+    articles = Article.objects.filter(attitude='Раздел 1 (статья 1)')
     context = {
         'articles': articles
     }
@@ -124,7 +124,7 @@ def article1(request):
 def article2(request):
     """ Страница со статьей. """
     template = 'wiki/article2.html'
-    articles = Article.objects.filter(attitude='Раздел 2')
+    articles = Article.objects.filter(attitude='Раздел 1 (статья 2)')
     context = {
         'articles': articles
     }
