@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var currentChapterIndex = 0;
   var chapters = Array.from(buttons).map(button => button.dataset.chapterId);
 
-  loadChapter(chapters[0], buttons[0].getAttribute('data-view-page'));
+  var pageKey = window.location.pathname;
+  var savedChapterId = localStorage.getItem('selectedChapterId_' + pageKey);
+  if (savedChapterId && chapters.indexOf(savedChapterId) !== -1) {
+    loadChapter(savedChapterId, buttons[chapters.indexOf(savedChapterId)].getAttribute('data-view-page'))
+      .then(() => scrollToChapter(savedChapterId));
+  } else {
+    loadChapter(chapters[0], buttons[0].getAttribute('data-view-page'));
+  }
 
   function loadChapter(chapterId, viewPage) {
     return new Promise(function (resolve, reject) {
@@ -41,13 +48,14 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`/${viewPage}?chapter_id=${chapterId}`)
           .then(response => response.text())
           .then(content => {
+            localStorage.setItem('selectedChapterId_' + pageKey, chapterId);
             contentContainer.innerHTML = content;
             buttons[currentChapterIndex].classList.remove('active');
             buttons[chapters.indexOf(chapterId)].classList.add('active');
             currentChapterIndex = chapters.indexOf(chapterId);
             updateNavigationButtons();
             var chapterButton = document.querySelector(`.chapter-button[data-chapter-id="${chapterId}"]`);
-            chapterButton.scrollIntoView({ behavior: "smooth", block: "start" });
+            chapterButton.scrollIntoView({ behavior: "smooth", block: "start" });           
             resolve();
           })
           .catch(error => {
@@ -70,11 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
     return new Promise(function (resolve) {
       var notesContent = document.querySelector('.chapter-2-3-notes__content');
       var chapterButton = document.querySelector(`.chapter-button[data-chapter-id="${chapterId}"]`);
-  
+
       var buttonOffsetTop = chapterButton.offsetTop;
       var containerScrollTop = notesContent.scrollTop;
       var targetScrollTop = buttonOffsetTop - containerScrollTop;
-  
+
       requestAnimationFrame(function () {
         notesContent.scrollTo({
           top: targetScrollTop,
@@ -86,33 +94,34 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   buttons.forEach(function (button) {
-  button.addEventListener('click', function () {
-    var selectedChapterId = button.dataset.chapterId;
-    var selectedViewPage = button.getAttribute('data-view-page');
+    button.addEventListener('click', function () {
+      var selectedChapterId = button.dataset.chapterId;
+      var selectedViewPage = button.getAttribute('data-view-page');
 
-    loadChapter(selectedChapterId, selectedViewPage)
-      .then(() => scrollToChapter(selectedChapterId));
+      loadChapter(selectedChapterId, selectedViewPage)
+        .then(() => scrollToChapter(selectedChapterId));
+    });
   });
-});
 
-prevButton.addEventListener('click', function () {
-  if (currentChapterIndex > 0) {
-    var prevChapterId = chapters[currentChapterIndex - 1];
-    var prevViewPage = buttons[currentChapterIndex - 1].getAttribute('data-view-page');
+  prevButton.addEventListener('click', function () {
+    if (currentChapterIndex > 0) {
+      var prevChapterId = chapters[currentChapterIndex - 1];
+      var prevViewPage = buttons[currentChapterIndex - 1].getAttribute('data-view-page');
 
-    loadChapter(prevChapterId, prevViewPage)
-      .then(() => scrollToChapter(prevChapterId));
-  }
-});
+      loadChapter(prevChapterId, prevViewPage)
+        .then(() => scrollToChapter(prevChapterId));
+    }
+  });
 
-nextButton.addEventListener('click', function () {
-  if (currentChapterIndex < chapters.length - 1) {
-    var nextChapterId = chapters[currentChapterIndex + 1];
-    var nextViewPage = buttons[currentChapterIndex + 1].getAttribute('data-view-page');
+  nextButton.addEventListener('click', function () {
+    if (currentChapterIndex < chapters.length - 1) {
+      var nextChapterId = chapters[currentChapterIndex + 1];
+      var nextViewPage = buttons[currentChapterIndex + 1].getAttribute('data-view-page');
 
-    loadChapter(nextChapterId, nextViewPage)
-      .then(() => scrollToChapter(nextChapterId));
-  }
+      loadChapter(nextChapterId, nextViewPage)
+        .then(() => scrollToChapter(nextChapterId));
+    }
+  });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -147,4 +156,4 @@ pastMeetingsButton.addEventListener('click', function () {
   plannedMeetingsContainer.style.display = 'none';
   pastMeetingsContainer.style.display = 'block';
 });
-});
+

@@ -80,7 +80,7 @@
 
 .bio__image_wide {
   width: calc((100% - 16px) / 2);
-  height: min-content;
+  object-fit: contain;
 }
 
 .bio__image_center {

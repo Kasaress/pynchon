@@ -277,3 +277,8 @@ html {
   align-self: flex-end;
 }
 
+.article-content {
+  overflow: hidden;
+  height: 130px;
+  transition: height 0.3s ease;
+}

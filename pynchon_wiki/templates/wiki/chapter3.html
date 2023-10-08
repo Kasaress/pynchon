@@ -41,31 +41,31 @@
       <div class="chapter-2-3-notes__list">
         <div id="comments-content">
           <div class="comments-container">
-            {% if start_chapter.image %}
+            {% if chapters.first.image %}
               <div class="chapter-3-image">
-                {% thumbnail start_chapter.image "1300x400" as thumbnail %}
-                  <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ start_chapter.image.alt }}">
+                {% thumbnail chapters.first.image "1300x400" as thumbnail %}
+                  <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapters.first.image.alt }}">
                 {% endthumbnail %}
               </div>
             {% endif %}
             <br>
-            <div id="chapter-content-{{ start_chapter.number }}" class="chapter-2-3-notes__item">
-              <div id="summary-{{ start_chapter.number }}">
-                <p class="chapter-2-3-notes__text body-text">{{ start_chapter.pov|safe }}</p>
+            <div id="chapter-content-{{ chapters.first.number }}" class="chapter-2-3-notes__item">
+              <div id="summary-{{ chapters.first.number }}">
+                <p class="chapter-2-3-notes__text body-text">{{ chapters.first.pov|safe }}</p>
                 <br>
                 <div class="chapter-2-3-notes__header">
-                  <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ start_chapter.number }}</h2><br>
+                  <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapters.first.number }}</h2><br>
                 </div>
                 <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{ start_chapter.summary|safe }}</p>
+                  <p class="chapter-2-3-notes__text body-text">{{ chapters.first.summary|safe }}</p>
                 </div>
               </div>
-              <div id="interpretation-{{ start_chapter.number}}">
+              <div id="interpretation-{{ chapters.first.number}}">
                 <div class="chapter-2-3-notes__header">
-                  <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ start_chapter.number }}</h2><br>
+                  <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapters.first.number }}</h2><br>
                 </div>
                 <div class="chapter-2-3-notes__text-content">
-                  <p class="chapter-2-3-notes__text body-text">{{ start_chapter.interpretation|safe }}</p>
+                  <p class="chapter-2-3-notes__text body-text">{{ chapters.first.interpretation|safe }}</p>
                 </div>
               </div>
             </div>

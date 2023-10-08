@@ -43,7 +43,7 @@
         <div id="comments-container">
           <div id="comments-content">
             <div class="comments-container">
-              {% for comment in start_chapter.comments.all %}
+              {% for comment in chapters.first.comments.all %}
                 <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
                   <div class="chapter-2-3-notes__header">
                     <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>

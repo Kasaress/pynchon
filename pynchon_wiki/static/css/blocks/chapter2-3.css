@@ -7,6 +7,11 @@
   position: relative;
 }
 
+.chapter-2-3-notes__text a {
+  color: #1c1b1f;
+  text-decoration: underline;
+}
+
 .chapter-2-3-notes__description {
   max-width: 631px;
   padding: 0;
