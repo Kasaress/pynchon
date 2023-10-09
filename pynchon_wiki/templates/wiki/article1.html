@@ -13,7 +13,7 @@
     {% for article in articles %}
       <div class="chapter-1-how__article">
         <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{article.name}}{% endif %}</h2>
-        <p class="chapter-1-how__text body-text">{{article.text|safe}}</p>
+        <p class="chapter-1-how__text body-text">{{article.text|safe|linebreaks}}</p>
       </div>
       {% if article.image %}
         <div class="chapter-1-how__image-container">
