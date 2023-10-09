@@ -195,3 +195,8 @@
 .table_characters_chronology__text {
   text-align: center;
 }
+
+.chronology-description__subtitle a{
+  color: #1c1b1f;
+  text-decoration: underline;
+}
