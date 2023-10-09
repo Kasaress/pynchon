@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}
-  KEZVH
+  KEZVH - Статьи
 {% endblock %}
 {% block content %}
   <section class="chapters-nav">
     <div class="search"></div><br><br>
     {% include 'includes/chapters.html' %}
-    <h1 class="chapters-nav__title chapter-title">KEZVH</h1>
+    <h1 class="chapters-nav__title chapter-title">KEZVH - Статьи</h1>
   </section>
   <section class="chapter chapter-4-kezvh">
     <div class="chapter-4-kezvh__article">
@@ -19,7 +19,7 @@
             <div class="article_transform">
               {% if article.author_article %}<p class="chapter-1-how__text body-text">{{author_article}}</p>{% endif %}
               {% if article.name %}<h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2><br>{% endif %}
-              <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p><br>
+              <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
               {% if article.image %}
                 <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
                   data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">

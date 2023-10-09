@@ -6,6 +6,7 @@ from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from pynchon_wiki.settings import EMAIL_HOST_USER
+from .decorators import page_in_development
 from .forms import ContactForm
 from .models import (
     Article, Book, Comment, CircleTableCharacters,
@@ -29,6 +30,7 @@ def about_project(request):
     """ Страница о проекте. """
     template = 'wiki/about-project.html'
     today = dt.date.today()
+    articles = Article.objects.filter(attitude='О сайте')
     planned = Article.objects.filter(
         attitude='Запланированные мероприятия',
         date__gte=today
@@ -37,6 +39,7 @@ def about_project(request):
     context = {
         'planned': planned,
         'past': past,
+        'articles': articles
     }
     return render(request, template, context)
 
@@ -85,6 +88,7 @@ def creators(request):
     return render(request, template, context)
 
 
+@page_in_development
 def other_books(request):
     """ Страница с другими книгами. """
     template = 'wiki/other-books.html'
@@ -230,12 +234,6 @@ def get_summary(request):
     return render(request, template, context)
 
 
-def in_development(request):
-    """ Страница в разработке. """
-    template = 'wiki/in_development.html'
-    return render(request, template)
-
-
 def search(request):
     """ Результаты поиска. """
     query = request.GET.get('q', '')
@@ -274,3 +272,9 @@ def search(request):
             )
     return render(request, 'wiki/search_results.html', {
         'results': results, 'query': query, 'search_model': search_model})
+
+
+def in_development(request):
+    """ Страница в разработке. """
+    template = 'wiki/in_development.html'
+    return render(request, template)

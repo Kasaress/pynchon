@@ -38,7 +38,7 @@
               <span class="chronology-description__fact-number title">{{article.sort}}</span>
               <h3 class="chronology-description__fact-title body-text-bold">{{article.name}}</h3>
             </div>
-            <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">{{article.text|striptags|safe|linebreaksbr}}</p>
+            <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">{{article.text|safe}}</p>
             <button class="chronology-description__fact-btn body-text" type="button">читать далее</button>
           </li>
         {% endfor %}

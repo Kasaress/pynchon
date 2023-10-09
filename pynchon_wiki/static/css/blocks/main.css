@@ -22,6 +22,11 @@
   max-width: 632px;
 }
 
+.promo__text a {
+  color: #1c1b1f;
+  text-decoration: underline;
+}
+
 .promo__circle {
   width: 342px;
   max-width: 400vw;

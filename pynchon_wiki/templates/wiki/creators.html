@@ -24,7 +24,7 @@
         <li class="about-creators__creator">
           <img class="about-creators__photo" src="{{article.image.alt}}" alt="команда">
           <h2 class="about-creators__name body-text-l">{{article.name}}</h2>
-          <p class="about-creators__role body-text-bold">{{article.text|safe|striptags}}</p>
+          <p class="about-creators__role body-text-bold">{{article.text|safe}}</p>
         </li>
       {% endfor %}
     </ul>

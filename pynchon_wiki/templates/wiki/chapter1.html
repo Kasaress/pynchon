@@ -15,7 +15,7 @@
         <div class="chapter-4-kezvh__text-content">
           <p class="chapter-1-how__text body-text">Андрей Н. И. Петров</p>
           <h1 class="chapter-4-kezvh__title title-bold">Как перестать беспокоиться и начать читать "Радугу тяготения</h1>
-          <p class="chapter-4-kezvh__text body-text">Теперь все вместе: "По небу раскатился вой". Я расскажу, как перестать беспокоиться и начать читать "Радугу тяготения", зачем читателю 900 страниц хитроумных повествовательных техник, завернутых в слои отсылок к реалиям 40-х, и что делать, когда после прочтения роман оказался еще менее понятным</p>
+          <p class="chapter-4-kezvh__text body-text">«Радугу Тяготения» Томаса Пинчона называют одним из самых сложных романов всех времен и народов. Но всегда можно начать с более простых книг автора. В этой статье я приведу несколько вариантов такой, своего рода, подготовки, а также, скажу пару слов о русских переводах</p>
           <a class="help_text" href="{% url "wiki:article1" %}">читать далее</a>
           <p class="chapter-1-how__text body-text">Станислав Распеченко</p>
           <h1 class="chapter-4-kezvh__title title-bold">Гид по Пинчону: Как подготовиться к "Радуге тяготения"</h1>
@@ -25,7 +25,7 @@
             <div class="article_transform">
               {% if article.author_article %}<p class="chapter-1-how__text body-text">{{author_article}}</p>{% endif %}
               {% if article.name %}<h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2><br>{% endif %}
-              <p class="chapter-4-kezvh__text body-text">{{article.text|striptags|safe}}</p><br>
+              <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
               {% if article.image %}
                 <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
                   data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">

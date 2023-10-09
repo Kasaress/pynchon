@@ -19,8 +19,10 @@
     <h1 class="about-nav__title chapter-title">Зачем мы все это делаем</h1>
   </section>
   <section class="about-project">
-    <img class="tentacle tentacle5 tentacle_type_about" src="{% static 'img/tentacle5.png' %}" alt="фон">
-    <p class="about-project__description body-text-bold">В США работал над программой баллистических ракет средней дальности (то есть от 3000 до 5500 км), считается также отцом американской космической программы. Эпиграф взят из статьи фон Брауна «Why I Believe in Immortality», опубликованной в книге Уильяма Николса «The Third Book of Words to Live By» (1962).</p>
+    {% for article in articles %}
+      <img class="tentacle tentacle5 tentacle_type_about" src="{% static 'img/tentacle5.png' %}" alt="фон">
+      <p class="about-project__description body-text-bold">{{article.text|safe}}</p>
+    {% endfor %}
     <div class="about-project__content">
       <div class="accordion accordion-flush sidebar" id="notesNav">
         <div class="accordion-item">
