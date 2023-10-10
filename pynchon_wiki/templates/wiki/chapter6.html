@@ -8,73 +8,86 @@
   <section class="chapters-nav">
     {% include 'includes/form_search.html' %}
     {% include 'includes/chapters.html' %}
-    <h1 class="chapters-nav__title chapter-title">Персонажи</h1>
-    <br>
+    <h1 class="chapters-nav__title chapter-title">Персонажи</h1><br>
+    <section class="characters">
+      <div class="characters__list-block">
+        <ul class="characters__list">
+          <li class="characters__item body-text">Семья</li>
+          <li class="characters__item body-text">Секс</li>
+          <li class="characters__item body-text">Дружба и помощь</li>
+          <li class="characters__item body-text">Дела и работа</li>
+          <li class="characters__item body-text">Потусторонние</li>
+          <li class="characters__item body-text">Двойники</li>
+          <li class="characters__item body-text">Уникальные</li>
+        </ul>
+      </div>
     <div class="container">
       <div id="image-container">
-          <img id="image" src="{% static 'img/scheme.jpg' %}" width="100%">
+          <img id="image" src="{% static 'img/svg/map.svg' %}" width="100%">
       </div>
       <br>
       <button id="zoom-in-button">+</button>
       <button id="zoom-out-button">-</button>
       <br><br><br>
-      <table class="table_characters_chronology">
-        <tr class="table_characters_chronology__row">
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Имя </p>
-          </td>
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Имя в оригинале и значение имени </p>
-          </td>
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Характеристика </p>
-          </td>
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Портрет </p>
-          </td>
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Группы </p>
-          </td>
-          <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Упоминания </p>
-          </td>
-        </tr> 
-        {% with previous_group=None %}
-          {% for circle in circles %}
-            <tr class="table_characters_chronology__row">
-              <td class="table_characters_chronology__cell" colspan="6">
-                <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ circle.name }}</h4>
-              </td>
-            </tr>
-            {% with characters=circle.characters.all %}
-              {% with group_size=characters|length %}
-                {% for character in characters %}
-                  <tr class="table_characters_chronology__row">
-                    <td class="table_characters_chronology__cell">
-                      <h6 class="table_characters_chronology__text"> {{ character.name }} </h6>
-                    </td>
-                    <td class="table_characters_chronology__cell">
-                      <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
-                    </td>
-                    <td class="table_characters_chronology__cell">
-                      <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
-                    </td>
-                    <td class="table_characters_chronology__cell">
-                      <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
-                    </td>
-                    <td class="table_characters_chronology__cell">
-                      <p class="table_characters_chronology__text"> {{ character.groups }} </p>
-                    </td>
-                    <td class="table_characters_chronology__cell">
-                      <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
-                    </td>
-                  </tr>
-                {% endfor %}
+      <div class="characters__table">
+        <table class="table_characters_chronology">
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Имя </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Имя в оригинале и значение имени </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Характеристика </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Портрет </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Группы </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Упоминания </p>
+            </td>
+          </tr> 
+          {% with previous_group=None %}
+            {% for circle in circles %}
+              <tr class="table_characters_chronology__row">
+                <td class="table_characters_chronology__cell" colspan="6">
+                  <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ circle.name }}</h4>
+                </td>
+              </tr>
+              {% with characters=circle.characters.all %}
+                {% with group_size=characters|length %}
+                  {% for character in characters %}
+                    <tr class="table_characters_chronology__row">
+                      <td class="table_characters_chronology__cell">
+                        <h6 class="table_characters_chronology__text"> {{ character.name }} </h6>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.groups }} </p>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                {% endwith %}
               {% endwith %}
-            {% endwith %}
-          {% endfor %}
-        {% endwith %}
-      </table>
+            {% endfor %}
+          {% endwith %}
+        </table>
+      </div>
     </div>
   </section>
 {% endblock %}

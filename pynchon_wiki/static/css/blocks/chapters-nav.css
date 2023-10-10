@@ -119,6 +119,7 @@
 }
 
 .chapters-nav__title {
+  width: 100%;
   max-width: 1140px;
   text-align: center;
   margin: 0;
@@ -135,5 +136,63 @@
 @media screen and (max-width: 1439px) {
   .chapters-nav__list {
     justify-content: start;
+  }
+}
+
+@media screen and (max-width: 1079px) {
+  .chapters-nav {
+    padding-bottom: 40px;
+  }
+
+  .search {
+    margin-bottom: 60px;
+  }
+
+  .search__input {
+    width: 400px;
+  }
+
+  .chapters-nav__list {
+    grid-template-columns: repeat(7, 160px);
+    grid-template-rows: 160px;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .chapters-nav__name {
+    font-size: 0.8125rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chapters-nav {
+    padding: 24px 16px 40px;
+  }
+
+  .search {
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .search__input {
+    font-size: 1rem;
+  }
+
+  .search__button {
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+    background-image: url(../../img/search-btn-mob.svg);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search {
+    width: 100%;
+  }
+
+  .search__input {
+    width: calc(100% - 44px);
   }
 }

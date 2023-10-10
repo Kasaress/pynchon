@@ -17,25 +17,33 @@
   padding: 0;
 }
 
+.chapter-1-how__subtitle-span {
+  font-weight: 400;
+}
+
 .chapter-1-how__image-container {
-  text-align: right;
+  /* text-align: right;
   max-width: 100%;
   overflow: hidden;
-  margin-right: 150px;
+  margin-right: 150px; */
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 0 80px;
+  box-sizing: border-box;
 }
 
 .chapter-1-how__image-container img {
-  width: 60%;
-  height: 400px;
+  /* width: 60%; */
+  /* height: 400px; */
+  width: 66.25%;
+  height: auto;
+  object-fit: contain;
 }
 
 .modal-content_chapter1 img {
   width: 100%; 
   height: auto;
-}
-
-.chapter-1-how__subtitle-span {
-  font-weight: 400;
 }
 
 .chapter-1-how__text {
@@ -51,10 +59,27 @@
   justify-content: flex-end;
 }
 
-.chapter-1-how__sign .chapter-1-how__text {
-  text-indent: 0;
-}
-
 .chapter-1-how__sign-span {
   color: #C3C3C3;
+}
+
+@media screen and (max-width: 768px) {
+  .chapter-1-how__article, .chapter-1-how__image-container {
+    padding: 12px 16px;
+  }
+
+  .chapter-1-how__sign {
+    padding: 0 16px 52px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .chapter-1-how__article {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .chapter-1-how__subtitle, .chapter-1-how__text, .chapter-1-how__image-container img {
+    width: 100%;
+  }
 }

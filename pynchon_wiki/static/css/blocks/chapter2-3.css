@@ -7,11 +7,6 @@
   position: relative;
 }
 
-.chapter-2-3-notes__text a {
-  color: #1c1b1f;
-  text-decoration: underline;
-}
-
 .chapter-2-3-notes__description {
   max-width: 631px;
   padding: 0;
@@ -21,6 +16,7 @@
 .chapter-2-3-notes__content {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .sidebar {
@@ -64,10 +60,10 @@
 .sidebar__icon {
   width: 24px;
   height: 24px;
-  margin: 0;
   padding: 0;
   content: "";
   background-image: url(../../img/sidebar-arrow.svg);
+  background-repeat: no-repeat;
   background-size: contain;
 }
 
@@ -77,6 +73,7 @@
 }
 
 .sidebar__title {
+  max-width: calc(100% - 24px - 8px);
   text-align: left;
   margin: 0 0 8px;
   padding: 0;
@@ -123,7 +120,7 @@
 .chapter-2-3-notes__item {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  /* gap: 32px; */
 }
 
 .chapter-2-3-notes__title {
@@ -150,6 +147,7 @@
 .chapter-2-3-notes__img {
   display: block;
   height: 260px;
+  max-width: 100%;
   object-fit: contain;
   object-position: 0;
 }
@@ -197,4 +195,57 @@
   color: #000;
   font-size: 1.3rem;
   opacity: 0.8;
+}
+
+@media screen and (max-width: 1199px) {
+  .sidebar {
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chapter-2-3-notes {
+    padding: 0 16px 119px;
+  }
+
+  .chapter-2-3-notes__description {
+    margin-bottom: 24px;
+  }
+
+  .chapter-2-3-notes__content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: none;
+  }
+
+  .sidebar__subtitle {
+    max-width: none;
+  }
+
+  .chapter-2-3-notes__list {
+    width: 100%;
+    max-width: none;
+  }
+
+  .chapter-2-3-notes__item {
+    padding: 24px 0 40px;
+    box-sizing: border-box;
+    /* стилизация для меню */
+    display: none;
+  }
+
+  .chapter-2-3-notes__title {
+    text-align: center;
+    font-style: normal;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 120%;
+  }
+
+  .chapter-2-3-notes__pages {
+    text-align: center;
+  }
 }

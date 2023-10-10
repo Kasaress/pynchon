@@ -1,16 +1,18 @@
 // Анимация ракеты
-let circle = document.querySelector('.promo__circle');
-let rocket = document.querySelector('.promo__rocket');
-window.onscroll = magic;
-function magic() {
-  circle.style.width = `${23.75 + window.pageYOffset * 0.7}vw`;
-
-  circle.style.bottom = `${6.39 - window.pageYOffset * 0.1}vw`;
-  circle.style.right = `${10.56 - window.pageYOffset * 0.2}vw`;
-
-  rocket.style.bottom = `${0.49 + window.pageYOffset * 0.1}vw`;
-  rocket.style.right = `${9.17 - window.pageYOffset * 0.1}vw`;
-}
+// let circle = document.querySelector('.promo__circle');
+// let rocket = document.querySelector('.promo__rocket');
+// window.onscroll = magic;
+// function magic() {
+//   if (window.innerWidth >= 768) {
+//     circle.style.width = `${23.75 + window.pageYOffset * 0.7}vw`;
+  
+//     circle.style.bottom = `${6.39 - window.pageYOffset * 0.1}vw`;
+//     circle.style.right = `${10.56 - window.pageYOffset * 0.2}vw`;
+  
+//     rocket.style.bottom = `${0.49 + window.pageYOffset * 0.1}vw`;
+//     rocket.style.right = `${9.17 - window.pageYOffset * 0.1}vw`;
+//   }
+// }
 
 // Счётчик
 function animateValue(obj, start, end, duration) {

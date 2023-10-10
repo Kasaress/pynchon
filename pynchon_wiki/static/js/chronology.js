@@ -1,6 +1,7 @@
 // Настройка слайдера дат
 
-const slider = new Swiper('.swiper1', {
+const swiper = new Swiper('.swiper', {
+  mousewheel: true,
   slidesPerView: 3,
   spaceBetween: 18,
   centeredSlides: true,
@@ -12,17 +13,12 @@ const slider = new Swiper('.swiper1', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev'
   },
-  breakpoints: {
-    1024: {
-      spaceBetween: 14,
-      // direction: 'horizontal',
-    }
-  }
 })
+
 
 const slides = document.querySelectorAll('.chronology__slide-text');
 
-slider.on('slideChange', () => {
+swiper.on('slideChange', () => {
   for (const slide of slides) {
     if (slide.textContent.length > 10) {
       slide.classList.add('chronology__slide_s')
@@ -30,29 +26,8 @@ slider.on('slideChange', () => {
   }
 })
 
-const factContainers = document.querySelectorAll('.chronology__fact');
-slider.on('slideChange', () => {
-    const activeSlideId = slider.slides[slider.activeIndex].dataset.id;
-    
-    factContainers.forEach(container => {
-        if (container.dataset.id === activeSlideId) {
-            container.style.display = 'block';
-        } else {
-            container.style.display = 'none';
-        }
-    });
-});
-
-function setDefaultFact() {
-  factContainers.forEach(container => {
-    container.style.display = 'none';
-  });
-
-  factContainers[0].style.display = 'block';
-}
-setDefaultFact();
-
 // Управление разворачиванием и сворачиванием текста
+
 const facts = document.querySelectorAll('.chronology-description__fact');
 
 facts.forEach((fact) => {
@@ -74,4 +49,5 @@ facts.forEach((fact) => {
       button.textContent = moreText;
     }
   })
+
 })

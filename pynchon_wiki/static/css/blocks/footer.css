@@ -28,10 +28,40 @@
   border-bottom: 1px solid #1B1B1B;
 }
 
+.footer__link, .footer__copyright {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%; 
+}
+
 .footer__text {
-  max-width: 43%;
+  max-width: 547px;
   margin: 0;
   padding: 0;
   font-style: italic;
   color: #C3C3C3;
+}
+
+@media screen and (max-width: 1079px) {
+  .footer__link, .footer__copyright {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 16px;
+    border-top: 1px solid #414141;
+  }
+
+  .footer__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 24px;
+    border: none;
+  }
+
+  .footer__link {
+    margin: 0;
+  }
 }

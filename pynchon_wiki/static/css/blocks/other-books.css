@@ -70,6 +70,7 @@
   font-weight: 400;
   line-height: 140%;
   padding: 10px 30px 10px 10px;
+  box-sizing: border-box;
   margin: 0;
   border-radius: 40px;
   border: 1px solid #151515;
@@ -146,4 +147,24 @@
 
 .covers-popup__pagination .swiper-pagination-bullet-active {
   background: #842234;
+}
+
+@media screen and (max-width: 768px) {
+  .other-books {
+    padding: 24px 16px 40px;
+  }
+
+  .other-books__content {
+    flex-direction: column;
+  }
+
+  .other-books__sidebar {
+    width: 100%;
+    max-width: none;
+  }
+
+  .other-books__description {
+    width: 100%;
+    max-width: none;
+  }
 }

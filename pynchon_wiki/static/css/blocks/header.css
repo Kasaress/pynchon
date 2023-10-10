@@ -30,3 +30,51 @@
 .header__link:hover {
   border-bottom: 1px solid #151515;
 }
+
+.header__button {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-image: url(../../img/burger-icon.svg);
+  border: 0;
+  outline: 0;
+  margin: 8px;
+  padding: 0;
+}
+
+.header__book {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  background-image: url(../../img/book-icon.svg);
+  border: 0;
+  outline: 0;
+  margin: 8px 8px 8px auto;
+  padding: 0;
+}
+
+@media screen and (max-width: 1079px) {
+  .header__links {
+    gap: 30px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .header__button, .header__book {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 56px 16px 0;
+  }
+
+  .header__logo {
+    width: 60px;
+  }
+
+  .header__links {
+    display: none;
+  }
+}

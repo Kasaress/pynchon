@@ -15,7 +15,7 @@
 }
 
 .chapter-4-kezvh__left-column {
-  max-width: 354px;
+  width: 27.6%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -27,6 +27,7 @@
 }
 
 .chapter-4-kezvh__link {
+  width: max-content;
   text-decoration: none;
   color: #151515;
   font-size: 1rem;
@@ -34,6 +35,7 @@
   line-height: 140%;
   display: inline-block;
   padding: 10px 30px 10px 10px;
+  box-sizing: border-box;
   margin: 0;
   border-radius: 40px;
   border: 1px solid #151515;
@@ -58,7 +60,7 @@
 }
 
 .chapter-4-kezvh__text-content {
-  max-width: 848px;
+  width: 66.25%;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -75,8 +77,36 @@
 }
 
 .chapter-4-kezvh__img {
-  display: block;
-  height: 260px;
+  width: 394px;
   object-fit: contain;
   object-position: 0;
+}
+
+@media screen and (max-width: 959px) {
+  .chapter-4-kezvh__article {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+
+  .chapter-4-kezvh__left-column {
+    width: 100%;
+  }
+
+  .chapter-4-kezvh__text-content {
+    width: 100%;
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chapter-4-kezvh {
+    gap: 40px;
+    padding: 0 16px 40px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .chapter-4-kezvh__img, .chapter-4-kezvh__link {
+    width: 100%;
+  }
 }

@@ -1,13 +1,26 @@
+{% load static %}
 <!-- компонент футера -->
 <footer class="footer">
   <div class="footer__container">
     <p class="footer__copyright">&copy;&nbsp; Группа «Расёмон», 2023</p>
-    <a class="footer__link" href="https://t.me/infinite_edge" target="_blank">Телеграм канал</a>
+    <a class="footer__link" href="#">Телеграм канал</a>
   </div>
-  <p class="footer__text body-text">Любое (полное или частичное) использование либо копированиематериалов или подборки материалов сайта, элементов дизайнаи оформления допускается лишь с разрешения правообладателяи только со ссылкой на источник: www.pynchon.ru и с указаниемправообладателя.</p>
+  <p class="footer__text body-text">Любое (полное или частичное) использование либо копирование материалов или подборки материалов сайта, элементов дизайна и оформления допускается лишь с разрешения правообладателяи только со ссылкой на источник: www.pynchon.ru и с указанием правообладателя.</p>
 </footer>
 <!-- компонент прокрутки страницы вверх -->
 <div class="to-top">
   <p class="to-top__text body-text">В начало</p>
   <button class="to-top__button" type="button" id="scrollToTopLink"></button>
+</div>
+<div class="menu">
+  <div class="menu__container">
+    <div class="menu__content">
+      <button class="menu__close"></button>
+      <div class="menu__links">
+        <a href="{% url 'wiki:author' %}" class="menu__link">Томас Пинчон</a>
+        <a href="{% url 'wiki:about-project' %}" class="menu__link">О проекте</a>
+        <a href="{% url 'wiki:other-books' %}" class="menu__link">Другие книги</a>
+      </div>
+    </div>
+  </div>
 </div>

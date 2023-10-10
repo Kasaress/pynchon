@@ -58,7 +58,7 @@
   border: 0;
   outline: 0;
   background-color: transparent;
-  background-image: url('../../img/file-btn.svg');
+  background-image: url(../../img/file-btn.svg);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -72,6 +72,7 @@
   font-weight: 400;
   line-height: 140%;
   padding: 10px 30px 10px 10px;
+  box-sizing: border-box;
   margin: 0;
   border-radius: 40px;
   border: 1px solid #151515;
@@ -100,4 +101,22 @@
   background-color: #D9909D;
   color: #F3F0EA;
   border-color: #D9909D;
+}
+
+@media screen and (max-width: 768px) {
+  .contact {
+    padding: 0 16px 44px;
+  }
+
+  .contact__text {
+    margin-bottom: 24px;
+  }
+
+  .contact__input {
+    margin-bottom: 16px;
+  }
+
+  .contact__actions {
+    margin-top: 16px;
+  }
 }
