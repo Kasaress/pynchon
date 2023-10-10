@@ -21,7 +21,7 @@
   <section class="about-project">
     {% for article in articles %}
       <img class="tentacle tentacle5 tentacle_type_about" src="{% static 'img/tentacle5.png' %}" alt="фон">
-      <p class="about-project__description body-text-bold">{{article.text|safe}}</p>
+      <p class="about-project__description">{{article.text|safe}}</p>
     {% endfor %}
     <div class="about-project__content">
       <div class="accordion accordion-flush sidebar" id="notesNav">

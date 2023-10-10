@@ -83,7 +83,7 @@
     </div>
     <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
   </section>
-  <script>
+  {% comment %} <script>
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar__link');
       const blocks = document.querySelectorAll('.chapter-2-3-notes__item');
@@ -143,5 +143,5 @@
         }
       });
     });
-  </script>
+  </script> {% endcomment %}
 {% endblock %}
