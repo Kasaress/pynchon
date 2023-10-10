@@ -38,7 +38,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="chapter-2-3-notes__list">
+      <ul class="chapter-2-3-notes__list">
         <div id="comments-content">
           <div class="comments-container">
             {% if chapters.first.image %}
@@ -49,7 +49,7 @@
               </div>
             {% endif %}
             <br>
-            <div id="chapter-content-{{ chapters.first.number }}" class="chapter-2-3-notes__item">
+            <li id="chapter-content-{{ chapters.first.number }}" class="chapter-2-3-notes__item">
               <div id="summary-{{ chapters.first.number }}">
                 <p class="chapter-2-3-notes__text body-text">{{ chapters.first.pov|safe }}</p>
                 <br>
@@ -68,14 +68,14 @@
                   <p class="chapter-2-3-notes__text body-text">{{ chapters.first.interpretation|safe }}</p>
                 </div>
               </div>
-            </div>
+            </li>
           </div>
         </div>
         <div class="chapter-navigation">
           <button id="prev-chapter" class="btn custom-button prev-chapter">Предыдущая глава</button>
           <button id="next-chapter" class="btn custom-button prev-chapter">Следующая глава</button>
         </div>
-      </div>
+      </ul>
     </div>
   </section>
   <script>
