@@ -5,7 +5,7 @@ from django.core.mail.message import EmailMessage
 from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
-from pynchon_wiki.settings import EMAIL_HOST_USER
+from pynchon_wiki.settings import EMAIL_HOST_USER, EMAIL_RECIPIENT
 from .decorators import page_in_development
 from .forms import ContactForm
 from .models import (
@@ -63,7 +63,7 @@ def contacts(request):
                 f'Текст сообщения: {body["message"]}'
             )
             email = EmailMessage(
-                subject, msg, EMAIL_HOST_USER, [EMAIL_HOST_USER]
+                subject, msg, EMAIL_HOST_USER, [EMAIL_RECIPIENT]
             )
             if body['file']:
                 attachment_file = body['file']
