@@ -39,12 +39,12 @@
           </div>
         {% endfor %}
       </div>
-      <div class="chapter-2-3-notes__list">
+      <ul class="chapter-2-3-notes__list">
         <div id="comments-container">
           <div id="comments-content">
             <div class="comments-container">
               {% for comment in chapters.first.comments.all %}
-                <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                <li class="chapter-2-3-notes__item" id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
                   <div class="chapter-2-3-notes__header">
                     <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
                     <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
@@ -68,7 +68,7 @@
                       </div>
                     </div>
                   {% endif %}
-                </div>
+                  </li>
                 <br>
               {% endfor %}
             </div>
@@ -79,11 +79,11 @@
             <button id="next-chapter" class="btn custom-button next-chapter">Следующая глава</button>
           </div>
         </div>
-      </div>
+      </ul>
     </div>
     <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
   </section>
-  {% comment %} <script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar__link');
       const blocks = document.querySelectorAll('.chapter-2-3-notes__item');
@@ -143,5 +143,5 @@
         }
       });
     });
-  </script> {% endcomment %}
+  </script>
 {% endblock %}
