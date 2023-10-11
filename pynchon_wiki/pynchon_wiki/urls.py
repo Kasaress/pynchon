@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import include, path
 
-import core.views
+# import core.views
 
 urlpatterns = [
     path('auth/', include('users.urls', namespace='users')),
