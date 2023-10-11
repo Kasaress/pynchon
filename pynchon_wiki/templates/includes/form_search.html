@@ -2,5 +2,5 @@
 <form class="search" action="{% url 'wiki:search' %}" method="GET">
 	<input type="hidden" name="chapter" value="{{ search_model }}">
 	<input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ query }}">
-	<button class="search__button" type="submit"><img src="{% static 'img/search-btn.svg' %}" alt="Поиск"></button>
+	<button class="search__button" type="button"></button>
 </form>
