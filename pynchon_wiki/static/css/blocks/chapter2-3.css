@@ -234,7 +234,7 @@
     padding: 24px 0 40px;
     box-sizing: border-box;
     /* стилизация для меню */
-    display: none;
+    /* display: none; */
   }
 
   .chapter-2-3-notes__title {

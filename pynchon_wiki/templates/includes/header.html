@@ -37,5 +37,12 @@
       </li>
     {% endwith %}
   </ul>
+  {% with request.resolver_match.view_name as view_name %}
+    {% if 'wiki:rainbow_part2' in view_name %}
+      <button class="header__book" type="button"></button>
+    {% elif 'wiki:rainbow_part3' in view_name %}
+      <button class="header__book" type="button"></button>
+    {% endif %}
+  {% endwith %}
   <button class="header__button" type="button"></button>
 </header>

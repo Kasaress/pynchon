@@ -1,8 +1,7 @@
 {% include 'includes/head.html' %}
-<div id="chapter-comments-{{ chapter.number }}" class="chapter-2-3-notes__item">
   <div class="comments-container">
     {% for comment in comments %}
-      <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+      <li id="{{ comment.page_number_by_2012 }}_{{ comment.id }}" class="chapter-2-3-notes__item">
         <div class="chapter-2-3-notes__header">
           <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
           <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
@@ -27,8 +26,7 @@
           </div>
         {% endif %}
         <br>
-      </div>
+      </li>
     {% endfor %}
   </div>
-</div>
 {% include 'includes/scripts.html' %}
