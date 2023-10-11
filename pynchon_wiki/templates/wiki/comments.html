@@ -1,4 +1,5 @@
 {% include 'includes/head.html' %}
+<div id="chapter-comments-{{ chapter.number }}">
   <div class="comments-container">
     {% for comment in comments %}
       <li id="{{ comment.page_number_by_2012 }}_{{ comment.id }}" class="chapter-2-3-notes__item">
@@ -29,4 +30,5 @@
       </li>
     {% endfor %}
   </div>
+</div>
 {% include 'includes/scripts.html' %}
