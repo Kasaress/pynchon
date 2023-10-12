@@ -5,7 +5,7 @@ from django.shortcuts import render
 # from services.time import get_datetime_today
 
 
-def page_not_found(request, exception):
+def page_not_found(request):
     return render(request, 'core/404.html', {'path': request.path}, status=404)
 
 

@@ -16,7 +16,7 @@ class BaseModel(models.Model):
         blank=False
     )
     deleted_at = models.DateTimeField(
-        'Дата удаления', 
+        'Дата удаления',
         default=None,
         null=True,
         blank=True
