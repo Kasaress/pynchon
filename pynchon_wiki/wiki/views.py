@@ -248,6 +248,11 @@ def search(request):
                 r'<span class="highlighted">\1</span>',
                 result.comment_text, flags=re.IGNORECASE
             )
+            result.name = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.name, flags=re.IGNORECASE
+            )
     elif search_model == 'chronology':
         results = TableChronology.objects.filter(
             Q(description__icontains=query) | Q(date__icontains=query)
