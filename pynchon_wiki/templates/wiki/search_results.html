@@ -105,7 +105,7 @@
           {% with result as comment %}
             <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
               <div class="chapter-2-3-notes__header">
-                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|safe}}</h2>
                 <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
                   Стр.{{comment.page_number_by_2021}}</p><br>
               </div>
