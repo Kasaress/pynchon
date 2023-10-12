@@ -240,7 +240,8 @@ def search(request):
     search_model = request.GET.get('chapter')
     results = []
     if search_model == 'comments':
-        results = Comment.objects.filter(comment_text__icontains=query)
+        results = Comment.objects.filter(
+            Q(comment_text__icontains=query) | Q(name__icontains=query))
         for result in results:
             result.comment_text = re.sub(
                 r'(%s)' % re.escape(query),

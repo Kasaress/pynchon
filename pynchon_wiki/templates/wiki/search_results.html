@@ -119,6 +119,7 @@
                 <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       <div class="modal-body text-center p-0">
                         <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
                       </div>
