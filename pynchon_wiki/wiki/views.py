@@ -56,7 +56,7 @@ def contacts(request):
                 'email': form.cleaned_data['email'],
                 'message': form.cleaned_data['message'],
                 'file': form.cleaned_data['file'],
-                # 'captcha': form.cleaned_data['captcha']
+                'captcha': form.cleaned_data['captcha']
             }
             msg = (
                 f'Новое сообщение от пользователя: {body["username"]}\n'
@@ -283,5 +283,5 @@ def search(request):
 
 def in_development(request):
     """ Страница в разработке. """
-    template = 'wiki/in_development.html'
+    template = 'includes/in_development.html'
     return render(request, template)
