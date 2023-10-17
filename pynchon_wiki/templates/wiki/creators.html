@@ -22,9 +22,8 @@
     <ul class="about-creators__list">
       {% for article in articles %}
         <li class="about-creators__creator">
-          {% comment %} <img class="about-creators__photo" src="{{article.image.alt}}" alt="команда"> {% endcomment %}
-          <h2 class="about-creators__name body-text-l">{{article.name}}</h2>
-          <p class="about-creators__role body-text-bold">{{article.text|safe}}</p>
+          <h2 class="about-creators__name title-bold">{{article.name}}</h2>
+          <p class="about-creators__role body-text">{{article.text|safe}}</p>
         </li>
       {% endfor %}
     </ul>

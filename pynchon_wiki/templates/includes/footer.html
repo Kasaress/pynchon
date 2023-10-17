@@ -3,14 +3,16 @@
 <footer class="footer">
   <div class="footer__container">
     <p class="footer__copyright">&copy;&nbsp; Группа «Расёмон», 2023</p>
-      <a class="footer__link" href="https://t.me/spell_pynchon" target="_blank">Телеграм канал</a><br>
-      {% comment %} <a class="footer__link br_link" href="https://t.me/infinite_edge/41600" target="_blank">Телеграм-чат</a><br> {% endcomment %}
+    <div class="footer__links">
+      <a class="footer__link" href="https://t.me/spell_pynchon" target="_blank">Телеграм-канал</a>
+      <a class="footer__link" href="https://t.me/infinite_edge/41600" target="_blank">Телеграм-чат</a>
+      <a class="footer__link" href="{% url 'wiki:contacts' %}" target="_blank">Сообщить об ошибке</a>
+    </div>
   </div>
   <p class="footer__text body-text">Любое (полное или частичное) использование либо копирование материалов или подборки материалов сайта, элементов дизайна и оформления допускается лишь с разрешения правообладателя и только со ссылкой на источник: www.pynchon.ru и с указанием правообладателя.</p>
 </footer>
 <!-- компонент прокрутки страницы вверх -->
 <div class="to-top">
-  <p class="to-top__text body-text">В начало</p>
   <button class="to-top__button" type="button" id="scrollToTopLink"></button>
 </div>
 <div class="menu">

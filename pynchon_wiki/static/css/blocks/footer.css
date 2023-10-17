@@ -16,11 +16,19 @@
   padding: 0;
 }
 
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
 .footer__link {
   text-decoration: none;
   color: #1B1B1B;
   margin: 0 auto;
   padding: 0;
+  border: 1px solid transparent;
   transition: border 100ms ease;
 }
 
@@ -61,7 +69,23 @@
     border: none;
   }
 
+  .footer__links {
+    align-items: end;
+  }
+
   .footer__link {
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .footer__links {
+    align-items: start;
+  }
+
+  .footer__container {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    gap: 16px;
   }
 }
