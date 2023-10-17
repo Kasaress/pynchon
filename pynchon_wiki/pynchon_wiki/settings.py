@@ -83,10 +83,10 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': 300,
-        'width': 800,
-        'forcePasteAsPlainText': True,
+        'width': 1200,
+        # 'forcePasteAsPlainText': True,
         'allowedContent': True,
-        'extraPlugins': 'autogrow',
+        'extraPlugins': 'tabletools',
         'autoGrow_minHeight': 200,
         'autoGrow_maxHeight': 600,
         'autoGrow_bottomSpace': 50,

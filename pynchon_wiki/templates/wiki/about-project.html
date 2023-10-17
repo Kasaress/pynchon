@@ -80,8 +80,9 @@
                   </div>
                 </div>
               </div>
-            </div><br>
+            </div>
           {% endif %}
+          <br>
         {% endfor %}
       </div>
       <div id="pastMeetingsContainer" class="meeting">
@@ -106,13 +107,15 @@
                   </div>
                 </div>
               </div>
-            </div><br>
+            </div>
           {% endif %}
+            <br>
           {% if meeting.link %}
             <div class="meeting__record">
               <iframe class="meeting__iframe" src="{{meeting.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           {% endif %}
+          <br>
         {% endfor %}
       </div>
     </div>

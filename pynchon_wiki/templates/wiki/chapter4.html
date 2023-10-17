@@ -16,27 +16,27 @@
       </div>
       <div class="chapter-4-kezvh__text-content">
         {% for article in articles %}
-            <div class="article_transform">
-              {% if article.author_article %}<p class="chapter-1-how__text body-text">{{author_article}}</p>{% endif %}
-              {% if article.name %}<h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2><br>{% endif %}
-              <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
-              {% if article.image %}
-                <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
-                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
-                <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      <div class="modal-body text-center p-0">
-                        <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
-                      </div>
+          <div class="article_transform">
+            {% if article.author_article %}<p class="chapter-1-how__text body-text">{{article.author_article}}</p><br>{% endif %}
+            {% if article.name %}<h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2><br>{% endif %}
+            <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
+            {% if article.image %}
+              <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
+                data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+              <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body text-center p-0">
+                      <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
                     </div>
                   </div>
                 </div>
-              {% endif %}
-            </div>
-            <button class="chronology-description__fact-btn body-text" type="button" data-index="{{forloop.counter}}">читать дальше</button>
-          {% endfor %}  
+              </div>
+            {% endif %}
+          </div>
+          <button class="chronology-description__fact-btn body-text" type="button" data-index="{{forloop.counter}}">читать дальше</button>
+        {% endfor %}  
         </div>
       </div>
     </div>
