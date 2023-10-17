@@ -61,13 +61,13 @@
       <div id="plannedMeetingsContainer" class="meeting">
         {% for meeting in planned %}
           <div id="{{ meeting.name }}" class="meeting__header">
-            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2><br>
             {% if meeting.date %}
               <p class="meeting__date body-text">{{meeting.date}}</p>
             {% endif %}
           </div>
           <p class="meeting__text">{{meeting.text|safe}}</p>
-          <br><br><br><br>
+          <br><br>
           {% if meeting.image %}
             <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
               data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
@@ -80,20 +80,20 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div><br>
           {% endif %}
         {% endfor %}
       </div>
       <div id="pastMeetingsContainer" class="meeting">
         {% for meeting in past %}
           <div id="{{ meeting.name }}" class="meeting__header">
-            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2><br>
             {% if meeting.date %}
               <p class="meeting__date body-text">{{meeting.date}}</p>
             {% endif %}
           </div>
           <p class="meeting__text">{{meeting.text|safe}}</p>
-          <br><br><br><br>
+          <br><br>
           {% if meeting.image %}
             <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
               data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
@@ -106,7 +106,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div><br>
           {% endif %}
           {% if meeting.link %}
             <div class="meeting__record">
