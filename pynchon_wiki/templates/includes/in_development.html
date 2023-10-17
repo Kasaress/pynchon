@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+  Страница в разработке
+{% endblock  %}
+{% block content %}
+  <section class="not-found">
+    <div class="not-found__column">
+      <div class="not-found__error">
+        <h2 class="not-found__title">Страница находится в разработке, очень скоро она станет доступна.</h2>
+      </div>
+      <a class="not-found__link" href="{% url 'wiki:index' %}">Вернуться на главную</a>
+    </div>
+  </section>
+  {% endblock  %}

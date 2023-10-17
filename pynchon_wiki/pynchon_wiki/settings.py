@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'ckeditor',
-    'import_export'
+    'import_export',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -208,3 +209,6 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_RECIPIENT = os.getenv('EMAIL_RECIPIENT')
+
+CAPTCHA_IMAGE_SIZE = (150, 40)
+CAPTCHA_FONT_SIZE = 35

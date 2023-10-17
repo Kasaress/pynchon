@@ -103,6 +103,16 @@
   border-color: #D9909D;
 }
 
+#id_captcha_1 {
+  outline: 0;
+  border: 1px solid #414141;
+  background-color: transparent;
+  margin: 0 0 32px;
+  padding: 8px;
+  box-sizing: border-box;
+  color: #151515;
+}
+
 @media screen and (max-width: 768px) {
   .contact {
     padding: 0 16px 44px;

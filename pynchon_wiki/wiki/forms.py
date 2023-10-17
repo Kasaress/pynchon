@@ -1,5 +1,5 @@
 from django import forms
-
+from captcha.fields import CaptchaField
 
 class ContactForm(forms.Form):
     username = forms.CharField(
@@ -13,5 +13,6 @@ class ContactForm(forms.Form):
         max_length=2000
     )
     file = forms.FileField(
-        required=False
+        required=False,
     )
+    captcha = CaptchaField()

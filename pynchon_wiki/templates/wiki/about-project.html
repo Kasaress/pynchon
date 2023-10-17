@@ -36,7 +36,7 @@
           <div id="noteNav-1" class="accordion-collapse collapse">
             {% for meeting in planned %}
             <ul class="accordion-body">
-              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}} / {{meeting.date}}</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}}{% if meeting.date %} / {{meeting.date}}{% endif %}</a></li>
             </ul>
             {% endfor %}
           </div>
@@ -52,7 +52,7 @@
           <div id="noteNav-2" class="accordion-collapse collapse">
             {% for meeting in past %}
             <ul class="accordion-body">
-              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}} / {{meeting.date}}</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}}{% if meeting.date %} / {{meeting.date}}{% endif %}</a></li>
             </ul>
             {% endfor %}
           </div>
@@ -62,19 +62,52 @@
         {% for meeting in planned %}
           <div id="{{ meeting.name }}" class="meeting__header">
             <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
-            <p class="meeting__date body-text">{{meeting.date}}</p>
+            {% if meeting.date %}
+              <p class="meeting__date body-text">{{meeting.date}}</p>
+            {% endif %}
           </div>
-          <p class="meeting__text">{{meeting.text|safe}}</p><br>
-          <br><br><br>
+          <p class="meeting__text">{{meeting.text|safe}}</p>
+          <br><br><br><br>
+          {% if meeting.image %}
+            <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
+              data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
+            <div class="modal fade" id="image-modal-{{ meeting.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div class="modal-body text-center p-0">
+                    <img src="{{ meeting.image.url }}" alt="{{ meeting.image.alt }}" class="modal-image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
       <div id="pastMeetingsContainer" class="meeting">
         {% for meeting in past %}
           <div id="{{ meeting.name }}" class="meeting__header">
             <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
-            <p class="meeting__date body-text">{{meeting.date}}</p>
+            {% if meeting.date %}
+              <p class="meeting__date body-text">{{meeting.date}}</p>
+            {% endif %}
           </div>
           <p class="meeting__text">{{meeting.text|safe}}</p>
+          <br><br><br><br>
+          {% if meeting.image %}
+            <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
+              data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
+            <div class="modal fade" id="image-modal-{{ meeting.pk }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div class="modal-body text-center p-0">
+                    <img src="{{ meeting.image.url }}" alt="{{ meeting.image.alt }}" class="modal-image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
           {% if meeting.link %}
             <div class="meeting__record">
               <iframe class="meeting__iframe" src="{{meeting.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

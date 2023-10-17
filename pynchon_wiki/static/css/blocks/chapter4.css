@@ -66,6 +66,11 @@
   gap: 40px;
 }
 
+.chapter-4-kezvh__text-content a {
+  text-decoration: none;
+}
+
+
 .chapter-4-kezvh__title {
   margin: 0;
   padding: 0;

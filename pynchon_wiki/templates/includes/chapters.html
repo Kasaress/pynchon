@@ -1,6 +1,10 @@
 {% with request.resolver_match.view_name as view_name %}
     <ul class="chapters-nav__list">
-        <li class="chapters-nav__item {% if view_name == 'wiki:rainbow_part1' %}chapters-nav__item_active{% endif %}">
+        <li class="chapters-nav__item 
+            {% if view_name == 'wiki:rainbow_part1' %}chapters-nav__item_active
+            {% elif view_name == 'wiki:article1' %}chapters-nav__item_active
+            {% elif view_name == 'wiki:article2' %}chapters-nav__item_active
+            {% endif %}">
         <a class="chapters-nav__link" href="{% url 'wiki:rainbow_part1' %}">
             <h1 class="chapters-nav__chapter">Раздел 1</h1>
             <h2 class="chapters-nav__name">Как перестать беспокоиться и начать читать роман</h2>
