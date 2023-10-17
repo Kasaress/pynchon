@@ -56,7 +56,7 @@ def contacts(request):
                 'email': form.cleaned_data['email'],
                 'message': form.cleaned_data['message'],
                 'file': form.cleaned_data['file'],
-                'captcha': form.cleaned_data['captcha']
+                # 'captcha': form.cleaned_data['captcha']
             }
             msg = (
                 f'Новое сообщение от пользователя: {body["username"]}\n'
