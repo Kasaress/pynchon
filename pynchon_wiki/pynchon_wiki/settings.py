@@ -84,6 +84,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'height': 300,
         'width': 1200,
+        'autoParagraph': False,
         # 'forcePasteAsPlainText': True,
         'allowedContent': True,
         'extraPlugins': 'tabletools',
