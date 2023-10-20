@@ -39,12 +39,12 @@
           </div>
         {% endfor %}
       </div>
-      <ul class="chapter-2-3-notes__list">
+      <div class="chapter-2-3-notes__list">
         <div id="comments-container">
           <div id="comments-content">
             <div class="comments-container">
               {% for comment in chapters.first.comments.all %}
-                <li class="chapter-2-3-notes__item" id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                <div class="chapter-2-3-notes__item" id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
                   <div class="chapter-2-3-notes__header">
                     <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
                     <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
@@ -68,24 +68,23 @@
                       </div>
                     </div>
                   {% endif %}
-                  </li>
-                <br>
+                </div>
               {% endfor %}
             </div>
           </div>
           <br><br>
           <div class="chapter-navigation">
-            <button id="prev-chapter" class="btn custom-button prev-chapter">Предыдущая глава</button>
-            <button id="next-chapter" class="btn custom-button next-chapter">Следующая глава</button>
+            <button id="prev-chapter" class="btn custom-button prev-chapter">Пред. глава</button>
+            <button id="next-chapter" class="btn custom-button next-chapter">След. глава</button>
           </div>
         </div>
-      </ul>
+      </div>
     </div>
     <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
   </section>
   {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script> {% endcomment %}
+    crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar__link');
@@ -146,5 +145,5 @@
         }
       });
     });
-  </script>
+  </script> {% endcomment %}
 {% endblock %}

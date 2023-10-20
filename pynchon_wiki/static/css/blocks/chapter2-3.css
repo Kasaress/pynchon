@@ -10,13 +10,15 @@
 .chapter-2-3-notes__description {
   max-width: 631px;
   padding: 0;
-  margin: 0 0 100px;
+  margin: 0;
 }
 
 .chapter-2-3-notes__content {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  padding-top: 36px;
+  box-sizing: border-box;
 }
 
 .sidebar {
@@ -29,6 +31,10 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  /*  */
+  margin-top: 64px;
+  position: sticky;
+  top: 64px;
 }
 
 .sidebar .accordion-item {
@@ -95,6 +101,7 @@
 }
 
 .sidebar__link {
+  display: block;
   text-decoration: none;
   color: #C3C3C3;
   padding: 0 8px;
@@ -114,13 +121,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  /* gap: 64px; */
 }
 
 .chapter-2-3-notes__item {
   display: flex;
   flex-direction: column;
   /* gap: 32px; */
+  padding-top: 64px;
+  box-sizing: border-box;
 }
 
 .chapter-2-3-notes__title {
@@ -150,6 +159,14 @@
   max-width: 100%;
   object-fit: contain;
   object-position: 0;
+  margin-top: 32px;
+}
+
+.chapter-navigation {
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  gap: 16px;
 }
 
 .modal-image {
@@ -217,8 +234,10 @@
   }
 
   .sidebar {
+    max-height: 70vh;
     width: 100%;
     max-width: none;
+    position: static;
   }
 
   .sidebar__subtitle {
@@ -247,5 +266,9 @@
 
   .chapter-2-3-notes__pages {
     text-align: center;
+  }
+
+  .chapter-navigation {
+    justify-content: center;
   }
 }

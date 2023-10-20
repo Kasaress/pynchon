@@ -189,17 +189,18 @@ a {
 }
 
 .custom-button:hover {
-  background-color: #990033;
+  border: 1px solid #842234;
+  background-color: #842234;
   color: white;
 }
 
-.prev-chapter {
+/* .prev-chapter {
   margin-right: 10px;
 }
-
 .next-chapter {
   margin-left: 10px;
 }
+} */
 
 .accordion-container {
   max-height: 850px;
@@ -212,7 +213,7 @@ a {
   display: none;
 }
 
-.comments-container {
+/* .comments-container {
   max-height: 1200px;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -221,7 +222,7 @@ a {
 
 .comments-container::-webkit-scrollbar {
   display: none; 
-}
+} */
 
 #image-container {
   position: relative;
