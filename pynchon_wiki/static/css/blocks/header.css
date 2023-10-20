@@ -24,6 +24,7 @@
   color: #151515;
   font-style: italic;
   text-transform: uppercase;
+  border: 1px solid transparent;
   transition: border 100ms ease;
 }
 

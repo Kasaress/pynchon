@@ -1,8 +1,8 @@
 /* обложка */
 
 .pynchon-promo {
-  height: calc(100vh - 83px);
-  max-height: 70vw;
+  /* height: calc(100vh - 83px); */
+  /* max-height: 70vw; */
   padding: 0 80px 61px;
   box-sizing: border-box;
   display: flex;

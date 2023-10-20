@@ -25,6 +25,7 @@
 .contact__input {
   outline: 0;
   border: 1px solid #414141;
+  border-radius: 0;
   background-color: transparent;
   margin: 0 0 32px;
   padding: 8px;

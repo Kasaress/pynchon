@@ -11,6 +11,14 @@ function magic() {
   
     rocket.style.bottom = `${0.49 + window.pageYOffset * 0.1}vw`;
     rocket.style.right = `${9.17 - window.pageYOffset * 0.1}vw`;
+  } else {
+    circle.style.width = `${252 + window.pageYOffset * 3}px`;
+
+    circle.style.bottom = `${100.8 - window.pageYOffset}px`;
+    circle.style.right = `${30.74 - window.pageYOffset}px`;
+
+    rocket.style.bottom = `${38 + window.pageYOffset}px`;
+    rocket.style.right = `${16 - window.pageYOffset}px`;
   }
 }
 
