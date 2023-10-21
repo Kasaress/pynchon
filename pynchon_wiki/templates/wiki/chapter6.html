@@ -48,9 +48,6 @@
               <p class="table_characters_chronology__text"> Имя в оригинале и значение имени </p>
             </td>
             <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text"> Характеристика </p>
-            </td>
-            <td class="table_characters_chronology__cell">
               <p class="table_characters_chronology__text"> Портрет </p>
             </td>
             <td class="table_characters_chronology__cell">
@@ -58,6 +55,9 @@
             </td>
             <td class="table_characters_chronology__cell">
               <p class="table_characters_chronology__text"> Упоминания </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text"> Характеристика </p>
             </td>
           </tr>
           {% with previous_group=None %}
@@ -78,9 +78,6 @@
                         <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
                       </td>
                       <td class="table_characters_chronology__cell">
-                        <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
-                      </td>
-                      <td class="table_characters_chronology__cell">
                         <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
                       </td>
                       <td class="table_characters_chronology__cell">
@@ -88,6 +85,9 @@
                       </td>
                       <td class="table_characters_chronology__cell">
                         <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
+                      </td>
+                      <td class="table_characters_chronology__cell">
+                        <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
                       </td>
                     </tr>
                   {% endfor %}
