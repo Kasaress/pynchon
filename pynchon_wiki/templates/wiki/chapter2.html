@@ -25,7 +25,7 @@
                 <div class="sidebar__icon"></div>
                 <h2 class="sidebar__title title-bold">Глава {{ chapter.number }}</h2>
               </div>
-              <p class="sidebar-subtitle body-text-bold">{{ chapter.description|striptags|safe }}</p>
+              <p class="sidebar-subtitle body-text-bold">{{ chapter.description|safe }}</p>
             </button>
             <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse">
               <ul class="accordion-body">

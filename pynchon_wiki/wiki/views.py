@@ -199,6 +199,15 @@ def rainbow_part6(request):
     return render(request, template, context)
 
 
+def rainbow_part6_map(request):
+    """ Страница с картой перемещений персонажей. """
+    template = 'wiki/chapter6_map.html'
+    context = {
+        'search_model': 'characters'
+    }
+    return render(request, template, context)
+
+
 def rainbow_part7(request):
     """ Страница со статьей. """
     template = 'wiki/chapter7.html'

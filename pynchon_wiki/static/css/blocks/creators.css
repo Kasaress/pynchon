@@ -30,7 +30,7 @@
 .about-creators__creator::after {
   content: '';
   width: calc(100% - 160px);
-  border-bottom: 1px solid #c3c3c3;
+  border-bottom: 1px solid #151515;
   position: absolute;
   bottom: 0;
   left: 80px;
@@ -42,7 +42,15 @@
 
 .about-creators__creator:hover {
   background-color: #151515;
+  margin-top: -1px;
+}
+
+.about-creators__creator:hover .about-creators__name {
   color: #F3F0EA;
+}
+
+.about-creators__creator:hover .about-creators__role {
+  color: #C3C3C3;
 }
 
 .about-creators__name {

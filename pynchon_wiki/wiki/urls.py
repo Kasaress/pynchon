@@ -17,6 +17,8 @@ urlpatterns = [
     path('rainbow_part4', views.rainbow_part4, name='rainbow_part4'),
     path('rainbow_part5', views.rainbow_part5, name='rainbow_part5'),
     path('rainbow_part6', views.rainbow_part6, name='rainbow_part6'),
+    path('rainbow_part6_map', views.rainbow_part6_map,
+        name='rainbow_part6_map'),
     path('rainbow_part7', views.rainbow_part7, name='rainbow_part7'),
     path('author', views.author, name='author'),
     path('about-project', views.about_project, name='about-project'),

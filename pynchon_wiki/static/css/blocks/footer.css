@@ -1,14 +1,39 @@
 .footer {
   padding: 0 80px 40px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer__container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 40px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0 8px;
   box-sizing: border-box;
   border-top: 1px solid #414141;
+  gap: 40px;
+}
+
+.footer__text-block, .footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__text-block {
+  max-width: 416px;
+}
+
+.footer__links {
+  min-width: 416px;
+}
+
+.footer__text {
+  font-size: 0.75rem;
+  font-weight: 300;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
 }
 
 .footer__copyright {
@@ -16,17 +41,11 @@
   padding: 0;
 }
 
-.footer__links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
 .footer__link {
+  width: max-content;
   text-decoration: none;
   color: #1B1B1B;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   border: 1px solid transparent;
   transition: border 100ms ease;
@@ -36,56 +55,40 @@
   border-bottom: 1px solid #1B1B1B;
 }
 
-.footer__link, .footer__copyright {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 160%; 
-}
-
-.footer__text {
-  max-width: 547px;
-  margin: 0;
-  padding: 0;
-  font-style: italic;
+.footer__age {
   color: #C3C3C3;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 120%;
+  margin: 0;
+  padding: 10px 0;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1079px) {
-  .footer__link, .footer__copyright {
-    font-size: 14px;
+  .footer__links {
+    min-width: max-content;
   }
 }
 
 @media screen and (max-width: 768px) {
   .footer {
-    padding: 40px 16px;
+    padding: 24px 16px;
     border-top: 1px solid #414141;
   }
 
   .footer__container {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0 24px;
+    padding: 0 0 16px;
     border: none;
-  }
-
-  .footer__links {
-    align-items: end;
-  }
-
-  .footer__link {
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .footer__links {
-    align-items: start;
-  }
-
-  .footer__container {
     flex-direction: column-reverse;
-    justify-content: flex-start;
     gap: 16px;
+  }
+
+  .footer__text-block {
+    flex-direction: column-reverse;
+  }
+
+  .footer__age {
+    padding: 0;
   }
 }

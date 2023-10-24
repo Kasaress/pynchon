@@ -2,14 +2,17 @@
 <!-- компонент футера -->
 <footer class="footer">
   <div class="footer__container">
-    <p class="footer__copyright">&copy;&nbsp; Группа «Расёмон», 2023</p>
+    <div class="footer__text-block">
+      <p class="footer__text">Любое (полное или частичное) использование либо копирование материалов или подборки материалов сайта, элементов дизайна и оформления допускается лишь с разрешения правообладателя и только со ссылкой на источник: www.pynchon.ru и с указанием правообладателя.</p>
+      <p class="footer__copyright body-text">&copy;&nbsp; Группа «Расёмон», 2023</p>
+    </div>
     <div class="footer__links">
-      <a class="footer__link" href="https://t.me/spell_pynchon" target="_blank">Телеграм-канал</a>
-      <a class="footer__link" href="https://t.me/infinite_edge/41600" target="_blank">Телеграм-чат</a>
-      <a class="footer__link" href="{% url 'wiki:contacts' %}" target="_blank">Сообщить об ошибке</a>
+      <a class="footer__link body-text" href="https://t.me/spell_pynchon" target="_blank">Телеграм канал</a>
+      <a class="footer__link body-text" href="https://t.me/infinite_edge/41600" target="_blank">Пообщаться</a>
+      <a class="footer__link body-text" href="{% url 'wiki:contacts' %}" target="_self">Сообщить об ошибке</a>
     </div>
   </div>
-  <p class="footer__text body-text">Любое (полное или частичное) использование либо копирование материалов или подборки материалов сайта, элементов дизайна и оформления допускается лишь с разрешения правообладателя и только со ссылкой на источник: www.pynchon.ru и с указанием правообладателя.</p>
+  <p class="footer__age">18+</p>
 </footer>
 <!-- компонент прокрутки страницы вверх -->
 <div class="to-top">
@@ -25,5 +28,12 @@
         <a href="{% url 'wiki:other-books' %}" class="menu__link">Другие книги</a>
       </div>
     </div>
+  </div>
+</div>
+<!-- попап 18+ -->
+<div class="age-popup">
+  <div class="age-popup__container">
+    <p class="age-popup__text body-text">Сайт содержит информацию, которая не рекомендована лицам, не достигшим совершеннолетия. Для входа на сайт подтвердите свой возраст.</p>
+    <button class="age-popup__button" type="button">Подтверждаю</button>
   </div>
 </div>
