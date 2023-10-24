@@ -34,7 +34,10 @@
             <h2 class="chapters-nav__name">Хронология</h2>
         </a>
         </li>
-        <li class="chapters-nav__item {% if view_name == 'wiki:rainbow_part6' %}chapters-nav__item_active{% endif %}">
+        <li class="chapters-nav__item 
+            {% if view_name == 'wiki:rainbow_part6' %}chapters-nav__item_active
+            {% elif view_name == 'wiki:rainbow_part6_map' %}chapters-nav__item_active
+            {% endif %}">
         <a class="chapters-nav__link" href="{% url 'wiki:rainbow_part6' %}">
             <h1 class="chapters-nav__chapter">Раздел 6</h1>
             <h2 class="chapters-nav__name">Персонажи</h2>
