@@ -11,7 +11,9 @@
   <section class="characters">
     <a class="characters__to-map-link body-text" href="{% url "wiki:rainbow_part6" %}">Перейти к схеме</a>
     <div class="container">
-      <iframe class="characters__google-map" src="https://www.google.com/maps/d/embed?mid=1pcBshIqbZM0_H615Yvtzv5lTSK-Pb3I&ehbc=2E312F" width="100%" height="600" style="margin-bottom: 40px;"></iframe>
+      <div class="map-container">
+        <iframe class="characters__google-map" src="https://www.google.com/maps/d/embed?mid=1pcBshIqbZM0_H615Yvtzv5lTSK-Pb3I&ehbc=2E312F"></iframe>
+      </div>
     </div>
   </section>
 {% endblock %}
