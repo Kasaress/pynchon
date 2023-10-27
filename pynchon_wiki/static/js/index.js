@@ -1,3 +1,23 @@
+// Работа с попапом подтверждения возраста
+const agePopup = document.querySelector('.age-popup');
+const ageBtn = agePopup.querySelector('.age-popup__button');
+
+if (!localStorage.getItem('visited') || !localStorage.getItem('age-confirm')) {
+  if (agePopup) agePopup.style.display = 'flex';
+  localStorage.setItem('visited', 'true');
+  setTimeout(function() {
+    localStorage.removeItem('visited');
+  }, 24 * 60 * 60 * 1000);
+}
+
+if (ageBtn) ageBtn.addEventListener('click', () => {
+  agePopup.style.display = 'none';
+  localStorage.setItem('age-confirm', 'true');
+  setTimeout(function() {
+    localStorage.removeItem('age-confirm');
+  }, 24 * 60 * 60 * 1000);
+})
+
 // Скролл вверх
 document.getElementById('scrollToTopLink').addEventListener('click', function(event) {
   event.preventDefault();
