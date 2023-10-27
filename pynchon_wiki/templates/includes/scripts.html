@@ -1,9 +1,16 @@
 {% load static %}
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
-<script defer src="{% static 'js/main.js' %}"></script>
-<script defer src="{% static 'js/zoom_image_table.js' %}"></script>
-<script defer src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% with request.resolver_match.view_name as view_name %}
+  {% if 'wiki:index' in view_name %}
+    <script src="{% static 'js/main.js' %}"></script>
+  {% elif 'wiki:rainbow_part5' in view_name %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  {% elif 'wiki:rainbow_part6' in view_name %}
+    <script src="{% static 'js/zoom_image_table.js' %}"></script>
+  {% elif 'wiki:about-project' in view_name %}
+    <script src="{% static 'js/meetings.js' %}"></script>
+  {% endif %}
+{% endwith %}
