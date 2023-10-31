@@ -13,48 +13,78 @@ function magic() {
     rocket.style.right = `${9.17 - window.pageYOffset * 0.1}vw`;
   } else {
     circle.style.width = `${252 + window.pageYOffset * 3}px`;
-
+  
     circle.style.bottom = `${100.8 - window.pageYOffset}px`;
     circle.style.right = `${30.74 - window.pageYOffset}px`;
-
+  
     rocket.style.bottom = `${38 + window.pageYOffset}px`;
     rocket.style.right = `${16 - window.pageYOffset}px`;
   }
 }
 
 // Счётчик
+
+// function animateValue(obj, start, end, duration) {
+// let startTimestamp = null;
+// const step = (timestamp) => {
+//   if (!startTimestamp) startTimestamp = timestamp;
+//   const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+//   obj.innerHTML = Math.floor(progress * (end - start) + start);
+//   if (progress < 1) {
+//     window.requestAnimationFrame(step);
+//   }
+// };
+// window.requestAnimationFrame(step);
+// }
+// const obj = document.getElementById('value');
+// animateValue(obj, 99999, 00000, 50000000);
+
+
 function animateValue(obj, start, end, duration) {
-let startTimestamp = null;
-const step = (timestamp) => {
-  if (!startTimestamp) startTimestamp = timestamp;
-  const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-  obj.innerHTML = Math.floor(progress * (end - start) + start);
-  if (progress < 1) {
-    window.requestAnimationFrame(step);
-  }
-};
-window.requestAnimationFrame(step);
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+
+    const formattedValue = String(value).padStart(5, '0');
+    
+    obj.innerHTML = formattedValue;
+    
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
 }
-const obj = document.getElementById('value');
-animateValue(obj, 99999, 00000, 50000000);
 
+// Функция, которая будет запускать анимацию при достижении блока
+function startCounterAnimation() {
+  const obj = document.getElementById('value');
+  animateValue(obj, 99999, 0, 3000);
+}
 
+// Функция для проверки, виден ли блок на экране
+function isElementInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 
-//Появление текста из-под оверлея
-// const overlays = document.querySelectorAll('.chapter__overlay');
-// function onEntry(entry) {
-//   entry.forEach(change => {
-//     if(change.isIntersecting) {
-//       let rect = change.getBoundingClientRect(),
-//       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-//       let distanceTop = rect.top + scrollTop;
-//       let elHeight = change.target.style.height
-//       change.target.style.height = `${elHeight + distanceTop - window.pageYOffset}px`;
-//     }
-//   })
-// }
-// let options = { threshold: [0.5]};
-// let observer = new IntersectionObserver(onEntry, options);
-// for (let item of overlays) {
-//   observer.observe(item);
-// }
+// Обработчик события прокрутки страницы
+function onScroll() {
+  const counterBlock = document.querySelector('.chapter-preview__counter');
+  
+  if (isElementInViewport(counterBlock)) {
+    startCounterAnimation();
+    // Удаляем обработчик события после запуска анимации, если это нужно
+    window.removeEventListener('scroll', onScroll);
+  }
+}
+
+// Добавляем обработчик события прокрутки
+window.addEventListener('scroll', onScroll);

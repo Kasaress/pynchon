@@ -11,7 +11,7 @@
   padding: 40px 0 8px;
   box-sizing: border-box;
   border-top: 1px solid #414141;
-  gap: 40px;
+  gap: 80px;
 }
 
 .footer__text-block, .footer__links {
@@ -21,7 +21,9 @@
 }
 
 .footer__text-block {
-  max-width: 416px;
+  width: 60%;
+  min-width: 416px;
+  max-width: 848px;
 }
 
 .footer__links {
@@ -71,9 +73,9 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 860px) {
   .footer {
-    padding: 24px 16px;
+    padding: 24px 80px;
     border-top: 1px solid #414141;
   }
 
@@ -86,9 +88,17 @@
 
   .footer__text-block {
     flex-direction: column-reverse;
+    width: 100%;
+    min-width: auto;
   }
 
   .footer__age {
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 24px 16px;
   }
 }

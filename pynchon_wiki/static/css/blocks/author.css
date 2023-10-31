@@ -1,8 +1,6 @@
 /* обложка */
 
 .pynchon-promo {
-  /* height: calc(100vh - 83px); */
-  /* max-height: 70vw; */
   padding: 0 80px 61px;
   box-sizing: border-box;
   display: flex;
@@ -16,8 +14,6 @@
 }
 
 .pynchon-promo__title-box {
-  /* width: 673px;
-  height: 234px; */
   width: 46.74vw;
   height: 16.25vw;
   background-image: url(../../img/author-name.svg);
@@ -33,10 +29,7 @@
 }
 
 .pynchon-promo__img {
-  /* width: 416px;
-  height: 507px; */
   width: 28.889vw;
-  /* height: 35.208vw; */
   object-fit: contain;
   margin-top: 72px;
   mix-blend-mode: darken;
@@ -79,13 +72,16 @@
   object-fit: cover;
 }
 
-.bio__image_high-l {
-  max-height: none;
+.bio__cover-img {
+  display: block;
+  object-fit: contain;
+  background-color: #F8F6F3;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .bio__image_wide {
   width: calc((100% - 16px) / 2);
-  /* height: min-content; */
   object-fit: contain;
 }
 
@@ -109,10 +105,6 @@
   width: 100%;
   max-width: 1060px;
   margin: 0 auto;
-}
-
-.bio__text_narrow {
-  width: calc((100% - 48px) / 4);
 }
 
 .bio__text p {
@@ -149,6 +141,7 @@
   width: 100%;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
 }
 
 .bio__fact-item_type_simpson-img {
@@ -158,13 +151,6 @@
 
 .bio__fact-item_type_simpson-video {
   height: 100%;
-}
-
-@media screen and (max-width: 1439px) {
-  .bio__image_high-l {
-    object-fit: contain;
-    object-position: top;
-  }
 }
 
 @media screen and (max-width: 1199px) {
