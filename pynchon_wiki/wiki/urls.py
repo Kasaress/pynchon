@@ -13,6 +13,10 @@ urlpatterns = [
     path('rainbow_part1/article1', views.article1, name='article1'),
     path('rainbow_part1/article2', views.article2, name='article2'),
     path('rainbow_part2', views.rainbow_part2, name='rainbow_part2'),
+    path(
+        'rainbow_part2_detail/<int:comment_id>', views.rainbow_part2_detail,
+        name='rainbow_part2_detail'
+    ),
     path('rainbow_part3', views.rainbow_part3, name='rainbow_part3'),
     path('rainbow_part4', views.rainbow_part4, name='rainbow_part4'),
     path('rainbow_part5', views.rainbow_part5, name='rainbow_part5'),

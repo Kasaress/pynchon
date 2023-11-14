@@ -11,6 +11,9 @@
           <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
         </div>
         <br>
+        {% if comment.comment_link %}
+          <a href="{% url "wiki:rainbow_part2_detail" comment.comment_link %}">перейти к упомянутому примечанию</a>
+        {% endif %}
         {% if comment.image %}
           <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
             data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">

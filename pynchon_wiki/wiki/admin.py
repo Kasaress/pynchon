@@ -155,7 +155,7 @@ class CommentResource(resources.ModelResource):
 class CommentAdmin(ImportExportModelAdmin):
     resource_classes = [CommentResource]
     list_display = (
-        'name', 'comment_text', 'page_number_by_2012', 'sort', 'preview',
+        'pk', 'name', 'comment_text', 'page_number_by_2012', 'sort', 'comment_link', 'preview',
         'get_links')
     inlines = (InlineCommentLink,)
     search_fields = ('comment_text',)
@@ -169,7 +169,7 @@ class CommentAdmin(ImportExportModelAdmin):
         }),
         ('Описание', {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('name', 'comment_text',)
+            'fields': ('name', 'comment_text', 'comment_link',)
         }),
         ('Данные по книге', {
             'classes': ('wide', 'extrapretty'),

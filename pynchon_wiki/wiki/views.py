@@ -149,6 +149,16 @@ def rainbow_part2(request):
     return render(request, template, context)
 
 
+def rainbow_part2_detail(request, comment_id):
+    """ Страница с отдельным примечанием. """
+    template = 'wiki/chapter2_detail.html'
+    comment = Comment.objects.get(pk=comment_id)
+    context = {
+        'comment': comment
+    }
+    return render(request, template, context)
+
+
 def rainbow_part3(request):
     """ Страница с комментариями к главам. """
     template = 'wiki/chapter3.html'

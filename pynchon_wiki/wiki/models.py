@@ -127,6 +127,11 @@ class ChapterLink(BaseModel):
 class Comment(BaseNameModel):
     """ Модель комментариев. """
 
+    comment_link = models.IntegerField(
+        'Cвязь с другим примечанием',
+        blank=True,
+        null=True
+    )
     comment_text = RichTextField(
         'Текст примечания'
     )
