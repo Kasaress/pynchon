@@ -154,8 +154,10 @@ class CommentResource(resources.ModelResource):
 @admin.register(Comment)
 class CommentAdmin(ImportExportModelAdmin):
     resource_classes = [CommentResource]
-    list_display = ('pk', 'name', 'comment_text', 'page_number_by_2012', 'sort', 
-                    'comment_link', 'preview', 'get_links')
+    list_display = (
+        'pk', 'name', 'comment_text', 'page_number_by_2012', 'sort',
+        'comment_link', 'preview', 'get_links'
+    )
     inlines = (InlineCommentLink,)
     search_fields = ('comment_text',)
     list_filter = ('book', 'chapter', 'page_number_by_2012', 'sort')
