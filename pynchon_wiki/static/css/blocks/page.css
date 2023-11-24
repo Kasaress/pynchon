@@ -234,9 +234,25 @@ a {
 }
 
 .article_transform {
-  width: 100%;
+  width: 100% !important;
   height: 130px;
-  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.article_transform span, .article_transform p {
+  font-family: 'Inter', 'Arial', sans-serif !important;
+}
+
+.article_transform table {
+  width: 100% !important;
+  min-width: 600px !important;
+  overflow-x: auto !important;
+  table-layout: fixed;
+}
+
+.article_transform table td {
+  width: auto !important;
+  height: auto !important;
 }
 
 .help_text {
