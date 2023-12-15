@@ -214,7 +214,9 @@ class TableChronologyResource(resources.ModelResource):
 @admin.register(TableChronology)
 class TableChronologyAdmin(ImportExportModelAdmin):
     resource_classes = [TableChronologyResource]
-    list_display = ('pk', 'created_at', 'description', 'sort', 'event_type', 'book')
+    list_display = (
+        'pk', 'created_at', 'description', 'sort', 'event_type', 'book'
+    )
     search_fields = ('created_at', 'description', 'sort', 'event_type')
     readonly_fields = ('created_at',)
 

@@ -9,7 +9,7 @@ from core.models import BaseModel, BaseNameModel
 User = get_user_model()
 
 CHOICES_CHAPTER = [
-    ('Другое', 'Другое'), ('Раздел 1', 'Раздел 1'), 
+    ('Другое', 'Другое'), ('Раздел 1', 'Раздел 1'),
     ('V Раздел 1', 'V Раздел 1'), ('Раздел 4', 'Раздел 4'),
     ('V Раздел 4', 'V Раздел 4'), ('V Раздел 5', 'V Раздел 5'),
     ('Раздел 1 (статья 1)', 'Раздел 1 (статья 1)'),
@@ -144,7 +144,7 @@ class Comment(BaseNameModel):
         upload_to='comments/'
     )
     book = models.ForeignKey(
-        Book, 
+        Book,
         verbose_name='Книга',
         related_name='comments',
         on_delete=models.SET_NULL,
@@ -325,6 +325,7 @@ class CircleTableCharacters(BaseNameModel):
         related_name='characters',
         on_delete=models.CASCADE
     )
+    
     class Meta:
         verbose_name = 'Круг в таблице персонажей'
         verbose_name_plural = 'Круги в таблице персонажей'
