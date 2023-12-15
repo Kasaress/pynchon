@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}Поиск{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+  {% include 'includes/form_search.html' %}
+  {% include 'includes/v_chapters.html' %}
+  </section>
+  <section class="chapter chapter-2-3-notes">
+    <a class="btn custom-button" href={% url 'wiki:v_part2' %}>вернуться к списку с примечаниями</a>
+    <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+      <div class="chapter-2-3-notes__header">
+        <br><h2 class="chapter-2-3-notes__title title-bold">{{comment.name|safe}}</h2>
+        <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+          Стр.{{comment.page_number_by_2021}}</p><br>
+      </div>
+      <div class="chapter-2-3-notes__text-content">
+        <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+      </div>
+      <br>
+      {% if comment.image %}
+        <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+          data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+        <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body text-center p-0">
+                <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

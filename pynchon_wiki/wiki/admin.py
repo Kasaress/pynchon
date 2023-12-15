@@ -214,7 +214,7 @@ class TableChronologyResource(resources.ModelResource):
 @admin.register(TableChronology)
 class TableChronologyAdmin(ImportExportModelAdmin):
     resource_classes = [TableChronologyResource]
-    list_display = ('pk', 'created_at', 'description', 'sort', 'event_type')
+    list_display = ('pk', 'created_at', 'description', 'sort', 'event_type', 'book')
     search_fields = ('created_at', 'description', 'sort', 'event_type')
     readonly_fields = ('created_at',)
 
@@ -225,7 +225,7 @@ class TableChronologyAdmin(ImportExportModelAdmin):
         }),
         ('Описание', {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('date', 'sort', 'description', 'event_type')
+            'fields': ('date', 'sort', 'description', 'event_type', 'book')
         }),
     )
 
@@ -283,5 +283,5 @@ class CircleTableCharactersResource(resources.ModelResource):
 @admin.register(CircleTableCharacters)
 class CircleTableCharactersAdmin(ImportExportModelAdmin):
     resource_classes = [CircleTableCharactersResource]
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'book',)
     search_fields = ('name',)

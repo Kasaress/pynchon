@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_filters %}
+{% block title %}
+  Персонажи
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/v_chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Персонажи</h1><br>
+  </section>
+  <section class="characters">
+    <p class="characters__text title">Также в&nbsp;этом разделе есть карта романа&nbsp;&mdash; и&nbsp;тоже со&nbsp;всевозможными спойлерами</p>
+    <a class="characters__to-map-link body-text" href="{% url 'wiki:rainbow_part6_map' %}">Перейти к карте</a>
+    <div class="characters__list-block">
+      <ul class="characters__list">
+        <li class="characters__item body-text">Семья</li>
+        <li class="characters__item body-text">Секс</li>
+        <li class="characters__item body-text">Дружба и помощь</li>
+        <li class="characters__item body-text">Дела и работа</li>
+        <li class="characters__item body-text">Потусторонние</li>
+        <li class="characters__item body-text">Двойники</li>
+        <li class="characters__item body-text">Уникальные</li>
+      </ul>
+    </div>
+    <div class="container">
+      <div id="image-container">
+        <img id="image" src="{% static 'img/map.svg' %}" width="100%" rel="preload" as="image">
+      </div>
+      <div class="characters__zoom">
+        <button id="zoom-in-button" type="button">+</button>
+        <button id="zoom-out-button" type="button">-</button>
+      </div>
+    </div>
+    <p class="characters__description body-text">
+      Список персонажей ниже является приложением к Схеме персонажей «Радуги тяготения», или Схема персонажей «Радуги тяготения» является приложением к Списку, кому как удобнее. В любом случае, Список и Схему лучше разглядывать параллельно.<br><br>
+      Под Кругом понимается группа персонажей, объединенная либо общим центральным персонажем, либо общими местом действия, организацией, историей и даже (однократно) лекарственным препаратом. При избрании центральных персонажей был избран критерий не только их места в романе, но и количества непосредственно связанных с ними лиц. К примеру, семья и знакомые Лайла Елейна читателю известны, а Ласло Ябопа – нет. Поэтому, хотя роль Ябопа в романе более важна, чем роль Елейна, создатель онейрина включен в круг «ИГ Фарбен», а масон-бизнесмен образовал свой собственный.<br><br> 
+      Последовательность появления кругов в Списке в целом следует последовательности повествования, но иногда нарушает ее ради логики взаимосвязей кругов. Так, круги «Мандоборо» и «Видения Ленитропа» помещены после круга Ленитропа, хотя их персонажи появляются в тексте позднее, чем, к примеру, персонажи «Германа Геринга» или «Банды Свиристеля».<br><br>
+      Некоторые из героев помещены в тот или иной круг по весьма условной связи потому, что отнести их к какому-либо иному кругу невозможно, а образовать свой собственный круг они не могли в силу ограниченного присутствия в романе. К примеру, родственники привратника в доме Томаса Гвенхидви и покоренная его пением дама помещены в круг «Книга» из-за знакомства с Томасом, а не потому, что они являлись владельцами редкого тома лекций И.П. Павлова. Другой пример, с более спорным, но, как представляется, наилучшим решением: гнусавый Ричард М. Жлобб по прозвищу «Аденоид» связан с разносторонним эрудитом Стивом Эдельманом, написавшим «Сказания Шварцкоммандо», а потому и Жлобб, и Эдельман включены в круг «Шварцкоммандо». Все персонажи с подобными ослабленными связями выделены курсивом.<br><br>
+      Деление персонажей на группы (круги) выявило наличие неких особых групп, члены которых по странному стечению обстоятельств полностью включены в иные группы (круги). Потому отдельно такие группы не выделены в качестве кругов, однако принадлежность к ним героев отмечена в специальном столбце под названием «Группы». К примеру, Эния Ленитроп отличался поразительной любвеобильностью, и полный список его сексуальных партнерш охватит, пожалуй, больше половины всех женских персонажей «Радуги», уже включенных в чей-то или какой-то круг. Поэтому такие женщины дополнительно отмечены принадлежностью к группе «Девушки Ленитропа». Такие группы в соответствующем столбце выделены курсивом, в отличие от названий тех кругов, в которые тот или иной персонаж входит помимо своего основного круга. Так, сквозной герой Пинчона матрос Будин, являясь членом команды «Джона З. Бяки» (основной круг), успел появиться в рассказе «К низинам низин» (Персонаж «К низинам низин») и в романе «V.» (Персонаж «V.»), а также в кругах Куксхафена, Der Platz, У Путци, Ужина Утгардалоки и Противодействия.
+    </p>
+    <div class="characters__table">
+      <table class="table_characters_chronology">
+        <tr class="table_characters_chronology__row">
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Имя </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Имя в оригинале и значение имени </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Портрет </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Группы </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Упоминания </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> Характеристика </p>
+          </td>
+        </tr>
+        {% with previous_group=None %}
+          {% for circle in circles %}
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell" colspan="6">
+                <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ circle.name }}</h4>
+              </td>
+            </tr>
+            {% with characters=circle.characters.all %}
+              {% with group_size=characters|length %}
+                {% for character in characters %}
+                  <tr class="table_characters_chronology__row">
+                    <td class="table_characters_chronology__cell">
+                      <h6 class="table_characters_chronology__text"> {{ character.name }} </h6>
+                    </td>
+                    <td class="table_characters_chronology__cell">
+                      <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
+                    </td>
+                    <td class="table_characters_chronology__cell">
+                      <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
+                    </td>
+                    <td class="table_characters_chronology__cell">
+                      <p class="table_characters_chronology__text"> {{ character.groups }} </p>
+                    </td>
+                    <td class="table_characters_chronology__cell">
+                      <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
+                    </td>
+                    <td class="table_characters_chronology__cell">
+                      <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% endwith %}
+            {% endwith %}
+          {% endfor %}
+        {% endwith %}
+      </table>
+    </div>
+  </section>
+{% endblock %}

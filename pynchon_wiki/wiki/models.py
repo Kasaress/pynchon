@@ -9,12 +9,14 @@ from core.models import BaseModel, BaseNameModel
 User = get_user_model()
 
 CHOICES_CHAPTER = [
-    ('Другое', 'Другое'), ('Раздел 1', 'Раздел 1'),
+    ('Другое', 'Другое'), ('Раздел 1', 'Раздел 1'), 
+    ('V Раздел 1', 'V Раздел 1'), ('Раздел 4', 'Раздел 4'),
+    ('V Раздел 4', 'V Раздел 4'), ('V Раздел 5', 'V Раздел 5'),
     ('Раздел 1 (статья 1)', 'Раздел 1 (статья 1)'),
+    ('V Раздел 1 (статья 1)', 'V Раздел 1 (статья 1)'),
     ('Раздел 1 (статья 2)', 'Раздел 1 (статья 2)'),
-    ('Раздел 2', 'Раздел 2'), ('Раздел 3', 'Раздел 3'),
-    ('Раздел 4', 'Раздел 4'), ('Раздел 5', 'Раздел 5'),
-    ('Раздел 6', 'Раздел 6'), ('Раздел 7', 'Раздел 7'),
+    ('V Раздел 1 (статья 2)', 'V Раздел 1 (статья 2)'),
+    ('Раздел 5', 'Раздел 5'), ('Раздел 7', 'Раздел 7'),
     ('Авторы', 'Авторы'), ('Томас Пинчон', 'Томас Пинчон'),
     ('Запланированные мероприятия', 'Запланированные мероприятия'),
     ('Записи встреч', 'Записи встреч'), ('Другие книги', 'Другие книги'),
@@ -142,7 +144,8 @@ class Comment(BaseNameModel):
         upload_to='comments/'
     )
     book = models.ForeignKey(
-        Book, verbose_name='Книга',
+        Book, 
+        verbose_name='Книга',
         related_name='comments',
         on_delete=models.SET_NULL,
         blank=True,
@@ -214,7 +217,6 @@ class CommentLink(BaseModel):
 
 class TableChronology(BaseModel):
     """ Модель таблицы для определения хронологии. """
-
     date = models.CharField(
         max_length=50,
         verbose_name='Дата',
@@ -234,6 +236,12 @@ class TableChronology(BaseModel):
         'Тип события',
         blank=True,
         null=True
+    )
+    book = models.ForeignKey(
+        Book,
+        verbose_name='Книга',
+        related_name='chronology',
+        on_delete=models.CASCADE
     )
 
     class Meta:
@@ -311,6 +319,12 @@ class Article(BaseNameModel):
 
 class CircleTableCharacters(BaseNameModel):
     """ Модель круга в таблице персонажей."""
+    book = models.ForeignKey(
+        Book,
+        verbose_name='Книга',
+        related_name='characters',
+        on_delete=models.CASCADE
+    )
     class Meta:
         verbose_name = 'Круг в таблице персонажей'
         verbose_name_plural = 'Круги в таблице персонажей'

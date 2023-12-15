@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}
+  KEZVH - Статьи
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    <div class="search"></div><br><br>
+    {% include 'includes/v_chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">KEZVH - Статьи</h1>
+  </section>
+  <section class="chapter chapter-4-kezvh">
+    <div class="chapter-4-kezvh__article">
+      <div class="chapter-4-kezvh__left-column"></div>
+      <div class="chapter-4-kezvh__text-content">
+        {% for article in articles %}
+          <div class="article_transform">
+            {% if article.author_article %}<p class="chapter-1-how__text body-text">{{article.author_article}}</p><br>{% endif %}
+            {% if article.name %}<h2 class="chapter-4-kezvh__title title-bold">{{article.name}}</h2><br>{% endif %}
+            <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
+            {% if article.image %}
+              <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
+                data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+              <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body text-center p-0">
+                      <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <button class="chronology-description__fact-btn body-text" type="button" data-index="{{forloop.counter}}">читать дальше</button>
+        {% endfor %}  
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    const elements = document.querySelectorAll('.article_transform');
+    const buttons = document.querySelectorAll('.chronology-description__fact-btn');
+    
+    buttons.forEach((button) => {
+      let index = button.getAttribute('data-index') - 1;
+      let element = elements[index];
+    
+      const moreText = 'читать далее';
+      const lessText = 'свернуть';
+    
+      if (element.scrollHeight > 130) {
+        button.style.display = 'block';
+      }
+    
+      button.addEventListener('click', () => {
+        if (button.textContent !== lessText) {
+          element.style.height = 'auto';
+          button.textContent = lessText;
+        } else if (button.textContent === lessText) {
+          element.style.height = '130px';
+          button.textContent = moreText;
+        }
+      });
+    });
+  </script>
+{% endblock %}

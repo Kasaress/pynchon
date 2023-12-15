@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  ГИД ПО ПИНЧОНУ: КАК ПОДГОТОВИТЬСЯ К "РАДУГЕ ТЯГОТЕНИЯ"
+{% endblock  %}
+{% block content %}
+  <section class="chapters-nav">
+    <div class="search"></div><br><br>
+    {% include 'includes/v_chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">ГИД ПО ПИНЧОНУ: КАК ПОДГОТОВИТЬСЯ К "РАДУГЕ&nbsp;ТЯГОТЕНИЯ"</h1>
+  </section>
+  <section class="chapter chapter-1-how">
+    {% for article in articles %}
+      <div class="chapter-1-how__article">
+        <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{article.name}}{% endif %}</h2>
+        <p class="chapter-1-how__text body-text">{{article.text|safe}}</p>
+      </div>
+      {% if article.image %}
+        <div class="chapter-1-how__image-container">
+          <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"
+              data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+          <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content_chapter1">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body text-center p-0">
+                  <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="chapter-1-how__sign">
+      <p class="chapter-1-how__text body-text"><span class="chapter-1-how__sign-span">Автор статьи:</span><br>Станислав Распеченко</p>
+    </div>
+  </section>
+{% endblock %}

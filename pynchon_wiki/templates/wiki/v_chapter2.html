@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_filters %}
+{% block title %}
+  Примечания
+{% endblock  %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/v_chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Примечания</h1>
+  </section>
+  <section class="chapter chapter-2-3-notes">
+    <p class="chapter-2-3-notes__description body-text-bold">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и выражений, содержащие справки об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п.<br>
+      Рекомендуется к прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше блуждали по просторам интернета в поисках нужной информации.<br><br>
+      Первый номер страницы — по 760-страничному изданию 2012 года (издательство «Эксмо»), через слэш — номер страницы по 924-страничному изданию 2021 года (издательство «Иностранка»).</p>
+    <div class="chapter-2-3-notes__content">
+      <div class="accordion accordion-flush sidebar accordion-container" id="notesNav">
+        {% for chapter in chapters|sort_queryset:'number' %}
+          <div class="accordion-item">
+            <button class="accordion-button collapsed chapter-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#noteNav-{{ chapter.number }}"
+                aria-expanded="false" aria-controls="noteNav-{{ chapter.number }}"
+                data-chapter-id="{{ chapter.id }}" data-view-page="comments">
+              <div class="accordion-header">
+                <div class="sidebar__icon"></div>
+                <h2 class="sidebar__title title-bold">Глава {{ chapter.number }}</h2>
+              </div>
+              <p class="sidebar-subtitle body-text-bold">{{ chapter.description|safe }}</p>
+            </button>
+            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse">
+              <ul class="accordion-body">
+                {% for comment in chapter.comments.all %}
+                  <li><a class="sidebar__link body-text comment-link"
+                    href="#{{ comment.page_number_by_2012 }}_{{ comment.id }}">{{ comment.name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="chapter-2-3-notes__list">
+        <div id="comments-container">
+          <div id="comments-content">
+            <div class="comments-container">
+              {% for comment in chapters.first.comments.all %}
+                <div class="chapter-2-3-notes__item" id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                  <div class="chapter-2-3-notes__header">
+                    <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
+                    <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+                      Стр.{{comment.page_number_by_2021}}</p><br>
+                  </div>
+                  <div class="chapter-2-3-notes__text-content">
+                    <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+                  </div>
+                  <br>
+                  {% if comment.image %}
+                    <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                      data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+                    <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <div class="modal-body text-center p-0">
+                            <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <br><br>
+          <div class="chapter-navigation">
+            <button id="prev-chapter" class="btn custom-button prev-chapter">Пред. глава</button>
+            <button id="next-chapter" class="btn custom-button next-chapter">След. глава</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
+  </section>
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar__link');
+      const blocks = document.querySelectorAll('.chapter-2-3-notes__item');
+      const nav = document.querySelector('.chapters-nav');
+      const chapterNav = document.querySelector('.chapter-navigation');
+      const sidebar = document.querySelector('.sidebar');
+      const text = document.querySelector('.chapter-2-3-notes__description');
+      const bookBtn = document.querySelector('.header__book');
+
+      const isMobileScreen = () => {
+        return window.innerWidth <= 768;
+      };
+
+      links.forEach(link => {
+        link.addEventListener('click', (event) => {
+          if (!isMobileScreen()) return;
+
+          event.preventDefault();
+
+          const targetId = event.target.getAttribute('href').substring(1);  // Get the target block ID
+          const targetBlock = document.getElementById(targetId);
+
+          if (targetBlock) {
+            blocks.forEach(block => {
+              block.style.display = 'none';
+            });
+
+            targetBlock.style.display = 'flex';
+          }
+
+          sidebar.style.display = 'none';
+          nav.style.display = 'none';
+          text.style.display = 'none';
+          chapterNav.style.display = 'none';
+        });
+      });
+
+      bookBtn.addEventListener('click', () => {
+        sidebar.style.display = 'flex';
+        nav.style.display = 'flex';
+        text.style.display = 'block';
+        chapterNav.style.display = 'block';
+        blocks.forEach(block => {
+          block.style.display = 'none';
+        });
+      })
+
+      window.addEventListener('resize', () => {
+        if (!isMobileScreen()) {
+          blocks.forEach(block => {
+            block.style.display = 'flex';
+          });
+        } else {
+          blocks.forEach(block => {
+            block.style.display = 'none';
+          });
+        }
+      });
+    });
+  </script> {% endcomment %}
+{% endblock %}

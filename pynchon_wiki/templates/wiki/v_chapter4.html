@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_filters %}
+{% block title %}
+  Хронология
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/v_chapters.html' %}
+    <h1 class="chapters-nav__title chapter-title">Хронология</h1>
+    <br><br><br>
+    <section class="chronology">
+      <div class="chronology__slider-container">
+        <div class="swiper-button-prev chronology__prev-btn"></div>
+          <div class="swiper chronology__slider">
+            <div class="swiper-wrapper chronology__wrapper">
+              {% for event in events|sort_queryset:'sort' %} 
+                <div class="swiper-slide chronology__slide" data-id="{{ event.id }}">
+                  <p class="chronology__slide-text">{{ event.date }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        <div class="swiper-button-next chronology__next-btn"></div>
+      </div>
+      {% for event in events|sort_queryset:'sort' %}
+        <p class="chronology__fact body-text-l" data-id="{{ event.id }}">{{ event.description }}</p>
+      {% endfor %}
+    </section>
+    <section class="chronology-description">
+      <h2 class="chronology-description__subtitle title">В хронологической таблице единым списком указаны три типа дат:</h2>
+      <p class="help_text">* для поиска события воспользуйтесь строкой "Поиск"</p>
+      <ul class="chronology-description__facts">
+        {% for article in articles %}
+          <li class="chronology-description__fact">
+            <div class="chronology-description__fact-header">
+              <span class="chronology-description__fact-number title">{{article.sort}}</span>
+              <h3 class="chronology-description__fact-title body-text-bold">{{article.name}}</h3>
+            </div>
+            <p class="chronology-description__fact-text body-text chronology-description__fact-text_short">{{article.text|safe}}</p>
+            <button class="chronology-description__fact-btn body-text" type="button">читать далее</button>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+      <div class="container">
+        <table class="table_characters_chronology">
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Дата </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Событие </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> Тип </p>
+            </td>
+          </tr> 
+          {% for event in events|sort_queryset:'sort' %}
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <h6 class="table_characters_chronology__text"> {{ event.date }} </h6>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ event.description }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ event.event_type }} </p>
+              </td>
+            </tr>
+          {% endfor %} 
+        </table> 
+      </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    // Настройка слайдера дат
+    const slider = new Swiper('.swiper', {
+      slidesPerView: 3,
+      spaceBetween: 18,
+      centeredSlides: true,
+      loop: true,
+      direction: 'vertical',
+      autoHeight: true,
+      slideActiveClass: 'chronology__slide_active',
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      breakpoints: {
+        1024: {
+          spaceBetween: 14,
+          // direction: 'horizontal',
+        }
+      }
+    })
+
+    const slides = document.querySelectorAll('.chronology__slide-text');
+
+    slider.on('slideChange', () => {
+      for (const slide of slides) {
+        if (slide.textContent.length > 10) {
+          slide.classList.add('chronology__slide_s')
+        }
+      }
+    })
+
+    const factContainers = document.querySelectorAll('.chronology__fact');
+    slider.on('slideChange', () => {
+        const activeSlideId = slider.slides[slider.activeIndex].dataset.id;
+        
+        factContainers.forEach(container => {
+            if (container.dataset.id === activeSlideId) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        });
+    });
+
+    function setDefaultFact() {
+      factContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+
+      factContainers[0].style.display = 'block';
+    }
+    setDefaultFact();
+
+    // Управление разворачиванием и сворачиванием текста
+    const facts = document.querySelectorAll('.chronology-description__fact');
+
+    facts.forEach((fact) => {
+      const text = fact.querySelector('.chronology-description__fact-text');
+      const button = fact.querySelector('.chronology-description__fact-btn');
+      const moreText = 'читать дальше';
+      const collapseText = 'свернуть';
+
+      if (text.scrollHeight > 130) {
+        button.style.display = 'block';
+      }
+
+      button.addEventListener('click', () => {
+        if (button.textContent !== collapseText) {
+          text.style.height = 'auto';
+          button.textContent = collapseText;
+        } else if (button.textContent === collapseText) {
+          text.style.height = '130px';
+          button.textContent = moreText;
+        }
+      })
+    })
+  </script>
+{% endblock %}

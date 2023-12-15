@@ -5,7 +5,10 @@ from django.core.mail.message import EmailMessage
 from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
-from pynchon_wiki.settings import EMAIL_HOST_USER, EMAIL_RECIPIENT
+from pynchon_wiki.settings import (
+    EMAIL_HOST_USER, EMAIL_RECIPIENT, RAINBOW_START_EVENT, V_START_EVENT,
+    RAINBOW_BOOK, V_BOOK
+)
 from .decorators import page_in_development
 from .forms import ContactForm
 from .models import (
@@ -185,14 +188,11 @@ def rainbow_part4(request):
 def rainbow_part5(request):
     """ Страница с хронологией. """
     template = 'wiki/chapter5.html'
-    book = get_object_or_404(Book, name='Радуга тяготения')
     articles = Article.objects.filter(attitude='Раздел 5')
     context = {
-        'book': book,
-        'chapters': Chapter.objects.filter(book=book).all(),
-        'start_event': TableChronology.objects.get(id=1589),
+        'start_event': TableChronology.objects.get(id=RAINBOW_START_EVENT),
         'articles': articles,
-        'events': TableChronology.objects.all(),
+        'events': TableChronology.objects.filter(book=RAINBOW_BOOK),
         'search_model': 'chronology'
     }
     return render(request, template, context)
@@ -201,7 +201,7 @@ def rainbow_part5(request):
 def rainbow_part6(request):
     """ Страница с персонажами. """
     template = 'wiki/chapter6.html'
-    circles = CircleTableCharacters.objects.all()
+    circles = CircleTableCharacters.objects.filter(book=RAINBOW_BOOK)
     context = {
         'circles': circles,
         'search_model': 'characters'
@@ -298,6 +298,107 @@ def search(request):
             )
     return render(request, 'wiki/search_results.html', {
         'results': results, 'query': query, 'search_model': search_model})
+
+
+def v_part1(request):
+    """ Страница со статьей. """
+    template = 'wiki/v_chapter1.html'
+    articles = Article.objects.filter(attitude='V Раздел 1')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
+def v_article1(request):
+    """ Страница со статьей. """
+    template = 'wiki/v_article1.html'
+    articles = Article.objects.filter(attitude='V Раздел 1 (статья 1)')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
+def v_article2(request):
+    """ Страница со статьей. """
+    template = 'wiki/v_article2.html'
+    articles = Article.objects.filter(attitude='V Раздел 1 (статья 2)')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context=context)
+
+
+def v_part2(request):
+    """ Страница с примечаниями. """
+    template = 'wiki/v_chapter2.html'
+    book = get_object_or_404(Book, name='V')
+    chapters = Chapter.objects.filter(book=book)
+    context = {
+        'book': book,
+        'chapters': chapters,
+        'search_model': 'comments'
+    }
+    return render(request, template, context)
+
+
+def v_part2_detail(request, comment_id):
+    """ Страница с отдельным примечанием. """
+    template = 'wiki/v_chapter2_detail.html'
+    comment = Comment.objects.get(pk=comment_id)
+    context = {
+        'comment': comment
+    }
+    return render(request, template, context)
+
+
+def v_part3(request):
+    """ Страница со статьями. """
+    template = 'wiki/v_chapter3.html'
+    book = get_object_or_404(Book, name='V')
+    articles = Article.objects.filter(attitude='V Раздел 3')
+    context = {
+        'book': book,
+        'articles': articles
+    }
+    return render(request, template, context)
+
+
+def v_part4(request):
+    """ Страница с хронологией. """
+    template = 'wiki/v_chapter4.html'
+    book = get_object_or_404(Book, name='V')
+    articles = Article.objects.filter(attitude='V Раздел 4')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+        'start_event': TableChronology.objects.get(id=V_START_EVENT),
+        'articles': articles,
+        'events': TableChronology.objects.filter(book=V_BOOK),
+        'search_model': 'chronology'
+    }
+    return render(request, template, context)
+
+
+def v_part5(request):
+    """ Страница с персонажами. """
+    template = 'wiki/v_chapter5.html'
+    circles = CircleTableCharacters.objects.filter(book=V_BOOK)
+    context = {
+        'circles': circles,
+        'search_model': 'characters'
+    }
+    return render(request, template, context)
+
+
+def v_part5_map(request):
+    """ Страница с картой перемещений персонажей. """
+    template = 'wiki/v_chapter5_map.html'
+    context = {
+        'search_model': 'characters'
+    }
+    return render(request, template, context)
 
 
 def in_development(request):
