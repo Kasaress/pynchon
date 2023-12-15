@@ -325,7 +325,7 @@ class CircleTableCharacters(BaseNameModel):
         related_name='characters',
         on_delete=models.CASCADE
     )
-    
+
     class Meta:
         verbose_name = 'Круг в таблице персонажей'
         verbose_name_plural = 'Круги в таблице персонажей'
