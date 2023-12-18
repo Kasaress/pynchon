@@ -165,7 +165,9 @@ class Comment(BaseNameModel):
         verbose_name='Нумерация глав в старом издании'
     )
     page_number_by_2021 = models.PositiveIntegerField(
-        verbose_name='Нумерация глав в новом издании'
+        verbose_name='Нумерация глав в новом издании',
+        blank=True,
+        null=True
     )
     sort = models.PositiveBigIntegerField(
         verbose_name='Сортировка',
