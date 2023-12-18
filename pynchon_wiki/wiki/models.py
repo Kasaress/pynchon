@@ -162,7 +162,9 @@ class Comment(BaseNameModel):
         null=True
     )
     page_number_by_2012 = models.PositiveIntegerField(
-        verbose_name='Нумерация глав в старом издании'
+        verbose_name='Нумерация глав в старом издании',
+        blank=True,
+        null=True
     )
     page_number_by_2021 = models.PositiveIntegerField(
         verbose_name='Нумерация глав в новом издании',
