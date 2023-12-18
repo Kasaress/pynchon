@@ -62,6 +62,8 @@ class Chapter(BaseModel):
     )
     pov = RichTextField(
         verbose_name='POV',
+        blank=True,
+        null=True
     )
     book_part = models.PositiveIntegerField(
         verbose_name='Часть книги',
