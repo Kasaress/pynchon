@@ -16,7 +16,7 @@
       Страницы приведены по изданию "Иностранки", 2022 год, переводчик М. Немцов.</p>
     <div class="chapter-2-3-notes__content">
       <div class="accordion accordion-flush sidebar accordion-container" id="notesNav">
-        {% for chapter in chapters|sort_queryset:'number' %}
+        {% for chapter in chapters %}
           <div class="accordion-item">
             <button class="accordion-button collapsed chapter-button" type="button"
                 data-bs-toggle="collapse" data-bs-target="#noteNav-{{ chapter.number }}"
