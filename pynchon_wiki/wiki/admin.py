@@ -142,7 +142,7 @@ class CommentResource(resources.ModelResource):
         exclude = ('created_at', 'is_active', 'deleted_at')
         fields = (
             'id',
-            'page_number_by_2021',
+            'page_number_by_2012',
             'name',
             'comment_text',
             'image',
