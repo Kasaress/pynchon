@@ -334,7 +334,7 @@ def v_part2(request):
     """ Страница с примечаниями. """
     template = 'wiki/v_chapter2.html'
     book = get_object_or_404(Book, name='V')
-    chapters = Chapter.objects.filter(book=book)
+    chapters = Chapter.objects.filter(book=book).order_by('sort')
     context = {
         'book': book,
         'chapters': chapters,

@@ -66,7 +66,8 @@ class ChapterAdmin(ImportExportModelAdmin):
         'book',
         'book_part',
         'preview',
-        'get_links'
+        'get_links',
+        'sort'
     )
     search_fields = ('number',)
     list_filter = ('number', 'book')
@@ -84,7 +85,8 @@ class ChapterAdmin(ImportExportModelAdmin):
         }),
         ('Описание', {
             'classes': ('wide', 'extrapretty'),
-            'fields': ('description', 'pov', 'summary', 'interpretation',)
+            'fields': ('description', 'pov', 'summary',
+                       'interpretation', 'sort')
         }),
         ('Изображение', {
             'classes': ('wide', 'extrapretty'),

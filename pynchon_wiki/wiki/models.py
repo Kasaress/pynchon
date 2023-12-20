@@ -94,6 +94,11 @@ class Chapter(BaseModel):
         null=True,
         blank=True
     )
+    sort = models.IntegerField(
+        verbose_name='Сортировка',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         verbose_name = 'Глава'
