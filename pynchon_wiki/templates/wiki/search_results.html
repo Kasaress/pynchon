@@ -10,11 +10,13 @@
     <div class="container">
       <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ query }}"</h3><br>
       <a class="btn custom-button" href={% if search_model == 'comments' %}
-                                            {% url 'wiki:rainbow_part2' %}	
+                                          {% url 'wiki:rainbow_part2' %}
+                                        {% elif search_model == 'v_comments' %}
+                                          {% url 'wiki:v_part2' %}	
                                         {% elif search_model == 'chronology' %}
-                                            {% url 'wiki:rainbow_part5' %}
+                                          {% url 'wiki:rainbow_part5' %}
                                         {% elif search_model == 'characters' %}
-                                            {% url 'wiki:rainbow_part6' %}
+                                          {% url 'wiki:rainbow_part6' %}
                                         {% endif %}>
           Назад
       </a>
@@ -133,6 +135,38 @@
         {% empty %}
           <h5>По вашему запросу ничего не найдено =(</h5>
         {% endfor %}
+      {% elif search_model == 'v_comments' and query != '' %}
+        {% for result in results %}
+          {% with result as comment %}
+            <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+              <div class="chapter-2-3-notes__header">
+                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|safe}}</h2>
+                <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}}</p><br>
+              </div>
+              <div class="chapter-2-3-notes__text-content">
+                <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
+              </div>
+              <br>
+              {% if comment.image %}
+                <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+                <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <div class="modal-body text-center p-0">
+                        <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <br>
+          {% endwith %}
+        {% empty %}
+          <h5>По вашему запросу ничего не найдено =(</h5>
+        {% endfor %}  
       {% endif %}
     </div>
   </section>

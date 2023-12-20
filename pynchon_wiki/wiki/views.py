@@ -338,7 +338,7 @@ def v_part2(request):
     context = {
         'book': book,
         'chapters': chapters,
-        'search_model': 'comments'
+        'search_model': 'v_comments'
     }
     return render(request, template, context)
 
