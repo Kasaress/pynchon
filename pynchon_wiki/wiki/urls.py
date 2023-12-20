@@ -25,6 +25,7 @@ urlpatterns = [
     path('v/article1', views.v_article1, name='v_article1'),
     path('v/article2', views.v_article2, name='v_article2'),
     path('v_part2', views.v_part2, name='v_part2'),
+    path('v_comments/', views.v_get_comments, name='v_get_comments'),
     path(
         'v_part2_detail/<int:comment_id>', views.v_part2_detail,
         name='v_part2_detail'

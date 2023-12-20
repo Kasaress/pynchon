@@ -343,6 +343,18 @@ def v_part2(request):
     return render(request, template, context)
 
 
+def v_get_comments(request):
+    """ Динамический контент комментариев главы. """
+    template = 'wiki/v_comments.html'
+    selected_chapter_id = request.GET.get('chapter_id')
+    comments = Comment.objects.filter(chapter_id=selected_chapter_id)
+    context = {
+        'selected_chapter_id': selected_chapter_id,
+        'comments': comments,
+    }
+    return render(request, template, context)
+
+
 def v_part2_detail(request, comment_id):
     """ Страница с отдельным примечанием. """
     template = 'wiki/v_chapter2_detail.html'
