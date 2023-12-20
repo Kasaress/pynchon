@@ -348,8 +348,6 @@ def v_get_comments(request):
     template = 'wiki/v_comments.html'
     selected_chapter_id = request.GET.get('chapter_id')
     comments = Comment.objects.filter(chapter_id=selected_chapter_id)
-    print(selected_chapter_id)
-    print(comments)
     context = {
         'selected_chapter_id': selected_chapter_id,
         'comments': comments,

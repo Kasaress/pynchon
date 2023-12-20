@@ -32,7 +32,7 @@
               <ul class="accordion-body">
                 {% for comment in chapter.comments.all %}
                   <li><a class="sidebar__link body-text comment-link"
-                    href="#{{ comment.page_number_by_2012 }}_{{ comment.id }}">{{ comment.name }}</a>
+                    href="#{{ comment.id }}">{{ comment.name }}</a>
                   </li>
                 {% endfor %}
               </ul>
@@ -45,7 +45,7 @@
           <div id="comments-content">
             <div class="comments-container">
               {% for comment in chapters.first.comments.all %}
-                <div class="chapter-2-3-notes__item" id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+                <div class="chapter-2-3-notes__item" id="{{ comment.id }}">
                   <div class="chapter-2-3-notes__header">
                     <h2 class="chapter-2-3-notes__title title-bold">{{comment.name}}</h2>
                     <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}}</p><br>
