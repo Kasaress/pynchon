@@ -273,6 +273,20 @@ def search(request):
                 r'<span class="highlighted">\1</span>',
                 result.name, flags=re.IGNORECASE
             )
+    elif search_model == 'v_comments':
+        results = Comment.objects.filter(
+            Q(comment_text__icontains=query) | Q(name__icontains=query))
+        for result in results:
+            result.comment_text = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.comment_text, flags=re.IGNORECASE
+            )
+            result.name = re.sub(
+                r'(%s)' % re.escape(query),
+                r'<span class="highlighted">\1</span>',
+                result.name, flags=re.IGNORECASE
+            )
     elif search_model == 'chronology':
         results = TableChronology.objects.filter(
             Q(description__icontains=query) | Q(date__icontains=query)
