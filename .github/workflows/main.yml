@@ -69,4 +69,5 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/pynchon_wiki
             sudo docker compose up -d
             sudo docker compose start
+            sudo docker image prune -a
 
