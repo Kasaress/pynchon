@@ -348,7 +348,7 @@ class CircleTableCharacters(BaseNameModel):
 
 class TableСharacters(BaseNameModel):
     """ Модель таблицы персонажей."""
-    
+
     value_name = models.TextField(
         'Имя в оригинале и значение',
         null=True,
