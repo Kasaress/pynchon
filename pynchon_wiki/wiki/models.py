@@ -228,6 +228,7 @@ class CommentLink(BaseModel):
 
 class TableChronology(BaseModel):
     """ Модель таблицы для определения хронологии. """
+
     date = models.CharField(
         max_length=50,
         verbose_name='Дата',
@@ -267,6 +268,7 @@ class TableChronology(BaseModel):
 
 class Article(BaseNameModel):
     """ Модель статей. """
+
     name = models.CharField(
         'Название',
         max_length=255,
@@ -330,6 +332,7 @@ class Article(BaseNameModel):
 
 class CircleTableCharacters(BaseNameModel):
     """ Модель круга в таблице персонажей."""
+
     book = models.ForeignKey(
         Book,
         verbose_name='Книга',
@@ -345,6 +348,7 @@ class CircleTableCharacters(BaseNameModel):
 
 class TableСharacters(BaseNameModel):
     """ Модель таблицы персонажей."""
+    
     value_name = models.TextField(
         'Имя в оригинале и значение',
         null=True,
