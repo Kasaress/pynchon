@@ -1,48 +1,50 @@
 {% load static %}
-<header class="header">
-  <a class="header__logo-link" href="{% url 'wiki:index' %}" target="_self">
-    <img class="header__logo" src="{% static 'img/logo.png' %}" alt="лого">
-  </a>
-  <ul class="header__links"> 
+{% with request.resolver_match.view_name as view_name %}
+  <header class={% if 'wiki:v_index' in view_name %}"header v-main"{% else %}"header"{% endif %}>
+{% endwith %}
+    <a class="header__logo-link" href="{% url 'wiki:index' %}" target="_self">
+      <img class="header__logo" src="{% static 'img/logo.png' %}" alt="лого">
+    </a>
+    <ul class="header__links"> 
+      {% with request.resolver_match.view_name as view_name %}
+        <li class="header__item">
+          <a class="header__link link body-text-l" 
+            href="{% if 'wiki:rainbow_part' in view_name %}
+                    {% url 'wiki:author' %}
+                  {% elif 'wiki:index' in view_name%}
+                    {% url 'wiki:author' %}
+                  {% else %}
+                    {% url 'wiki:index' %}
+                  {% endif %}" target="_self">
+            {% if 'wiki:rainbow_part' in view_name %}
+              ТОМАС ПИНЧОН
+            {% elif 'wiki:index' in view_name%}
+              ТОМАС ПИНЧОН
+            {% else %}
+              РАДУГА ТЯГОТЕНИЯ
+            {% endif %}
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link link body-text-l" 
+            href="{% url 'wiki:other-books' %}" target="_self">
+            ДРУГИЕ КНИГИ
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link link body-text-l"
+            href="{% url 'wiki:about-project' %}" target="_self">
+            О ПРОЕКТЕ
+          </a>
+        </li>
+      {% endwith %}
+    </ul>
     {% with request.resolver_match.view_name as view_name %}
-      <li class="header__item">
-        <a class="header__link link body-text-l" 
-          href="{% if 'wiki:rainbow_part' in view_name %}
-                  {% url 'wiki:author' %}
-                {% elif 'wiki:index' in view_name%}
-                  {% url 'wiki:author' %}
-                {% else %}
-                  {% url 'wiki:index' %}
-                {% endif %}" target="_self">
-          {% if 'wiki:rainbow_part' in view_name %}
-            ТОМАС ПИНЧОН
-          {% elif 'wiki:index' in view_name%}
-            ТОМАС ПИНЧОН
-          {% else %}
-            РАДУГА ТЯГОТЕНИЯ
-          {% endif %}
-        </a>
-      </li>
-      <li class="header__item">
-        <a class="header__link link body-text-l" 
-          href="{% url 'wiki:other-books' %}" target="_self">
-          ДРУГИЕ КНИГИ
-        </a>
-      </li>
-      <li class="header__item">
-        <a class="header__link link body-text-l"
-          href="{% url 'wiki:about-project' %}" target="_self">
-          О ПРОЕКТЕ
-        </a>
-      </li>
+      {% if 'wiki:rainbow_part2' in view_name %}
+        <button class="header__book" type="button"></button>
+      {% elif 'wiki:rainbow_part3' in view_name %}
+        <button class="header__book" type="button"></button>
+      {% endif %}
     {% endwith %}
-  </ul>
-  {% with request.resolver_match.view_name as view_name %}
-    {% if 'wiki:rainbow_part2' in view_name %}
-      <button class="header__book" type="button"></button>
-    {% elif 'wiki:rainbow_part3' in view_name %}
-      <button class="header__book" type="button"></button>
-    {% endif %}
-  {% endwith %}
-  <button class="header__button" type="button"></button>
-</header>
+    <button class="header__button" type="button"></button>
+  </header>

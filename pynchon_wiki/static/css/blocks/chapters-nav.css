@@ -50,15 +50,13 @@
 
 .chapters-nav__list {
   list-style: none;
-  width: 100%;
-  max-width: 1440px;
+  width: max-content;
+  max-width: 100%;
   margin: 0 auto 60px;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(7, 176px);
-  grid-template-rows: 180px;
+  display: flex;
   gap: 8px;
-  justify-content: center;
+  justify-content: start;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
@@ -70,7 +68,9 @@
 }
 
 .chapters-nav__item {
-  width: 100%;
+  width: 176px;
+  min-width: 176px;
+  min-height: 180px;
   padding: 8px 16px;
   box-sizing: border-box;
   background-color: #F3F0EA;
@@ -134,12 +134,6 @@
   padding: 0;
 }
 
-@media screen and (max-width: 1439px) {
-  .chapters-nav__list {
-    justify-content: start;
-  }
-}
-
 @media screen and (max-width: 1079px) {
   .chapters-nav {
     padding-bottom: 40px;
@@ -154,10 +148,14 @@
   }
 
   .chapters-nav__list {
-    grid-template-columns: repeat(7, 160px);
-    grid-template-rows: 160px;
     gap: 16px;
     margin-bottom: 40px;
+  }
+
+  .chapters-nav__item {
+    width: 160px;
+    min-width: 160px;
+    min-height: 160px;
   }
 
   .chapters-nav__name {

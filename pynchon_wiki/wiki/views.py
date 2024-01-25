@@ -314,6 +314,17 @@ def search(request):
         'results': results, 'query': query, 'search_model': search_model})
 
 
+def v_index(request):
+    """ Главная страница книги 'Радуга тяготения'. """
+    template = 'wiki/v_index.html'
+    book = get_object_or_404(Book, name='V')
+    context = {
+        'book': book,
+        'chapters': Chapter.objects.filter(book=book).all(),
+    }
+    return render(request, template, context=context)
+
+
 def v_part1(request):
     """ Страница со статьей. """
     template = 'wiki/v_chapter1.html'

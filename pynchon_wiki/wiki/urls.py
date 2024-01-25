@@ -43,5 +43,6 @@ urlpatterns = [
     path('creators', views.creators, name='creators'),
     path('author', views.author, name='author'),
     path('search', views.search, name='search'),
+    path('v/', views.v_index, name='v_index'),
     path('', views.index, name='index'),
 ]
