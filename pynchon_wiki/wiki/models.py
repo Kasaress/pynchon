@@ -255,7 +255,9 @@ class TableChronology(BaseModel):
         Book,
         verbose_name='Книга',
         related_name='chronology',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     class Meta:
