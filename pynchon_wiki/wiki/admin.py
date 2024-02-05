@@ -210,11 +210,11 @@ class TableChronologyResource(resources.ModelResource):
         attribute='book',
         widget=widgets.ForeignKeyWidget(Book, 'id')
     )
-    
+
     class Meta:
         model = TableChronology
         exclude = ('created_at', 'is_active', 'deleted_at')
-        fields = ('id', 'date', 'description')
+        fields = ('id', 'date', 'description', 'book_id')
 
 
 @admin.register(TableChronology)
