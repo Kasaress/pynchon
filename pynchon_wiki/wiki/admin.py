@@ -205,7 +205,12 @@ class CommentAdmin(ImportExportModelAdmin):
 
 
 class TableChronologyResource(resources.ModelResource):
-
+    book_id = fields.Field(
+        column_name='book_id',
+        attribute='book',
+        widget=widgets.ForeignKeyWidget(Book, 'id')
+    )
+    
     class Meta:
         model = TableChronology
         exclude = ('created_at', 'is_active', 'deleted_at')
