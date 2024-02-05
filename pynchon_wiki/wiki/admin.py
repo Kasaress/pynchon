@@ -209,7 +209,7 @@ class TableChronologyResource(resources.ModelResource):
     class Meta:
         model = TableChronology
         exclude = ('created_at', 'is_active', 'deleted_at')
-        fields = ('id', 'sort', 'date', 'description', 'event_type')
+        fields = ('id', 'date', 'description')
 
 
 @admin.register(TableChronology)
