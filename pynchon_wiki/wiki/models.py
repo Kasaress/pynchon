@@ -242,7 +242,9 @@ class TableChronology(BaseModel):
     )
     sort = models.CharField(
         max_length=10,
-        verbose_name='Сортировка'
+        verbose_name='Сортировка',
+        blank=True,
+        null=True
     )
     event_type = models.PositiveSmallIntegerField(
         'Тип события',
