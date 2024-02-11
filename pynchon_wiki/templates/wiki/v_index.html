@@ -7,10 +7,10 @@
   <section class="promo v">
     <p class="promo__text title">Ведущий представитель постмодернистской литературы второй половины XX века.<br><br>
     <span class="body-text-bold">Обладатель Фолкнеровской премии за лучший дебют, лауреат Национальной книжной премии</span></p>
-    <img class="promo__v-venera" src="{% static 'img/venera_animation.gif' %}" alt="">
+    <img class="promo__v-venera" src="{% static 'img/venera.gif' %}" rel="preload" alt="">
     <div class="promo__v-v">
-      <img class="promo__v-silhouette" src="{% static 'img/silhouette.svg' %}">
-      <img class="promo__v-silhouette" src="{% static 'img/silhouette.svg' %}">
+      <img class="promo__v-silhouette" src="{% static 'img/silhouette-left.svg' %}" rel="preload" alt="">
+      <img class="promo__v-silhouette" src="{% static 'img/silhouette-right.svg' %}" rel="preload" alt="">
     </div>
     <div class="promo__v-dot"></div>
   </section>
@@ -26,7 +26,6 @@
           <p class="chapter-preview__text body-text">Обзорные материалы о романе "V.", которые можно читать до чтения романа. Спойлеров нет, однако присутствует информация о структуре книги.</p>
           <a class="chapter-preview__link" href="{% url "wiki:v_part1" %}">Читать</a>
         </div>
-        <img class="tentacle tentacle1" src="{% static 'img/tentacle1.png' %}" alt="фон">
       </div>
       <div class="chapter-preview chapter-preview_dark">
         <div class="chapter-preview__content chapter-preview__content_right">
