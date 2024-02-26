@@ -12,5 +12,7 @@
     <script src="{% static 'js/zoom_image_table.js' %}"></script>
   {% elif 'wiki:about-project' in view_name %}
     <script src="{% static 'js/meetings.js' %}"></script>
+  {% elif 'wiki:v_index' in view_name %}
+    <script src="{% static 'js/v-main.js' %}"></script>
   {% endif %}
 {% endwith %}
