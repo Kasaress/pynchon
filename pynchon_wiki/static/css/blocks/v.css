@@ -97,8 +97,6 @@
   left: 80px;
   bottom: 200px;
   z-index: 1;
-  -webkit-animation: transparency 0.5s ease-out 1.7s forwards;
-          animation: transparency 0.5s ease-out 1.7s forwards;
 }
 
 .v .promo__text span {
@@ -130,8 +128,6 @@
   -webkit-transform-origin: bottom right;
       -ms-transform-origin: bottom right;
           transform-origin: bottom right;
-  -webkit-animation: silhouetteLeft 2s ease-out 1.7s forwards;
-          animation: silhouetteLeft 2s ease-out 1.7s forwards;
 }
 
 .promo__v-silhouette:last-of-type {
@@ -139,8 +135,6 @@
   -webkit-transform-origin: bottom left;
       -ms-transform-origin: bottom left;
           transform-origin: bottom left;
-  -webkit-animation: silhouetteRight 2s ease-out 1.7s forwards;
-          animation: silhouetteRight 2s ease-out 1.7s forwards;
 }
 
 .promo__v-dot {
@@ -151,8 +145,6 @@
   bottom: 1px;
   left: calc(50% + 50px);
   border-radius: 50%;
-  -webkit-animation: pointBounce 2s ease-out 0.7s forwards;
-          animation: pointBounce 2s ease-out 0.7s forwards;
 }
 
 .v .search__button {
@@ -219,6 +211,16 @@
 
 .v .chronology-description__fact-number {
   background-color: #9E501F;
+}
+
+.bg-crocodile {
+  position: absolute;
+  top: 0px;
+  left: -50px;
+  transform: rotate(45deg);
+  filter: invert(30%);
+  opacity: 20%;
+  z-index: 1;
 }
 
 @media screen and (max-width: 1279px) {
