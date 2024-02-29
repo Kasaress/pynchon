@@ -5,12 +5,12 @@
 {% endblock %}
 {% block content %}
   <section class="promo v">
-    <p class="promo__text title">Ведущий представитель постмодернистской литературы второй половины XX века.<br><br>
+    <p class="promo__text title" id="v-promo-text">Ведущий представитель постмодернистской литературы второй половины XX века.<br><br>
     <span class="body-text-bold">Обладатель Фолкнеровской премии за лучший дебют, лауреат Национальной книжной премии</span></p>
     <img class="promo__v-venera" src="{% static 'img/venera.gif' %}" rel="preload" alt="">
     <div class="promo__v-v">
-      <img class="promo__v-silhouette" src="{% static 'img/silhouette-left.svg' %}" rel="preload" alt="">
-      <img class="promo__v-silhouette" src="{% static 'img/silhouette-right.svg' %}" rel="preload" alt="">
+      <img class="promo__v-silhouette" id="silhouette-left" src="{% static 'img/silhouette-left.svg' %}" rel="preload" alt="">
+      <img class="promo__v-silhouette" id="silhouette-right" src="{% static 'img/silhouette-right.svg' %}" rel="preload" alt="">
     </div>
     <div class="promo__v-dot"></div>
   </section>
@@ -37,7 +37,7 @@
           <p class="chapter-preview__text body-text">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и выражений, содержащие справки об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п. Рекомендуется к прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше блуждали по просторам интернета в поисках нужной информации.</p>
           <a class="chapter-preview__link" href="{% url "wiki:v_part2" %}">Читать</a>
         </div>
-        {% comment %} <img class="bg-crocodile" src="{% static 'img/bg-crocodile.png' %}" alt="фон"> {% endcomment %}
+        <img class="bg-crocodile" src="{% static 'img/footprints.png' %}" alt="фон">
       </div>
       <div class="chapter-preview chapter-preview_dark">
         <div class="chapter-preview__content">
