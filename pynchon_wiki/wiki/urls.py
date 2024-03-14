@@ -22,8 +22,6 @@ urlpatterns = [
     ),
     path('rainbow_part7', views.rainbow_part7, name='rainbow_part7'),
     path('v_part1', views.v_part1, name='v_part1'),
-    path('v/article1', views.v_article1, name='v_article1'),
-    path('v/article2', views.v_article2, name='v_article2'),
     path('v_part2', views.v_part2, name='v_part2'),
     path('v_comments/', views.v_get_comments, name='v_get_comments'),
     path(

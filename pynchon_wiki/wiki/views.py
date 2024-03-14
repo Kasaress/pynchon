@@ -335,26 +335,6 @@ def v_part1(request):
     return render(request, template, context=context)
 
 
-def v_article1(request):
-    """ Страница со статьей. """
-    template = 'wiki/v_article1.html'
-    articles = Article.objects.filter(attitude='V Раздел 1 (статья 1)')
-    context = {
-        'articles': articles
-    }
-    return render(request, template, context=context)
-
-
-def v_article2(request):
-    """ Страница со статьей. """
-    template = 'wiki/v_article2.html'
-    articles = Article.objects.filter(attitude='V Раздел 1 (статья 2)')
-    context = {
-        'articles': articles
-    }
-    return render(request, template, context=context)
-
-
 def v_part2(request):
     """ Страница с примечаниями. """
     template = 'wiki/v_chapter2.html'
