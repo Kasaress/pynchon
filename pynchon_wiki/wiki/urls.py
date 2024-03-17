@@ -29,8 +29,10 @@ urlpatterns = [
         name='v_part2_detail'
     ),
     path('v_part3', views.v_part3, name='v_part3'),
-    path("v_part3_detail/<int:article_id>", views.v_part3_detail,
-        name="v_part3_detail"),
+    path(
+        'v_part3_detail/<int:article_id>', views.v_part3_detail,
+        name='v_part3_detail'
+    ),
     path('v_part4', views.v_part4, name='v_part4'),
     path('v_part5', views.v_part5, name='v_part5'),
     path('v_part5_map', views.v_part5_map, name='v_part5_map'),
