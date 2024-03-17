@@ -382,6 +382,18 @@ def v_part3(request):
     return render(request, template, context)
 
 
+def v_part3_detail(request, article_id):
+    """ Страница со статьями. """
+    template = 'wiki/v_chapter3_detail.html'
+    book = get_object_or_404(Book, name='V')
+    article = Article.objects.get(pk=article_id)
+    context = {
+        'book': book,
+        'article': article
+    }
+    return render(request, template, context)
+
+
 def v_part4(request):
     """ Страница с хронологией. """
     template = 'wiki/v_chapter4.html'
