@@ -330,6 +330,20 @@ a {
   text-decoration: none;
 }
 
+.menu__sublinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 16px;
+  box-sizing: border-box;
+  margin-top: -16px;
+}
+
+.menu__sublink {
+  color: #F8F6F3;
+  text-decoration: none;
+}
+
 /* попап подтверждения возраста */
 
 .age-popup {
