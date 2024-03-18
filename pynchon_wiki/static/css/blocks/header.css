@@ -5,7 +5,6 @@
   align-items: center;
   padding: 0 80px 0 65px;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .header__logo {
@@ -20,6 +19,10 @@
   padding: 0;
 }
 
+.header__item {
+  position: relative;
+}
+
 .header__link {
   color: #151515;
   font-style: italic;
@@ -30,6 +33,48 @@
 
 .header__link:hover {
   border-bottom: 1px solid #151515;
+}
+
+.header__drop {
+  width: 200px;
+  position: absolute;
+  top: calc(32px - 1px);
+  right: 0;
+  padding: 14px 0 0;
+  box-sizing: border-box;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 100ms ease, visibility 100ms ease;
+  /* width: 100%; */
+  /* top: 54px; */
+  /* top: 0; */
+  /* right: 80px; */
+  /* display: none; */
+}
+
+.header__drop-links {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 4px;
+  background-color: #151515;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+@media (hover: hover) {
+  .header__link:hover ~ .header__drop,
+  .header__drop:hover {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.header__drop-link {
+  width: 100%;
+  text-decoration: none;
+  color: #F3F0EA;
 }
 
 .header__button {

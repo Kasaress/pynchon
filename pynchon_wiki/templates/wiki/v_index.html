@@ -5,9 +5,9 @@
 {% endblock %}
 {% block content %}
   <section class="promo v">
-    <p class="promo__text title" id="v-promo-text">САМЫЙ ЯРКИЙ ДЕБЮТ В ЛИТЕРАТУРЕ ХХ&nbsp;ВЕКА.<br><br>
-    <span class="body-text-bold">Первый роман Томаса Пинчона, названный журналом «Time» «дофрейдовской роскошью снов». 
-      <br><em>Песьи дни закончились, перестал дуть майистрал</em></span></p>
+    <p class="promo__text title" id="v-promo-text">САМЫЙ ЯРКИЙ ДЕБЮТ В&nbsp;ЛИТЕРАТУРЕ ХХ&nbsp;ВЕКА<br><br>
+    <span class="body-text-bold">&laquo;Дофрейдовская роскошь снов&raquo; ("Time")<br>
+      Песьи дни закончились, перестал дуть майистрал</span></p>
     <img class="promo__v-venera" src="{% static 'img/venera.gif' %}" rel="preload" alt="">
     <div class="promo__v-v">
       <img class="promo__v-silhouette" id="silhouette-left" src="{% static 'img/silhouette-left.svg' %}" rel="preload" alt="">
@@ -16,35 +16,40 @@
     <div class="promo__v-dot"></div>
   </section>
   <section class="chapters v">
+    <div class="promo__subtitle-block">
+      <p class="promo__subtitle body-text-bold">&laquo;Дофрейдовская роскошь снов&raquo; ("Time")<br>
+          Песьи дни закончились, перестал дуть майистрал</p>
+    </div>
     <div class="chapters__dark">
       <div class="chapter-preview chapter-preview_dark">
         <div class="chapter-preview__content">
           <div class="chapter-preview__overlay chapter-preview__overlay_dark"></div>
           <div class="chapter-preview__header">
-            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part1" %}">Раздел 1</a>
+            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part1" %}">Раздел I</a>
             <h2 class="chapter-preview__subtitle title-bold">Что необычного в первом романе Томаса Пинчона</h2>
           </div>
           <p class="chapter-preview__text body-text">Обзорные материалы о романе "V.", которые можно читать до чтения романа. Спойлеров нет, однако присутствует информация о структуре книги.</p>
           <a class="chapter-preview__link" href="{% url "wiki:v_part1" %}">Читать</a>
         </div>
+        <img class="bg-sewer" src="{% static 'img/v-sewer.png' %}" alt="фон">
       </div>
       <div class="chapter-preview chapter-preview_dark">
         <div class="chapter-preview__content chapter-preview__content_right">
           <div class="chapter-preview__overlay chapter-preview__overlay_dark"></div>
           <div class="chapter-preview__header">
-            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part2" %}">Раздел 2</a>
+            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part2" %}">Раздел II</a>
             <h2 class="chapter-preview__subtitle title-bold">Примечания</h2>
           </div>
           <p class="chapter-preview__text body-text">Постраничные примечания к роману, объясняющие значения малоупотребимых слов и выражений, содержащие справки об исторических личностях и событиях, о произведениях искусства, математических формулах и т.п. Рекомендуется к прочтению параллельно с чтением романа. Здесь нет никаких спойлеров. Примечания мы делали, дабы вы меньше блуждали по просторам интернета в поисках нужной информации.</p>
           <a class="chapter-preview__link" href="{% url "wiki:v_part2" %}">Читать</a>
         </div>
-        <img class="bg-crocodile" src="{% static 'img/footprints.png' %}" alt="фон">
+        <img class="bg-crocodile bg-crocodile_dark" src="{% static 'img/footprints.png' %}" alt="фон">
       </div>
       <div class="chapter-preview chapter-preview_dark">
         <div class="chapter-preview__content">
           <div class="chapter-preview__overlay chapter-preview__overlay_dark"></div>
           <div class="chapter-preview__header">
-            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part3" %}">Раздел 3</a>
+            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part3" %}">Раздел III</a>
             <h2 class="chapter-preview__subtitle title-bold">Статьи</h2>
           </div>
           <p class="chapter-preview__text body-text">Здесь собраны статьи, соображения, мыслеобразы и некоторые справочные материалы о романе, его литературных и исторических источниках</p>
@@ -57,18 +62,19 @@
         <div class="chapter-preview__content chapter-preview__content_right">
           <div class="chapter-preview__overlay"></div>
           <div class="chapter-preview__header">
-            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part4" %}">Раздел 4</a>
+            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part4" %}">Раздел IV</a>
             <h2 class="chapter-preview__subtitle title-bold">Хронология</h2>
           </div>
           <p class="chapter-preview__text body-text">Все события романа представлены в табличной форме и строгой линейной хронологической последовательности. Надеемся, что мы ничего не забыли. Рекомендуется к прочтению только после окончания чтения книги, ибо тут сосредоточение всех мыслимых и немыслимых спойлеров.</p>
           <a class="chapter-preview__link" href="{% url "wiki:v_part4" %}">Читать</a>
         </div>
+        <img class="bg-crocodile bg-crocodile_light" src="{% static 'img/footprints.png' %}" alt="фон">
       </div>
       <div class="chapter-preview">
         <div class="chapter-preview__content">
           <div class="chapter-preview__overlay"></div>
           <div class="chapter-preview__header">
-            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part5" %}">Раздел 5</a>
+            <a class="chapter-preview__title chapter-title" href="{% url "wiki:v_part5" %}">Раздел V</a>
             <h2 class="chapter-preview__subtitle title-bold">Персонажи</h2>
           </div>
           <p class="chapter-preview__text body-text">Все персонажи романа представлены в схематичной и табличной форме, с их оригинальными английскими именами, краткими характеристиками, портретами, связями и постраничными упоминаниями (с соблюдением требований законодательства о персональных данных). Если вы не хотите заранее знать, кто чей брат (сестра) или кто с кем сольется-таки в экстазе, лучше сюда не заходить. Мы вас предупредили. Также в этом разделе есть карта романа – и тоже со всевозможными спойлерами.</p>

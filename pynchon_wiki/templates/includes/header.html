@@ -20,15 +20,13 @@
               ТОМАС ПИНЧОН
             {% elif 'wiki:index' in view_name%}
               ТОМАС ПИНЧОН
+            {% elif 'wiki:v_index' in view_name%}
+              ТОМАС ПИНЧОН
+            {% elif 'wiki:v_part' in view_name%}
+              ТОМАС ПИНЧОН
             {% else %}
               РАДУГА ТЯГОТЕНИЯ
             {% endif %}
-          </a>
-        </li>
-        <li class="header__item">
-          <a class="header__link link body-text-l" 
-            href="{% url 'wiki:other-books' %}" target="_self">
-            ДРУГИЕ КНИГИ
           </a>
         </li>
         <li class="header__item">
@@ -36,6 +34,18 @@
             href="{% url 'wiki:about-project' %}" target="_self">
             О ПРОЕКТЕ
           </a>
+        </li>
+        <li class="header__item" id="other-books-header-link">
+          <a class="header__link link body-text-l" 
+            href="{% url 'wiki:other-books' %}" target="_self">
+            ДРУГИЕ КНИГИ
+          </a>
+          <div class="header__drop">
+            <div class="header__drop-links">
+              <a class="header__drop-link body-text-bold" href="{% url 'wiki:index' %}">Радуга тяготения</a>
+              <a class="header__drop-link body-text-bold" href="{% url 'wiki:v_index' %}">V.</a>
+            </div>
+          </div>
         </li>
       {% endwith %}
     </ul>
@@ -48,3 +58,11 @@
     {% endwith %}
     <button class="header__button" type="button"></button>
   </header>
+  {% comment %}
+  <div class="header__drop">
+    <div class="header__drop-links">
+      <a class="header__drop-link body-text-bold" href="{% url 'wiki:index' %}">Радуга тяготения</a>
+      <a class="header__drop-link body-text-bold" href="{% url 'wiki:v_index' %}">V.</a>
+    </div>
+  </div>
+  {% endcomment %}
