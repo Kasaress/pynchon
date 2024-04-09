@@ -174,7 +174,7 @@
               {% if forloop.first %}
                 <tr class="table_characters_chronology__row">
                   <td class="table_characters_chronology__cell" colspan="6">
-                    <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ character.circle }}</h4>
+                    <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ character.circle|search_highlight:q }}</h4>
                   </td>
                 </tr>
               {% endif %}
