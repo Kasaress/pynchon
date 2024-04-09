@@ -278,9 +278,14 @@ class TableCharacterResource(resources.ModelResource):
 class TableCharacterAdmin(ImportExportModelAdmin):
     resource_classes = [TableCharacterResource]
     list_display = ('id', 'name', 'value_name', 'characteristics',
-                    'portrait', 'groups', 'mentions', 'circle', 'book_id',)
-    list_editable = ('book_id',)
+                    'portrait', 'groups', 'mentions', 'circle', 'book',)
+    list_editable = ('book',)
     search_fields = ('name',)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "book":
+            kwargs["queryset"] = Book.objects.all()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class CircleTableCharactersResource(resources.ModelResource):
