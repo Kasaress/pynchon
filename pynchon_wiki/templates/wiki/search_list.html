@@ -150,6 +150,13 @@
             </td>
           </tr>
           {% for character in object_list %}
+            {% if forloop.first %}
+              <tr class="table_characters_chronology__row">
+                <td class="table_characters_chronology__cell" colspan="6">
+                  <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ character.circle.name|search_highlight:q|safe }}</h4>
+                </td>
+              </tr>
+            {% endif %}
             <tr class="table_characters_chronology__row">
               <td class="table_characters_chronology__cell">
                 <h6 class="table_characters_chronology__text"> {{ character.name|search_highlight:q|safe }} </h6>
