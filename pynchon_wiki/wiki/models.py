@@ -51,7 +51,7 @@ class ChapterManager(models.Manager):
                 | Q(interpretation__icontains=query)
             )
             qs = qs.filter(or_lookup, book_id=book_id)
-        
+
         return qs
 
 
@@ -267,7 +267,7 @@ class TableChronologyManager(models.Manager):
                 Q(date__icontains=query) | Q(description__icontains=query)
             )
             qs = qs.filter(or_lookup, book_id=book_id)
-        
+
         return qs
 
 
@@ -437,7 +437,6 @@ class TableСharactersManager(models.Manager):
             qs = qs.filter(or_lookup, book_id=book_id)
 
         return qs
-
 
 
 class TableСharacters(BaseNameModel):
