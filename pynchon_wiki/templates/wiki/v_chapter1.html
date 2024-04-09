@@ -5,7 +5,7 @@
 {% endblock  %}
 {% block content %}
   <section class="chapters-nav v">
-    <div class="search"></div><br><br>
+    {% include 'includes/form_search.html' %}
     {% include 'includes/v_chapters.html' %}
     <h1 class="chapters-nav__title chapter-title">Что необычного в первом романе Томаса Пинчона</h1>
   </section>

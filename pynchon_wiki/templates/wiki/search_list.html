@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load user_filters %}
+{% block title %}Поиск{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% if book.pk == 2 %}
+      {% include 'includes/v_chapters.html' %}
+    {% else %}
+      {% include 'includes/chapters.html' %}
+    {% endif %}
+  </section>
+  <section class="chapter chapter-2-3-notes">
+    <div class="container">
+      <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ q }}"</h3><br>
+      <a class="btn custom-button" href="{% url 'wiki:search' book.id %}?q={{ q }}">вернуться к общему списку</a><br><br>
+      {% if content_list|first|class_name == 'Comment'  %}
+        <h5>Примечания:</h5><br>
+        {% for comment in object_list %}
+          <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+            <div class="chapter-2-3-notes__header">
+              <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|search_highlight:q|safe}}</h2>
+              <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+                Стр.{{comment.page_number_by_2021}}</p><br>
+            </div>
+            <div class="chapter-2-3-notes__text-content">
+              <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|search_highlight:q|safe}}</p>
+            </div>
+            <br>
+            {% if comment.image %}
+              <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+              <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body text-center p-0">
+                      <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <br>
+        {% endfor %}
+      {% elif content_list|first|class_name == 'Chapter' %}
+        <h5>Комментарии:</h5><br>
+        <div class="comments-container">
+        {% for chapter in object_list %}
+          {% if chapter.image %}
+            <div class="chapter-3-image">
+              {% thumbnail chapter.image "1300x400" as thumbnail %}
+                <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}">
+              {% endthumbnail %}
+            </div>
+          {% endif %}
+          <br>
+          <li id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
+            <div id="summary-{{ chapter.number }}">
+                <p class="chapter-2-3-notes__text body-text">{{ chapter.pov|search_highlight:q|safe }}</p><br>
+              <div class="chapter-2-3-notes__header">
+                <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
+              </div>
+              <div class="chapter-2-3-notes__text-content">
+                <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|search_highlight:q|safe|linebreaks }}</p>
+              </div>
+            </div>
+            <div id="interpretation-{{ chapter.number}}">
+              <div class="chapter-2-3-notes__header">
+                <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
+              </div>
+              <div class="chapter-2-3-notes__text-content">
+                <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|search_highlight:q|safe|linebreaks }}</p>
+              </div>
+            </div>
+          </li> 
+        {% endfor %}
+        </div> 
+      {% elif content_list|first|class_name == 'Article' %}
+        <h5>Статьи:</h5><br>
+        {% for article in object_list %}
+          <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
+          <p class="chapter-2-3-notes__text body-text">{{ article.text|search_highlight:q|safe }}</p>
+          {% if article.image %}
+            <div class="chapter-1-how__image-container">
+              <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"
+                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+              <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content_chapter1">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body text-center p-0">
+                      <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          <br>
+        {% endfor %}
+        
+      {% elif content_list|first|class_name == 'TableСhronology' %}
+        <h5>Хронология:</h5><br>
+        <div class="container">
+          <table class="table_characters_chronology">
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Дата</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Событие</p>
+              </td>
+            </tr>
+            {% for row in object_list %}
+              <tr class="table_characters_chronology__row">
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ row.date|search_highlight:q|safe }} </p>
+                </td>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ row.description|search_highlight:q|safe }} </p>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      {% elif content_list|first|class_name == 'TableСharacters' %}
+        <h5>Персонажи:</h5><br>
+        <table class="table_characters_chronology">
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Имя</p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Имя в оригинале и значение имени</p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Характеристика</p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Портрет</p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Группы</p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text">Упоминания</p>
+            </td>
+          </tr>
+          {% for character in object_list %}
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <h6 class="table_characters_chronology__text"> {{ character.name|search_highlight:q|safe }} </h6>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ character.value_name|search_highlight:q|safe }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ character.characteristics|search_highlight:q|safe }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ character.portrait|search_highlight:q|safe }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ character.groups }} </p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+      {% include 'includes/paginator.html' %}
+    </div>
+  </section>
+{% endblock %}

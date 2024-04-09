@@ -9,24 +9,7 @@
       {% with request.resolver_match.view_name as view_name %}
         <li class="header__item">
           <a class="header__link link body-text-l" 
-            href="{% if 'wiki:rainbow_part' in view_name %}
-                    {% url 'wiki:author' %}
-                  {% elif 'wiki:index' in view_name%}
-                    {% url 'wiki:author' %}
-                  {% else %}
-                    {% url 'wiki:index' %}
-                  {% endif %}" target="_self">
-            {% if 'wiki:rainbow_part' in view_name %}
-              ТОМАС ПИНЧОН
-            {% elif 'wiki:index' in view_name%}
-              ТОМАС ПИНЧОН
-            {% elif 'wiki:v_index' in view_name%}
-              ТОМАС ПИНЧОН
-            {% elif 'wiki:v_part' in view_name%}
-              ТОМАС ПИНЧОН
-            {% else %}
-              РАДУГА ТЯГОТЕНИЯ
-            {% endif %}
+            href="{% url 'wiki:author' %}" target="_self">ТОМАС ПИНЧОН
           </a>
         </li>
         <li class="header__item">

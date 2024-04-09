@@ -1,0 +1,2 @@
+{% load user_filters %}
+{% if content_list|first|class_name == 'Comment' %}{{ 'comments' }}{% elif content_list|first|class_name == 'Chapter' %}{{ 'chapters' }}{% elif content_list|first|class_name == 'Article' %}{{ 'articles' }}{% elif content_list|first|class_name == 'TableChronology' %}{{ 'chronology' }}{% elif content_list|first|class_name == 'TableCharacters' %}{{ 'characters' }}{% endif %}

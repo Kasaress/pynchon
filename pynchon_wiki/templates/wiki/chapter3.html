@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
   <section class="chapters-nav">
-    <div class="search"></div><br><br>
+    {% include 'includes/form_search.html' %}
     {% include 'includes/chapters.html' %}
     <h1 class="chapters-nav__title chapter-title">Комментарии</h1>
   </section>

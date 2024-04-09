@@ -44,7 +44,8 @@ urlpatterns = [
     path('contacts', views.contacts, name='contacts'),
     path('creators', views.creators, name='creators'),
     path('author', views.author, name='author'),
-    path('search', views.search, name='search'),
+    path('search/<int:book_id>/', views.search, name='search'),
+    path('search-list/<int:book_id>/', views.search_list, name='search_list'),
     path('v/', views.v_index, name='v_index'),
     path('', views.index, name='index'),
 ]

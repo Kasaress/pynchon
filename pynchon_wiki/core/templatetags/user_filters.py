@@ -1,3 +1,4 @@
+import re
 from django import template
 
 from core.models import TopMenu
@@ -26,7 +27,17 @@ def sort_queryset(queryset, sort_obj):
 
 @register.simple_tag
 def show_top_menu():
-    menu = TopMenu.objects.filter(is_active=True,
-                                  deleted_at__isnull=True
-                                  ).order_by('sort')
+    menu = TopMenu.objects.filter(
+        is_active=True, deleted_at__isnull=True
+    ).order_by('sort')
     return menu
+
+
+@register.filter
+def search_highlight(value, query):
+    return re.sub(r'(%s)' % re.escape(query), r'<span class="highlighted">\1</span>', value, flags=re.IGNORECASE)
+
+
+@register.filter
+def class_name(value):
+    return value.__class__.__name__

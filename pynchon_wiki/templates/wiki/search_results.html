@@ -1,63 +1,188 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load user_filters %}
 {% block title %}Поиск{% endblock %}
 {% block content %}
   <section class="chapters-nav">
     {% include 'includes/form_search.html' %}
-    {% include 'includes/chapters.html' %}
+    {% if book.pk == 2 %}
+      {% include 'includes/v_chapters.html' %}
+    {% else %}
+      {% include 'includes/chapters.html' %}
+    {% endif %}
   </section>
   <section class="chapter chapter-2-3-notes">
     <div class="container">
-      <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ query }}"</h3><br>
-      <a class="btn custom-button" href={% if search_model == 'comments' %}
-                                          {% url 'wiki:rainbow_part2' %}
-                                        {% elif search_model == 'v_comments' %}
-                                          {% url 'wiki:v_part2' %}	
-                                        {% elif search_model == 'chronology' %}
-                                          {% url 'wiki:rainbow_part5' %}
-                                        {% elif search_model == 'characters' %}
-                                          {% url 'wiki:rainbow_part6' %}
-                                        {% endif %}>
-          Назад
-      </a>
+      <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ q }}"</h3><br>
       <br>
       <br>
-      {% if search_model == 'characters' and query != '' %}
-        <table class="table_characters_chronology">
-          <tr class="table_characters_chronology__row">
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Имя</p>
-            </td>
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Имя в оригинале и значение имени</p>
-            </td>
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Характеристика</p>
-            </td>
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Портрет</p>
-            </td>
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Группы</p>
-            </td>
-            <td class="table_characters_chronology__cell">
-              <p class="table_characters_chronology__text">Упоминания</p>
-            </td>
-          </tr>
-          {% for result in results %}
-            {% with result as character %}
+      {% if q != '' %}
+        {% if comments_set_count > 0 %}
+          <h5>Примечания: {{ comments_set_count }}</h5><br>
+          {% for comment in comments_set_prev %}
+            <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+              <div class="chapter-2-3-notes__header">
+                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|search_highlight:q|safe}}</h2>
+                <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+                  Стр.{{comment.page_number_by_2021}}</p><br>
+              </div>
+              <div class="chapter-2-3-notes__text-content">
+                <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|search_highlight:q|safe}}</p>
+              </div>
+              <br>
+              {% if comment.image %}
+                <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+                <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <div class="modal-body text-center p-0">
+                        <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <br>
+          {% endfor %}
+          {% if comments_set_count > 3 %}
+            <a href="{% url "wiki:search_list" book.id %}?content={{ 'comments' }}&q={{ q }}">посмотреть все примечания</a><br><br>
+          {% endif %}
+        {% endif %}
+        <br>
+        {% if chapters_set_count > 0 %}
+          <h5>Комментарии: {{ chapters_set_count }}</h5><br>
+          <div class="comments-container">
+          {% for chapter in chapters_set_prev %}
+            {% if chapter.image %}
+              <div class="chapter-3-image">
+                {% thumbnail chapter.image "1300x400" as thumbnail %}
+                  <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}">
+                {% endthumbnail %}
+              </div>
+            {% endif %}
+            <br>
+            <li id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
+              <div id="summary-{{ chapter.number }}">
+                  <p class="chapter-2-3-notes__text body-text">{{ chapter.pov|search_highlight:q|safe }}</p><br>
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|search_highlight:q|safe|linebreaks }}</p>
+                </div>
+              </div>
+              <div id="interpretation-{{ chapter.number}}">
+                <div class="chapter-2-3-notes__header">
+                  <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
+                </div>
+                <div class="chapter-2-3-notes__text-content">
+                  <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|search_highlight:q|safe|linebreaks }}</p>
+                </div>
+              </div>
+            </li> 
+          {% endfor %}
+          {% if chapters_set_count > 3 %}
+            <a href="{% url "wiki:search_list" book.id %}?content={{ 'chapters' }}&q={{ q }}">посмотреть все комментарии</a><br><br>
+          {% endif %}
+          </div> 
+        {% endif %}
+        <br>
+        {% if articles_set_count > 0 %}
+          <h5>Статьи: {{  articles_set_count }}</h5><br>
+          {% for article in articles_set_prev %}
+            <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
+            <p class="chapter-2-3-notes__text body-text">{{ article.text|search_highlight:q|safe }}</p>
+            {% if article.image %}
+              <div class="chapter-1-how__image-container">
+                <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"
+                    data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+                <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content_chapter1">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <div class="modal-body text-center p-0">
+                        <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            <br>
+          {% endfor %}
+          {% if articles_set_count > 3 %}
+            <a href="{% url "wiki:search_list" book.id %}?content={{ 'articles' }}&q={{ q }}">посмотреть все статьи</a><br><br>
+          {% endif %}
+        {% endif %}
+        <br>
+        {% if chronology_set_count > 0 %}      
+          <h5>Хронология: {{ chronology_set_count }}</h5><br>
+          <div class="container">
+            <table class="table_characters_chronology">
               <tr class="table_characters_chronology__row">
                 <td class="table_characters_chronology__cell">
-                  <h6 class="table_characters_chronology__text"> {{ character.name|safe }} </h6>
+                  <p class="table_characters_chronology__text">Дата</p>
                 </td>
                 <td class="table_characters_chronology__cell">
-                  <p class="table_characters_chronology__text"> {{ character.value_name }} </p>
+                  <p class="table_characters_chronology__text">Событие</p>
+                </td>
+              </tr>
+              {% for row in chronology_set_prev %}
+                <tr class="table_characters_chronology__row">
+                  <td class="table_characters_chronology__cell">
+                    <p class="table_characters_chronology__text"> {{ row.date|search_highlight:q|safe }} </p>
+                  </td>
+                  <td class="table_characters_chronology__cell">
+                    <p class="table_characters_chronology__text"> {{ row.description|search_highlight:q|safe }} </p>
+                  </td>
+                </tr>
+              {% endfor %}
+              {% if chronology_set_count > 3 %}
+                <a href="{% url "wiki:search_list" book.id %}?content={{ 'chronology' }}&q={{ q }}">посмотреть все события</a><br><br>
+              {% endif %}
+            </table>
+          </div>
+        {% endif %}
+        <br>
+        {% if characters_set_count > 0 %}
+          <h5>Персонажи: {{ characters_set_count }}</h5><br>
+          <table class="table_characters_chronology">
+            <tr class="table_characters_chronology__row">
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Имя</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Имя в оригинале и значение имени</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Характеристика</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Портрет</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Группы</p>
+              </td>
+              <td class="table_characters_chronology__cell">
+                <p class="table_characters_chronology__text">Упоминания</p>
+              </td>
+            </tr>
+            {% for character in characters_set_prev %}
+              <tr class="table_characters_chronology__row">
+                <td class="table_characters_chronology__cell">
+                  <h6 class="table_characters_chronology__text"> {{ character.name|search_highlight:q|safe }} </h6>
                 </td>
                 <td class="table_characters_chronology__cell">
-                  <p class="table_characters_chronology__text"> {{ character.characteristics }} </p>
+                  <p class="table_characters_chronology__text"> {{ character.value_name|search_highlight:q|safe }} </p>
                 </td>
                 <td class="table_characters_chronology__cell">
-                  <p class="table_characters_chronology__text"> {{ character.portrait }} </p>
+                  <p class="table_characters_chronology__text"> {{ character.characteristics|search_highlight:q|safe }} </p>
+                </td>
+                <td class="table_characters_chronology__cell">
+                  <p class="table_characters_chronology__text"> {{ character.portrait|search_highlight:q|safe }} </p>
                 </td>
                 <td class="table_characters_chronology__cell">
                   <p class="table_characters_chronology__text"> {{ character.groups }} </p>
@@ -66,107 +191,16 @@
                   <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
                 </td>
               </tr>
-            {% endwith %}
-          {% empty %}
-            <tr>
-              <td colspan="6"><br><h5>По вашему запросу ничего не найдено =(</h5></td>
-            </tr>
-          {% endfor %}
-        </table>
-      {% elif search_model == 'chronology' and query != '' %}
-        <div class="container">
-          <table class="table_characters_chronology">
-            <tr class="table_characters_chronology__row">
-              <td class="table_characters_chronology__cell">
-                <p class="table_characters_chronology__text">Дата</p>
-              </td>
-              <td class="table_characters_chronology__cell">
-                <p class="table_characters_chronology__text">Событие</p>
-              </td>
-            </tr>
-            {% for result in results %}
-              {% with result as row %}
-                <tr class="table_characters_chronology__row">
-                  <td class="table_characters_chronology__cell">
-                    <p class="table_characters_chronology__text"> {{ row.date|safe }} </p>
-                  </td>
-                  <td class="table_characters_chronology__cell">
-                    <p class="table_characters_chronology__text"> {{ row.description|safe }} </p>
-                  </td>
-                </tr>
-              {% endwith %}
-            {% empty %}
-              <tr>
-                <td colspan="2"><br><h5>По вашему запросу ничего не найдено =(</h5></td>
-              </tr>
             {% endfor %}
           </table>
-        </div>
-      {% elif search_model == 'comments' and query != '' %}
-        {% for result in results %}
-          {% with result as comment %}
-            <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
-              <div class="chapter-2-3-notes__header">
-                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|safe}}</h2>
-                <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
-                  Стр.{{comment.page_number_by_2021}}</p><br>
-              </div>
-              <div class="chapter-2-3-notes__text-content">
-                <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
-              </div>
-              <br>
-              {% if comment.image %}
-                <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
-                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
-                <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      <div class="modal-body text-center p-0">
-                        <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            </div>
-            <br>
-          {% endwith %}
-        {% empty %}
-          <h5>По вашему запросу ничего не найдено =(</h5>
-        {% endfor %}
-      {% elif search_model == 'v_comments' and query != '' %}
-        {% for result in results %}
-          {% with result as comment %}
-            <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
-              <div class="chapter-2-3-notes__header">
-                <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|safe}}</h2>
-                <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}}</p><br>
-              </div>
-              <div class="chapter-2-3-notes__text-content">
-                <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|safe}}</p>
-              </div>
-              <br>
-              {% if comment.image %}
-                <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
-                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
-                <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      <div class="modal-body text-center p-0">
-                        <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            </div>
-            <br>
-          {% endwith %}
-        {% empty %}
-          <h5>По вашему запросу ничего не найдено =(</h5>
-        {% endfor %}  
+          {% if characters_set_count > 3 %}
+            <a href="{% url "wiki:search_list" book.id %}?content={{ 'characters' }}&q={{ q }}">посмотреть всех персонажей</a><br><br>
+          {% endif %}
+        {% endif %}
+      {% else %}
+        <tr>
+          <td colspan="6"><br><h5>По вашему запросу ничего не найдено =(</h5></td>
+        </tr>
       {% endif %}
     </div>
   </section>

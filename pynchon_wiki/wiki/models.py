@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.db.models import Q
 from django.template.defaultfilters import truncatechars
 from ckeditor.fields import RichTextField
 
@@ -39,8 +40,24 @@ class Book(BaseNameModel):
         return self.name
 
 
+class ChapterManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None, book_id=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (
+                Q(pov__icontains=query) | Q(summary__icontains=query) | 
+                Q(interpretation__icontains=query)
+            )
+            qs = qs.filter(or_lookup, book_id=book_id)
+        
+        return qs
+
+
 class Chapter(BaseModel):
     """ Модель глав у книг. """
+    objects = ChapterManager()
 
     number = models.CharField(
         verbose_name='Номер главы',
@@ -132,8 +149,23 @@ class ChapterLink(BaseModel):
         return self.link
 
 
+class CommentManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None, book_id=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (
+                Q(comment_text__icontains=query) | Q(name__icontains=query)
+            )
+            qs = qs.filter(or_lookup, book_id=book_id)
+
+        return qs
+
+
 class Comment(BaseNameModel):
     """ Модель комментариев. """
+    objects = CommentManager()
 
     comment_link = models.IntegerField(
         'Cвязь с другим примечанием',
@@ -225,8 +257,23 @@ class CommentLink(BaseModel):
         return self.link
 
 
+class TableChronologyManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None, book_id=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (
+                Q(date__icontains=query) | Q(description__icontains=query)
+            )
+            qs = qs.filter(or_lookup, book_id=book_id)
+        
+        return qs
+
+
 class TableChronology(BaseModel):
     """ Модель таблицы для определения хронологии. """
+    objects = TableChronologyManager()
 
     date = models.CharField(
         max_length=50,
@@ -269,8 +316,29 @@ class TableChronology(BaseModel):
         return self.description
 
 
+class ArticleManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None, book_id=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (
+                Q(name__icontains=query) | Q(text__icontains=query)
+            )
+            qs = qs.filter(
+                or_lookup, book_id=book_id, attitude__in=[
+                'Раздел 1', 'V Раздел 1', 'Раздел 4', 'V Раздел 4',
+                'V Раздел 5', 'Раздел 1 (статья 1)', 'V Раздел 3',
+                'Раздел 1 (статья 2)', 'Раздел 5', 'Раздел 7'
+            ]
+        )
+        print(qs)
+        return qs
+
+
 class Article(BaseNameModel):
     """ Модель статей. """
+    objects = ArticleManager()
 
     name = models.CharField(
         'Название',
@@ -322,6 +390,12 @@ class Article(BaseNameModel):
         blank=True,
         null=True
     )
+    book_id = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        verbose_name='Книга',
+        related_name='articles'
+    )
 
     class Meta:
         ordering = ('sort'),
@@ -339,7 +413,7 @@ class CircleTableCharacters(BaseNameModel):
     book = models.ForeignKey(
         Book,
         verbose_name='Книга',
-        related_name='characters',
+        related_name='circles',
         on_delete=models.CASCADE
     )
 
@@ -349,8 +423,28 @@ class CircleTableCharacters(BaseNameModel):
         db_table = 'circles'
 
 
+class TableСharactersManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None, book_id=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (
+                Q(name__icontains=query) |
+                Q(value_name__icontains=query) |
+                Q(characteristics__icontains=query) |
+                Q(portrait__icontains=query) |
+                Q(circle__name__icontains=query)
+            )
+            qs = qs.filter(or_lookup, book_id=book_id)
+
+        return qs
+
+
+
 class TableСharacters(BaseNameModel):
     """ Модель таблицы персонажей."""
+    objects = TableСharactersManager()
 
     value_name = models.TextField(
         'Имя в оригинале и значение',
@@ -379,6 +473,12 @@ class TableСharacters(BaseNameModel):
         CircleTableCharacters,
         on_delete=models.CASCADE,
         verbose_name='Круг персонажа',
+        related_name='characters'
+    )
+    book_id = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        verbose_name='Книга',
         related_name='characters'
     )
 
