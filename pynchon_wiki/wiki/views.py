@@ -272,8 +272,10 @@ def search(request, book_id):
     query_sets.extend([
         Comment.objects.search(query=q, book_id=book_id),
         Chapter.objects.search(query=q, book_id=book_id),
-        sorted(Article.objects.search(query=q, book_id=book_id),
-            key=lambda x: x.attitude),
+        sorted(
+            Article.objects.search(query=q, book_id=book_id),
+            key=lambda x: x.attitude
+        ),
         TableChronology.objects.search(query=q, book_id=book_id),
         TableСharacters.objects.search(query=q, book_id=book_id)
     ])
@@ -294,7 +296,7 @@ def search(request, book_id):
         el for el in final_set if el.__class__.__name__ == 'TableСharacters'
     ]
     context = {
-        'q': q, 
+        'q': q,
         'book': book,
         'comments_set_prev': comments_set[:3],
         'chapters_set_prev': chapters_set[:3],
@@ -347,7 +349,7 @@ def search_list(request, book_id):
         context['object_list'] = current_page.page(1)
     except EmptyPage:
         context['object_list'] = current_page.page(current_page.num_pages)
-    print(context['object_list'])
+
     return render(request, template, context)
 
 

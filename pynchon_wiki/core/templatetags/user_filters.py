@@ -35,7 +35,10 @@ def show_top_menu():
 
 @register.filter
 def search_highlight(value, query):
-    return re.sub(r'(%s)' % re.escape(query), r'<span class="highlighted">\1</span>', value, flags=re.IGNORECASE)
+    return re.sub(
+        r'(%s)' % re.escape(query),
+        r'<span class="highlighted">\1</span>', value, flags=re.IGNORECASE
+    )
 
 
 @register.filter

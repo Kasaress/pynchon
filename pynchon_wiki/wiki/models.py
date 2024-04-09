@@ -47,8 +47,8 @@ class ChapterManager(models.Manager):
         qs = self.get_queryset()
         if query:
             or_lookup = (
-                Q(pov__icontains=query) | Q(summary__icontains=query) | 
-                Q(interpretation__icontains=query)
+                Q(pov__icontains=query) | Q(summary__icontains=query)
+                | Q(interpretation__icontains=query)
             )
             qs = qs.filter(or_lookup, book_id=book_id)
         
@@ -327,12 +327,11 @@ class ArticleManager(models.Manager):
             )
             qs = qs.filter(
                 or_lookup, book_id=book_id, attitude__in=[
-                'Раздел 1', 'V Раздел 1', 'Раздел 4', 'V Раздел 4',
-                'V Раздел 5', 'Раздел 1 (статья 1)', 'V Раздел 3',
-                'Раздел 1 (статья 2)', 'Раздел 5', 'Раздел 7'
-            ]
-        )
-        print(qs)
+                    'Раздел 1', 'V Раздел 1', 'Раздел 4', 'V Раздел 4',
+                    'V Раздел 5', 'Раздел 1 (статья 1)', 'V Раздел 3',
+                    'Раздел 1 (статья 2)', 'Раздел 5', 'Раздел 7'
+                ]
+            )
         return qs
 
 
@@ -430,11 +429,10 @@ class TableСharactersManager(models.Manager):
         qs = self.get_queryset()
         if query:
             or_lookup = (
-                Q(name__icontains=query) |
-                Q(value_name__icontains=query) |
-                Q(characteristics__icontains=query) |
-                Q(portrait__icontains=query) |
-                Q(circle__name__icontains=query)
+                Q(name__icontains=query) | Q(value_name__icontains=query)
+                | Q(characteristics__icontains=query)
+                | Q(portrait__icontains=query)
+                | Q(circle__name__icontains=query)
             )
             qs = qs.filter(or_lookup, book_id=book_id)
 
