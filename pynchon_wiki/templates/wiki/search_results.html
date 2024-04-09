@@ -16,7 +16,7 @@
       <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ q }}"</h3><br>
       <br>
       <br>
-      {% if q != '' %}
+      {% if q != '' and final_set|length != 0 %}
         {% if comments_set_count > 0 %}
           <h5>Примечания: {{ comments_set_count }}</h5><br>
           {% for comment in comments_set_prev %}

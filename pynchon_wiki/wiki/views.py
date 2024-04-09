@@ -309,6 +309,7 @@ def search(request, book_id):
         'chronology_set_count': len(chronology_set),
         'characters_set_count': len(characters_set)
     }
+    print(final_set)
     return render(request, template, context)
 
 
