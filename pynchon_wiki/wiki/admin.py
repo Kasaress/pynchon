@@ -278,7 +278,7 @@ class TableCharacterResource(resources.ModelResource):
 class TableCharacterAdmin(ImportExportModelAdmin):
     resource_classes = [TableCharacterResource]
     list_display = ('id', 'name', 'value_name', 'characteristics',
-                    'portrait', 'groups', 'mentions', 'circle')
+                    'portrait', 'groups', 'mentions', 'circle', 'book_id')
     autocomplete_fields = ('book_id',)
     search_fields = ('name',)
 
