@@ -298,6 +298,7 @@ def search(request, book_id):
     context = {
         'q': q,
         'book': book,
+        'final_set': final_set,
         'comments_set_prev': comments_set[:3],
         'chapters_set_prev': chapters_set[:3],
         'articles_set_prev': articles_set[:3],
