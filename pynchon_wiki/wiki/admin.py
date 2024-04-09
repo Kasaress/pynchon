@@ -279,7 +279,7 @@ class TableCharacterAdmin(ImportExportModelAdmin):
     resource_classes = [TableCharacterResource]
     list_display = ('id', 'name', 'value_name', 'characteristics',
                     'portrait', 'groups', 'mentions', 'circle', 'book')
-    
+
     search_fields = ('name',)
 
 
