@@ -9,6 +9,11 @@ from core.models import BaseModel, BaseNameModel
 
 User = get_user_model()
 
+CHOICES_BOOKS = [
+    (1, 'Радуга тяготения'),
+    (2, 'V')
+]
+
 CHOICES_CHAPTER = [
     ('Другое', 'Другое'), ('Раздел 1', 'Раздел 1'),
     ('V Раздел 1', 'V Раздел 1'), ('Раздел 4', 'Раздел 4'),
@@ -475,6 +480,7 @@ class TableСharacters(BaseNameModel):
     book_id = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
+        choices=CHOICES_BOOKS,
         verbose_name='Книга',
         related_name='characters'
     )
