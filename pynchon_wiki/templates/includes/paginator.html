@@ -2,30 +2,29 @@
   <nav aria-label="Page navigation" class="my-5">
     <ul class="pagination">
       {% if object_list.has_previous %}
-        <li class="page-item"><a class="page-link"
+        <li class="page-item"><a class="btn custom-button"
           href="?page=1&content={% include 'includes/select_content.html' %}&q={{ q }}">Первая</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ object_list.previous_page_number }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Предыдущая</a>
-
+          <a class="btn custom-button" href="?page={{ object_list.previous_page_number }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Предыдущая</a>
         </li>
       {% endif %}
       {% for i in object_list.paginator.page_range %}
           {% if object_list.number == i %}
             <li class="page-item active">
-              <span class="page-link">{{ i }}</span>
+              <span class="btn custom-button">{{ i }}</span>
             </li>
           {% else %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ i }}&content={% include 'includes/select_content.html' %}&q={{ q }}">{{ i }}</a>
+              <a class="btn custom-button" href="?page={{ i }}&content={% include 'includes/select_content.html' %}&q={{ q }}">{{ i }}</a>
           {% endif %}
       {% endfor %}
       {% if object_list.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ object_list.next_page_number }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Следующая</a>
+          <a class="btn custom-button" href="?page={{ object_list.next_page_number }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Следующая</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ object_list.paginator.num_pages }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Последняя</a>
+          <a class="btn custom-button" href="?page={{ object_list.paginator.num_pages }}&content={% include 'includes/select_content.html' %}&q={{ q }}">Последняя</a>
         </li>
       {% endif %}    
     </ul>
