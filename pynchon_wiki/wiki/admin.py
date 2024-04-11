@@ -260,6 +260,13 @@ class TableCharacterResource(resources.ModelResource):
             CircleTableCharacters, 'id'
         )
     )
+    book_id = fields.Field(
+        column_name='book_id',
+        attribute='book',
+        widget=widgets.ForeignKeyWidget(
+            Book, 'id'
+        )
+    )
 
     class Meta:
         model = TableСharacters
@@ -270,7 +277,7 @@ class TableCharacterResource(resources.ModelResource):
             'characteristics',
             'portrait',
             'groups',
-            'mentions'
+            'mentions',
         )
 
 
