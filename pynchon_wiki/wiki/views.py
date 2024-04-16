@@ -192,6 +192,18 @@ def rainbow_part4(request):
     return render(request, template, context)
 
 
+def rainbow_part4_detail(request, article_id):
+    """ Страница со статьями. """
+    template = 'wiki/chapter4_detail.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    article = Article.objects.get(pk=article_id)
+    context = {
+        'book': book,
+        'article': article
+    }
+    return render(request, template, context)
+
+
 def rainbow_part5(request):
     """ Страница с хронологией. """
     template = 'wiki/chapter5.html'
@@ -385,8 +397,7 @@ def v_part2(request):
     chapters = Chapter.objects.filter(book=book).order_by('sort')
     context = {
         'book': book,
-        'chapters': chapters,
-        'search_model': 'v_comments'
+        'chapters': chapters
     }
     return render(request, template, context)
 
@@ -429,7 +440,7 @@ def v_part3(request):
 
 def v_part3_detail(request, article_id):
     """ Страница со статьями. """
-    template = 'wiki/v_chapter3_detail   .html'
+    template = 'wiki/v_chapter3_detail.html'
     book = get_object_or_404(Book, name='V')
     article = Article.objects.get(pk=article_id)
     context = {
@@ -449,8 +460,7 @@ def v_part4(request):
         'chapters': Chapter.objects.filter(book=book).all(),
         'start_event': TableChronology.objects.get(id=V_START_EVENT),
         'articles': articles,
-        'events': TableChronology.objects.filter(book=V_BOOK),
-        'search_model': 'chronology'
+        'events': TableChronology.objects.filter(book=V_BOOK)
     }
     return render(request, template, context)
 
@@ -462,8 +472,7 @@ def v_part5(request):
     circles = CircleTableCharacters.objects.filter(book=V_BOOK)
     context = {
         'book': book,
-        'circles': circles,
-        'search_model': 'characters'
+        'circles': circles
     }
     return render(request, template, context)
 
@@ -471,10 +480,7 @@ def v_part5(request):
 def v_part5_map(request):
     """ Страница с картой перемещений персонажей. """
     template = 'wiki/v_chapter5_map.html'
-    context = {
-        'search_model': 'characters'
-    }
-    return render(request, template, context)
+    return render(request, template)
 
 
 def in_development(request):

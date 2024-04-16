@@ -15,6 +15,10 @@ urlpatterns = [
     ),
     path('rainbow_part3', views.rainbow_part3, name='rainbow_part3'),
     path('rainbow_part4', views.rainbow_part4, name='rainbow_part4'),
+    path(
+        'rainbow_part4_detail/<int:article_id>', views.rainbow_part4_detail,
+        name='rainbow_part4_detail'
+    ),
     path('rainbow_part5', views.rainbow_part5, name='rainbow_part5'),
     path('rainbow_part6', views.rainbow_part6, name='rainbow_part6'),
     path(
