@@ -25,7 +25,10 @@
             <h2 class="chapters-nav__name">Комментарии</h2>
         </a>
         </li>
-        <li class="chapters-nav__item {% if view_name == 'wiki:rainbow_part4' %}chapters-nav__item_active{% endif %}">
+        <li class="chapters-nav__item 
+            {% if view_name == 'wiki:rainbow_part4' %}chapters-nav__item_active
+            {% elif view_name == 'wiki:rainbow_part4_detail' %}chapters-nav__item_active
+            {% endif %}">
         <a class="chapters-nav__link" href="{% url 'wiki:rainbow_part4' %}">
             <h1 class="chapters-nav__chapter">Раздел 4</h1>
             <h2 class="chapters-nav__name">KEZVH - Статьи</h2>

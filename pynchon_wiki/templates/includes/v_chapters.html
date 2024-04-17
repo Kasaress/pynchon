@@ -19,7 +19,10 @@
             <h2 class="chapters-nav__name">Примечания</h2>
         </a>
         </li>
-        <li class="chapters-nav__item {% if view_name == 'wiki:v_part3' %}chapters-nav__item_active{% endif %}">
+        <li class="chapters-nav__item 
+            {% if view_name == 'wiki:v_part3' %}chapters-nav__item_active
+            {% elif view_name == 'wiki:v_part3_detail' %}chapters-nav__item_active
+            {% endif %}">
         <a class="chapters-nav__link" href="{% url 'wiki:v_part3' %}">
             <h1 class="chapters-nav__chapter">Раздел III</h1>
             <h2 class="chapters-nav__name">Статьи</h2>

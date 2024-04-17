@@ -15,7 +15,7 @@
         {% for article in articles %}
           <div class="article_transform">
             {% if article.author_article %}<p class="chapter-1-how__text body-text">{{article.author_article}}</p><br>{% endif %}
-            {% if article.name %}<a class="chapter-4-kezvh__title title-bold" href="{% url "wiki:v_part3_detail" article.pk %}">{{article.name}}</a><br>{% endif %}
+            {% if article.name %}<a class="chapter-4-kezvh__title title-bold" target='_blank' href="{% url "wiki:v_part3_detail" article.pk %}">{{article.name}}</a><br>{% endif %}
             <p class="chapter-4-kezvh__text body-text">{{article.text|safe}}</p><br>
             {% if article.image %}
               <img class="chapter-2-3-notes__img" src="{{article.image.url}}" alt="{{article.name}}"
