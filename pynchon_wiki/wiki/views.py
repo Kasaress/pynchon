@@ -480,7 +480,11 @@ def v_part5(request):
 def v_part5_map(request):
     """ Страница с картой перемещений персонажей. """
     template = 'wiki/v_chapter5_map.html'
-    return render(request, template)
+    book = get_object_or_404(Book, name='V')
+    context = {
+        'book': book
+    }
+    return render(request, template, context)
 
 
 def in_development(request):
