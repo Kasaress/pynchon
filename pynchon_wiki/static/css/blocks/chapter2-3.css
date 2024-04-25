@@ -17,8 +17,22 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding-top: 36px;
+  /* padding-top: 36px; */
+  padding-top: 100px;
   box-sizing: border-box;
+  position: relative;
+}
+
+#comments-content {
+  max-height: 800px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+  position: relative;
+}
+
+#comments-content::-webkit-scrollbar {
+  display: none; 
 }
 
 .sidebar {
@@ -32,7 +46,7 @@
   flex-direction: column;
   gap: 32px;
   /*  */
-  margin-top: 64px;
+  /* margin-top: 64px; */
   position: sticky;
   top: 64px;
 }
@@ -121,14 +135,14 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  /* gap: 64px; */
+  gap: 64px;
 }
 
 .chapter-2-3-notes__item {
   display: flex;
   flex-direction: column;
   /* gap: 32px; */
-  padding-top: 64px;
+  /* padding-top: 64px; */
   box-sizing: border-box;
 }
 
@@ -171,7 +185,9 @@
 
 .modal-image {
   width: 50%;
+  max-width: 70vw;
   height: 50%;
+  max-height: 90vh;
   object-fit: contain;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -181,8 +197,11 @@
   background-color: rgba(0, 0, 0, 0.9);
 }
 
+.modal-content {
+  background-color: none;
+}
+
 .modal-body {
-  background-color: rgba(0, 0, 0, 0.9);
   max-width: 100%;
   max-height: 100vh;
   width: auto;

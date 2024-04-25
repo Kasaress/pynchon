@@ -5,10 +5,10 @@ const plannedMeetingsContainer = document.getElementById('plannedMeetingsContain
 const pastMeetingsContainer = document.getElementById('pastMeetingsContainer');
 
 plannedMeetingsButton.addEventListener('click', function () {
-  plannedMeetingsContainer.style.display = 'block';
+  plannedMeetingsContainer.style.display = 'flex';
   pastMeetingsContainer.style.display = 'none';
 });
 pastMeetingsButton.addEventListener('click', function () {
   plannedMeetingsContainer.style.display = 'none';
-  pastMeetingsContainer.style.display = 'block';
+  pastMeetingsContainer.style.display = 'flex';
 });

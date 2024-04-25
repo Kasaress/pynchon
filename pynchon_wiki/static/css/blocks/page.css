@@ -188,14 +188,6 @@ a {
   color: white;
 }
 
-/* .prev-chapter {
-  margin-right: 10px;
-}
-
-.next-chapter {
-  margin-left: 10px;
-} */
-
 .accordion-container {
   max-height: 850px;
   overflow-y: scroll;
@@ -206,17 +198,6 @@ a {
 .accordion-container::-webkit-scrollbar {
   display: none;
 }
-
-/* .comments-container {
-  max-height: 1200px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none; 
-}
-
-.comments-container::-webkit-scrollbar {
-  display: none; 
-} */
 
 #image-container {
   position: relative;
@@ -251,6 +232,14 @@ a {
   transition: height 0.3s ease;
 }
 
+.chapter__cover-img_wide {
+  width: calc(100% - 160px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto 40px;
+}
+
 /* меню по нажатию на бургер */
 
 .menu {
@@ -261,7 +250,6 @@ a {
   left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
   justify-content: end;
   z-index: 1000;
   background-color: rgba(21, 21, 21, .3);
@@ -359,7 +347,6 @@ a {
   justify-content: center;
   align-items: center;
   z-index: 10000;
-  /*  */
   display: none;
 }
 
@@ -433,6 +420,10 @@ a {
   .to-top {
     display: none;
   }
+}
+
+.chapter__cover-img_wide {
+  width: calc(100% - 32px);
 }
 
 @media screen and (max-width: 1079px) {

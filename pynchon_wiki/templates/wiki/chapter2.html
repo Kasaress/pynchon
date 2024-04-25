@@ -28,7 +28,7 @@
               </div>
               <p class="sidebar-subtitle body-text-bold">{{ chapter.description|safe }}</p>
             </button>
-            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse">
+            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse" data-bs-parent="#notesNav">
               <ul class="accordion-body">
                 {% for comment in chapter.comments.all %}
                   <li><a class="sidebar__link body-text comment-link"
@@ -83,68 +83,4 @@
     </div>
     <img class="tentacle tentacle4 tentacle_type_chapter" src="{% static 'img/tentacle4.png' %}" alt="фон">
   </section>
-  {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar__link');
-      const blocks = document.querySelectorAll('.chapter-2-3-notes__item');
-      const nav = document.querySelector('.chapters-nav');
-      const chapterNav = document.querySelector('.chapter-navigation');
-      const sidebar = document.querySelector('.sidebar');
-      const text = document.querySelector('.chapter-2-3-notes__description');
-      const bookBtn = document.querySelector('.header__book');
-
-      const isMobileScreen = () => {
-        return window.innerWidth <= 768;
-      };
-
-      links.forEach(link => {
-        link.addEventListener('click', (event) => {
-          if (!isMobileScreen()) return;
-
-          event.preventDefault();
-
-          const targetId = event.target.getAttribute('href').substring(1);  // Get the target block ID
-          const targetBlock = document.getElementById(targetId);
-
-          if (targetBlock) {
-            blocks.forEach(block => {
-              block.style.display = 'none';
-            });
-
-            targetBlock.style.display = 'flex';
-          }
-
-          sidebar.style.display = 'none';
-          nav.style.display = 'none';
-          text.style.display = 'none';
-          chapterNav.style.display = 'none';
-        });
-      });
-
-      bookBtn.addEventListener('click', () => {
-        sidebar.style.display = 'flex';
-        nav.style.display = 'flex';
-        text.style.display = 'block';
-        chapterNav.style.display = 'block';
-        blocks.forEach(block => {
-          block.style.display = 'none';
-        });
-      })
-
-      window.addEventListener('resize', () => {
-        if (!isMobileScreen()) {
-          blocks.forEach(block => {
-            block.style.display = 'flex';
-          });
-        } else {
-          blocks.forEach(block => {
-            block.style.display = 'none';
-          });
-        }
-      });
-    });
-  </script> {% endcomment %}
 {% endblock %}

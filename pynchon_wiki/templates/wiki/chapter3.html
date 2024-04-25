@@ -25,7 +25,7 @@
               </div>
               <p class="sidebar-subtitle body-text-bold">{{ chapter.description|striptags|safe }}</p>
             </button>
-            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse">
+            <div id="noteNav-{{ chapter.number }}" class="accordion-collapse collapse" data-bs-parent="#notesNav">
               <ul class="accordion-body">
                 <li>
                   <a class="sidebar__link body-text comment-link" href="#summary-{{ chapter.number }}">Краткое содержание главы</a>
@@ -38,7 +38,7 @@
           </div>
         {% endfor %}
       </div>
-      <ul class="chapter-2-3-notes__list">
+      <div class="chapter-2-3-notes__list">
         <div id="comments-content">
           <div class="comments-container">
             {% if chapters.first.image %}
@@ -49,7 +49,7 @@
               </div>
             {% endif %}
             <br>
-            <li id="chapter-content-{{ chapters.first.number }}" class="chapter-2-3-notes__item">
+            <div id="chapter-content-{{ chapters.first.number }}" class="chapter-2-3-notes__item">
               <div id="summary-{{ chapters.first.number }}">
                 <p class="chapter-2-3-notes__text body-text">{{ chapters.first.pov|safe }}</p>
                 <br>
@@ -69,78 +69,14 @@
                   <p class="chapter-2-3-notes__text body-text">{{ chapters.first.interpretation|safe }}</p>
                 </div>
               </div>
-            </li>
+            </div>
           </div>
         </div>
         <div class="chapter-navigation">
           <button id="prev-chapter" class="btn custom-button prev-chapter">Пред. глава</button>
           <button id="next-chapter" class="btn custom-button prev-chapter">След. глава</button>
         </div>
-      </ul>
+      </div>
     </div>
   </section>
-  {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar__link');
-      const blocks = document.querySelectorAll('.chapter-2-3-notes__item');
-      const nav = document.querySelector('.chapters-nav');
-      const chapterNav = document.querySelector('.chapter-navigation');
-      const sidebar = document.querySelector('.sidebar');
-      const text = document.querySelector('.chapter-2-3-notes__description');
-      const bookBtn = document.querySelector('.header__book');
-
-      const isMobileScreen = () => {
-        return window.innerWidth <= 768;
-      };
-
-      links.forEach(link => {
-        link.addEventListener('click', (event) => {
-          if (!isMobileScreen()) return;
-
-          event.preventDefault();
-
-          const targetId = event.target.getAttribute('href').substring(1);  // Get the target block ID
-          const targetBlock = document.getElementById(targetId);
-
-          if (targetBlock) {
-            blocks.forEach(block => {
-              block.style.display = 'none';
-            });
-
-            targetBlock.style.display = 'flex';
-          }
-
-          sidebar.style.display = 'none';
-          nav.style.display = 'none';
-          text.style.display = 'none';
-          chapterNav.style.display = 'none';
-        });
-      });
-
-      bookBtn.addEventListener('click', () => {
-        sidebar.style.display = 'flex';
-        nav.style.display = 'flex';
-        text.style.display = 'block';
-        chapterNav.style.display = 'block';
-        blocks.forEach(block => {
-          block.style.display = 'none';
-        });
-      })
-
-      window.addEventListener('resize', () => {
-        if (!isMobileScreen()) {
-          blocks.forEach(block => {
-            block.style.display = 'flex';
-          });
-        } else {
-          blocks.forEach(block => {
-            block.style.display = 'none';
-          });
-        }
-      });
-    });
-  </script> {% endcomment %}
 {% endblock %}

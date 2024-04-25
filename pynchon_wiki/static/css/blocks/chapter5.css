@@ -79,10 +79,11 @@
 }
 
 .chronology-description__subtitle {
-  max-width: 528px;
+  max-width: 700px;
   color: #414141;
-  margin: 0 0 32px;
+  margin: 0 auto 32px;
   padding: 0;
+  text-align: center;
 }
 
 .chronology-description__facts {
@@ -158,8 +159,8 @@
 }
 
 .help_text {
-  margin-top: -25px;
-  margin-left: 10px;
+  margin: -25px auto 0;
+  text-align: center;
 }
 
 .table_characters_chronology {

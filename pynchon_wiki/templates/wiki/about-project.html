@@ -19,8 +19,8 @@
     <h1 class="about-nav__title chapter-title">Как пользоваться сайтом</h1>
   </section>
   <section class="about-project">
+    <img class="about-project__cover-img" src="{% static 'img/about-project-cover.jpg' %}" alt="">
     {% for article in articles %}
-      <img class="tentacle tentacle5 tentacle_type_about" src="{% static 'img/tentacle5.png' %}" alt="фон">
       <p class="about-project__description">{{article.text|safe}}</p>
     {% endfor %}
     <div class="about-project__content">
@@ -52,7 +52,7 @@
           <div id="noteNav-2" class="accordion-collapse collapse">
             {% for meeting in past %}
             <ul class="accordion-body">
-              <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}}{% if meeting.date %} / {{meeting.date}}{% endif %}</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="#meeting-{{ meeting.id }}">{{meeting.name}}{% if meeting.date %} / {{meeting.date}}{% endif %}</a></li>
             </ul>
             {% endfor %}
           </div>
@@ -60,14 +60,14 @@
       </div>
       <div id="plannedMeetingsContainer" class="meeting">
         {% for meeting in planned %}
+        <div id="meeting-{{ meeting.id }}" class="meeting__box">
           <div id="{{ meeting.name }}" class="meeting__header">
-            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2><br>
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
             {% if meeting.date %}
               <p class="meeting__date body-text">{{meeting.date}}</p>
             {% endif %}
           </div>
           <p class="meeting__text">{{meeting.text|safe}}</p>
-          <br><br>
           {% if meeting.image %}
             <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
               data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
@@ -82,19 +82,20 @@
               </div>
             </div>
           {% endif %}
-          <br>
         {% endfor %}
       </div>
       <div id="pastMeetingsContainer" class="meeting">
         {% for meeting in past %}
+        <div id="meeting-{{ meeting.id }}" class="meeting__box">
           <div id="{{ meeting.name }}" class="meeting__header">
-            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2><br>
+            <h2 class="meeting__topic title-bold">{{meeting.name}}</h2>
             {% if meeting.date %}
               <p class="meeting__date body-text">{{meeting.date}}</p>
             {% endif %}
           </div>
-          <p class="meeting__text">{{meeting.text|safe}}</p>
-          <br><br>
+          {% if meeting.text %}
+            <p class="meeting__text">{{meeting.text|safe}}</p>
+          {% endif %}
           {% if meeting.image %}
             <img class="chapter-2-3-notes__img" src="{{meeting.image.url}}" alt="{{meeting.name}}"
               data-bs-toggle="modal" data-bs-target="#image-modal-{{ meeting.pk }}">
@@ -109,74 +110,14 @@
               </div>
             </div>
           {% endif %}
-            <br>
           {% if meeting.link %}
             <div class="meeting__record">
-              <iframe class="meeting__iframe" src="{{meeting.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe class="meeting__iframe" src="{{meeting.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           {% endif %}
-          <br>
         {% endfor %}
       </div>
     </div>
     </div>
   </section>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar__link');
-      const blocks = document.querySelectorAll('.meeting');
-      const nav = document.querySelector('.about-nav');
-      const sidebar = document.querySelector('.sidebar');
-      const text = document.querySelector('.about-project__description');
-      const bookBtn = document.querySelector('.header__book');
-
-      const isMobileScreen = () => {
-        return window.innerWidth <= 768;
-      };
-
-      links.forEach(link => {
-        link.addEventListener('click', (event) => {
-          if (!isMobileScreen()) return;
-
-          event.preventDefault();
-
-          const targetId = event.target.getAttribute('href').substring(1);  // Get the target block ID
-          const targetBlock = document.getElementById(targetId);
-
-          if (targetBlock) {
-            blocks.forEach(block => {
-              block.style.display = 'none';
-            });
-
-            targetBlock.style.display = 'flex';
-          }
-
-          sidebar.style.display = 'none';
-          nav.style.display = 'none';
-          text.style.display = 'none';
-        });
-      });
-
-      bookBtn.addEventListener('click', () => {
-        sidebar.style.display = 'flex';
-        nav.style.display = 'flex';
-        text.style.display = 'block';
-        blocks.forEach(block => {
-          block.style.display = 'none';
-        });
-      })
-
-      window.addEventListener('resize', () => {
-        if (!isMobileScreen()) {
-          blocks.forEach(block => {
-            block.style.display = 'flex';
-          });
-        } else {
-          blocks.forEach(block => {
-            block.style.display = 'none';
-          });
-        }
-      });
-    });
-  </script>
 {% endblock %}

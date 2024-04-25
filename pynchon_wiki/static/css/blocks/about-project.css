@@ -43,10 +43,20 @@
   position: relative;
 }
 
+.about-project__cover-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto 80px;
+}
+
 .about-project__description {
   max-width: 1300px;
   padding: 0;
   margin: 0 0 90px;
+  padding-top: 80px;
 }
 
 .about-project__content {
@@ -59,7 +69,21 @@
   max-width: 49%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
+}
+
+.meeting__box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.meeting__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .meeting__topic {
@@ -75,6 +99,7 @@
 }
 
 .meeting__text {
+  width: 100%;
   color: #000;
   margin: 0;
   padding: 0;
