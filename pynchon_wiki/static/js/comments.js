@@ -94,7 +94,21 @@ document.addEventListener("DOMContentLoaded", function () {
         left: 0,
         behavior: 'smooth'
       })
-      console.log($(comment).position().top);
     })
   })
 });
+
+function setActiveLink(links, activeClass) {
+  links.forEach(link => {
+    link.addEventListener('click', event => {
+      links.forEach(link => {
+        link.classList.remove(activeClass);
+      });
+      event.target.classList.add(activeClass);
+    });
+  });
+}
+const commentLinks = document.querySelectorAll('.comment-link');
+setActiveLink(commentLinks, 'sidebar__link_active');
+// const bookLinks = document.querySelectorAll('.book-link');
+// setActiveLink(bookLinks, 'other-books__book-link_active');

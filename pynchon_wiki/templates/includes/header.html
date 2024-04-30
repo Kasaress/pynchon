@@ -19,10 +19,10 @@
           </a>
         </li>
         <li class="header__item" id="other-books-header-link">
-          <a class="header__link link body-text-l" 
+          <p class="header__link link body-text-l" 
             href="{% url 'wiki:other-books' %}" target="_self">
             ДРУГИЕ КНИГИ
-          </a>
+          </p>
           <div class="header__drop">
             <div class="header__drop-links">
               <a class="header__drop-link body-text-bold" href="{% url 'wiki:v_index' %}">V.</a>
@@ -32,20 +32,22 @@
         </li>
       {% endwith %}
     </ul>
-    {% with request.resolver_match.view_name as view_name %}
-      {% if 'wiki:rainbow_part2' in view_name %}
-        <button class="header__book" type="button"></button>
-      {% elif 'wiki:rainbow_part3' in view_name %}
-        <button class="header__book" type="button"></button>
-      {% endif %}
-    {% endwith %}
+    {% comment %}
+      {% with request.resolver_match.view_name as view_name %}
+        {% if 'wiki:rainbow_part2' in view_name %}
+          <button class="header__book" type="button"></button>
+        {% elif 'wiki:rainbow_part3' in view_name %}
+          <button class="header__book" type="button"></button>
+        {% elif 'wiki:v_part2' in view_name %}
+          <button class="header__book" type="button"></button>
+        {% endif %}
+      {% endwith %}
+    {% endcomment %}
     <button class="header__button" type="button"></button>
   </header>
-  {% comment %}
   <div class="header__drop">
     <div class="header__drop-links">
       <a class="header__drop-link body-text-bold" href="{% url 'wiki:index' %}">Радуга тяготения</a>
       <a class="header__drop-link body-text-bold" href="{% url 'wiki:v_index' %}">V.</a>
     </div>
   </div>
-  {% endcomment %}

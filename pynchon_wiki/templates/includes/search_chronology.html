@@ -26,7 +26,7 @@
           <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'chronology' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
         {% endif %}
       </table>
-    </div>
+    </div><br>
   {% endif %}
 {% else %}
   {% if chronology_set|length > 0 %}
