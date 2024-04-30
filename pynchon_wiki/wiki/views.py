@@ -342,7 +342,7 @@ def search(request, book_id, search_model):
         if el.__class__.__name__ == 'Article' and el.attitude == 'Раздел 7'
     ]
     chronology_set = [
-        el for el in final_set if el.__class__.__name__ == 'TableСhronology'
+        el for el in final_set if el.__class__.__name__ == 'TableChronology'
     ]
     characters_set = [
         el for el in final_set if el.__class__.__name__ == 'TableСharacters'
