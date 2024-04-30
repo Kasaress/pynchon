@@ -5,13 +5,6 @@
     <h5>Найдено в разделе "КОММЕНТАРИИ" {{ chapters_set|length }} результатов:</h5><br>
     <div class="comments-container">
     {% for chapter in chapters_set|slice:":3" %}
-      {% if chapter.image %}
-        <div class="chapter-3-image">
-          {% thumbnail chapter.image "1300x400" as thumbnail %}
-            <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}">
-          {% endthumbnail %}
-        </div>
-      {% endif %}
       <br>
       <li id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
         <div id="summary-{{ chapter.number }}">
