@@ -325,14 +325,17 @@ def search(request, book_id, search_model):
     ]
     articles_1_set = [
         el for el in final_set
-        if el.__class__.__name__ == 'Article' 
-        and (el.attitude == 'Раздел 1' or el.attitude == 'Раздел 1 (статья 1)'
-        or el.attitude == 'Раздел 1 (статья 2)' or el.attitude == 'V Раздел 1')
+        if el.__class__.__name__ == 'Article'
+        and (
+            el.attitude == 'Раздел 1' or el.attitude == 'Раздел 1 (статья 1)'
+            or el.attitude == 'Раздел 1 (статья 2)'
+            or el.attitude == 'V Раздел 1'
+        )
     ]
     articles_4_set = [
         el for el in final_set
-        if el.__class__.__name__ == 'Article' and
-        (el.attitude == 'Раздел 4' or el.attitude == 'V Раздел 3')
+        if el.__class__.__name__ == 'Article'
+        and (el.attitude == 'Раздел 4' or el.attitude == 'V Раздел 3')
     ]
     articles_7_set = [
         el for el in final_set
