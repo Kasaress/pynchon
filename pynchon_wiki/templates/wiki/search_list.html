@@ -14,7 +14,7 @@
   <section class="chapter chapter-2-3-notes">
     <div class="container">
       <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ q }}"</h3><br>
-      <a class="btn custom-button" href="{% url 'wiki:search' book.id %}?q={{ q }}">вернуться к общему списку</a><br><br>
+      <a class="btn custom-button" href="{% url 'wiki:search' book.id search_model %}?q={{ q }}">вернуться к общему списку</a><br><br>
       {% if content_list|first|class_name == 'Comment'  %}
         <h5>Примечания:</h5><br>
         {% for comment in object_list %}
@@ -49,13 +49,6 @@
         <h5>Комментарии:</h5><br>
         <div class="comments-container">
         {% for chapter in object_list %}
-          {% if chapter.image %}
-            <div class="chapter-3-image">
-              {% thumbnail chapter.image "1300x400" as thumbnail %}
-                <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}">
-              {% endthumbnail %}
-            </div>
-          {% endif %}
           <br>
           <li id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
             <div id="summary-{{ chapter.number }}">
@@ -64,7 +57,7 @@
                 <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
               </div>
               <div class="chapter-2-3-notes__text-content">
-                <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|search_highlight:q|safe|linebreaks }}</p>
+                <p class="chapter-2-3-notes__text body-text">..... {{ chapter.summary|search_highlight:q|custom_slice:q|safe|linebreaks }} .....</p>
               </div>
             </div>
             <div id="interpretation-{{ chapter.number}}">
@@ -72,36 +65,45 @@
                 <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
               </div>
               <div class="chapter-2-3-notes__text-content">
-                <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|search_highlight:q|safe|linebreaks }}</p>
+                <p class="chapter-2-3-notes__text body-text">..... {{ chapter.interpretation|search_highlight:q|custom_slice:q|safe|linebreaks }} .....</p>
               </div>
             </div>
           </li> 
+          <a href="{% url "wiki:rainbow_part3_detail" chapter.pk %}">Посмотреть полностью</a><br><br><br>
         {% endfor %}
         </div> 
-      {% elif content_list|first|class_name == 'Article' %}
+      {% elif content_list|first|class_name == 'Article' and search_model == 'articles_1'%}
         <h5>Статьи:</h5><br>
         {% for article in object_list %}
-          <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
-          <p class="chapter-2-3-notes__text body-text">{{ article.text|search_highlight:q|safe }}</p>
-          {% if article.image %}
-            <div class="chapter-1-how__image-container">
-              <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"
-                  data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
-              <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                  <div class="modal-content_chapter1">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="modal-body text-center p-0">
-                      <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {% if article.attitude == 'Раздел 4' %}
+            <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
+            <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|custom_slice:q|safe }} .....</p><br>
+            <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
+            <br><br><br> 
+          {% endif %}
+        {% endfor %}
+      {% elif content_list|first|class_name == 'Article' and search_model == 'articles_4'%}
+        <h5>Статьи:</h5><br>
+        {% for article in object_list %}
+          {% if article.attitude == 'Раздел 1' %}
+            <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
+            <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|custom_slice:q|safe }} .....</p><br>
+            <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
+            <br><br><br> 
           {% endif %}
           <br>
         {% endfor %}
-        
+      {% elif content_list|first|class_name == 'Article' and search_model == 'articles_7'%}
+        <h5>Статьи:</h5><br>
+        {% for article in object_list %}
+          {% if article.attitude == 'Раздел 1' %}
+            <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
+            <p class="chapter-2-3-notes__text body-text">.....{{ article.text|search_highlight:q|custom_slice:q|safe }} .....</p><br>
+            <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
+            <br><br><br> 
+          {% endif %}
+          <br>
+        {% endfor %}
       {% elif content_list|first|class_name == 'TableСhronology' %}
         <h5>Хронология:</h5><br>
         <div class="container">

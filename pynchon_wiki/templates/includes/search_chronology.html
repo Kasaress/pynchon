@@ -1,0 +1,36 @@
+{% load user_filters %}
+{% if search_model == 'chronology' %}
+  {% if chronology_set|length > 0 %}      
+    <h5>Найдено в разделе "ХРОНОЛОГИЯ" {{ chronology_set|length }} результатов:</h5><br>
+    <div class="container">
+      <table class="table_characters_chronology">
+        <tr class="table_characters_chronology__row">
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text">Дата</p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text">Событие</p>
+          </td>
+        </tr>
+        {% for row in chronology_set|slice:":3" %}
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text"> {{ row.date|search_highlight:q|safe }} </p>
+            </td>
+            <td class="table_characters_chronology__cell">
+              <p class="table_characters_chronology__text"> {{ row.description|search_highlight:q|safe }} </p>
+            </td>
+          </tr>
+        {% endfor %}
+        {% if chronology_set|length > 3 %}
+          <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'chronology' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
+        {% endif %}
+      </table>
+    </div>
+  {% endif %}
+{% else %}
+  {% if chronology_set|length > 0 %}
+    <h5>Найдено в разделе "ХРОНОЛОГИЯ" {{ chronology_set|length }} результатов:</h5><br>
+    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'chronology' }}&q={{ q }}">Посмотреть результаты по разделу</a><br><br>
+  {% endif %}
+{% endif %}

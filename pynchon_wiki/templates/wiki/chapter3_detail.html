@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}
+  Статьи
+{% endblock %}
+{% block content %}
+  <section class="chapters-nav">
+    {% include 'includes/form_search.html' %}
+    {% include 'includes/chapters.html' %}
+  </section>
+  <section class="chapter chapter-2-3-notes">
+    <div class="comments-container">
+      {% if chapter.image %}
+        <div class="chapter-3-image">
+          {% thumbnail chapter.image "1300x400" as thumbnail %}
+            <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapter.image.alt }}">
+          {% endthumbnail %}
+        </div>
+      {% endif %}
+      <br>
+      <div id="chapter-content-{{ chapter.number }}" class="chapter-2-3-notes__item">
+        <div id="summary-{{ chapter.number }}">
+            <p class="chapter-2-3-notes__text body-text">{{ chapter.pov|safe }}</p><br>
+          <div class="chapter-2-3-notes__header">
+            <h2 class="chapter-2-3-notes__title title-bold">Краткое содержание главы {{ chapter.number }}</h2><br>
+          </div>
+          <div class="chapter-2-3-notes__text-content">
+            <p class="chapter-2-3-notes__text body-text">{{ chapter.summary|safe|linebreaks }}</p>
+          </div>
+        </div>
+        <div id="interpretation-{{ chapter.number}}">
+          <div class="chapter-2-3-notes__header">
+            <h2 class="chapter-2-3-notes__title title-bold">Комментарии к главе {{ chapter.number }}</h2><br>
+          </div>
+          <div class="chapter-2-3-notes__text-content">
+            <p class="chapter-2-3-notes__text body-text">{{ chapter.interpretation|safe|linebreaks }}</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% load user_filters %}
+{% if search_model == 'characters' %}
+  {% if characters_set|length > 0 %}
+    <h5>Найдено в разделе "ПЕРСОНАЖИ" {{ characters_set|length }} результатов:</h5><br>
+    <table class="table_characters_chronology">
+      <tr class="table_characters_chronology__row">
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Имя</p>
+        </td>
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Имя в оригинале и значение имени</p>
+        </td>
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Характеристика</p>
+        </td>
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Портрет</p>
+        </td>
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Группы</p>
+        </td>
+        <td class="table_characters_chronology__cell">
+          <p class="table_characters_chronology__text">Упоминания</p>
+        </td>
+      </tr>
+      {% for character in characters_set|slice:":3" %}
+        {% if forloop.first %}
+          <tr class="table_characters_chronology__row">
+            <td class="table_characters_chronology__cell" colspan="6">
+              <h4 class="table_characters_chronology__text circle-name text-center">Круг {{ character.circle.name|search_highlight:q|safe }}</h4>
+            </td>
+          </tr>
+        {% endif %}
+        <tr class="table_characters_chronology__row">
+          <td class="table_characters_chronology__cell">
+            <h6 class="table_characters_chronology__text"> {{ character.name|search_highlight:q|safe }} </h6>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> {{ character.value_name|search_highlight:q|safe }} </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> {{ character.characteristics|search_highlight:q|safe }} </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> {{ character.portrait|search_highlight:q|safe }} </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> {{ character.groups }} </p>
+          </td>
+          <td class="table_characters_chronology__cell">
+            <p class="table_characters_chronology__text"> {{ character.mentions }} </p>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    {% if characters_set|length > 3 %}
+      <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'characters' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% if characters_set|length > 0 %}
+    <h5>Найдено в разделе "ПЕРСОНАЖИ" {{ characters_set|length }} результатов:</h5><br>
+    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'characters' }}&q={{ q }}">Посмотреть результаты по разделу</a><br><br>
+  {% endif %}
+{% endif %}

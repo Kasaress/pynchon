@@ -1,0 +1,42 @@
+{% load user_filters %}
+{% if search_model == 'comments' %}
+  {% if comments_set|length > 0 %}
+    <h5>Найдено в разделе "ПРИМЕЧАНИЯ" {{ comments_set|length }} результатов:</h5><br>
+    {% for comment in comments_set|slice:":3" %}
+    <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
+        <div class="chapter-2-3-notes__header">
+        <h2 class="chapter-2-3-notes__title title-bold">{{comment.name|search_highlight:q|safe}}</h2>
+        <p class="chapter-2-3-notes__pages body-text">Стр.{{comment.page_number_by_2012}} /
+            Стр.{{comment.page_number_by_2021}}</p><br>
+        </div>
+        <div class="chapter-2-3-notes__text-content">
+        <p class="chapter-2-3-notes__text body-text">{{comment.comment_text|search_highlight:q|safe}}</p>
+        </div>
+        <br>
+        {% if comment.image %}
+        <img class="chapter-2-3-notes__img" src="{{comment.image.url}}" alt="{{comment.name}}"
+            data-bs-toggle="modal" data-bs-target="#image-modal-{{ comment.pk }}">
+        <div class="modal fade" id="image-modal-{{ comment.pk }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body text-center p-0">
+                <img src="{{ comment.image.url }}" alt="{{ comment.image.alt }}" class="modal-image">
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    {% endfor %}
+    {% if comments_set|length > 3 %}
+    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'comments' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% if comments_set|length > 0 %}
+    <h5>Найдено в разделе "ПРИМЕЧАНИЯ" {{ comments_set|length }} результатов:</h5><br>
+    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'comments' }}&q={{ q }}">Посмотреть результаты по разделу</a><br><br>
+  {% endif %}
+{% endif %}

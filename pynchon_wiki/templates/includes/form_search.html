@@ -1,5 +1,5 @@
 {% load static %}
-<form class="search" action="{% url 'wiki:search' book.id %}" method="GET">
+<form class="search" action="{% url 'wiki:search' book.id search_model %}" method="GET">
 	<input type="hidden">
 	<input class="search__input" type="text" name="q" placeholder="Поиск" value="{{ q }}">
 	<button class="search__button" type="submit"></button>

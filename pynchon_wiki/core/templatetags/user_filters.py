@@ -44,3 +44,11 @@ def search_highlight(value, query):
 @register.filter
 def class_name(value):
     return value.__class__.__name__
+
+
+@register.filter
+def custom_slice(value, q):
+    n = value.find(q)
+    start_index = max(0, n - 500)
+    end_index = min(len(value), n + 500)
+    return value[start_index:end_index]

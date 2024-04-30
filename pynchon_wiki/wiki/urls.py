@@ -14,6 +14,10 @@ urlpatterns = [
         name='rainbow_part2_detail'
     ),
     path('rainbow_part3', views.rainbow_part3, name='rainbow_part3'),
+    path(
+        'rainbow_part3_detail/<int:chapter_id>', views.rainbow_part3_detail,
+        name='rainbow_part3_detail'
+    ),
     path('rainbow_part4', views.rainbow_part4, name='rainbow_part4'),
     path(
         'rainbow_part4_detail/<int:article_id>', views.rainbow_part4_detail,
@@ -48,8 +52,13 @@ urlpatterns = [
     path('contacts', views.contacts, name='contacts'),
     path('creators', views.creators, name='creators'),
     path('author', views.author, name='author'),
-    path('search/<int:book_id>/', views.search, name='search'),
-    path('search-list/<int:book_id>/', views.search_list, name='search_list'),
+    path(
+        'search/<int:book_id>/<str:search_model>', views.search, name='search'
+    ),
+    path(
+        'search-list/<int:book_id>/<str:search_model>', views.search_list,
+        name='search_list'
+    ),
     path('v/', views.v_index, name='v_index'),
     path('', views.index, name='index'),
 ]

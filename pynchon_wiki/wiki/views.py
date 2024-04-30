@@ -116,7 +116,8 @@ def rainbow_part1(request):
     articles = Article.objects.filter(attitude='Раздел 1')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_1'
     }
     return render(request, template, context)
 
@@ -128,7 +129,8 @@ def article1(request):
     articles = Article.objects.filter(attitude='Раздел 1 (статья 1)')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_1'
     }
     return render(request, template, context)
 
@@ -140,7 +142,8 @@ def article2(request):
     articles = Article.objects.filter(attitude='Раздел 1 (статья 2)')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_1'
     }
     return render(request, template, context)
 
@@ -153,6 +156,7 @@ def rainbow_part2(request):
     context = {
         'book': book,
         'chapters': chapters,
+        'search_model': 'comments'
     }
     return render(request, template, context)
 
@@ -164,7 +168,8 @@ def rainbow_part2_detail(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     context = {
         'book': book,
-        'comment': comment
+        'comment': comment,
+        'search_model': 'comments'
     }
     return render(request, template, context)
 
@@ -176,6 +181,20 @@ def rainbow_part3(request):
     context = {
         'book': book,
         'chapters': Chapter.objects.filter(book=book).all(),
+        'search_model': 'chapters'
+    }
+    return render(request, template, context)
+
+
+def rainbow_part3_detail(request, chapter_id):
+    """ Страница с отдельным комментарием. """
+    template = 'wiki/chapter3_detail.html'
+    book = get_object_or_404(Book, name='Радуга тяготения')
+    chapter = Chapter.objects.get(pk=chapter_id)
+    context = {
+        'book': book,
+        'chapter': chapter,
+        'search_model': 'chapters'
     }
     return render(request, template, context)
 
@@ -187,19 +206,21 @@ def rainbow_part4(request):
     articles = Article.objects.filter(attitude='Раздел 4')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_4'
     }
     return render(request, template, context)
 
 
 def rainbow_part4_detail(request, article_id):
-    """ Страница со статьями. """
+    """ Страница с отдельной статьей. """
     template = 'wiki/chapter4_detail.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     article = Article.objects.get(pk=article_id)
     context = {
         'book': book,
-        'article': article
+        'article': article,
+        'search_model': 'articles_4'
     }
     return render(request, template, context)
 
@@ -214,6 +235,7 @@ def rainbow_part5(request):
         'start_event': TableChronology.objects.get(id=RAINBOW_START_EVENT),
         'articles': articles,
         'events': TableChronology.objects.filter(book=RAINBOW_BOOK),
+        'search_model': 'chronology'
     }
     return render(request, template, context)
 
@@ -226,6 +248,7 @@ def rainbow_part6(request):
     context = {
         'book': book,
         'circles': circles,
+        'search_model': 'characters'
     }
     return render(request, template, context)
 
@@ -235,7 +258,8 @@ def rainbow_part6_map(request):
     template = 'wiki/chapter6_map.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     context = {
-        'book': book
+        'book': book,
+        'search_model': 'characters'
     }
     return render(request, template, context)
 
@@ -247,7 +271,8 @@ def rainbow_part7(request):
     articles = Article.objects.filter(attitude='Раздел 7')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_7'
     }
     return render(request, template, context)
 
@@ -276,7 +301,7 @@ def get_summary(request):
     return render(request, template, context)
 
 
-def search(request, book_id):
+def search(request, book_id, search_model):
     template = 'wiki/search_results.html'
     q = request.GET.get('q')
     book = get_object_or_404(Book, pk=book_id)
@@ -298,8 +323,20 @@ def search(request, book_id):
     chapters_set = [
         el for el in final_set if el.__class__.__name__ == 'Chapter'
     ]
-    articles_set = [
-        el for el in final_set if el.__class__.__name__ == 'Article'
+    articles_1_set = [
+        el for el in final_set
+        if el.__class__.__name__ == 'Article' and
+        (el.attitude == 'Раздел 1' or el.attitude == 'Раздел 1 (статья 1)' or
+        el.attitude == 'Раздел 1 (статья 2)' or el.attitude == 'V Раздел 1')
+    ]
+    articles_4_set = [
+        el for el in final_set
+        if el.__class__.__name__ == 'Article' and 
+        (el.attitude == 'Раздел 4' or el.attitude == 'V Раздел 3')
+    ]
+    articles_7_set = [
+        el for el in final_set
+        if el.__class__.__name__ == 'Article' and el.attitude == 'Раздел 7'
     ]
     chronology_set = [
         el for el in final_set if el.__class__.__name__ == 'TableСhronology'
@@ -311,22 +348,19 @@ def search(request, book_id):
         'q': q,
         'book': book,
         'final_set': final_set,
-        'comments_set_prev': comments_set[:3],
-        'chapters_set_prev': chapters_set[:3],
-        'articles_set_prev': articles_set[:3],
-        'chronology_set_prev': chronology_set[:3],
-        'characters_set_prev': characters_set[:3],
-        'comments_set_count': len(comments_set),
-        'chapters_set_count': len(chapters_set),
-        'articles_set_count': len(articles_set),
-        'chronology_set_count': len(chronology_set),
-        'characters_set_count': len(characters_set)
+        'comments_set': comments_set,
+        'chapters_set': chapters_set,
+        'articles_1_set': articles_1_set,
+        'articles_4_set': articles_4_set,
+        'articles_7_set': articles_7_set,
+        'chronology_set': chronology_set,
+        'characters_set': characters_set,
+        'search_model': search_model
     }
-    print(final_set)
     return render(request, template, context)
 
 
-def search_list(request, book_id):
+def search_list(request, book_id, search_model):
     template = 'wiki/search_list.html'
     q = request.GET.get('q')
     content = request.GET.get('content')
@@ -352,7 +386,8 @@ def search_list(request, book_id):
     context = {
         'q': q,
         'book': book,
-        'content_list': content_list
+        'content_list': content_list,
+        'search_model': search_model
     }
     context['last_question'] = '?q=%s' % q
     current_page = Paginator(content_list, 10)
@@ -363,12 +398,11 @@ def search_list(request, book_id):
         context['object_list'] = current_page.page(1)
     except EmptyPage:
         context['object_list'] = current_page.page(current_page.num_pages)
-
     return render(request, template, context)
 
 
 def v_index(request):
-    """ Главная страница книги 'Радуга тяготения'. """
+    """ Главная страница книги 'V.'. """
     template = 'wiki/v_index.html'
     book = get_object_or_404(Book, name='V')
     context = {
@@ -385,7 +419,8 @@ def v_part1(request):
     articles = Article.objects.filter(attitude='V Раздел 1')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_1'
     }
     return render(request, template, context)
 
@@ -397,7 +432,8 @@ def v_part2(request):
     chapters = Chapter.objects.filter(book=book).order_by('sort')
     context = {
         'book': book,
-        'chapters': chapters
+        'chapters': chapters,
+        'search_model': 'comments'
     }
     return render(request, template, context)
 
@@ -421,7 +457,8 @@ def v_part2_detail(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     context = {
         'book': book,
-        'comment': comment
+        'comment': comment,
+        'search_model': 'comments'
     }
     return render(request, template, context)
 
@@ -433,19 +470,21 @@ def v_part3(request):
     articles = Article.objects.filter(attitude='V Раздел 3')
     context = {
         'book': book,
-        'articles': articles
+        'articles': articles,
+        'search_model': 'articles_4'
     }
     return render(request, template, context)
 
 
 def v_part3_detail(request, article_id):
-    """ Страница со статьями. """
+    """ Страница с отдельной статьей. """
     template = 'wiki/v_chapter3_detail.html'
     book = get_object_or_404(Book, name='V')
     article = Article.objects.get(pk=article_id)
     context = {
         'book': book,
-        'article': article
+        'article': article,
+        'search_model': 'articles_4'
     }
     return render(request, template, context)
 
@@ -460,7 +499,8 @@ def v_part4(request):
         'chapters': Chapter.objects.filter(book=book).all(),
         'start_event': TableChronology.objects.get(id=V_START_EVENT),
         'articles': articles,
-        'events': TableChronology.objects.filter(book=V_BOOK)
+        'events': TableChronology.objects.filter(book=V_BOOK),
+        'search_model': 'chronology'
     }
     return render(request, template, context)
 
@@ -472,7 +512,8 @@ def v_part5(request):
     circles = CircleTableCharacters.objects.filter(book=V_BOOK)
     context = {
         'book': book,
-        'circles': circles
+        'circles': circles,
+        'search_model': 'characters'
     }
     return render(request, template, context)
 
@@ -482,7 +523,8 @@ def v_part5_map(request):
     template = 'wiki/v_chapter5_map.html'
     book = get_object_or_404(Book, name='V')
     context = {
-        'book': book
+        'book': book,
+        'search_model': 'characters'
     }
     return render(request, template, context)
 
