@@ -4,7 +4,7 @@
     <h5>Найдено в разделе "РАЗБОР РОМАНА" {{ articles_7_set|length }} результатов:</h5><br>
     {% for article in articles_7_set|slice:":3" %}
       <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
-      <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|custom_slice:q|safe }} .....</p><br>
+      <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|striptags|custom_slice:q|safe }} .....</p><br>
       <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a><br><br><br>
     {% endfor %}
     {% if articles_7_set|length > 3 %}
