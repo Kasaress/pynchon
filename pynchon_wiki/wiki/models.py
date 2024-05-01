@@ -319,19 +319,30 @@ class TableChronology(BaseModel):
 class ArticleManager(models.Manager):
     use_for_related_fields = True
 
-    def search(self, query=None, book_id=None):
+    def search(self, query=None, book_id=None, attitude=None):
         qs = self.get_queryset()
         if query:
             or_lookup = (
                 Q(name__icontains=query) | Q(text__icontains=query)
             )
-            qs = qs.filter(
-                or_lookup, book_id=book_id, attitude__in=[
-                    'Раздел 1', 'V Раздел 1', 'Раздел 4', 'V Раздел 4',
-                    'V Раздел 5', 'Раздел 1 (статья 1)', 'V Раздел 3',
-                    'Раздел 1 (статья 2)', 'Раздел 5', 'Раздел 7'
-                ]
-            )
+            if attitude in [
+                'Раздел 1', 'Раздел 1 (статья 1)', 
+                'Раздел 1 (статья 2)', 'V Раздел 1'
+            ]:
+                qs = qs.filter(
+                    or_lookup, book_id=book_id, attitude__in=[
+                        'Раздел 1', 'V Раздел 1', 'Раздел 1 (статья 1)',
+                        'Раздел 1 (статья 2)',
+                        ]
+                    )
+            elif attitude in ['Раздел 4', 'V Раздел 3']:
+                qs = qs.filter(
+                    or_lookup, book_id=book_id, attitude__in=[
+                        'Раздел 4', 'V Раздел 3',
+                    ]
+                )
+            elif attitude == 'Раздел 7':
+                qs = qs.filter(or_lookup, book_id=book_id, attitude='Раздел 7')
         return qs
 
 

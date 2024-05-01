@@ -8,12 +8,12 @@
       <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a><br><br><br>
     {% endfor %}
     {% if articles_1_set|length > 3 %}
-      <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'articles' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
+      <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'articles_1' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
     {% endif %}
   {% endif %}
 {% else %}
   {% if articles_1_set|length > 0 %}
     <h5>Найдено в разделе {% if book.pk == 1 %}"КАК ПЕРЕСТАТЬ БЕСПОКОИТЬСЯ И НАЧАТЬ ЧИТАТЬ РОМАН"{% else %}"ЧТО НЕОБЫЧНОГО В ПЕРВОМ РОМАНЕ ТОМАСА ПИНЧОНА"{% endif %} {{ articles_1_set|length }} результатов:</h5><br>
-    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'articles' }}&q={{ q }}">Посмотреть результаты по разделу</a><br><br>
+    <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'articles_1' }}&q={{ q }}">Посмотреть результаты по разделу</a><br><br>
   {% endif %}
 {% endif %}

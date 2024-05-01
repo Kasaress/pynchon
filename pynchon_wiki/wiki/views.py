@@ -302,6 +302,7 @@ def get_summary(request):
 
 
 def search(request, book_id, search_model):
+    """ Поиск по всем моделям """
     template = 'wiki/search_results.html'
     q = request.GET.get('q')
     book = get_object_or_404(Book, pk=book_id)
@@ -309,10 +310,7 @@ def search(request, book_id, search_model):
     query_sets.extend([
         Comment.objects.search(query=q, book_id=book_id),
         Chapter.objects.search(query=q, book_id=book_id),
-        sorted(
-            Article.objects.search(query=q, book_id=book_id),
-            key=lambda x: x.attitude
-        ),
+        Article.objects.search(query=q, book_id=book_id),
         TableChronology.objects.search(query=q, book_id=book_id),
         TableСharacters.objects.search(query=q, book_id=book_id)
     ])
@@ -373,10 +371,22 @@ def search_list(request, book_id, search_model):
         content_list.append(Comment.objects.search(query=q, book_id=book_id))
     elif content == 'chapters':
         content_list.append(Chapter.objects.search(query=q, book_id=book_id))
-    elif content == 'articles':
-        content_list.append(sorted(Article.objects.search(
-            query=q, book_id=book_id
-        ), key=lambda x: x.attitude))
+    elif content == 'articles_1':
+        content_list.append(Article.objects.search(
+            query=q, book_id=book_id, attitude='Раздел 1'
+            or 'Раздел 1 (статья 1)' or 'Раздел 1 (статья 2)' or 'V Раздел 1'
+            )
+        )
+    elif content == 'articles_4':
+        content_list.append(Article.objects.search(
+            query=q, book_id=book_id, attitude='Раздел 4' or 'V Раздел 3'
+            )
+        )
+    elif content == 'articles_7':
+        content_list.append(Article.objects.search(
+            query=q, book_id=book_id, attitude='Раздел 7'
+            )
+        )
     elif content == 'chronology':
         content_list.append(TableChronology.objects.search(
             query=q, book_id=book_id
@@ -389,6 +399,7 @@ def search_list(request, book_id, search_model):
     context = {
         'q': q,
         'book': book,
+        'content': content,
         'content_list': content_list,
         'search_model': search_model
     }
