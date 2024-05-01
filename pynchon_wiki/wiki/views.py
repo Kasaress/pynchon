@@ -366,39 +366,40 @@ def search_list(request, book_id, search_model):
     q = request.GET.get('q')
     content = request.GET.get('content')
     book = get_object_or_404(Book, pk=book_id)
-    content_list = []
-    if content == 'comments':
-        content_list.append(Comment.objects.search(query=q, book_id=book_id))
-    elif content == 'chapters':
-        content_list.append(Chapter.objects.search(query=q, book_id=book_id))
-    elif content == 'articles_1':
-        content_list.append(Article.objects.search(
-            query=q, book_id=book_id, attitude='Раздел 1'
-            or 'Раздел 1 (статья 1)' or 'Раздел 1 (статья 2)' or 'V Раздел 1'
-            )
-        )
-    elif content == 'articles_4':
-        content_list.append(Article.objects.search(
-            query=q, book_id=book_id, attitude='Раздел 4' or 'V Раздел 3'
-            )
-        )
-    elif content == 'articles_7':
-        content_list.append(Article.objects.search(
-            query=q, book_id=book_id, attitude='Раздел 7'
-            )
-        )
-    elif content == 'chronology':
-        content_list.append(TableChronology.objects.search(
-            query=q, book_id=book_id
-        ))
-    elif content == 'characters':
-        content_list.append(TableСharacters.objects.search(
-            query=q, book_id=book_id
-        ))
+    model_maping = {
+        'comments': Comment,
+        'chapters': Chapter,
+        'articles_1': Article,
+        'articles_4': Article,
+        'articles_7': Article,
+        'chronology': TableChronology,
+        'characters': TableСharacters
+    }
+    attitude_mapping = {
+        'articles_1': 'Раздел 1' or 'Раздел 1 (статья 1)' 
+        or 'Раздел 1 (статья 2)' or 'V Раздел 1',
+        'articles_4': 'Раздел 4' or 'V Раздел 3',
+        'articles_7': 'Раздел 7',
+    }
+    model = model_maping.get(content)
+    if not model:
+        return render(request, template, {
+            'q': q, 'book': book, 'content': content, 
+            'content_list': content_list, 'search_model': search_model
+        }
+    )
+    attitude = None
+    if content in attitude_mapping:
+        attitude = attitude_mapping[content]
+    query_kwargs = {'query': q, 'book_id': book_id}
+    if attitude:
+        query_kwargs['attitude'] = attitude
+    content_list = [model.objects.search(**query_kwargs)]
     content_list = list(chain(*content_list))
     context = {
         'q': q,
         'book': book,
+        'model': model,
         'content': content,
         'content_list': content_list,
         'search_model': search_model

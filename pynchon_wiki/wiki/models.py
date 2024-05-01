@@ -326,21 +326,21 @@ class ArticleManager(models.Manager):
                 Q(name__icontains=query) | Q(text__icontains=query)
             )
             if attitude in [
-                'Раздел 1', 'Раздел 1 (статья 1)', 
+                'Раздел 1', 'Раздел 1 (статья 1)',
                 'Раздел 1 (статья 2)', 'V Раздел 1'
             ]:
                 qs = qs.filter(
                     or_lookup, book_id=book_id, attitude__in=[
                         'Раздел 1', 'V Раздел 1', 'Раздел 1 (статья 1)',
                         'Раздел 1 (статья 2)',
-                        ]
-                    )
+                    ]
+                )
             elif attitude in ['Раздел 4', 'V Раздел 3']:
                 qs = qs.filter(
                     or_lookup, book_id=book_id, attitude__in=[
                         'Раздел 4', 'V Раздел 3',
-                    ]
-                )
+                ]
+            )
             elif attitude == 'Раздел 7':
                 qs = qs.filter(or_lookup, book_id=book_id, attitude='Раздел 7')
         return qs

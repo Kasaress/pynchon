@@ -15,7 +15,7 @@
     <div class="container">
       <h3 class="chapter-2-3-notes__title title-bold">Результаты поиска по запросу "{{ q }}"</h3><br>
       <a class="btn custom-button" href="{% url 'wiki:search' book.id search_model %}?q={{ q }}">вернуться к общему списку</a><br><br>
-      {% if content_list|first|class_name == 'Comment'  %}
+      {% if model|class_name == 'Comment'  %}
         <h5>Примечания:</h5><br>
         {% for comment in object_list %}
           <div id="{{ comment.page_number_by_2012 }}_{{ comment.id }}">
@@ -45,7 +45,7 @@
           </div>
           <br>
         {% endfor %}
-      {% elif content_list|first|class_name == 'Chapter' %}
+      {% elif model|class_name == 'Chapter' %}
         <h5>Комментарии:</h5><br>
         <div class="comments-container">
         {% for chapter in object_list %}
@@ -72,7 +72,7 @@
           <a href="{% url "wiki:rainbow_part3_detail" chapter.pk %}">Посмотреть полностью</a><br><br><br>
         {% endfor %}
         </div> 
-      {% elif content_list|first|class_name == 'Article' and content == 'articles_1' %}
+      {% elif model|class_name == 'Article' and content == 'articles_1' %}
         <h5>Статьи:</h5><br>
         {% for article in object_list %}
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
@@ -80,7 +80,7 @@
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
-      {% elif content_list|first|class_name == 'Article' and content == 'articles_4' %}
+      {% elif model|class_name == 'Article' and content == 'articles_4' %}
         <h5>Статьи:</h5><br>
         {% for article in object_list %}
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
@@ -88,7 +88,7 @@
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
-      {% elif content_list|first|class_name == 'Article' and content == 'articles_7' %}
+      {% elif model|class_name == 'Article' and content == 'articles_7' %}
         <h5>Статьи:</h5><br>
         {% for article in object_list %}
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
@@ -96,7 +96,7 @@
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
-      {% elif content_list|first|class_name == 'TableСhronology' %}
+      {% elif model|class_name == 'TableСhronology' %}
         <h5>Хронология:</h5><br>
         <div class="container">
           <table class="table_characters_chronology">
@@ -120,7 +120,7 @@
             {% endfor %}
           </table>
         </div><br>
-      {% elif content_list|first|class_name == 'TableСharacters' %}
+      {% elif model|class_name == 'TableСharacters' %}
         <h5>Персонажи:</h5><br>
         <table class="table_characters_chronology">
           <tr class="table_characters_chronology__row">
