@@ -5,7 +5,7 @@
     {% for article in articles_1_set|slice:":3" %}
       <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
       <p class="chapter-2-3-notes__text body-text">..... {{ article.text|striptags|custom_slice:q|search_highlight:q|safe }} .....</p><br>
-      <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a><br><br><br>
+      <a href="{% if article.attitude == 'Раздел 1 (статья 1)' %}{% url "wiki:article1" %}{% else %}{% url "wiki:article2" %}{% endif %}">Посмотреть полностью</a><br><br><br>
     {% endfor %}
     {% if articles_1_set|length > 3 %}
       <a href="{% url "wiki:search_list" book.id search_model %}?content={{ 'articles_1' }}&q={{ q }}">Посмотреть остальные результаты по разделу</a><br><br>
