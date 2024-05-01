@@ -96,7 +96,7 @@
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
-      {% elif model|class_name == 'TableСhronology' %}
+      {% elif model|class_name == 'TableChronology' %}
         <h5>Хронология:</h5><br>
         <div class="container">
           <table class="table_characters_chronology">
@@ -108,7 +108,7 @@
                 <p class="table_characters_chronology__text">Событие</p>
               </td>
             </tr>
-            {% for row in object_list %}
+            {% for row in content_list %}
               <tr class="table_characters_chronology__row">
                 <td class="table_characters_chronology__cell">
                   <p class="table_characters_chronology__text"> {{ row.date|search_highlight:q|safe }} </p>
@@ -143,7 +143,7 @@
               <p class="table_characters_chronology__text">Упоминания</p>
             </td>
           </tr>
-          {% for character in object_list %}
+          {% for character in content_list %}
             {% if forloop.first %}
               <tr class="table_characters_chronology__row">
                 <td class="table_characters_chronology__cell" colspan="6">
