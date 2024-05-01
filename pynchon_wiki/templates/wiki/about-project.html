@@ -34,11 +34,20 @@
             </div>
           </button>
           <div id="noteNav-1" class="accordion-collapse collapse">
-            {% for meeting in planned %}
+            {% comment %} {% for meeting in planned %}
             <ul class="accordion-body">
               <li><a class="sidebar__link body-text comment-link" href="#{{ meeting.name }}">{{meeting.name}}{% if meeting.date %} / {{meeting.date}}{% endif %}</a></li>
             </ul>
-            {% endfor %}
+            {% endfor %} {% endcomment %}
+            <ul class="accordion-body">
+              <li><a class="sidebar__link body-text comment-link" href="https://www.pynchonwiki.com">Пинчонвики</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="https://pynchonnotes.openlibhums.org">Публикации журнала «Pynchon Notes» </a></li>
+              <li><a class="sidebar__link body-text comment-link" href="https://thomaspynchon.com">Сайт о творчестве Томаса Пинчона (не обновлялся с 2015 года, однако есть много интересных материалов)</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="https://drunkpynchon.com">Напитки в романах Томаса Пинчона</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="https://noiselesschatter.com/2013/03/05/the-love-songs-of-thomas-pynchon/"> Коллекция песен о любви в романах Томаса Пинчона</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="https://letterstobarbara.com/thomas-pynchon-v-valletta-report/">География Валетты</a></li>
+              <li><a class="sidebar__link body-text comment-link" href="http://www.v2rocket.com">Сайт о ФАУ-2</a></li>
+            </ul>
           </div>
         </div>
         <div class="accordion-item">

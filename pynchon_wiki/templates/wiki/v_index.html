@@ -5,9 +5,10 @@
 {% endblock %}
 {% block content %}
   <section class="promo v">
-    <p class="promo__text title" id="v-promo-text">САМЫЙ ЯРКИЙ ДЕБЮТ В&nbsp;ЛИТЕРАТУРЕ ХХ&nbsp;ВЕКА<br><br>
+    <p class="promo__text title" id="v-promo-text">САМЫЙ ЯРКИЙ ДЕБЮТ В&nbsp;ЛИТЕРАТУРЕ ХХ&nbsp;ВЕКА<br><br> 
     <span class="body-text-bold">&laquo;Дофрейдовская роскошь снов&raquo; ("Time")<br>
-      Песьи дни закончились, перестал дуть майистрал</span></p>
+      Песьи дни закончились, перестал дуть майистрал.<br>
+      Здесь вы найдете примечания, хронологию, персонажей и многое другое; как им пользоваться, вы можете прочитать <a href="{% url "wiki:about-project" %}">здесь</a></span></p>
     <img class="promo__v-venera" src="{% static 'img/venera.gif' %}" rel="preload" alt="">
     <div class="promo__v-v">
       <img class="promo__v-silhouette" id="silhouette-left" src="{% static 'img/silhouette-left.svg' %}" rel="preload" alt="">
