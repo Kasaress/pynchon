@@ -338,9 +338,9 @@ class ArticleManager(models.Manager):
             elif attitude in ['Раздел 4', 'V Раздел 3']:
                 qs = qs.filter(
                     or_lookup, book_id=book_id, attitude__in=[
-                        'Раздел 4', 'V Раздел 3',
-                ]
-            )
+                        'Раздел 4', 'V Раздел 3'
+                    ]
+                )
             elif attitude == 'Раздел 7':
                 qs = qs.filter(or_lookup, book_id=book_id, attitude='Раздел 7')
         return qs

@@ -376,7 +376,7 @@ def search_list(request, book_id, search_model):
         'characters': TableСharacters
     }
     attitude_mapping = {
-        'articles_1': 'Раздел 1' or 'Раздел 1 (статья 1)' 
+        'articles_1': 'Раздел 1' or 'Раздел 1 (статья 1)'
         or 'Раздел 1 (статья 2)' or 'V Раздел 1',
         'articles_4': 'Раздел 4' or 'V Раздел 3',
         'articles_7': 'Раздел 7',
@@ -384,10 +384,9 @@ def search_list(request, book_id, search_model):
     model = model_maping.get(content)
     if not model:
         return render(request, template, {
-            'q': q, 'book': book, 'content': content, 
-            'content_list': content_list, 'search_model': search_model
-        }
-    )
+            'q': q, 'book': book, 'content': content, 'content_list': [],
+            'search_model': search_model
+        })
     attitude = None
     if content in attitude_mapping:
         attitude = attitude_mapping[content]
