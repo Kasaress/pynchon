@@ -45,6 +45,7 @@
           </div>
           <br>
         {% endfor %}
+        {% include 'includes/paginator.html' %}
       {% elif model|class_name == 'Chapter' %}
         <h5>Комментарии:</h5><br>
         <div class="comments-container">
@@ -71,7 +72,8 @@
           </li> 
           <a href="{% url "wiki:rainbow_part3_detail" chapter.pk %}">Посмотреть полностью</a><br><br><br>
         {% endfor %}
-        </div> 
+        </div>
+        {% include 'includes/paginator.html' %}
       {% elif model|class_name == 'Article' and content == 'articles_1' %}
         <h5>Статьи:</h5><br>
         {% with content_list|first as article %} 
@@ -88,6 +90,7 @@
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
+        {% include 'includes/paginator.html' %}
       {% elif model|class_name == 'Article' and content == 'articles_7' %}
         <h5>Статьи:</h5><br>
         {% with content_list|first as article %} 
@@ -174,7 +177,6 @@
           {% endfor %}
         </table>
       {% endif %}
-      {% include 'includes/paginator.html' %}
     </div>
   </section>
 {% endblock %}
