@@ -74,28 +74,28 @@
         </div> 
       {% elif model|class_name == 'Article' and content == 'articles_1' %}
         <h5>Статьи:</h5><br>
-        {% for article in object_list %}
+        {% with object_list|first as article %} 
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
-          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|striptags|custom_slice:q|safe }} .....</p><br>
+          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|striptags|custom_slice:q|search_highlight:q|safe }} .....</p><br>
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
-        {% endfor %}
+        {% endwith %}
       {% elif model|class_name == 'Article' and content == 'articles_4' %}
         <h5>Статьи:</h5><br>
         {% for article in object_list %}
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
-          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|striptags|custom_slice:q|safe }} .....</p><br>
+          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|striptags|custom_slice:q|search_highlight:q|safe }} .....</p><br>
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
         {% endfor %}
       {% elif model|class_name == 'Article' and content == 'articles_7' %}
         <h5>Статьи:</h5><br>
-        {% for article in object_list %}
+        {% with object_list|first as article %} 
           <h2 class="chapter-1-how__subtitle body-text-bold">{% if article.name %}{{ article.name|search_highlight:q|safe }}{% endif %}</h2><br>
-          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|search_highlight:q|striptags|custom_slice:q|safe }} .....</p><br>
+          <p class="chapter-2-3-notes__text body-text">..... {{ article.text|striptags|custom_slice:q|search_highlight:q|safe }} .....</p><br>
           <a href="{% url "wiki:rainbow_part4_detail" article.pk %}">Посмотреть полностью</a>
           <br><br><br>
-        {% endfor %}
+        {% endwith %}
       {% elif model|class_name == 'TableChronology' %}
         <h5>Хронология:</h5><br>
         <div class="container">
