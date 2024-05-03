@@ -18,14 +18,20 @@
 </footer>
 
 {% with request.resolver_match.view_name as view_name %}
-  <div class="to-top{% if 'wiki:v_index' in view_name or 'wiki:v_part' in view_name %} v{% endif %}">
-    <button class="to-top__button" type="button" id="scrollToTopLink"></button>
-  </div>
+<div class="to-top{% if 'wiki:v_index' in view_name or 'wiki:v_part' in view_name %} v{% endif %}">
+  <button class="to-top__button" type="button" id="scrollToTopLink"></button>
+</div>
 {% endwith %}
+
 <div class="menu">
   <div class="menu__container">
     <div class="menu__content">
-      <button class="menu__close"></button>
+      <div class="menu__header">
+        <a class="menu__logo-link" href="{% url 'wiki:index' %}">
+          <img class="menu__logo" src="{% static 'img/logo-white.png' %}" alt="">
+        </a>
+        <button class="menu__close"></button>
+      </div>
       <div class="menu__links">
         <a href="{% url 'wiki:author' %}" class="menu__link">Томас Пинчон</a>
         <a href="{% url 'wiki:about-project' %}" class="menu__link">О проекте</a>
