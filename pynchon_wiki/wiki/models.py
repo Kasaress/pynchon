@@ -410,7 +410,7 @@ class Article(BaseNameModel):
     )
 
     class Meta:
-        ordering = ('sort'),
+        ordering = ['sort']
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         db_table = 'articles'
@@ -493,6 +493,7 @@ class TableСharacters(BaseNameModel):
     )
 
     class Meta:
+        ordering = ['pk']
         verbose_name = 'Запись в таблице персонажей'
         verbose_name_plural = 'Записи в таблице персонажей'
         db_table = 'characters'
