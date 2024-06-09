@@ -8,6 +8,9 @@
 @import url(./blocks/header.css);
 @import url(./blocks/footer.css);
 
+/* пагинация */
+@import url(./blocks/pagination.css);
+
 /* главная */
 @import url(./blocks/main.css);
 

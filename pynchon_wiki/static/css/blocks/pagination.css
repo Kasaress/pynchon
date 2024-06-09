@@ -1,0 +1,77 @@
+.pagination-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  width: max-content;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  gap: 20px;
+}
+
+.pagination__block {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination__block_pages {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.pagination__block_pages::-webkit-scrollbar {
+  display: none;
+}
+
+/* .pagination__block_pages::before,
+.pagination__block_pages::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 100%;
+}
+.pagination__block_pages::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(243, 240, 234, 1), rgba(243, 240, 234, 0));
+}
+.pagination__block_pages::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(243, 240, 234, 1), rgba(243, 240, 234, 0));
+} */
+
+.pagination__item {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pagination__item.active .custom-button {
+  border: 1px solid #842234;
+  background-color: #842234;
+  color: white;
+}
+
+@media screen and (max-width: 960px) {
+  .pagination__item .custom-button {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    gap: 10px;
+  }
+
+  .pagination__block_arrows .custom-button {
+    padding: 10px;
+    border: none;
+  }
+}

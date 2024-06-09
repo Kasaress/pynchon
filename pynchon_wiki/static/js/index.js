@@ -82,3 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const navItemsLeft = navItemActiveRect.left - navItemsRect.left + (navItemActiveRect.width - navItemsRect.width) / 2;
   $navItems.scrollLeft = navItemsLeft;
 });
+
+// Прокрутка пагинатора до активной страницы
+document.addEventListener('DOMContentLoaded', () => {
+  const $pagItems = document.querySelector('.pagination__block_pages');
+  const $pagItemActive = document.querySelector('.pagination__item_active');
+  if (!$pagItems || !$pagItemActive) return;
+  const pagItemsRect = $pagItems.getBoundingClientRect();
+  const pagItemActiveRect = $pagItemActive.getBoundingClientRect();
+  const pagItemsLeft = pagItemActiveRect.left - pagItemsRect.left + (pagItemActiveRect.width - pagItemsRect.width) / 2;
+  $pagItems.scrollLeft = pagItemsLeft;
+});
