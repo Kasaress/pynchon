@@ -303,7 +303,7 @@ def get_summary(request):
 
 
 def search(request, book_id, search_model):
-    """ Поиск по всем моделям """
+    """ Поиск по всем моделям. """
     template = 'wiki/search_results.html'
     q = request.GET.get('q')
     book = get_object_or_404(Book, pk=book_id)
