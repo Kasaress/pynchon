@@ -1,5 +1,6 @@
-from itertools import chain
 import datetime as dt
+
+from itertools import chain
 from django.core.mail.message import EmailMessage
 from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import get_object_or_404, render
