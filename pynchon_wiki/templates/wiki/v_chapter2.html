@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load user_filters %}
+{% load thumbnail %}
 {% block title %}
   Примечания
 {% endblock  %}
@@ -44,6 +45,13 @@
         <div id="comments-container">
           <div id="comments-content">
             <div class="comments-container">
+              {% if chapters.first.image %}
+                <div class="chapter-3-image">
+                  {% thumbnail chapters.first.image "1300x400" as thumbnail %}
+                    <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ chapters.first.image.alt }}">
+                  {% endthumbnail %}
+                </div>
+              {% endif %}<br>
               {% for comment in chapters.first.comments.all %}
                 <div class="chapter-2-3-notes__item" id="{{ comment.id }}">
                   <div class="chapter-2-3-notes__header">

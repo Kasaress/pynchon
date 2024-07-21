@@ -471,7 +471,7 @@ def v_part2_detail(request, comment_id):
     book = get_object_or_404(Book, name='V')
     comment = Comment.objects.get(pk=comment_id)
     context = {
-        'book': book,
+        'book': book, 
         'comment': comment,
         'search_model': 'comments'
     }

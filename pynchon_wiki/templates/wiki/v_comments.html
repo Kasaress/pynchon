@@ -1,5 +1,13 @@
+{% load thumbnail %}
 <div id="chapter-comments-{{ chapter.number }}">
     <div class="comments-container">
+      {% if comments.first.chapter.image %}
+        <div class="chapter-3-image">
+          {% thumbnail comments.first.chapter.image "1300x400" as thumbnail %}
+            <img class="img-chapter img" src="{{ thumbnail.url }}" alt="{{ comments.first.chapter.image.alt }}">
+          {% endthumbnail %}
+        </div>
+      {% endif %}<br>
       {% for comment in comments %}
         <li id="{{ comment.id }}" class="chapter-2-3-notes__item">
           <div class="chapter-2-3-notes__header">
