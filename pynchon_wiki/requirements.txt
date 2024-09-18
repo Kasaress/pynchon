@@ -1,5 +1,5 @@
 asgiref==3.6.0
-bleach==6.1.0
+bleach==5.0.1
 da-vinci==0.3.0
 Django==3.2.16
 django-ckeditor==6.3.2
