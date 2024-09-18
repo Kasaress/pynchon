@@ -17,7 +17,5 @@ def load_chapters():
                     f'{i.name}\n\n'
                     f'Стр.{i.page_number_by_2012} / '
                     f'Стр.{i.page_number_by_2021}\n\n'
-                    (f'{html.unescape(
-                        bleach.clean(i.comment_text, strip=True)
-                    )}\n\n')
+                    f'{html.unescape(bleach.clean(i.comment_text, strip=True))}\n\n'
                 )
