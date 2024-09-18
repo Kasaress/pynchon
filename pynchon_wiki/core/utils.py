@@ -8,7 +8,7 @@ from wiki.models import Book, Chapter
 
 def load_chapters():
     book = get_object_or_404(Book, name='Радуга тяготения')
-    chapters = Chapter.objects.filter(book=book)
+    chapters = Chapter.objects.filter(book=book).order_by('sort')
     with open('test.doc', 'w') as f:
         for cptr in chapters:
             f.write(f'\nГлава {cptr.number}\n\n')

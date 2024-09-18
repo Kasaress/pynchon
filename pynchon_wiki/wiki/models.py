@@ -119,6 +119,7 @@ class Chapter(BaseModel):
     class Meta:
         verbose_name = 'Глава'
         verbose_name_plural = 'Главы'
+        ordering = ('sort',)
         db_table = 'chapters'
 
     def __str__(self) -> str:
