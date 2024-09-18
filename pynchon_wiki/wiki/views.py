@@ -6,6 +6,7 @@ from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+from core.utils import load_chapters
 from pynchon_wiki.settings import (
     EMAIL_HOST_USER, EMAIL_RECIPIENT, RAINBOW_START_EVENT, V_START_EVENT,
     RAINBOW_BOOK, V_BOOK
@@ -154,6 +155,7 @@ def rainbow_part2(request):
     template = 'wiki/chapter2.html'
     book = get_object_or_404(Book, name='Радуга тяготения')
     chapters = Chapter.objects.filter(book=book)
+    load_chapters()
     context = {
         'book': book,
         'chapters': chapters,
