@@ -49,6 +49,16 @@ def about_project(request):
     return render(request, template, context)
 
 
+def news(request):
+    """ Страница с новостями. """
+    template = 'wiki/news.html'
+    articles = Article.objects.filter(attitude='Новости')
+    context = {
+        'articles': articles
+    }
+    return render(request, template, context)
+
+
 def contacts(request):
     """ Страница для отправки контактной формы. """
     template = 'wiki/contacts.html'

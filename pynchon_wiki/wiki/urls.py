@@ -59,6 +59,7 @@ urlpatterns = [
         'search-list/<int:book_id>/<str:search_model>', views.search_list,
         name='search_list'
     ),
+    path('news', views.news, name='news'),
     path('v/', views.v_index, name='v_index'),
     path('', views.index, name='index'),
 ]
