@@ -87,6 +87,52 @@
   object-position: 0;
 }
 
+/* Редизайн. Ноябрь/декабрь 2024 */
+
+.articles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.articles__article {
+  border-bottom: 1px solid #151515;
+}
+
+.articles__article:last-of-type {
+  border: none;
+}
+
+.articles__link {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  cursor: pointer;
+  padding: 24px 0;
+  box-sizing: border-box;
+}
+
+.articles__info {
+  width: 45%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.articles__title, .articles__author, .articles__preview {
+  margin: 0;
+  padding: 0;
+}
+
+.articles__author {
+  color: #C3C3C3;
+}
+
+
 @media screen and (max-width: 959px) {
   .chapter-4-kezvh__article {
     flex-direction: column-reverse;
@@ -109,6 +155,18 @@
     padding: 0 16px 40px;
   }
 }
+
+/* Редизайн. Ноябрь/декабрь 2024 */
+@media screen and (max-width: 600px) {
+  .articles__link {
+    flex-direction: column;
+  }
+
+  .articles__info {
+    width: 100%;
+  }
+}
+/* - */
 
 @media screen and (max-width: 500px) {
   .chapter-4-kezvh__img, .chapter-4-kezvh__link {

@@ -9,6 +9,22 @@
     <h1 class="chapters-nav__title chapter-title">KEZVH - Статьи</h1>
   </section>
   <section class="chapter chapter-4-kezvh">
+
+    <ul class="articles">
+      {% for article in articles %}
+      <li class="articles__article">
+        <a href="#" class="articles__link link">
+          <div class="articles__info">
+           <p class="articles__title title-bold">{{article.name}}</p>
+           <p class="articles__author body-text">Автор: {{article.author_article}}</p>
+         </div>
+         <p class="articles__preview body-text">{{ article.text|safe|default_if_none:""|striptags|slice:":250" }}...</p>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% comment %}
     <div class="chapter-4-kezvh__article">
       <div class="chapter-4-kezvh__left-column">
       </div>
@@ -38,8 +54,12 @@
         </div>
       </div>
     </div>
+    {% endcomment %}
+
   </section>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  {% comment %}
   <script>
     const elements = document.querySelectorAll('.article_transform');
     const buttons = document.querySelectorAll('.chronology-description__fact-btn');
@@ -66,4 +86,6 @@
       });
     });
   </script>
+  {% endcomment %}
+
 {% endblock %}
