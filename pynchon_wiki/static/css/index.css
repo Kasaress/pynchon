@@ -29,6 +29,7 @@
 @import url(./blocks/about-project.css);
 @import url(./blocks/creators.css);
 @import url(./blocks/contacts.css);
+@import url(./blocks/news.css);
 
 /* другие книги */
 @import url(./blocks/other-books.css);
