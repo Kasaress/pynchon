@@ -13,7 +13,7 @@
     <ul class="articles">
       {% for article in articles %}
       <li class="articles__article">
-        <a href="#" class="articles__link link">
+        <a href="{% url "wiki:v_part3_detail" article.pk %}" class="articles__link link">
           <div class="articles__info">
            <p class="articles__title title-bold">{{article.name}}</p>
            <p class="articles__author body-text">Автор: {{article.author_article}}</p>
