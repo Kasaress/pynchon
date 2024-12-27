@@ -217,6 +217,10 @@
   background-color: #9E501F;
 }
 
+.v .article__nav-arrow {
+  background-color: #9E501F;
+}
+
 @media screen and (max-width: 1279px) {
   .v .promo__text {
     bottom: 100px;
