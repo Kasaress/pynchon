@@ -1,0 +1,79 @@
+.org {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.org__item {
+  display: grid;
+  grid-template-columns: 37px 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 16px;
+  padding: 24px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #151515;
+}
+
+.org__item:last-of-type {
+  border-bottom: none;
+}
+
+.org__flag {
+  height: 25px;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;
+}
+
+.org__flag_uk {
+  background-image: url(../../img/flags/org-flag-uk.svg);
+}
+
+.org__flag_uk-us {
+  background-image: url(../../img/flags/org-flag-uk-us.svg);
+}
+
+.org__flag_us {
+  background-image: url(../../img/flags/org-flag-us.svg);
+}
+
+.org__flag_de {
+  background-image: url(../../img/flags/org-flag-de.svg);
+}
+
+.org__flag_ch {
+  background-image: url(../../img/flags/org-flag-ch.svg);
+}
+
+.org__flag_ussr {
+  background-image: url(../../img/flags/org-flag-ussr.svg);
+}
+
+.org__flag_ar {
+  background-image: url(../../img/flags/org-flag-ar.svg);
+}
+
+.org__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.org__name, .org__status, .org__text {
+  margin: 0;
+}
+
+.org__status {
+  color: #414141;
+}
+
+@media screen and (max-width: 550px) {
+  .org__item {
+    grid-template-columns: 37px 1fr;
+    padding: 16px 0;
+  }
+
+  .org__text {
+    grid-column: 1 / span 2;
+  }
+}
