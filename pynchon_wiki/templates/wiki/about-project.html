@@ -24,7 +24,7 @@
   <section class="about-project">
     <img class="about-project__cover-img" src="{% static 'img/about-project-cover.jpg' %}" alt="">
     {% for article in articles %}
-      <p class="about-project__description">{{article.text|safe}}</p>
+      <div class="about-project__description">{{article.text|safe}}</div>
     {% endfor %}
     <div class="about-project__content">
       <div class="accordion accordion-flush sidebar" id="notesNav">

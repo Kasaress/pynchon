@@ -1,6 +1,7 @@
 .about-nav {
   width: 100%;
   max-width: 1440px;
+  margin: 0 auto;
   padding: 50px 80px 80px;
   box-sizing: border-box;
   display: flex;
@@ -43,6 +44,9 @@
   padding: 0 80px 100px;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .about-project__cover-img {
@@ -51,14 +55,13 @@
   height: auto;
   display: block;
   object-fit: contain;
-  margin: 0 auto 80px;
+  margin: 0 auto;
 }
 
 .about-project__description {
   max-width: 1300px;
   padding: 0;
-  margin: 0 0 90px;
-  padding-top: 80px;
+  margin: 0;
 }
 
 .about-project__content {
@@ -171,6 +174,7 @@
 
   .about-project {
     padding: 0 16px 70px;
+    gap: 40px;
   }
 
   .about-project__content {
