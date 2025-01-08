@@ -22,35 +22,34 @@
     <h1 class="about-nav__title chapter-title">Новости</h1>
   </section>
   <section class="news">
-    <!-- Нужен функционал фильтрации либо пока закомментить -->
+    {% comment %}
     <nav class="news__filters">
       <button type="button" class="news__filter body-text active">Все</button>
       <button type="button" class="news__filter body-text">Мероприятия</button>
       <button type="button" class="news__filter body-text">Отчеты</button>
       <button type="button" class="news__filter body-text">Фотоотчеты</button>
-    </nav>
-    <!--  -->
+    </nav> {% endcomment %}
     <ul class="news__list">
-      <!-- Начало цикла -->
-      <li class="news__item">
-        <a href="#" class="news__item-link" target="_blank">
-          <div class="news__image-placeholder">
-            <!-- If есть картинка (div-плейсхолдер выше оставляем): -->
-            <img src="{% static 'img/v-main-picture.png' %}" alt="" class="news__image">
-            <!-- Конец if -->
-          </div>
-          <div class="news__date">
-            <p class="news__date-day">17</p>
-            <p class="news__date-month body-text">ноября</p>
-            <p class="news__date-year body-text">2024</p>          
-          </div>
-          <div class="news__content">
-            <h2 class="news__title title-bold">Выпуск печатной версии гайда к Радуге тяготения. Предзаказ</h2>
-            <p class="news__preview body-text">Группа Расёмон совместно с издательством «Найди лесоруба» рады сообщить о выпуске печатной версии полного гайда к роману Томаса Пинчона «Радуга тяготения».</p>
-          </div>
-        </a>
-      </li>
-      <!-- Конец цикла -->
+      {% for article in articles %}
+        <li class="news__item">
+          <a href="#" class="news__item-link" target="_blank">
+            {% if article.image %}
+              <div class="news__image-placeholder">
+                <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="news__image">
+              </div>
+            {% endif %}
+            <div class="news__date">
+              <p class="news__date-day">{{article.date|date:"d"}}</p>
+              <p class="news__date-month body-text">{{article.date|date:"F"}}</p>
+              <p class="news__date-year body-text">{{article.date|date:"Y"}}</p>          
+            </div>
+            <div class="news__content">
+              <h2 class="news__title title-bold">{{ article.name }}</h2>
+              <p class="news__preview body-text">{{ article.text }}</p>
+            </div>
+          </a>
+        </li>
+      {% endfor %}
     </ul>
   </section>
 {% endblock %}
