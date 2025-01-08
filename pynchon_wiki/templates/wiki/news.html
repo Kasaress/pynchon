@@ -21,7 +21,36 @@
     </ul>
     <h1 class="about-nav__title chapter-title">Новости</h1>
   </section>
-  <section>
-
+  <section class="news">
+    <!-- Нужен функционал фильтрации либо пока закомментить -->
+    <nav class="news__filters">
+      <button type="button" class="news__filter body-text active">Все</button>
+      <button type="button" class="news__filter body-text">Мероприятия</button>
+      <button type="button" class="news__filter body-text">Отчеты</button>
+      <button type="button" class="news__filter body-text">Фотоотчеты</button>
+    </nav>
+    <!--  -->
+    <ul class="news__list">
+      <!-- Начало цикла -->
+      <li class="news__item">
+        <a href="#" class="news__item-link" target="_blank">
+          <div class="news__image-placeholder">
+            <!-- If есть картинка (div-плейсхолдер выше оставляем): -->
+            <img src="{% static 'img/v-main-picture.png' %}" alt="" class="news__image">
+            <!-- Конец if -->
+          </div>
+          <div class="news__date">
+            <p class="news__date-day">17</p>
+            <p class="news__date-month body-text">ноября</p>
+            <p class="news__date-year body-text">2024</p>          
+          </div>
+          <div class="news__content">
+            <h2 class="news__title title-bold">Выпуск печатной версии гайда к Радуге тяготения. Предзаказ</h2>
+            <p class="news__preview body-text">Группа Расёмон совместно с издательством «Найди лесоруба» рады сообщить о выпуске печатной версии полного гайда к роману Томаса Пинчона «Радуга тяготения».</p>
+          </div>
+        </a>
+      </li>
+      <!-- Конец цикла -->
+    </ul>
   </section>
 {% endblock %}

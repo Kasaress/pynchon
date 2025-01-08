@@ -3,6 +3,38 @@
   Статьи
 {% endblock %}
 {% block content %}
+
+<section class="v article chapter">
+  <a href="{% url 'wiki:v_part3' %}" class="article__nav">
+    <div class="article__nav-arrow">&#60;</div>
+    <p class="article__nav-link body-text">назад к статьям</p>
+  </a>
+  <div class="article__content">
+    <div class="article__header">
+      {% if article.name %}<h1 class="article__title chapter-title">{{article.name}}</h1>{% endif %}
+      {% if article.author_article %}<p class="article__author body-text">Автор: {{article.author_article}}</p>{% endif %}
+    </div>
+
+    <div class="article__text-block body-text">{{article.text|safe}}</div>
+
+    {% if article.image %}
+      <img class="article__image" src="{{article.image.url}}" alt="{{article.name}}"
+        data-bs-toggle="modal" data-bs-target="#image-modal-{{ article.pk }}">
+      <div class="modal fade" id="image-modal-{{ article.pk }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body text-center p-0">
+              <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="modal-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+  {% comment %}
   <section class="chapters-nav v">
     {% include 'includes/form_search.html' %}
     {% include 'includes/v_chapters.html' %}
@@ -32,4 +64,6 @@
       </div>
     </div>
   </section>
+  {% endcomment %}
+
 {% endblock %}
