@@ -221,6 +221,11 @@
   background-color: #9E501F;
 }
 
+.v .articles__article:hover {
+  color: #F3F0EA;
+  background-color: #9E501F;
+}
+
 @media screen and (max-width: 1279px) {
   .v .promo__text {
     bottom: 100px;

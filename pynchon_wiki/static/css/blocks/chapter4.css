@@ -99,11 +99,14 @@
 }
 
 .articles__article {
-  border-bottom: 1px solid #151515;
+  -webkit-transition: background-color 200ms ease, color 200ms ease;
+  -o-transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
-.articles__article:last-of-type {
-  border: none;
+.articles__article:hover {
+  color: #F3F0EA;
+  background-color: #842234;
 }
 
 .articles__link {
@@ -111,8 +114,13 @@
   display: flex;
   gap: 16px;
   cursor: pointer;
-  padding: 24px 0;
+  padding: 24px;
   box-sizing: border-box;
+  border-bottom: 1px solid #151515;
+}
+
+.articles__article:last-of-type .articles__link {
+  border: none;
 }
 
 .articles__info {
