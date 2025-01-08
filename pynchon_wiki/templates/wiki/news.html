@@ -33,11 +33,11 @@
       {% for article in articles %}
         <li class="news__item">
           <a href="#" class="news__item-link" target="_blank">
-            {% if article.image %}
-              <div class="news__image-placeholder">
+            <div class="news__image-placeholder">
+                {% if article.image %}
                 <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="news__image">
+                {% endif %}
               </div>
-            {% endif %}
             <div class="news__date">
               <p class="news__date-day">{{article.date|date:"d"}}</p>
               <p class="news__date-month body-text">{{article.date|date:"F"}}</p>
