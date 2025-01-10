@@ -60,6 +60,7 @@ urlpatterns = [
         name='search_list'
     ),
     path('news', views.news, name='news'),
+    path('news-detail/<int:pk>', views.news_detail, name='news_detail'),
     path('v/', views.v_index, name='v_index'),
     path('', views.index, name='index'),
 ]

@@ -59,6 +59,16 @@ def news(request):
     return render(request, template, context)
 
 
+def news_detail(request, pk):
+    """ Страница с полным текстом новости. """
+    template = 'wiki/news_detail.html'
+    article = get_object_or_404(Article, pk=pk)
+    context = {
+        'article': article
+    }
+    return render(request, template, context)
+
+
 def contacts(request):
     """ Страница для отправки контактной формы. """
     template = 'wiki/contacts.html'

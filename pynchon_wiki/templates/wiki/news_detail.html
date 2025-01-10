@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Новости
+{% endblock %}
+{% block content %}
+<section class="article chapter">
+  <a href="{% url 'wiki:news' %}" class="article__nav">
+    <div class="article__nav-arrow">&#60;</div>
+    <p class="article__nav-link body-text">назад к новостям</p>
+  </a>
+  <section class="news">
+    <div class="news__image-placeholder">
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="news__image">
+        {% endif %}
+    </div>
+    <div class="news__date">
+        <p class="news__date-day">{{article.date|date:"d"}}</p>
+        <p class="news__date-month body-text">{{article.date|date:"F"}}</p>
+        <p class="news__date-year body-text">{{article.date|date:"Y"}}</p>          
+    </div>
+    <div class="news__content">
+        <h2 class="news__title title-bold">{{ article.name }}</h2>
+        <p class="news__preview body-text">{{ article.text }}</p>
+    </div>
+  </section>
+</section>
+{% endblock %}
