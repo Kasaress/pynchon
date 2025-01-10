@@ -22,7 +22,7 @@
     </div>
     <div class="news__content">
         <h2 class="news__title title-bold">{{ article.name }}</h2>
-        <p class="news__preview body-text">{{ article.text }}</p>
+        <p class="news__preview body-text">{{ article.text|safe }}</p>
     </div>
   </section>
 </section>
