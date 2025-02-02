@@ -2,6 +2,8 @@ import re
 from django import template
 
 from core.models import TopMenu
+from core.utils import get_mounth_name
+
 
 register = template.Library()
 
@@ -52,3 +54,8 @@ def custom_slice(value, q):
     start_index = max(0, n - 500)
     end_index = min(len(value), n + 500)
     return value[start_index:end_index]
+
+
+@register.filter
+def month_genitive(month_number):
+    return get_mounth_name(month_number, case='genitive')

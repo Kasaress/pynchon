@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load user_filters %}
 {% block title %}
   Новости
 {% endblock %}
@@ -32,7 +33,7 @@
     <ul class="news__list">
       {% for article in articles %}
         <li class="news__item">
-          <a href="{% url "wiki:news_detail" article.pk %}" class="news__item-link" target="_blank">
+          <a href="{% url "wiki:news_detail" article.pk %}" class="news__item-link" target="_self">
             <div class="news__image-placeholder">
               {% if article.image %}
                 <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="news__image">
@@ -40,7 +41,7 @@
             </div>
             <div class="news__date">
               <p class="news__date-day">{{article.date|date:"d"}}</p>
-              <p class="news__date-month body-text">{{article.date|date:"F"}}</p>
+              <p class="news__date-month body-text">{{article.date|date:"m"|month_genitive}}</p>
               <p class="news__date-year body-text">{{article.date|date:"Y"}}</p>          
             </div>
             <div class="news__content">

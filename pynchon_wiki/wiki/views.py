@@ -52,7 +52,7 @@ def about_project(request):
 def news(request):
     """ Страница с новостями. """
     template = 'wiki/news.html'
-    articles = Article.objects.filter(attitude='Новости')
+    articles = Article.objects.filter(attitude='Новости').order_by('-date')
     context = {
         'articles': articles
     }
