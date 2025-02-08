@@ -33,7 +33,7 @@
     <ul class="news__list">
       {% for article in articles %}
         <li class="news__item">
-          <a href="{% url "wiki:news_detail" article.pk %}" class="news__item-link" target="_self">
+          <a href="{% url "wiki:news_detail" article.pk %}" class="news__item-link" target="_blank">
             <div class="news__image-placeholder">
               {% if article.image %}
                 <img src="{{ article.image.url }}" alt="{{ article.image.alt }}" class="news__image">

@@ -135,13 +135,13 @@
 }
 
 .news__date-day {
-  font-size: 4rem;
+  font-size: 3rem;
   font-style: italic;
   font-weight: 700;
   line-height: 100%;
   text-transform: uppercase;
   color: #842234;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .news__date-month, .news__date-year {
