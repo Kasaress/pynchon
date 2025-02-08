@@ -73,11 +73,11 @@
 
 .news__item {
   width: 100%;
-  border-bottom: 1px solid #151515;
-}
-
-.news__item:last-of-type {
-  border-bottom: none;
+  padding: 0 20px;
+  box-sizing: border-box;
+  -webkit-transition: background-color 200ms ease, color 200ms ease;
+  -o-transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 .news__item-link {
@@ -93,10 +93,16 @@
   padding: 24px 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  border-bottom: 1px solid #151515;
+}
+
+.news__item:last-of-type .news__item-link {
+  border-bottom: none;
 }
 
 .news__image-placeholder {
   width: 100%;
+  position: relative;
 }
 
 .news__image {
@@ -122,6 +128,9 @@
 .news__date-day, .news__date-month, .news__date-year {
   margin: 0;
   padding: 0;
+  -webkit-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
+  transition: color 200ms ease;
 }
 
 .news__date-day {
@@ -131,11 +140,11 @@
   line-height: 100%;
   text-transform: uppercase;
   color: #842234;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .news__date-month, .news__date-year {
-  color: #C3C3C3;
+  color: #414141;
 }
 
 .news__content {
@@ -150,10 +159,40 @@
   padding-top: 8px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .news__title, .news__preview {
   margin: 0;
+}
+
+.news__item:hover {
+  background-color: #842234;
+  color: #F8F6F3;
+}
+
+.news__item:hover .news__date-day, .news__item:hover .news__date-month, .news__item:hover .news__date-year {
+  color: #F8F6F3;
+}
+
+.news__item:hover .news__image-placeholder::after {
+  content: '>';
+  width: 50px;
+  height: 50px;
+  background-color: #F3F0EA;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #842234;
+  font-size: 32px;
+  line-height: 1;
+  text-align: center;
+  padding: 0 0 5px 2px;
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(50% - 25px);
+  right: -25px;
 }
 
 @media screen and (max-width: 1280px) {
@@ -216,6 +255,10 @@
     line-height: 160%;
     font-style: normal;
     margin: 0;
+  }
+
+  .news__item:hover .news__image-placeholder::after {
+    display: none;
   }
 }
 
