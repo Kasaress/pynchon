@@ -174,3 +174,4 @@ GitHub.sublime-settings
 *.dwg
 pynchon_wiki/media
 .vscode/settings.json
+.python-version
