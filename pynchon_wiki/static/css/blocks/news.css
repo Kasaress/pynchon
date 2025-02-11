@@ -160,9 +160,6 @@
   padding-top: 8px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .news__title, .news__preview {
