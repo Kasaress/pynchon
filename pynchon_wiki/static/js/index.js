@@ -1,22 +1,33 @@
 // Работа с попапом подтверждения возраста
-const agePopup = document.querySelector('.age-popup');
-const ageBtn = agePopup.querySelector('.age-popup__button');
+document.addEventListener('DOMContentLoaded', () => {
+  const agePopup = document.getElementById('age-popup');
+  const disclaimerPopup = document.getElementById('disclaimer-popup');
 
-if (!localStorage.getItem('visited') || !localStorage.getItem('age-confirm')) {
-  if (agePopup) agePopup.style.display = 'flex';
-  localStorage.setItem('visited', 'true');
-  setTimeout(function () {
-    localStorage.removeItem('visited');
-  }, 24 * 60 * 60 * 1000);
-}
+  const ageBtn = document.getElementById('age-popup-confirm');
+  const disclaimerBtn = document.getElementById('disclaimer-popup-confirm');
 
-if (ageBtn) ageBtn.addEventListener('click', () => {
-  agePopup.style.display = 'none';
-  localStorage.setItem('age-confirm', 'true');
-  setTimeout(function () {
-    localStorage.removeItem('age-confirm');
-  }, 24 * 60 * 60 * 1000);
-})
+  if (!agePopup || !disclaimerPopup || !ageBtn || !disclaimerBtn) return;
+
+  const ageConfirmed = sessionStorage.getItem('ageConfirmed');
+  const disclaimerConfirmed = sessionStorage.getItem('disclaimerConfirmed');
+
+  if (!ageConfirmed) {
+    agePopup.style.display = 'flex';
+  } else if (!disclaimerConfirmed) {
+    disclaimerPopup.style.display = 'flex';
+  }
+
+  ageBtn.addEventListener('click', () => {
+    sessionStorage.setItem('ageConfirmed', 'true');
+    agePopup.style.display = 'none';
+    disclaimerPopup.style.display = 'flex';
+  });
+
+  disclaimerBtn.addEventListener('click', () => {
+    sessionStorage.setItem('disclaimerConfirmed', 'true');
+    disclaimerPopup.style.display = 'none';
+  });
+});
 
 // Скролл вверх страницы
 document.getElementById('scrollToTopLink').addEventListener('click', function (event) {
